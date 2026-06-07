@@ -1,0 +1,6 @@
+{
+  "name": "TNT Performance Agency",
+  "description": "An elite, tech-driven performance marketing and business growth agency that solves complex business-level acquisition problems. Features an interactive scaling model and an on-demand campaign auditor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
