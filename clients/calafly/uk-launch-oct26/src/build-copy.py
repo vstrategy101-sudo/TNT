@@ -151,6 +151,8 @@ with open(os.path.join(OUT, "meta_ads.csv"), "w", newline="") as f:
             for cre, pt, hl, ds in rows:
                 pt, hl, ds = (x.format(n=c["name"], s=c["short"], sofa=c.get("sofa", "sofa")) for x in (pt, hl, ds))
                 if cre in ("01_INTRO", "03_PRICE", "05_ALL-USP", "06_RETARGET", "VIDEO_01"): pt += c.get("price", "")
+                if "h_price" in c and cre in ("03_PRICE", "05_ALL-USP"):   # price-led headline where a price is confirmed
+                    hl, ds = "3GB for £7 · 30 days", "New here? 10% off: USA10"
                 check("meta headline", hl, 40, f"{key} {cre}")
                 check("meta description", ds, 40, f"{key} {cre}")
                 out.append({"creative": cre, "primary": pt, "headline": hl, "description": ds})
