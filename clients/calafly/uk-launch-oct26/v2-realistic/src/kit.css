@@ -1,0 +1,181 @@
+/* CalaFly realistic kit: brand tokens, hi-fi iPhone mockup, iOS-style UI, physical props. */
+@font-face { font-family: "CFD"; src: local("Inter Display ExtraBold"), local("InterDisplay-ExtraBold"); font-weight: 800; }
+@font-face { font-family: "CFD"; src: local("Inter Display Bold"), local("InterDisplay-Bold"); font-weight: 700; }
+@font-face { font-family: "CFD"; src: local("Inter Display SemiBold"), local("InterDisplay-SemiBold"); font-weight: 600; }
+@font-face { font-family: "CFD"; src: local("Inter Display Medium"), local("InterDisplay-Medium"); font-weight: 500; }
+@font-face { font-family: "CFD"; src: local("Inter Display Light"), local("InterDisplay-Light"); font-weight: 300; }
+@font-face { font-family: "UI"; src: local("Inter SemiBold"), local("Inter-SemiBold"); font-weight: 600; }
+@font-face { font-family: "UI"; src: local("Inter Medium"), local("Inter-Medium"); font-weight: 500; }
+@font-face { font-family: "UI"; src: local("Inter Regular"), local("Inter-Regular"), local("Inter"); font-weight: 400; }
+@font-face { font-family: "UI"; src: local("Inter Bold"), local("Inter-Bold"); font-weight: 700; }
+
+:root {
+  --ink: #0b0d10; --panel: #16191e; --teal: #18c8a8; --teal-d: #0f9c83; --pink: #ff4d6a;
+  --blue: #2f6bff; --yellow: #ffe14a; --white: #ffffff; --muted: #b7c0c8; --mist: #f4f7fb;
+  --ios-bg: #f2f2f7; --ios-sep: rgba(60,60,67,.18); --ios-2: rgba(60,60,67,.6); --ios-blue: #0a84ff; --ios-green: #34c759;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "CFD", sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ---------- brand atoms (match the CalaFly site) ---------- */
+.logo { display: inline-flex; align-items: center; gap: 14px; border: 4px solid currentColor; border-radius: 22px; padding: 13px 22px 13px 15px; font-weight: 800; font-size: 38px; letter-spacing: -0.02em; line-height: 1; }
+.logo .dot { width: 44px; height: 44px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
+.logo .dot::after { content: ""; width: 15px; height: 15px; border-radius: 50%; background: var(--ink); }
+.logo .la { color: var(--teal); }
+.tag { display: inline-block; background: var(--white); color: var(--ink); border: 4px solid var(--ink); border-radius: 999px; padding: 10px 22px 9px; font-weight: 800; font-size: 25px; letter-spacing: 0.12em; text-transform: uppercase; box-shadow: 6px 6px 0 var(--teal); }
+.cta { display: inline-flex; align-items: center; gap: 14px; background: var(--blue); color: var(--white); font-weight: 800; font-size: 36px; letter-spacing: -0.02em; padding: 22px 36px; border-radius: 999px; border: 4px solid var(--white); box-shadow: 7px 7px 0 var(--teal); white-space: nowrap; }
+.hl { color: var(--pink); }
+
+/* ---------- iPhone mockup (natural size 440×900, scale with --s) ---------- */
+.phone3d { position: absolute; width: 440px; height: 900px; transform-origin: 50% 50%; transform-style: preserve-3d; }
+.iphone { position: absolute; inset: 0; border-radius: 74px; padding: 6px;
+  background: linear-gradient(135deg, #b9bec4 0%, #6f747b 18%, #d4d8dc 34%, #5c6167 52%, #a3a8ae 70%, #4a4e54 86%, #9aa0a6 100%);
+  box-shadow:
+    -1px 1px 0 #8d9298, -2px 2px 0 #7b8086, -3px 3px 0 #6b7076, -4px 4px 0 #5d6268, -5px 5px 0 #50555a, -6px 6px 0 #45494e, -7px 7px 0 #3b3f43,
+    -18px 40px 50px -10px rgba(0,0,0,.45), -40px 90px 120px -30px rgba(0,0,0,.55); }
+.iphone.flat { box-shadow: 0 2px 0 #4c5056, 0 4px 0 #3b3f43, 0 30px 40px -12px rgba(0,0,0,.45), 0 70px 90px -30px rgba(0,0,0,.45); }
+.iphone::before { content: ""; position: absolute; inset: 2px; border-radius: 72px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.45), inset 0 0 0 3px rgba(0,0,0,.35); pointer-events: none; }
+.iphone .bezel { position: absolute; inset: 6px; border-radius: 68px; background: #050506; padding: 13px; }
+.iphone .screen { position: relative; width: 100%; height: 100%; border-radius: 56px; overflow: hidden; background: #000; }
+.iphone .island { position: absolute; top: 14px; left: 50%; width: 126px; height: 37px; margin-left: -63px; border-radius: 20px; background: #000; z-index: 30; }
+.iphone .island::after { content: ""; position: absolute; right: 22px; top: 12px; width: 13px; height: 13px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #2b3a55 0 25%, #0b0f18 60%); }
+.iphone .glare { position: absolute; inset: 0; border-radius: 56px; z-index: 40; pointer-events: none;
+  background: linear-gradient(118deg, rgba(255,255,255,.20) 0%, rgba(255,255,255,.06) 22%, rgba(255,255,255,0) 38%, rgba(255,255,255,0) 70%, rgba(255,255,255,.05) 100%); }
+.iphone .btn { position: absolute; width: 6px; border-radius: 3px; background: linear-gradient(90deg, #3c4046, #9ca1a7 50%, #4a4e54); }
+.iphone .btn.l1 { left: -5px; top: 170px; height: 34px; }
+.iphone .btn.l2 { left: -5px; top: 232px; height: 64px; }
+.iphone .btn.l3 { left: -5px; top: 312px; height: 64px; }
+.iphone .btn.r1 { right: -5px; top: 262px; height: 104px; }
+
+/* ---------- iOS chrome ---------- */
+.ios { position: absolute; inset: 0; font-family: "UI", "Inter", sans-serif; color: #000; }
+.sbar { position: absolute; top: 0; left: 0; right: 0; height: 64px; display: flex; justify-content: space-between; align-items: center; padding: 18px 40px 0 48px; font: 600 19px "UI"; z-index: 20; }
+.sbar.light { color: #fff; }
+.sbar .r { display: flex; align-items: center; gap: 7px; }
+.sig { display: flex; align-items: flex-end; gap: 2.5px; height: 13px; }
+.sig i { display: block; width: 4px; border-radius: 1.2px; background: currentColor; }
+.sig i:nth-child(1) { height: 5px; } .sig i:nth-child(2) { height: 7.5px; } .sig i:nth-child(3) { height: 10px; } .sig i:nth-child(4) { height: 13px; }
+.sig.weak i:nth-child(n+2) { opacity: .3; }
+.bat { width: 27px; height: 13px; border: 1.6px solid currentColor; border-radius: 4px; padding: 1.5px; position: relative; opacity: .95; }
+.bat::after { content: ""; position: absolute; right: -4px; top: 3.5px; width: 2px; height: 4px; border-radius: 0 1px 1px 0; background: currentColor; opacity: .5; }
+.bat i { display: block; height: 100%; width: 78%; background: currentColor; border-radius: 1.5px; }
+.carrier { font: 600 17px "UI"; }
+
+/* lock screen */
+.lock { position: absolute; inset: 0; color: #fff; }
+.lock .wall { position: absolute; inset: 0; }
+.lock .date { position: absolute; top: 108px; left: 0; right: 0; text-align: center; font: 600 22px "UI"; opacity: .92; }
+.lock .clock { position: absolute; top: 128px; left: 0; right: 0; text-align: center; font: 700 112px "CFD"; letter-spacing: -0.02em; line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,.15); }
+.notif { position: relative; margin: 0 14px; border-radius: 26px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start;
+  background: rgba(245,245,247,.72); backdrop-filter: blur(24px) saturate(1.6); -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  color: #000; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
+.notif .ic { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 11px; }
+.notif .tx { flex: 1; min-width: 0; font: 400 16.5px/1.28 "UI"; }
+.notif .tx b { display: flex; justify-content: space-between; font: 600 16.5px "UI"; margin-bottom: 1px; }
+.notif .tx b span { font: 400 14px "UI"; color: rgba(0,0,0,.45); }
+.lock .bottom { position: absolute; bottom: 44px; left: 52px; right: 52px; display: flex; justify-content: space-between; }
+.lock .bottom i { width: 52px; height: 52px; border-radius: 50%; background: rgba(40,40,45,.35); backdrop-filter: blur(10px); }
+.lock .home { position: absolute; bottom: 10px; left: 50%; width: 150px; margin-left: -75px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.9); }
+.homebar { position: absolute; bottom: 10px; left: 50%; width: 150px; margin-left: -75px; height: 5px; border-radius: 3px; background: #000; z-index: 25; }
+
+/* app icon */
+.appicon { position: relative; background: linear-gradient(160deg, #22d6b4, #10a98c); display: grid; place-items: center; overflow: hidden; }
+.appicon::before { content: ""; width: 46%; height: 46%; border-radius: 50%; background: #0b0d10; box-shadow: inset 0 0 0 0 transparent; display: block; }
+.appicon::after { content: ""; position: absolute; width: 16%; height: 16%; border-radius: 50%; background: #18c8a8; }
+
+/* generic app/web screen */
+.app { position: absolute; inset: 0; background: #fff; color: var(--ink); font-family: "UI"; }
+.app.dark { background: var(--ink); color: #fff; }
+.urlbar { position: absolute; left: 14px; right: 14px; bottom: 26px; height: 52px; border-radius: 16px; background: rgba(242,242,247,.95); box-shadow: 0 2px 10px rgba(0,0,0,.08); display: flex; align-items: center; justify-content: center; gap: 8px; font: 500 17px "UI"; color: #000; z-index: 22; }
+.urlbar .lk { width: 11px; height: 13px; border: 2px solid rgba(0,0,0,.55); border-radius: 3px; position: relative; top: 2px; }
+.urlbar .lk::before { content: ""; position: absolute; left: 1px; top: -8px; width: 5px; height: 6px; border: 2px solid rgba(0,0,0,.55); border-bottom: 0; border-radius: 4px 4px 0 0; }
+.app .nav { position: absolute; top: 64px; left: 0; right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; border-bottom: 1px solid #eef0f3; }
+.minilogo { display: inline-flex; align-items: center; gap: 7px; border: 2.5px solid currentColor; border-radius: 11px; padding: 5px 10px 5px 6px; font: 800 18px "CFD"; letter-spacing: -0.02em; }
+.minilogo .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
+.minilogo .dot::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+.minilogo .la { color: var(--teal); }
+.burger { width: 24px; height: 14px; border-top: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; position: relative; }
+.burger::after { content: ""; position: absolute; left: 0; right: 0; top: 3.5px; border-top: 2.5px solid currentColor; }
+.app .body { position: absolute; top: 128px; left: 0; right: 0; bottom: 90px; padding: 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+.chip { display: inline-flex; align-self: flex-start; border: 2.5px solid var(--ink); border-radius: 999px; padding: 4px 11px; font: 800 12.5px "CFD"; letter-spacing: .12em; text-transform: uppercase; box-shadow: 3px 3px 0 var(--teal); background: #fff; color: var(--ink); }
+.app h3 { font: 800 38px/0.98 "CFD"; letter-spacing: -0.04em; }
+.app h3 .hl { color: var(--pink); }
+.card2 { border: 2.5px solid var(--ink); border-radius: 18px; padding: 14px 16px; box-shadow: 5px 5px 0 var(--teal); background: #fff; color: var(--ink); }
+.row2 { display: flex; justify-content: space-between; align-items: center; font: 500 15.5px "UI"; padding: 9px 0; border-bottom: 1px solid #eef0f3; }
+.row2:last-child { border-bottom: 0; }
+.row2 b { font: 600 15.5px "UI"; }
+.row2 .ok { color: var(--teal-d); font-weight: 700; }
+.bigbtn { display: flex; align-items: center; justify-content: center; height: 58px; border-radius: 999px; background: var(--blue); color: #fff; font: 800 21px "CFD"; letter-spacing: -0.01em; border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
+.bigbtn.ghost { background: #fff; color: var(--ink); }
+.tick { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--teal); border: 2px solid var(--ink); }
+.tick svg { width: 14px; height: 14px; }
+
+/* iOS sheet */
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 30px 30px 0 0; background: #f2f2f7; color: #000; padding: 12px 24px 36px; box-shadow: 0 -10px 40px rgba(0,0,0,.25); z-index: 24; font-family: "UI"; }
+.sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: rgba(60,60,67,.3); margin: 0 auto 18px; }
+.sheet .simic { width: 74px; height: 92px; margin: 6px auto 14px; border-radius: 10px 26px 10px 10px; background: linear-gradient(160deg,#22d6b4,#10a98c); position: relative; box-shadow: inset 0 0 0 2px rgba(0,0,0,.15); }
+.sheet .simic::after { content: ""; position: absolute; left: 18px; top: 30px; width: 38px; height: 32px; border-radius: 6px; background: linear-gradient(135deg,#f6d77a,#c99a2e); box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.25); }
+.sheet h4 { text-align: center; font: 700 25px "UI"; letter-spacing: -0.01em; }
+.sheet p { text-align: center; font: 400 16px/1.35 "UI"; color: rgba(60,60,67,.75); margin-top: 6px; }
+.sheet .bar { height: 6px; border-radius: 3px; background: rgba(60,60,67,.15); margin: 22px 10px 0; overflow: hidden; }
+.sheet .bar i { display: block; height: 100%; background: var(--ios-blue); border-radius: 3px; }
+.sheet .iosbtn { margin-top: 22px; height: 54px; border-radius: 14px; background: var(--ios-blue); color: #fff; display: grid; place-items: center; font: 600 18px "UI"; }
+
+/* camera viewfinder */
+.camera { position: absolute; inset: 0; background: #222; overflow: hidden; }
+.camera canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.reticle { position: absolute; left: 50%; top: 40%; width: 250px; height: 250px; margin: -125px 0 0 -125px; }
+.reticle i { position: absolute; width: 46px; height: 46px; border: 5px solid #ffd60a; }
+.reticle i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; border-radius: 14px 0 0 0; }
+.reticle i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; border-radius: 0 14px 0 0; }
+.reticle i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 14px; }
+.reticle i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; border-radius: 0 0 14px 0; }
+.campill { position: absolute; left: 50%; transform: translateX(-50%); padding: 9px 16px; border-radius: 999px; background: rgba(255,214,10,.95); color: #000; font: 600 16px "UI"; white-space: nowrap; }
+
+/* ---------- props ---------- */
+.qrsvg rect { shape-rendering: crispEdges; }
+.pass { position: absolute; width: 560px; height: 250px; border-radius: 14px; background: #fbfbf8; color: #111; overflow: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05), 0 18px 30px -10px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.12); font-family: "UI"; }
+.pass::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255,255,255,.0) 40%, rgba(0,0,0,.05) 70%, rgba(255,255,255,.08) 100%); pointer-events: none; }
+.pass .hd { height: 52px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; font: 800 15px "CFD"; letter-spacing: .14em; }
+.pass .hd b { color: var(--teal); }
+.pass .rt { display: flex; align-items: flex-end; gap: 22px; padding: 16px 22px 0; }
+.pass .rt small, .pass .meta small { display: block; font: 600 10.5px "UI"; letter-spacing: .14em; color: #777; }
+.pass .rt b { display: block; font: 800 50px/1 "CFD"; letter-spacing: -0.04em; }
+.pass .rt .pl { font-size: 26px; padding-bottom: 10px; color: #444; }
+.pass .meta { display: flex; gap: 26px; padding: 12px 22px 0; }
+.pass .meta b { font: 700 17px "DejaVu Sans Mono", monospace; }
+.pass .stub { position: absolute; right: 0; top: 52px; bottom: 0; width: 132px; border-left: 3px dashed #ccc; display: grid; place-items: center; }
+.pass .stub .bc { width: 92px; height: 150px; background: repeating-linear-gradient(0deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 12px); opacity: .9; }
+
+.laptop { position: absolute; width: 760px; }
+.laptop .lid { position: relative; width: 760px; height: 480px; border-radius: 22px 22px 6px 6px; background: linear-gradient(180deg,#2a2d31,#1a1c1f); padding: 16px 16px 20px; box-shadow: inset 0 0 0 2px #3b3f44, 0 30px 50px -20px rgba(0,0,0,.5); }
+.laptop .disp { width: 100%; height: 100%; border-radius: 6px; overflow: hidden; background: #fff; position: relative; }
+.laptop .base { position: relative; width: 860px; margin-left: -50px; height: 22px; border-radius: 0 0 26px 26px; background: linear-gradient(180deg,#d9dce0,#9a9ea4 60%,#6f7378); box-shadow: 0 24px 30px -12px rgba(0,0,0,.5); }
+.laptop .base::before { content: ""; position: absolute; left: 50%; top: 0; width: 140px; margin-left: -70px; height: 8px; border-radius: 0 0 10px 10px; background: #8d9196; }
+
+/* split-flap board */
+.board { position: absolute; background: #121417; border-radius: 18px; padding: 26px 26px 30px; box-shadow: inset 0 0 0 3px #22262b, 0 40px 60px -20px rgba(0,0,0,.6); }
+.board .ttl { display: flex; justify-content: space-between; color: #ffd84a; font: 800 22px "CFD"; letter-spacing: .14em; margin-bottom: 16px; }
+.board .ttl span { color: #8b9299; }
+.board .r { display: flex; gap: 22px; margin-top: 10px; align-items: center; }
+.flaps { display: flex; gap: 4px; }
+.flap { position: relative; width: 34px; height: 50px; border-radius: 5px; background: linear-gradient(180deg,#26292e 0 49%,#0e1013 49% 51%,#1d2024 51%); color: #f2f2f2; display: grid; place-items: center; font: 700 32px "DejaVu Sans Mono", monospace; box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 2px 0 #000; }
+.flap.y { color: #ffd84a; }
+.flap.g { color: #3ee2a4; }
+.board .r.hi { background: rgba(24,200,168,.12); margin-inline: -12px; padding: 6px 12px; border-radius: 10px; box-shadow: inset 0 0 0 2px rgba(24,200,168,.6); }
+
+/* plane window */
+.window { position: absolute; border-radius: 46% / 40%; overflow: hidden; box-shadow: inset 0 0 0 14px #e9e7e2, inset 0 0 0 16px #cfccc5, inset 0 0 40px 22px rgba(0,0,0,.35); }
+.window canvas { position: absolute; inset: -10%; width: 120%; height: 120%; }
+.window .shade { position: absolute; left: 0; right: 0; top: 0; background: linear-gradient(180deg,#f3f1ec,#dedad3); box-shadow: 0 6px 12px rgba(0,0,0,.25); }
+.window .shade::after { content: ""; position: absolute; left: 50%; bottom: 10px; width: 70px; height: 10px; margin-left: -35px; border-radius: 6px; background: #c9c5bd; box-shadow: inset 0 2px 3px rgba(0,0,0,.2); }
+.cabin { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 40%, #f4f2ee 0%, #e2dfd8 55%, #c9c5bd 100%); }
+.cabin::after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1.4px); background-size: 6px 6px; }
+.bezelring { position: absolute; border-radius: 48% / 42%; background: linear-gradient(160deg,#fbfaf7,#d6d2ca); box-shadow: 0 10px 30px rgba(0,0,0,.18), inset 0 2px 0 #fff; }
+
+/* toast card floating outside the phone */
+.toast { position: absolute; display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: 24px; background: rgba(255,255,255,.92); color: var(--ink); font-family: "UI"; box-shadow: 0 30px 50px -18px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.04); }
+.toast .ic { width: 52px; height: 52px; border-radius: 14px; }
+.toast b { display: block; font: 700 20px "UI"; letter-spacing: -0.01em; }
+.toast span { font: 400 16px "UI"; color: #555; }

@@ -16,12 +16,20 @@ CONCEPTS = [
 COUNTRIES = [("usa", "USA"), ("turkey", "Turkey"), ("dubai", "Dubai")]
 SIZES = [("1x1", "1:1"), ("4x5", "4:5"), ("9x16", "9:16"), ("191x1", "1.91:1")]
 
-def gallery():
+CONCEPTS_V2 = [
+    ("R1", "WHEELS-DOWN-DATA-ON", "Wheels down. Data on.", "", "Prospecting · intro"),
+    ("R2", "SET-UP-FROM-THE-SOFA", "Set up from the sofa", "", "Prospecting · easy setup"),
+    ("R3", "PAY-ONCE-ORDER", "Pay once. Not per day.", "", "Prospecting · pricing"),
+    ("R4", "REFUND-IF-NOT-INSTALLED", "Refund if not installed", "", "Prospecting + retargeting"),
+    ("R5", "STILL-FLYING-RETARGET", "Still flying to …?", "", "Retargeting"),
+]
+
+def gallery(concepts=CONCEPTS, root="creatives"):
     out = []
     for key, label in COUNTRIES:
         cards = []
-        for n, slug, name, head, role in CONCEPTS:
-            base = f"creatives/{key}/CALAFLY_{key.upper()}_{n}_{slug}"
+        for n, slug, name, head, role in concepts:
+            base = f"{root}/{key}/CALAFLY_{key.upper()}_{n}_{slug}"
             imgs = "".join(
                 f'<img data-size="{s}" src="{base}_{s}.png" alt="{html.escape(name)} creative for {label}, {r}" loading="lazy"{" hidden" if s != "1x1" else ""}>'
                 for s, r in SIZES)
@@ -57,6 +65,18 @@ def copy_blocks():
     return "\n".join(out)
 
 page = open(os.path.join(HERE, "review.template.html")).read()
+def videos_v2():
+    out = []
+    for key, label in COUNTRIES:
+        vids = []
+        for code, name, note in [("V3_WHEELS-DOWN", "V3 · Wheels down", "Prospecting: Meta, YouTube, Demand Gen"), ("V4_FROM-THE-SOFA", "V4 · From the sofa", "Retargeting and mid-funnel")]:
+            b = f"v2-realistic/videos/CALAFLY_{key.upper()}_{code}"
+            vids.append(f'''<div class="video"><h3>{name}</h3><p class="muted">{note}</p>
+  <div class="players"><video src="{b}_9x16.mp4" controls playsinline preload="metadata"></video><video src="{b}_16x9.mp4" controls playsinline preload="metadata"></video></div></div>''')
+        out.append(f'<div class="vset videos" data-country="{key}"{" hidden" if key != "usa" else ""}>{"".join(vids)}</div>')
+    return "\n".join(out)
+
+page = page.replace("<!--GALLERY_V2-->", gallery(CONCEPTS_V2, "v2-realistic/creatives")).replace("<!--VIDEOS_V2-->", videos_v2())
 page = page.replace("<!--GALLERY-->", gallery()).replace("<!--COPY-->", copy_blocks())
 page = page.replace("<!--NEG-->", ", ".join(html.escape(n) for n in copy["negatives"]))
 page = page.replace("<!--BRAND-->", ", ".join(html.escape(n) for n in copy["brand"]))

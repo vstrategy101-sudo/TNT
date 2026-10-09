@@ -13,6 +13,10 @@ Prospecting and retargeting on Google (70% of spend) and Meta (30%) for people t
 
 Re-render: `cd src && node render-creatives.mjs && node render-videos.mjs && python3 build-copy.py`
 
+## Round 2 (realistic set)
+
+See `v2-realistic/README.md`: competitor scan, 60 realistic statics (phone mock-ups, iOS-style screens, rendered scenes), 12 videos with synthesised sound design, and audio stems.
+
 ## Message architecture
 
 An intro to CalaFly, followed by three USPs. Every ad is about CalaFly's own product. There are no competitor names and no comparative claims.

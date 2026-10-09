@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="kit.css">
+<style>
+body { background: var(--ink); overflow: hidden; }
+#v { position: relative; overflow: hidden; background: var(--ink); color: #fff; }
+.f-9x16 { width: 1080px; height: 1920px; }
+.f-16x9 { width: 1920px; height: 1080px; }
+
+/* text band + stage (1080×1080) */
+.band { position: absolute; z-index: 10; }
+.f-9x16 .band { left: 64px; right: 64px; top: 250px; height: 520px; }
+.f-16x9 .band { left: 80px; top: 0; width: 760px; height: 1080px; display: flex; flex-direction: column; justify-content: center; }
+.stage { position: absolute; width: 1080px; height: 1080px; overflow: hidden; }
+.f-9x16 .stage { left: 0; top: 780px; border-radius: 48px 48px 0 0; }
+.f-16x9 .stage { left: 840px; top: 0; }
+.topbar { position: absolute; z-index: 12; display: flex; justify-content: space-between; align-items: center; }
+.f-9x16 .topbar { left: 64px; right: 64px; top: 130px; }
+.f-16x9 .topbar { left: 80px; right: 1160px; top: 60px; }
+.f-16x9 .topbar .url { display: none; }
+.url { font: 800 30px "CFD"; color: var(--teal); }
+
+.line { position: absolute; left: 0; right: 0; opacity: 0; }
+.f-9x16 .line { top: 70px; }
+.f-16x9 .line { top: 50%; transform: translateY(-50%); }
+.line h1 { font: 800 112px/0.94 "CFD"; letter-spacing: -0.045em; }
+.line .sub { font: 600 38px/1.2 "CFD"; letter-spacing: -0.015em; color: #e6ebef; margin-top: 22px; max-width: 900px; }
+.f-16x9 .line h1 { font-size: 104px; }
+.small { position: absolute; z-index: 12; font: 500 23px/1.35 "CFD"; color: var(--muted); }
+.f-9x16 .small { left: 64px; right: 64px; top: 700px; }
+.f-16x9 .small { left: 80px; width: 720px; bottom: 50px; }
+
+.scene { position: absolute; inset: 0; opacity: 0; }
+.scene .layer { position: absolute; inset: 0; }
+.scene canvas.fill { position: absolute; inset: 0; width: 100%; height: 100%; }
+.studio { background: radial-gradient(90% 70% at 60% 35%, #2a3a3a 0%, #13181b 55%, #07090b 100%); }
+.terminal { background: linear-gradient(180deg, #1b2027, #0d1014 70%); }
+
+.endcard { background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+.endcard .logo { font-size: 66px; padding: 22px 36px 22px 24px; border-width: 6px; border-radius: 34px; }
+.endcard .logo .dot { width: 76px; height: 76px; }
+.endcard .logo .dot::after { width: 26px; height: 26px; }
+.endcard .cta { font-size: 46px; padding: 26px 46px; }
+.endcard .ticks { display: grid; gap: 14px; }
+.endcard .ticks div { display: flex; align-items: center; gap: 16px; font: 700 34px "CFD"; letter-spacing: -0.02em; }
+.endcard .ticks .tick { width: 44px; height: 44px; }
+.endcard .ticks .tick svg { width: 24px; height: 24px; }
+.flash { position: absolute; inset: 0; background: #fff; opacity: 0; z-index: 9; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="v"></div>
+<script src="qr.js"></script>
+<script src="kit.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const which = P.get("v") || "wheels";
+const fmt = P.get("f") || "9x16";
+const C = K.COUNTRIES[P.get("c") || "dubai"];
+const v = document.getElementById("v");
+v.className = `f-${fmt}`;
+const BASE = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
+const REFUND = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+
+const clamp = x => Math.max(0, Math.min(1, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);
+const easeIO = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const back = x => { x = clamp(x); const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const $ = q => v.querySelector(q);
+
+// ---------- scenes (all live in the 1080×1080 stage) ----------
+const phone = (screen, id, style, opts) => `<div class="phone3d" id="${id}" style="${style}">${K.iphone(screen, opts)}</div>`;
+const notifs = K.notif({ title: "Mum", body: "Landed safe? Send a pic when you can x" }) + K.notif({ title: "Holiday group", body: "Taxi rank is just outside arrivals", time: "now", style: "margin-top:10px" });
+
+const SC = {
+  window: `<div class="layer cabin"></div>
+    <div class="layer" id="winwrap"><div class="bezelring" style="left:180px;top:80px;width:720px;height:960px"></div>
+      <div class="window" style="left:236px;top:140px;width:608px;height:840px"><canvas id="sky" data-sky="${C.sky}" width="480" height="700"></canvas><div class="shade" id="shade" style="height:22%"></div></div></div>
+    ${phone(K.lockScreen(C, `<div id="n1" style="opacity:0">${K.notif({ title: "Mum", body: "Landed safe? Send a pic when you can x" })}</div><div id="n2" style="opacity:0;margin-top:10px">${K.notif({ title: "Holiday group", body: "Taxi rank is just outside arrivals" })}</div>`), "ph_lock", "left:320px;top:1200px")}`,
+  sofa: `<div class="layer"><canvas class="fill" data-fabric="#b9b2a6" width="540" height="540"></canvas></div>
+    <div class="layer" id="lap" style="transform-origin:30% 60%"><div style="position:absolute;left:-60px;top:330px;transform:scale(.9);transform-origin:0 0">${K.laptopQR()}</div></div>
+    ${phone(K.screenCamera(C, { progress: 0 }), "ph_cam", "left:600px;top:1200px")}`,
+  order: `<div class="layer"><canvas class="fill" data-wood="1" width="540" height="540"></canvas></div>
+    ${K.boardingPass(C, "left:40px;top:690px;transform:rotate(-11deg)")}
+    ${phone(K.screenOrder(C), "ph_order", "left:470px;top:60px", { flat: true })}`,
+  refund: `<div class="layer studio"></div>
+    ${phone(K.screenRefund(C), "ph_ref", "left:330px;top:70px")}
+    <div class="toast" id="toast" style="left:160px;top:780px;opacity:0"><span class="ic appicon"></span><div><b>Refund request sent</b><span>${C.plan} · not installed</span></div></div>`,
+  board: `<div class="layer terminal"></div>
+    <div id="boardwrap" style="position:absolute;left:30px;top:250px;transform:scale(.97);transform-origin:0 0">${K.board(C)}</div>`,
+  end: `<div class="layer endcard">${K.logo()}
+    <div class="ticks">${["Set up in minutes", "Pay once, not per day", "Refund if not installed"].map(t => `<div><span class="tick">${K.tickSvg()}</span>${t}</div>`).join("")}</div>
+    <span class="cta">Get Calafly</span><span class="url" style="font-size:38px">calafly.net</span></div>`,
+};
+
+// ---------- timelines ----------
+// Each video: scenes with [t0, t1], text lines with [t0, t1], and sound cues for the audio mix.
+const V = {
+  wheels: {
+    scenes: [["window", 0, 6.2], ["sofa", 6.0, 8.8], ["order", 8.6, 11.0], ["refund", 10.8, 13.2], ["end", 13.0, 15.01]],
+    lines: [
+      [0.2, 3.0, `<h1>Wheels<br>down.</h1>`],
+      [3.0, 6.1, `<h1>Wheels down.<br><span class="hl">Data on.</span></h1><p class="sub">Your ${C.short} eSIM, set up before you flew.</p>`],
+      [6.1, 8.7, `<h1>Set up in minutes.<br><span class="hl">From the sofa.</span></h1>`],
+      [8.7, 10.9, `<h1>Pay once.<br><span class="hl">Not per day.</span></h1><p class="sub">One price for your whole trip.</p>`],
+      [10.9, 13.1, `<h1>Plans changed?<br><span class="hl">Get a refund.</span></h1><p class="sub">If you never install it.</p>`],
+      [13.1, 15.01, `<h1>${C.short} data,<br><span class="hl">sorted.</span></h1>`],
+    ],
+    cues: [[0, "ambience", 6.4], [0, "music", 15], [0.35, "chime_seatbelt"], [1.55, "landing"], [3.0, "whoosh_up"], [3.9, "notif"], [4.7, "notif_soft"],
+      [6.0, "whoosh"], [6.7, "focus_beep"], [7.0, "progress", 1.4], [8.35, "success"], [8.6, "whoosh"], [9.4, "pop"], [9.75, "pop"],
+      [10.8, "whoosh"], [11.6, "tap"], [11.9, "toast"], [12.6, "riser", 0.5], [13.0, "sting"]],
+  },
+  sofa: {
+    scenes: [["sofa", 0, 6.4], ["board", 6.2, 9.2], ["window", 9.0, 12.6], ["end", 12.4, 15.01]],
+    lines: [
+      [0.2, 2.6, `<h1>Flying to<br><span class="hl">${C.short}?</span></h1>`],
+      [2.6, 6.3, `<h1>Sort your data<br><span class="hl">from the sofa.</span></h1><p class="sub">Scan the QR code. Done in minutes.</p>`],
+      [6.3, 9.1, `<h1>Ready before<br><span class="hl">you board.</span></h1><p class="sub">One price for the trip. Not per day.</p>`],
+      [9.1, 12.5, `<h1>Switch it on<br><span class="hl">when you land.</span></h1><p class="sub">Refund if you never install it.</p>`],
+      [12.5, 15.01, `<h1>${C.short} data,<br><span class="hl">sorted.</span></h1>`],
+    ],
+    cues: [[0, "room", 6.5], [0, "music", 15], [0.25, "whoosh_up"], [2.4, "whoosh"], [3.4, "focus_beep"], [3.7, "progress", 1.6], [5.4, "success"],
+      [6.2, "whoosh"], [6.5, "flaps", 1.7], [8.25, "pop"], [9.0, "whoosh"], [9.2, "ambience", 3.4], [9.6, "chime_seatbelt"], [10.6, "notif"], [11.4, "notif_soft"],
+      [12.0, "riser", 0.4], [12.4, "sting"]],
+  },
+};
+const T = V[which];
+window.CUES = T.cues;
+
+v.innerHTML = `
+  <div class="topbar">${K.logo()}<span class="url">calafly.net</span></div>
+  <div class="band">${T.lines.map((l, i) => `<div class="line" id="l${i}">${l[2]}</div>`).join("")}</div>
+  <p class="small" id="small"></p>
+  <div class="stage">${T.scenes.map(([k], i) => `<div class="scene" id="s${i}" data-k="${k}">${SC[k]}</div>`).join("")}<div class="flash" id="flash"></div></div>`;
+K.paintAll(v);
+
+// scene-local animation, p = seconds since the scene started
+const ANIM = {
+  window(el, p, t) {
+    const sky = el.querySelector("#sky"); sky.style.transform = `translateX(${-p * 14}px) translateY(${Math.sin(p * 1.3) * 3}px)`;
+    const shake = which === "wheels" && t > 1.5 && t < 2.6 ? Math.sin(t * 90) * (2.6 - t) * 6 : 0;
+    el.querySelector("#winwrap").style.transform = `translateY(${shake}px) scale(${1.04 + p * 0.004})`;
+    el.querySelector("#shade").style.height = `${22 - ease(p / 2) * 8}%`;
+    const enter = which === "wheels" ? 3.0 : 0.2;
+    const ph = el.querySelector("#ph_lock");
+    ph.style.top = `${1200 - ease((p - enter) / 0.9) * 1120}px`;
+    ph.style.transform = `perspective(2600px) rotateY(-12deg) rotateX(4deg) rotateZ(${-6 + ease((p - enter) / 0.9) * 2}deg) scale(.94)`;
+    const n1 = which === "wheels" ? 3.9 : 1.6, n2 = n1 + 0.8;
+    [["#n1", n1], ["#n2", n2]].forEach(([q, at]) => { const e = el.querySelector(q); const k = back((p - at) / 0.35); e.style.opacity = clamp((p - at) / 0.15); e.style.transform = `translateY(${(1 - k) * -40}px) scale(${0.9 + 0.1 * k})`; });
+  },
+  sofa(el, p, t) {
+    const enter = which === "wheels" ? 0.1 : 2.4;
+    el.querySelector("#lap").style.transform = `scale(${1.02 + p * 0.01})`;
+    const ph = el.querySelector("#ph_cam");
+    ph.style.top = `${1200 - ease((p - enter) / 0.8) * 1150}px`;
+    ph.style.transform = `perspective(2600px) rotateY(-16deg) rotateX(6deg) rotateZ(-3deg) scale(.92)`;
+    const st = which === "wheels" ? 1.0 : 3.7, dur = which === "wheels" ? 1.4 : 1.6;
+    const bar = el.querySelector("#esimbar"); const pr = clamp((p - st) / dur); bar.style.width = `${pr * 100}%`;
+    el.querySelector("#esimsheet h4").textContent = pr >= 1 ? "eSIM activated" : "Activating eSIM";
+    el.querySelector("#esimsheet").style.transform = `translateY(${(1 - ease((p - st + 0.4) / 0.4)) * 300}px)`;
+  },
+  order(el, p) {
+    const ph = el.querySelector("#ph_order"); ph.style.transform = `rotate(${6 - p * 0.6}deg) scale(${0.95 + p * 0.006})`;
+    el.querySelectorAll(".row2").forEach((r, i) => { const k = ease((p - 0.5 - i * 0.14) / 0.3); r.style.opacity = 0.25 + 0.75 * k; });
+    el.querySelectorAll(".row2 .ok").forEach((r, i) => { const k = back((p - 0.8 - i * 0.35) / 0.3); r.style.display = "inline-block"; r.style.transform = `scale(${0.6 + 0.4 * k})`; });
+  },
+  refund(el, p) {
+    el.querySelector("#ph_ref").style.transform = `perspective(2600px) rotateY(${16 - p * 2}deg) rotateX(5deg) rotateZ(3deg) scale(.96)`;
+    const btn = el.querySelector("#refundbtn"); const tp = p - 0.8;
+    btn.style.transform = tp > 0 && tp < 0.18 ? "scale(.96)" : "scale(1)";
+    const ts = el.querySelector("#toast"), k = back((p - 1.1) / 0.4);
+    ts.style.opacity = clamp((p - 1.1) / 0.2); ts.style.transform = `translateX(${(1 - k) * -160}px) rotate(-3deg)`;
+  },
+  board(el, p) {
+    const settle = 0.3; const rows = el.querySelectorAll(".r");
+    rows.forEach((row, ri) => row.querySelectorAll(".flap").forEach((f, i) => {
+      if (!f.dataset.ch) f.dataset.ch = f.textContent;
+      const done = p > settle + ri * 0.18 + i * 0.03 + (row.classList.contains("hi") ? 0.6 : 0);
+      f.textContent = done ? f.dataset.ch : "ABCDEFGHIJKLMNOPRSTUVWXY0123456789"[Math.floor((p * 40 + i * 7 + ri * 3) % 34)];
+    }));
+    el.querySelector("#boardwrap").style.transform = `scale(${0.97 + p * 0.01})`;
+  },
+  end(el, p) {
+    const kids = el.querySelectorAll(".logo, .ticks > div, .cta, .url");
+    kids.forEach((k, i) => { const e = back((p - 0.1 - i * 0.12) / 0.45); k.style.opacity = clamp((p - 0.1 - i * 0.12) / 0.2); k.style.transform = `translateY(${(1 - e) * 40}px)`; });
+  },
+};
+
+window.renderFrame = (t) => {
+  T.scenes.forEach(([k, t0, t1], i) => {
+    const el = document.getElementById(`s${i}`);
+    const vis = t >= t0 && t < t1;
+    const fin = clamp((t - t0) / 0.3), fout = i === T.scenes.length - 1 ? 0 : clamp((t - (t1 - 0.3)) / 0.3);
+    el.style.opacity = vis ? Math.min(fin, 1 - fout) : 0;
+    el.style.transform = `scale(${1 + (1 - ease(fin)) * 0.06})`;
+    if (vis) ANIM[k](el, t - t0, t);
+  });
+  T.lines.forEach(([t0, t1], i) => {
+    const el = document.getElementById(`l${i}`), vis = t >= t0 && t < t1;
+    const fin = ease((t - t0) / 0.35), fout = i === T.lines.length - 1 ? 0 : ease((t - (t1 - 0.2)) / 0.2);
+    el.style.opacity = vis ? Math.min(fin, 1 - fout) : 0;
+    const base = fmt === "16x9" ? "translateY(-50%) " : "";
+    el.style.transform = `${base}translateY(${(1 - fin) * 30}px)`;
+  });
+  const refundShown = which === "wheels" ? t >= 10.9 : t >= 9.1;
+  $("#small").textContent = refundShown ? `${REFUND} ${BASE}` : BASE;
+  // landing flash
+  $("#flash").style.opacity = which === "wheels" ? Math.max(0, 0.25 - Math.abs(t - 1.6) * 0.8) : 0;
+};
+document.fonts.ready.then(() => { window.renderFrame(0); document.body.dataset.ready = "1"; });
+</script>
+</body>
+</html>

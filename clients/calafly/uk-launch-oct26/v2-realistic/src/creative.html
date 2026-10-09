@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="kit.css">
+<style>
+html, body { background: #777; }
+#ad { position: relative; overflow: hidden; background: var(--ink); color: #fff; }
+.s-1x1  { width: 1080px; height: 1080px; }
+.s-4x5  { width: 1080px; height: 1350px; }
+.s-9x16 { width: 1080px; height: 1920px; }
+.s-191x1 { width: 1920px; height: 1005px; zoom: 0.625; }
+
+.top { position: absolute; z-index: 6; display: flex; justify-content: space-between; align-items: center; }
+.txt { position: absolute; z-index: 6; }
+.card { position: absolute; z-index: 2; border-radius: 40px; overflow: hidden; box-shadow: 16px 16px 0 var(--teal); background: #222; }
+.subjwrap { position: absolute; z-index: 4; pointer-events: none; }
+.subj { position: absolute; width: 1000px; height: 1000px; transform-origin: 0 0; }
+.foot { position: absolute; z-index: 6; display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; }
+
+h1 { font-weight: 800; letter-spacing: -0.045em; line-height: 0.94; margin-top: 24px; }
+.sub { font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; color: #e6ebef; margin-top: 20px; }
+.small { font: 500 23px/1.35 "CFD"; color: var(--muted); }
+.url { font: 800 30px "CFD"; color: var(--teal); }
+
+/* 1:1 — text left, product card right */
+.s-1x1 .top { left: 56px; right: 56px; top: 52px; }
+.s-1x1 .txt { left: 56px; top: 190px; width: 470px; }
+.s-1x1 h1 { font-size: 92px; }
+.s-1x1 .sub { font-size: 33px; }
+.s-1x1 .card { left: 560px; top: 52px; width: 466px; height: 860px; }
+.s-1x1 .foot { left: 56px; right: 56px; bottom: 44px; }
+.s-1x1 .foot .small { max-width: 640px; }
+
+/* 4:5 — text top, wide card below */
+.s-4x5 .top { left: 60px; right: 60px; top: 56px; }
+.s-4x5 .txt { left: 60px; top: 160px; width: 960px; }
+.s-4x5 h1 { font-size: 96px; }
+.s-4x5 .sub { font-size: 32px; max-width: 900px; }
+.s-4x5 .card { left: 60px; top: 520px; width: 944px; height: 672px; }
+.s-4x5 .foot { left: 60px; right: 60px; bottom: 48px; }
+.s-4x5 .foot .small { max-width: 620px; }
+
+/* 9:16 — copy in the safe zone, scene runs full-bleed underneath the platform UI */
+.s-9x16 .top { left: 64px; right: 64px; top: 250px; }
+.s-9x16 .txt { left: 64px; top: 360px; width: 952px; }
+.s-9x16 h1 { font-size: 112px; }
+.s-9x16 .sub { font-size: 38px; }
+.s-9x16 .card { left: 0; top: 840px; width: 1080px; height: 1080px; border-radius: 48px 48px 0 0; box-shadow: none; }
+.s-9x16 .foot { display: none; }
+.s-9x16 .small9 { display: block; margin-top: 22px; max-width: 900px; }
+.small9 { display: none; }
+
+/* 1.91:1 — text left, card right */
+.s-191x1 .top { left: 80px; right: 1000px; top: 60px; }
+.s-191x1 .txt { left: 80px; top: 200px; width: 840px; }
+.s-191x1 h1 { font-size: 112px; }
+.s-191x1 .sub { font-size: 38px; }
+.s-191x1 .card { left: 990px; top: 50px; width: 870px; height: 905px; }
+.s-191x1 .foot { left: 80px; right: 1000px; bottom: 56px; flex-direction: column; align-items: flex-start; gap: 22px; }
+
+/* scene backdrops */
+.bg { position: absolute; inset: 0; }
+.bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.studio { background: radial-gradient(90% 70% at 60% 35%, #2a3a3a 0%, #13181b 55%, #07090b 100%); }
+.studio::after { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 80% 10%, rgba(24,200,168,.35), transparent 70%); }
+.terminal { background: linear-gradient(180deg, #1b2027, #0d1014 70%); }
+.terminal::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(180deg, transparent, rgba(255,214,140,.10)); }
+.floorlight { position: absolute; border-radius: 50%; filter: blur(30px); }
+</style>
+</head>
+<body>
+<div id="ad"></div>
+<script src="qr.js"></script>
+<script src="kit.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const C = K.COUNTRIES[P.get("c") || "dubai"];
+const concept = P.get("k") || "wheels";
+const size = P.get("s") || "1x1";
+
+const BASE = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
+const REFUND = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+
+// Each concept: copy + a backdrop that fills the card + a subject composed in a 1000×1000 box.
+const CONCEPTS = {
+  wheels: {
+    tag: "Meet CalaFly",
+    h: `Wheels down.<br><span class="hl">Data on.</span>`,
+    sub: `Set up your ${C.short} eSIM at home. Switch it on when you land.`,
+    small: BASE,
+    bg: `<div class="bg cabin"></div>`,
+    subj: `
+      <div class="bezelring" style="left:40px;top:30px;width:560px;height:760px"></div>
+      <div class="window" style="left:84px;top:78px;width:472px;height:664px">
+        <canvas data-sky="${C.sky}" width="420" height="600"></canvas>
+        <div class="shade" style="height:20%"></div>
+      </div>
+      <div class="phone3d" style="left:470px;top:60px;transform:perspective(2600px) rotateY(-14deg) rotateX(4deg) rotateZ(-5deg) scale(.92)">
+        ${K.iphone(K.lockScreen(C, K.notif({ title: "Mum", body: "Landed safe? Send a pic when you can x" }) + K.notif({ title: "Holiday group", body: "Taxi rank is just outside arrivals", time: "1m ago", style: "margin-top:10px" })))}
+      </div>`,
+  },
+  setup: {
+    tag: "Easy setup",
+    h: `Set up in minutes.<br><span class="hl">From the sofa.</span>`,
+    sub: `Scan the QR code before you fly. Your ${C.short} data is ready when you land.`,
+    small: BASE,
+    bg: `<div class="bg"><canvas data-fabric="#b9b2a6" width="540" height="540"></canvas></div>`,
+    subj: `
+      <div style="position:absolute;left:-110px;top:250px;transform:scale(.84);transform-origin:0 0;filter:blur(1.3px)">${K.laptopQR()}</div>
+      <div class="phone3d" style="left:540px;top:10px;transform:perspective(2600px) rotateY(-16deg) rotateX(6deg) rotateZ(-3deg) scale(.9)">
+        ${K.iphone(K.screenCamera(C, { progress: 0.72 }))}
+      </div>`,
+  },
+  payonce: {
+    tag: C.tag,
+    h: `Pay once.<br><span class="hl">Not per day.</span>`,
+    sub: `One price for your whole trip to ${C.name}. No daily charges from us.`,
+    small: BASE,
+    bg: `<div class="bg"><canvas data-wood="1" width="540" height="540"></canvas></div>`,
+    subj: `
+      ${K.boardingPass(C, "left:10px;top:600px;transform:rotate(-11deg)")}
+      <div class="phone3d" style="left:430px;top:0px;transform:rotate(6deg) scale(.97)">${K.iphone(K.screenOrder(C), { flat: true })}</div>`,
+  },
+  refund: {
+    tag: "Peace of mind",
+    h: `Plans changed?<br><span class="hl">Get a refund.</span>`,
+    sub: `If you never install your ${C.short} eSIM, you can get your money back.`,
+    small: REFUND + " " + BASE,
+    bg: `<div class="bg studio"></div>`,
+    subj: `
+      <div class="floorlight" style="left:300px;top:880px;width:560px;height:90px;background:rgba(0,0,0,.6)"></div>
+      <div class="phone3d" style="left:330px;top:0px;transform:perspective(2600px) rotateY(16deg) rotateX(5deg) rotateZ(3deg) scale(.96)">${K.iphone(K.screenRefund(C))}</div>
+      <div class="toast" style="left:200px;top:700px;transform:rotate(-3deg)"><span class="ic appicon"></span><div><b>Refund request sent</b><span>${C.plan} · not installed</span></div></div>`,
+  },
+  still: {
+    tag: "Before you fly",
+    h: `Still flying to<br><span class="hl">${C.short}?</span>`,
+    sub: `Sort your data tonight. One price, set up in minutes, refund if not installed.`,
+    small: REFUND + " " + BASE,
+    bg: `<div class="bg terminal"></div>`,
+    subj: `
+      <div style="position:absolute;left:0;top:30px;transform:scale(.88);transform-origin:0 0">${K.board(C)}</div>
+      <div class="phone3d" style="left:540px;top:250px;transform:perspective(2600px) rotateY(-12deg) rotateX(4deg) rotateZ(5deg) scale(.84)">${K.iphone(K.screenPlan(C))}</div>`,
+  },
+};
+
+const S = CONCEPTS[concept];
+const ad = document.getElementById("ad");
+ad.className = `s-${size}`;
+ad.innerHTML = `
+  <div class="top">${K.logo()}${size !== "1x1" ? `<span class="url">calafly.net</span>` : ""}</div>
+  <div class="txt"><span class="tag">${S.tag}</span><h1>${S.h}</h1><p class="sub">${S.sub}</p><p class="small small9">${S.small}</p></div>
+  <div class="card">${S.bg}</div>
+  <div class="subjwrap"><div class="subj">${S.subj}</div></div>
+  <div class="foot">${size === "191x1"
+    ? `<span class="cta">Get Calafly</span><p class="small">${S.small}</p>`
+    : `<div style="display:flex;flex-direction:column;gap:8px">${size === "1x1" ? `<span class="url">calafly.net</span>` : ""}<p class="small">${S.small}</p></div><span class="cta">Get Calafly</span>`}</div>`;
+
+// place the 1000×1000 subject box over the card: contain-fit, anchored by size
+function place() {
+  const card = ad.querySelector(".card"), wrap = ad.querySelector(".subjwrap"), subj = ad.querySelector(".subj");
+  const z = size === "191x1" ? 1 : 1;
+  const L = card.offsetLeft, T = card.offsetTop, W = card.offsetWidth, H = card.offsetHeight;
+  Object.assign(wrap.style, { left: L + "px", top: T + "px", width: W + "px", height: H + "px" });
+  let s = Math.min(W / 1000, H / 1000) * (size === "4x5" ? 1.14 : size === "191x1" ? 1.0 : 1.0);
+  if (size === "1x1") s = H / 1000 * 0.98;      // tall narrow card: fill height, let the scene crop at the sides
+  if (size === "9x16") s = W / 1000 * 1.0;
+  const focus = { wheels: 600, setup: 640, payonce: 650, refund: 560, still: 720 }[concept];
+  const x = size === "1x1" ? W / 2 - focus * s : (W - 1000 * s) / 2, y = size === "9x16" ? 20 : size === "4x5" ? -10 : (H - 1000 * s) / 2;
+  subj.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+  wrap.style.overflow = size === "1x1" || size === "4x5" || size === "191x1" ? "hidden" : "hidden";
+  wrap.style.borderRadius = getComputedStyle(card).borderRadius;
+}
+place();
+K.paintAll(ad);
+document.fonts.ready.then(() => { document.body.dataset.ready = "1"; });
+</script>
+</body>
+</html>
