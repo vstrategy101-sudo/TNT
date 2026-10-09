@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="kit.css">
+<style>html,body{margin:0;background:#888}#l{display:grid;place-items:center;overflow:hidden}
+#l .logo{transform-origin:center}</style></head><body><div id="l"></div><script src="kit.js"></script><script>
+const P=new URLSearchParams(location.search), w=+P.get("w"), h=+P.get("h"), dark=P.get("bg")==="ink", scale=+P.get("s");
+const l=document.getElementById("l"); l.style.width=w+"px"; l.style.height=h+"px";
+l.style.background=dark?"#0b0d10":"#ffffff"; l.style.color=dark?"#ffffff":"#0b0d10";
+l.innerHTML=K.logo(); l.querySelector(".logo").style.transform=`scale(${scale})`;
+document.fonts.ready.then(()=>document.body.dataset.ready="1");
+</script></body></html>
