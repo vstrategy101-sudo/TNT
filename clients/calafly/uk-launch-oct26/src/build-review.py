@@ -29,7 +29,7 @@ def gallery(concepts=CONCEPTS, root="creatives"):
     for key, label in COUNTRIES:
         cards = []
         for n, slug, name, head, role in concepts:
-            base = f"{root}/{key}/CALAFLY_{key.upper()}_{n}_{slug}"
+            base = f"{root}/{key}/CALAFLY_{key.upper()}_{n}_{slug.replace('SOFA', 'COUCH') if key == 'usa' else slug}"
             imgs = "".join(
                 f'<img data-size="{s}" src="{base}_{s}.png" alt="{html.escape(name)} creative for {label}, {r}" loading="lazy"{" hidden" if s != "1x1" else ""}>'
                 for s, r in SIZES)
@@ -70,7 +70,7 @@ def videos_v2():
     for key, label in COUNTRIES:
         vids = []
         for code, name, note in [("V3_WHEELS-DOWN", "V3 · Wheels down", "Prospecting: Meta, YouTube, Demand Gen"), ("V4_FROM-THE-SOFA", "V4 · From the sofa", "Retargeting and mid-funnel")]:
-            b = f"v2-realistic/videos/CALAFLY_{key.upper()}_{code}"
+            b = f"v2-realistic/videos/CALAFLY_{key.upper()}_{code.replace('SOFA', 'COUCH') if key == 'usa' else code}"
             vids.append(f'''<div class="video"><h3>{name}</h3><p class="muted">{note}</p>
   <div class="players"><video src="{b}_9x16.mp4" controls playsinline preload="metadata"></video><video src="{b}_16x9.mp4" controls playsinline preload="metadata"></video></div></div>''')
         out.append(f'<div class="vset videos" data-country="{key}"{" hidden" if key != "usa" else ""}>{"".join(vids)}</div>')

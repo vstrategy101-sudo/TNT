@@ -10,7 +10,9 @@ OUT = os.path.join(HERE, "..", "copy")
 os.makedirs(OUT, exist_ok=True)
 
 COUNTRIES = {
-    "usa":    {"name": "the USA", "short": "USA",    "path": "usa",    "cities": ["New York", "Orlando", "Las Vegas"]},
+    "usa":    {"name": "the USA", "short": "USA",    "path": "usa", "sofa": "couch",
+               "price": "\n\nUSA 3GB for 30 days: £7, paid once. New to CalaFly? Use code USA10 for 10% off your first order.",
+               "h_price": "USA 3GB for £7, 30 Days", "h_code": "10% Off With Code USA10",    "cities": ["New York", "Orlando", "Las Vegas"]},
     "turkey": {"name": "Turkey",  "short": "Turkey", "path": "turkey", "cities": ["Istanbul", "Antalya", "Dalaman"]},
     "dubai":  {"name": "Dubai",   "short": "Dubai",  "path": "dubai",  "cities": ["Dubai"]},
 }
@@ -24,7 +26,7 @@ def rsa(c):
         "Set Up in Minutes",
         "Pay Once, Not Per Day",
         "One Price for Your Trip",
-        "Refund if Not Installed",
+        "100% Refund if Unused",
         "Scan a QR Code at Home",
         "Land Connected",
         "Sorted Before You Fly",
@@ -34,10 +36,13 @@ def rsa(c):
         "No Daily Charges From Us",
         "Official Site: CalaFly",
     ]
+    if "h_price" in c:
+        headlines = [x for x in headlines if x not in ("Land Connected", "Sorted Before You Fly")]
+        headlines[3:3] = [c["h_price"], c["h_code"]]
     descriptions = [
         f"Mobile data for {n}, sorted before you leave the UK. Scan a QR code, land connected.",
-        "Pay once for your whole trip, not per day. Set up in minutes from the sofa.",
-        "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+        f"Pay once for your whole trip, not per day. Set up in minutes from the {c.get('sofa', 'sofa')}.",
+        "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
         "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.",
     ]
     return headlines, descriptions
@@ -69,26 +74,26 @@ NEGATIVES = ["free", "jobs", "job", "career", "login", "log in", "my account", "
 
 META = {
     "prospecting": [
-        ("01_INTRO", "Meet CalaFly: mobile data for {n}, sorted before you leave the UK.\n\nPick your {s} plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&Cs apply).",
+        ("01_INTRO", "Meet CalaFly: mobile data for {n}, sorted before you leave the UK.\n\nPick your {s} plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if it's unused, you get a 100% refund. Guaranteed (T&Cs apply).",
          "Meet CalaFly", "{s} data, sorted before you fly"),
-        ("02_EASE", "Set up your {s} data in minutes, from the sofa.\n\n1. Pick your plan\n2. Scan the QR code\n3. Land connected\n\nData-only eSIM. Your WhatsApp number stays the same.",
+        ("02_EASE", "Set up your {s} data in minutes, from the {sofa}.\n\n1. Pick your plan\n2. Scan the QR code\n3. Land connected\n\nData-only eSIM. Your WhatsApp number stays the same.",
          "Set up in minutes", "Scan a QR code at home"),
         ("03_PRICE", "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to {n}. No daily charges from us, whether you stay for a long weekend or two weeks.",
          "Pay once, not per day", "One price for your whole trip"),
-        ("04_REFUND", "Plans changed? If you never install your {s} eSIM, you can get your money back.\n\nRefund if not installed. T&Cs apply, see calafly.net.",
-         "Refund if not installed", "Book your data with confidence"),
-        ("05_ALL-USP", "{s} data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ Refund if not installed (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
+        ("04_REFUND", "Plans changed? If your {s} eSIM is unused, you get every penny back.\n\n100% refund, guaranteed, if unused. T&Cs apply: calafly.net/legal/terms",
+         "100% refund if unused", "Book your data with confidence"),
+        ("05_ALL-USP", "{s} data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ 100% refund if unused (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
          "{s} data, sorted", "Set up in minutes. Pay once."),
-        ("VIDEO_01", "Flying from the UK to {n}? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&Cs apply.",
+        ("VIDEO_01", "Flying from the UK to {n}? Meet CalaFly. Set up in minutes, pay once (not per day), and get a 100% refund if it's unused. T&Cs apply.",
          "Meet CalaFly", "Data for {n}, sorted"),
         ("VIDEO_02", "How CalaFly works: pick your {s} plan, scan the QR code at home, land connected. One price for the trip.",
          "Land connected in {s}", "Three steps, done before you fly"),
     ],
     "retargeting": [
-        ("06_RETARGET", "Still planning {n}? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a refund if you never install it (T&Cs apply).",
+        ("06_RETARGET", "Still planning {n}? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a 100% refund if it's unused (T&Cs apply).",
          "Still planning {s}?", "Your data, sorted tonight"),
-        ("04_REFUND", "Not sure your plans are fixed? Book your {s} eSIM now. If you never install it, you can get a refund. T&Cs apply.",
-         "Refund if not installed", "Book now, decide later"),
+        ("04_REFUND", "Not sure your plans are fixed? Book your {s} eSIM now. If it's unused, you get a 100% refund. Guaranteed. T&Cs apply.",
+         "100% refund if unused", "Book now, decide later"),
         ("VIDEO_02", "Three steps and you're connected in {n}. Pick, scan, land. Pay once, not per day.",
          "Pick. Scan. Land connected.", "Set up in minutes"),
     ],
@@ -112,10 +117,10 @@ with open(os.path.join(OUT, "google_rsa.csv"), "w", newline="") as f:
         copy["google"][key] = {"headlines": h, "descriptions": d}
         w.writerow([f"CF_UK_SEARCH_{key.upper()}", "All ad groups", f"https://calafly.net/{c['path']}", p1, p2] + h + d)
     h = ["CalaFly Official Site", "CalaFly Travel eSIM", "USA, Turkey and Dubai", "Set Up in Minutes", "Pay Once, Not Per Day",
-         "Refund if Not Installed", "Scan a QR Code at Home", "Land Connected", "Data-Only Travel eSIM", "Keep Your WhatsApp Number"]
+         "100% Refund if Unused", "Scan a QR Code at Home", "Land Connected", "Data-Only Travel eSIM", "Keep Your WhatsApp Number"]
     d = ["Travel eSIM data for the USA, Turkey and Dubai, sorted before you leave the UK.",
          "Pay once for your whole trip, not per day. Set up in minutes from the sofa.",
-         "Refund if your eSIM is never installed. T&Cs apply.",
+         "100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
          "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays."]
     for i, x in enumerate(h): check("headline", x, 30, f"brand H{i+1}")
     for i, x in enumerate(d): check("description", x, 90, f"brand D{i+1}")
@@ -144,7 +149,8 @@ with open(os.path.join(OUT, "meta_ads.csv"), "w", newline="") as f:
         for stage, rows in META.items():
             out = []
             for cre, pt, hl, ds in rows:
-                pt, hl, ds = (x.format(n=c["name"], s=c["short"]) for x in (pt, hl, ds))
+                pt, hl, ds = (x.format(n=c["name"], s=c["short"], sofa=c.get("sofa", "sofa")) for x in (pt, hl, ds))
+                if cre in ("01_INTRO", "03_PRICE", "05_ALL-USP", "06_RETARGET", "VIDEO_01"): pt += c.get("price", "")
                 check("meta headline", hl, 40, f"{key} {cre}")
                 check("meta description", ds, 40, f"{key} {cre}")
                 out.append({"creative": cre, "primary": pt, "headline": hl, "description": ds})

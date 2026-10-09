@@ -23,14 +23,14 @@
      "Get Your USA eSIM",
      "USA Travel eSIM",
      "Official Site: CalaFly",
+     "USA 3GB for £7, 30 Days",
+     "10% Off With Code USA10",
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
-     "Land Connected",
-     "Sorted Before You Fly",
      "Data-Only Travel eSIM",
      "Keep Your WhatsApp Number",
      "No Daily Charges From Us"
@@ -41,15 +41,15 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.",
+      "3GB for 30 days: £7, paid once. New here? 10% off with code USA10. T&Cs apply.",
       ""
      ]
     ],
@@ -73,14 +73,14 @@
      "USA Travel SIM, as eSIM",
      "No SIM Card to Collect",
      "USA eSIM by CalaFly",
+     "USA 3GB for £7, 30 Days",
+     "10% Off With Code USA10",
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
-     "Land Connected",
-     "Sorted Before You Fly",
      "Data-Only Travel eSIM",
      "Keep Your WhatsApp Number",
      "No Daily Charges From Us"
@@ -91,15 +91,15 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.",
+      "3GB for 30 days: £7, paid once. New here? 10% off with code USA10. T&Cs apply.",
       ""
      ]
     ],
@@ -124,14 +124,14 @@
      "Holiday Data for USA",
      "Travel Data for USA",
      "USA eSIM by CalaFly",
+     "USA 3GB for £7, 30 Days",
+     "10% Off With Code USA10",
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
-     "Land Connected",
-     "Sorted Before You Fly",
      "Data-Only Travel eSIM",
      "Keep Your WhatsApp Number",
      "No Daily Charges From Us"
@@ -142,15 +142,15 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.",
+      "3GB for 30 days: £7, paid once. New here? 10% off with code USA10. T&Cs apply.",
       ""
      ]
     ],
@@ -174,14 +174,14 @@
      "eSIM for Orlando",
      "eSIM for Las Vegas",
      "USA eSIM by CalaFly",
+     "USA 3GB for £7, 30 Days",
+     "10% Off With Code USA10",
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
-     "Land Connected",
-     "Sorted Before You Fly",
      "Data-Only Travel eSIM",
      "Keep Your WhatsApp Number",
      "No Daily Charges From Us"
@@ -192,15 +192,15 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.",
+      "3GB for 30 days: £7, paid once. New here? 10% off with code USA10. T&Cs apply.",
       ""
      ]
     ],
@@ -229,9 +229,9 @@
    ],
    [
     "Refund Policy",
-    "Refund if never installed",
+    "100% refund if unused",
     "See the full terms",
-    "https://calafly.net/refund-policy"
+    "https://calafly.net/legal/terms"
    ],
    [
     "Compatible Phones",
@@ -257,6 +257,18 @@
    "calafly-usa-arrive-191x1.jpg",
    "calafly-usa-home-1x1.jpg",
    "calafly-usa-home-191x1.jpg"
+  ],
+  "callouts": [
+   "Set Up in Minutes",
+   "Pay Once, Not Per Day",
+   "100% Refund if Unused",
+   "QR Code by Email",
+   "Data-Only eSIM",
+   "Keep Your WhatsApp Number",
+   "Install Before You Fly",
+   "No Daily Charges From Us",
+   "3GB for £7, 30 Days",
+   "10% Off: Code USA10"
   ]
  },
  "turkey": {
@@ -284,7 +296,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -299,11 +311,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -333,7 +345,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -348,11 +360,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -384,7 +396,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -399,11 +411,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -434,7 +446,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -449,11 +461,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -488,9 +500,9 @@
    ],
    [
     "Refund Policy",
-    "Refund if never installed",
+    "100% refund if unused",
     "See the full terms",
-    "https://calafly.net/refund-policy"
+    "https://calafly.net/legal/terms"
    ],
    [
     "Compatible Phones",
@@ -516,6 +528,16 @@
    "calafly-turkey-arrive-191x1.jpg",
    "calafly-turkey-home-1x1.jpg",
    "calafly-turkey-home-191x1.jpg"
+  ],
+  "callouts": [
+   "Set Up in Minutes",
+   "Pay Once, Not Per Day",
+   "100% Refund if Unused",
+   "QR Code by Email",
+   "Data-Only eSIM",
+   "Keep Your WhatsApp Number",
+   "Install Before You Fly",
+   "No Daily Charges From Us"
   ]
  },
  "dubai": {
@@ -544,7 +566,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -559,11 +581,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -594,7 +616,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -609,11 +631,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -645,7 +667,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -660,11 +682,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -691,7 +713,7 @@
      "Set Up in Minutes",
      "Pay Once, Not Per Day",
      "One Price for Your Trip",
-     "Refund if Not Installed",
+     "100% Refund if Unused",
      "Scan a QR Code at Home",
      "QR Code Sent by Email",
      "Land Connected",
@@ -706,11 +728,11 @@
       ""
      ],
      [
-      "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+      "Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
-      "Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.",
+      "Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.",
       "2"
      ],
      [
@@ -746,9 +768,9 @@
    ],
    [
     "Refund Policy",
-    "Refund if never installed",
+    "100% refund if unused",
     "See the full terms",
-    "https://calafly.net/refund-policy"
+    "https://calafly.net/legal/terms"
    ],
    [
     "Compatible Phones",
@@ -774,6 +796,16 @@
    "calafly-dubai-arrive-191x1.jpg",
    "calafly-dubai-home-1x1.jpg",
    "calafly-dubai-home-191x1.jpg"
+  ],
+  "callouts": [
+   "Set Up in Minutes",
+   "Pay Once, Not Per Day",
+   "100% Refund if Unused",
+   "QR Code by Email",
+   "Data-Only eSIM",
+   "Keep Your WhatsApp Number",
+   "Install Before You Fly",
+   "No Daily Charges From Us"
   ]
  },
  "shared": {
@@ -842,7 +874,7 @@
   "callouts": [
    "Set Up in Minutes",
    "Pay Once, Not Per Day",
-   "Refund if Not Installed",
+   "100% Refund if Unused",
    "QR Code by Email",
    "Data-Only eSIM",
    "Keep Your WhatsApp Number",

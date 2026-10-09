@@ -26,7 +26,7 @@ for (const c of COUNTRIES) {
       await page.goto(`file://${here}/creative.html?c=${c}&k=${k}&s=${s}`);
       await page.waitForSelector("body[data-ready='1']");
       await page.waitForTimeout(60);
-      await page.screenshot({ path: path.join(out, c, `CALAFLY_${c.toUpperCase()}_${n}_${label}_${s}.png`), clip: { x: 0, y: 0, width: w, height: h } });
+      await page.screenshot({ path: path.join(out, c, `CALAFLY_${c.toUpperCase()}_${n}_${c === "usa" ? label.replace("SOFA", "COUCH") : label}_${s}.png`), clip: { x: 0, y: 0, width: w, height: h } });
     }
   }
 }

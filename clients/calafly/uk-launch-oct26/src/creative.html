@@ -35,7 +35,7 @@ body { font-family: "CF", "Inter", sans-serif; -webkit-font-smoothing: antialias
 .visual { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 0; }
 .s-191x1 .visual { flex: 1; height: 100%; }
 
-.foot { position: relative; z-index: 3; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.foot { margin-top: 26px; position: relative; z-index: 3; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
 .s-9x16 .foot { flex: 0 0 auto; padding-top: 28px; }
 .below { display: none; }
 .s-9x16 .below { display: block; flex: 0 0 600px; position: relative; margin: 0 -64px; }
@@ -64,7 +64,7 @@ h1 .hl { color: var(--pink); }
 /* ---------- CTA + small print ---------- */
 .cta { display: inline-flex; align-items: center; background: var(--blue); color: var(--white); font-weight: 800; font-size: 36px; letter-spacing: -0.02em; padding: 22px 36px; border-radius: 999px; border: 4px solid var(--ink); box-shadow: 7px 7px 0 var(--ink); white-space: nowrap; }
 .theme-dark .cta { border-color: var(--white); box-shadow: 7px 7px 0 var(--teal); }
-.small { font-weight: 500; font-size: 24px; line-height: 1.35; color: var(--muted); max-width: 640px; }
+.small { font-weight: 500; font-size: 22px; line-height: 1.35; color: var(--muted); max-width: 640px; }
 .theme-light .small { color: #59616b; }
 .theme-teal .small { color: #0b3b33; }
 .url { font-weight: 800; font-size: 30px; color: var(--teal); letter-spacing: -0.01em; }
@@ -72,6 +72,35 @@ h1 .hl { color: var(--pink); }
 .theme-teal .url { color: var(--ink); }
 .footcol { display: flex; flex-direction: column; gap: 10px; }
 .s-9x16 .foot { flex-direction: column; align-items: flex-start; gap: 22px; }
+
+/* ---------- price ---------- */
+/* compact price line for non-money creatives: plan | price | promo, read as one object */
+.pline { display: inline-flex; align-items: stretch; margin-top: 30px; border: 4px solid var(--ink); border-radius: 18px; overflow: hidden; box-shadow: 7px 7px 0 var(--teal); background: var(--white); color: var(--ink); }
+.theme-light .pline, .theme-teal .pline { box-shadow: 7px 7px 0 var(--ink); }
+.theme-dark .pline { border-color: var(--white); }
+.pline > span { display: flex; align-items: center; padding: 12px 20px; }
+.pline .w { font-weight: 700; font-size: 28px; letter-spacing: -0.01em; }
+.pline .p { background: var(--ink); color: var(--teal); font-weight: 800; font-size: 54px; letter-spacing: -0.04em; padding: 6px 22px; }
+.pline .c { background: var(--yellow); font-weight: 800; font-size: 24px; line-height: 1.05; letter-spacing: -0.01em; border-left: 4px solid var(--ink); }
+.s-9x16 .pline .w { font-size: 30px; } .s-9x16 .pline .p { font-size: 62px; }
+/* hero price ticket for the money creative */
+.ticket { width: 100%; max-width: 860px; padding: 34px 40px 0; overflow: hidden; }
+.ticket .label { color: #59616b; }
+.ticket .row { display: flex; align-items: flex-end; gap: 26px; margin-top: 6px; }
+.ticket .amt { font-weight: 800; font-size: 290px; letter-spacing: -0.07em; line-height: .82; }
+.ticket .amt sup { font-size: .45em; vertical-align: .9em; letter-spacing: -0.02em; margin-right: 4px; }
+.ticket .per { font-weight: 800; font-size: 46px; letter-spacing: -0.03em; line-height: 1; padding-bottom: 18px; }
+.ticket .per small { display: block; font-weight: 600; font-size: 28px; color: #59616b; margin-top: 8px; letter-spacing: -0.01em; }
+.ticket .code { margin: 30px -40px 0; background: var(--yellow); border-top: 5px dashed var(--ink); padding: 22px 40px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.ticket .code b { font-weight: 800; font-size: 40px; letter-spacing: -0.02em; }
+.ticket .code .k { font-family: "DejaVu Sans Mono", monospace; font-weight: 700; font-size: 34px; background: var(--white); border: 4px solid var(--ink); border-radius: 12px; padding: 6px 14px; }
+
+.s-1x1 .ticket { max-width: 780px; padding: 24px 32px 0; }
+.s-1x1 .ticket .amt { font-size: 190px; }
+.s-1x1 .ticket .per { font-size: 38px; padding-bottom: 10px; } .s-1x1 .ticket .per small { font-size: 24px; }
+.s-1x1 .ticket .code { margin: 20px -32px 0; padding: 16px 32px; } .s-1x1 .ticket .code b { font-size: 32px; } .s-1x1 .ticket .code .k { font-size: 28px; }
+.s-1x1 .visual { padding-top: 24px; }
+.pass .row b.big { font-size: 54px; color: var(--teal); -webkit-text-stroke: 1.5px var(--ink); line-height: .9; }
 
 /* ---------- shared visual pieces ---------- */
 .card { background: var(--white); color: var(--ink); border: 5px solid var(--ink); border-radius: 30px; box-shadow: 14px 14px 0 var(--teal); }
@@ -168,6 +197,7 @@ h1 .hl { color: var(--pink); }
 </head>
 <body>
 <div id="ad"></div>
+<script src="offers.js"></script>
 <script>
 const P = new URLSearchParams(location.search);
 const country = P.get("c") || "dubai";
@@ -182,8 +212,12 @@ const COUNTRIES = {
 const C = COUNTRIES[country];
 
 // Standard qualifications (CAP Code 3.9/3.10): shown on every ad, plus refund terms where refund is claimed.
-const BASE_SMALL = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
-const REFUND_SMALL = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+const O = OFFERS, OF = O.get(country);
+const BASE_SMALL = O.small(country);
+const REFUND_SMALL_ALL = O.small(country, { refund: true });
+// price line: replaces the sub-line wherever a confirmed price exists, so the ad says less but says the price
+const pline = () => OF ? `<div class="pline"><span class="w">${C.short} · ${O.plan(country)}</span><span class="p">${O.price(country)}</span>${OF.code ? `<span class="c">10% off<br>code ${OF.code}</span>` : ""}</div>` : "";
+const subOr = text => OF ? pline() : `<p class="sub">${text}</p>`;
 
 const logo = `<div class="logo"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>`;
 const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="#0b0d10" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>`;
@@ -239,7 +273,7 @@ const CONCEPTS = {
     theme: "dark",
     copy: `<span class="tag">${C.tag}</span>
       <h1>Meet<br><span class="hl">CalaFly.</span></h1>
-      <p class="sub">Mobile data for ${C.name}, sorted before you leave the UK.</p>`,
+      ${subOr(`Mobile data for ${C.name}, sorted before you leave the UK.`)}`,
     visual: `<div style="display:flex;align-items:center;gap:40px">${bagtag(-7)}${size === "1x1" ? "" : phoneConnected}</div>`,
     visualAlt: size === "1x1" ? null : null,
     small: BASE_SMALL,
@@ -249,7 +283,7 @@ const CONCEPTS = {
   ease: () => ({
     theme: "teal",
     copy: `<span class="tag">Easy setup</span>
-      <h1>Set up in minutes.<br><span class="hl">From the sofa.</span></h1>`,
+      <h1>Set up in minutes.<br><span class="hl">From the ${O.sofa(country)}.</span></h1>${pline()}`,
     visual: `<div class="steps">
         <div class="card step"><div class="n">1</div><div><div class="t">Pick</div><div class="d">Choose your ${C.short} plan.</div></div></div>
         <div class="card step"><div class="n">2</div><div><div class="t">Scan</div><div class="d">Scan the QR code at home.</div></div></div>
@@ -263,36 +297,40 @@ const CONCEPTS = {
     theme: "light",
     copy: `<span class="tag">${C.tag}</span>
       <h1>Pay once.<br><span class="hl">Not per day.</span></h1>
-      <p class="sub">One price for your whole trip. No daily charges from us.</p>`,
-    visual: `<div class="card week">
+      ${OF ? "" : `<p class="sub">One price for your whole trip. No daily charges from us.</p>`}`,
+    visual: OF ? `<div class="card ticket">
+        <div class="label">${C.short} eSIM · ${OF.data} data · ${OF.days} days</div>
+        <div class="row"><div class="amt"><sup>£</sup>${OF.price}</div><div class="per">for the whole trip<small>Paid once. No daily charges.</small></div></div>
+        ${OF.code ? `<div class="code"><b>New here? ${OF.pct}% off: ${O.promoPrice(country)}</b><span class="k">${OF.code}</span></div>` : ""}
+      </div>` : `<div class="card week">
         <div class="label">Your week ${C.in}</div>
         <div class="days">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(d => `<div class="day"><b>${d}</b><span>${tick.replace('stroke="#0b0d10"','stroke="#18c8a8"').replace("<svg", '<svg style="width:36px;height:36px"')}</span></div>`).join("")}</div>
         <div class="bar"><span class="k">One CalaFly price</span><span class="v">Paid once</span></div>
       </div>`,
-    small: BASE_SMALL + " Price varies by plan.",
+    small: BASE_SMALL,
   }),
 
   // 4. Refund if unused
   refund: () => ({
     theme: "dark",
-    copy: `<span class="tag">Peace of mind</span>
-      <h1>Plans changed?<br><span class="hl">Get a refund.</span></h1>
-      <p class="sub">If you never install your ${C.short} eSIM, you can get your money back.</p>`,
-    visual: `<div class="stamp"><div class="big">REFUND<span class="lil">if not installed</span></div></div>`,
-    small: REFUND_SMALL + " " + BASE_SMALL,
+    copy: `<span class="tag">Guaranteed</span>
+      <h1>Plans changed?<br><span class="hl">100% refund.</span></h1>
+      ${subOr(`If your ${C.short} eSIM is unused, you get every penny back. Guaranteed.`)}`,
+    visual: `<div class="stamp"><div class="big">100%<span class="lil" style="font-size:52px;letter-spacing:-.03em">REFUND</span><span class="lil">if unused</span></div></div>`,
+    small: REFUND_SMALL_ALL,
   }),
 
   // 5. All three USPs
   stack: () => ({
     theme: "light",
     copy: `<span class="tag">${C.tag}</span>
-      <h1>${C.short} data,<br><span class="hl">sorted.</span></h1>`,
+      <h1>${C.short} data,<br><span class="hl">sorted.</span></h1>${size === "191x1" ? pline() : ""}`,
     visual: `<div class="checks">
         <div class="card check"><div class="tick">${tick}</div><div><div class="t">Set up in minutes</div><div class="d">Scan a QR code before you fly.</div></div></div>
-        <div class="card check"><div class="tick">${tick}</div><div><div class="t">Pay once, not per day</div><div class="d">One price for the whole trip.</div></div></div>
-        <div class="card check"><div class="tick">${tick}</div><div><div class="t">Refund if not installed</div><div class="d">T&amp;Cs apply.</div></div></div>
-      </div>`,
-    small: REFUND_SMALL + " " + BASE_SMALL,
+        <div class="card check"><div class="tick">${tick}</div><div><div class="t">${OF ? `${O.price(country)} for ${OF.data}, ${OF.days} days` : "Pay once, not per day"}</div><div class="d">${OF ? "Paid once, not per day." : "One price for the whole trip."}</div></div></div>
+        <div class="card check"><div class="tick">${tick}</div><div><div class="t">100% refund if unused</div><div class="d">Guaranteed. T&amp;Cs apply.</div></div></div>
+      </div>${OF && OF.code && size !== "191x1" ? `<div class="sticker" style="right:-10px;top:-70px">10% off<br><span style="font-size:26px">${OF.code}</span></div>` : ""}`,
+    small: REFUND_SMALL_ALL,
   }),
 
   // 6. Retargeting
@@ -300,23 +338,23 @@ const CONCEPTS = {
     theme: "dark",
     copy: `<span class="tag">Before you fly</span>
       <h1>Still planning<br><span class="hl">${C.short}?</span></h1>
-      <p class="sub">Your data can be sorted tonight. One price, and a refund if you never install it.</p>`,
+      ${OF ? "" : `<p class="sub">Your data can be sorted tonight. One price, and a 100% refund if unused.</p>`}`,
     visual: `<div style="position:relative;width:100%;max-width:900px;padding:0 0 30px"><div class="card pass">
         <div class="hd"><span class="label">Boarding pass</span><span class="label">CalaFly</span></div>
         <div class="route"><div><small>FROM</small><b>UK</b></div><div class="arrow">→</div><div style="text-align:right"><small>TO</small><b>${C.code}</b></div></div>
-        <div class="row"><div><small>DATA</small><b>Ready</b></div><div><small>PRICE</small><b>Paid once</b></div><div><small>SETUP</small><b>Minutes</b></div></div>
+        <div class="row"><div><small>DATA</small><b>Ready</b></div><div><small>${OF ? `${OF.data} · ${OF.days} DAYS` : "PRICE"}</small>${OF ? `<b class="big">${O.price(country)}</b>` : "<b>Paid once</b>"}</div>${OF && OF.code ? `<div><small>NEW? ${OF.pct}% OFF</small><b>${OF.code}</b></div>` : `<div><small>SETUP</small><b>Minutes</b></div>`}</div>
         <div class="perf"></div>
         ${barcode()}
       </div>
-      <div class="sticker" style="right:-20px;bottom:-50px">Still<br>sorted</div></div>`,
-    small: REFUND_SMALL + " " + BASE_SMALL,
+      ${OF ? `<div class="sticker" style="right:-40px;bottom:-110px;width:250px;height:250px;font-size:92px;transform:rotate(10deg)">${O.price(country)}<span style="font-size:26px;letter-spacing:-.01em;margin-top:-30px">${OF.data} · ${OF.days} days</span></div>` : `<div class="sticker" style="right:-20px;bottom:-50px">Still<br>sorted</div>`}</div>`,
+    small: REFUND_SMALL_ALL,
   }),
 };
 
 const spec = CONCEPTS[concept]();
 const ad = document.getElementById("ad");
 ad.className = `s-${size} theme-${spec.theme}`;
-const tickerText = C.codes.concat(["DATA READY", "PAY ONCE", "LAND CONNECTED"]);
+const tickerText = C.codes.concat(OF ? [`${OF.data} · ${O.price(country)}`, "PAY ONCE", OF.code ? `CODE ${OF.code}` : "LAND CONNECTED"] : ["DATA READY", "PAY ONCE", "LAND CONNECTED"]);
 ad.innerHTML = `
   <div class="top">${logo}${size === "9x16" || size === "191x1" ? `<span class="url">calafly.net</span>` : ""}</div>
   <div class="main">
@@ -326,7 +364,7 @@ ad.innerHTML = `
   <div class="foot">
     ${size === "9x16"
       ? `<p class="small" style="max-width:900px">${spec.small}</p>`
-      : `<div class="footcol">${size === "191x1" ? "" : `<span class="url">calafly.net</span>`}<p class="small">${spec.small}</p></div><span class="cta">Get Calafly</span>`}
+      : `<div class="footcol">${size === "191x1" || OF ? "" : `<span class="url">calafly.net</span>`}<p class="small">${spec.small}</p></div><span class="cta">Get Calafly</span>`}
   </div>
   <div class="below"><div class="giant">${C.code === "USA" ? "USA" : C.code}</div><div class="ticker mono">${Array(6).fill(tickerText.map(t => `<span>${t}</span>`).join("✦")).join("✦")}</div></div>`;
 

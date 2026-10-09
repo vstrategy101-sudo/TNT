@@ -185,17 +185,20 @@
       <div class="body">${inner}</div>
       <div class="urlbar"><span class="lk"></span>calafly.net</div><div class="homebar"></div></div>`;
 
-  K.screenOrder = (C) => K.web(`
+  K.showOffer = false;
+  K.offer = (C) => (K.showOffer && window.OFFERS) ? window.OFFERS.get(C.key) : null;
+
+  K.screenOrder = (C) => { const o = K.offer(C), O = window.OFFERS; return K.web(`
     <span class="chip">${C.tag}</span>
     <h3>Order<br><span class="hl">confirmed.</span></h3>
     <div class="card2">
-      <div class="row2"><span>Plan</span><b>${C.plan}</b></div>
-      <div class="row2"><span>Covers</span><b>Your whole trip</b></div>
-      <div class="row2"><span>Payment</span><b class="ok">One-off ✓</b></div>
+      <div class="row2"><span>Plan</span><b>${C.plan}${o ? " · " + o.data : ""}</b></div>
+      <div class="row2"><span>Covers</span><b>${o ? o.days + " days" : "Your whole trip"}</b></div>
+      ${o ? `<div class="row2"><span>Paid once</span><b style="font:800 30px CFD;letter-spacing:-.03em">${O.price(C.key)}</b></div>` : `<div class="row2"><span>Payment</span><b class="ok">One-off ✓</b></div>`}
       <div class="row2"><span>Daily charges</span><b class="ok">None ✓</b></div>
-      <div class="row2"><span>Install</span><b>Scan QR code</b></div>
+      ${o && o.code ? `<div class="row2"><span>New customer code</span><b style="background:var(--yellow);border-radius:6px;padding:0 6px">${o.code} −${o.pct}%</b></div>` : `<div class="row2"><span>Install</span><b>Scan QR code</b></div>`}
     </div>
-    <div class="bigbtn" style="margin-top:4px">Install eSIM</div>`);
+    <div class="bigbtn" style="margin-top:4px">Install eSIM</div>`); };
 
   K.screenRefund = (C) => K.web(`
     <span class="chip">My eSIMs</span>
@@ -204,11 +207,11 @@
       <div style="flex:1"><b style="font:800 22px CFD;letter-spacing:-.02em">${C.plan}</b><div style="font:500 14.5px UI;color:#59616b;margin-top:2px">Bought for your trip</div></div>
     </div>
     <div class="card2">
-      <div class="row2"><span>Status</span><b style="color:#c2410c">Not installed</b></div>
-      <div class="row2"><span>Refund</span><b class="ok">Available ✓</b></div>
+      <div class="row2"><span>Status</span><b style="color:#c2410c">Unused</b></div>
+      <div class="row2"><span>Refund</span><b class="ok">100% guaranteed ✓</b></div>
     </div>
     <div class="bigbtn" id="refundbtn" style="background:var(--pink);color:var(--ink)">Request refund</div>
-    <div style="font:500 13px/1.35 UI;color:#59616b;text-align:center">Refund if your eSIM is not installed. T&amp;Cs apply.</div>`);
+    <div style="font:500 13px/1.35 UI;color:#59616b;text-align:center">100% refund if your eSIM is unused. T&amp;Cs apply.</div>`);
 
   K.screenPick = (C) => K.web(`
     <span class="chip">Where to?</span>
@@ -220,14 +223,15 @@
       </div>`).join("")}
     <div class="bigbtn" id="pickbtn">Continue</div>`);
 
-  K.screenPlan = (C) => K.web(`
+  K.screenPlan = (C) => { const o = K.offer(C), O = window.OFFERS; return K.web(`
     <span class="chip">${C.tag}</span>
     <h3>${C.short} data,<br><span class="hl">sorted.</span></h3>
     <div class="card2" style="display:grid;gap:10px">
-      ${["Set up in minutes", "Pay once, not per day", "Refund if not installed"].map(t => `<div style="display:flex;gap:10px;align-items:center;font:600 16.5px UI"><span class="tick">${tickSvg()}</span>${t}</div>`).join("")}
+      ${o ? `<div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:1.5px dashed #c9d1d8;padding-bottom:8px"><span style="font:600 15px UI;color:#59616b">${o.data} · ${o.days} days</span><b style="font:800 40px CFD;letter-spacing:-.04em">${O.price(C.key)}</b></div>` : ""}
+      ${["Set up in minutes", "Pay once, not per day", "100% refund if unused"].map(t => `<div style="display:flex;gap:10px;align-items:center;font:600 16.5px UI"><span class="tick">${tickSvg()}</span>${t}</div>`).join("")}
     </div>
     <div class="bigbtn">Get Calafly</div>
-    <div style="font:500 12.5px/1.35 UI;color:#59616b;text-align:center">Data-only eSIM. Unlocked, eSIM-compatible phone needed.</div>`);
+    <div style="font:500 12.5px/1.35 UI;color:#59616b;text-align:center">Data-only eSIM. Unlocked, eSIM-compatible phone needed.</div>`); };
 
   K.screenCamera = (C, { progress = 0.65, sheet = true, pill = "eSIM QR code" } = {}) => `
     <div class="camera"><canvas width="300" height="640" data-cam="1"></canvas>
@@ -243,7 +247,7 @@
     <div class="pass" style="${style}">
       <div class="hd"><span>BOARDING PASS</span><b>CALAFLY</b></div>
       <div class="rt"><div><small>FROM</small><b>LON</b></div><div class="pl">✈</div><div><small>TO</small><b>${C.code}</b></div></div>
-      <div class="meta"><div><small>DATA</small><b>READY</b></div><div><small>PAID</small><b>ONCE</b></div><div><small>SEAT</small><b>23A</b></div></div>
+      <div class="meta"><div><small>DATA</small><b>READY</b></div><div><small>PAID</small><b>${K.offer(C) ? window.OFFERS.price(C.key) + " ONCE" : "ONCE"}</b></div><div><small>SEAT</small><b>23A</b></div></div>
       <div class="stub"><div class="bc"></div></div></div>`;
 
   K.laptopQR = (style = "") => {

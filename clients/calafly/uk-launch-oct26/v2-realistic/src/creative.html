@@ -39,7 +39,7 @@ h1 { font-weight: 800; letter-spacing: -0.045em; line-height: 0.94; margin-top: 
 .s-4x5 .sub { font-size: 32px; max-width: 900px; }
 .s-4x5 .card { left: 60px; top: 520px; width: 944px; height: 672px; }
 .s-4x5 .foot { left: 60px; right: 60px; bottom: 48px; }
-.s-4x5 .foot .small { max-width: 620px; }
+.s-4x5 .foot .small { max-width: 700px; }
 
 /* 9:16 — copy in the safe zone, scene runs full-bleed underneath the platform UI */
 .s-9x16 .top { left: 64px; right: 64px; top: 250px; }
@@ -67,11 +67,30 @@ h1 { font-weight: 800; letter-spacing: -0.045em; line-height: 0.94; margin-top: 
 .terminal { background: linear-gradient(180deg, #1b2027, #0d1014 70%); }
 .terminal::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: linear-gradient(180deg, transparent, rgba(255,214,140,.10)); }
 .floorlight { position: absolute; border-radius: 50%; filter: blur(30px); }
+
+/* price line (plan | price | promo) and the hero price for the pay-once concept */
+.pline { display: inline-flex; align-items: stretch; margin-top: 26px; border: 4px solid #fff; border-radius: 18px; overflow: hidden; box-shadow: 7px 7px 0 var(--teal); background: #fff; color: var(--ink); }
+.pline > span { display: flex; align-items: center; padding: 10px 18px; }
+.pline .w { font: 700 26px "CFD"; letter-spacing: -0.01em; }
+.pline .p { background: var(--ink); color: var(--teal); font: 800 52px "CFD"; letter-spacing: -0.04em; padding: 4px 20px; }
+.pline .c { background: var(--yellow); font: 800 22px/1.05 "CFD"; border-left: 4px solid var(--ink); }
+.s-1x1 .pline .w { font-size: 22px; } .s-1x1 .pline .p { font-size: 44px; padding: 4px 14px; } .s-1x1 .pline .c { font-size: 19px; padding: 8px 12px; } .s-1x1 .pline .w { padding: 8px 12px; }
+.bigprice { display: flex; align-items: flex-end; gap: 18px; margin-top: 22px; }
+.bigprice .amt { font: 800 230px/0.8 "CFD"; letter-spacing: -0.07em; color: #fff; }
+.bigprice .amt sup { font-size: .42em; vertical-align: 1.05em; color: var(--teal); }
+.bigprice .per { font: 800 36px/1.05 "CFD"; letter-spacing: -0.02em; padding-bottom: 12px; }
+.bigprice .per small { display: block; font: 600 25px/1.2 "CFD"; color: var(--muted); margin-top: 6px; }
+.codechip { display: inline-flex; gap: 12px; align-items: center; margin-top: 22px; background: var(--yellow); color: var(--ink); border: 4px solid #fff; border-radius: 14px; padding: 10px 16px; font: 800 28px "CFD"; letter-spacing: -0.01em; box-shadow: 6px 6px 0 var(--teal); }
+.codechip i { font: 700 26px "DejaVu Sans Mono", monospace; font-style: normal; background: #fff; border: 3px solid var(--ink); border-radius: 9px; padding: 2px 10px; }
+.s-1x1 .bigprice .amt { font-size: 170px; } .s-1x1 .bigprice .per { font-size: 28px; } .s-1x1 .bigprice .per small { font-size: 21px; } .s-1x1 .codechip { font-size: 22px; } .s-1x1 .codechip i { font-size: 21px; }
+.s-4x5 .bigprice, .s-4x5 .codechip { display: inline-flex; vertical-align: bottom; margin-right: 28px; }
+.s-4x5 .bigprice .amt { font-size: 160px; } .s-9x16 .bigprice .amt { font-size: 190px; }
 </style>
 </head>
 <body>
 <div id="ad"></div>
 <script src="qr.js"></script>
+<script src="../../src/offers.js"></script>
 <script src="kit.js"></script>
 <script>
 const P = new URLSearchParams(location.search);
@@ -79,8 +98,10 @@ const C = K.COUNTRIES[P.get("c") || "dubai"];
 const concept = P.get("k") || "wheels";
 const size = P.get("s") || "1x1";
 
-const BASE = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
-const REFUND = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+K.showOffer = true;
+const O = OFFERS, OF = O.get(C.key);
+const BASE = O.small(C.key), REFUND_ALL = O.small(C.key, { refund: true });
+const pline = () => OF ? `<div class="pline"><span class="w">${C.short} · ${O.plan(C.key)}</span><span class="p">${O.price(C.key)}</span>${OF.code ? `<span class="c">10% off<br>code ${OF.code}</span>` : ""}</div>` : "";
 
 // Each concept: copy + a backdrop that fills the card + a subject composed in a 1000×1000 box.
 const CONCEPTS = {
@@ -102,7 +123,7 @@ const CONCEPTS = {
   },
   setup: {
     tag: "Easy setup",
-    h: `Set up in minutes.<br><span class="hl">From the sofa.</span>`,
+    h: `Set up in minutes.<br><span class="hl">From the ${O.sofa(C.key)}.</span>`,
     sub: `Scan the QR code before you fly. Your ${C.short} data is ready when you land.`,
     small: BASE,
     bg: `<div class="bg"><canvas data-fabric="#b9b2a6" width="540" height="540"></canvas></div>`,
@@ -116,6 +137,7 @@ const CONCEPTS = {
     tag: C.tag,
     h: `Pay once.<br><span class="hl">Not per day.</span>`,
     sub: `One price for your whole trip to ${C.name}. No daily charges from us.`,
+    hero: OF ? `<div class="bigprice"><div class="amt"><sup>£</sup>${OF.price}</div><div class="per">${OF.data} · ${OF.days} days<small>Paid once.<br>Not per day.</small></div></div>${OF.code ? `<div class="codechip">New here? 10% off <i>${OF.code}</i></div>` : ""}` : "",
     small: BASE,
     bg: `<div class="bg"><canvas data-wood="1" width="540" height="540"></canvas></div>`,
     subj: `
@@ -123,21 +145,21 @@ const CONCEPTS = {
       <div class="phone3d" style="left:430px;top:0px;transform:rotate(6deg) scale(.97)">${K.iphone(K.screenOrder(C), { flat: true })}</div>`,
   },
   refund: {
-    tag: "Peace of mind",
-    h: `Plans changed?<br><span class="hl">Get a refund.</span>`,
-    sub: `If you never install your ${C.short} eSIM, you can get your money back.`,
-    small: REFUND + " " + BASE,
+    tag: "Guaranteed",
+    h: `Plans changed?<br><span class="hl">100% refund.</span>`,
+    sub: `If your ${C.short} eSIM is unused, you get every penny back. Guaranteed.`,
+    small: REFUND_ALL,
     bg: `<div class="bg studio"></div>`,
     subj: `
       <div class="floorlight" style="left:300px;top:880px;width:560px;height:90px;background:rgba(0,0,0,.6)"></div>
       <div class="phone3d" style="left:330px;top:0px;transform:perspective(2600px) rotateY(16deg) rotateX(5deg) rotateZ(3deg) scale(.96)">${K.iphone(K.screenRefund(C))}</div>
-      <div class="toast" style="left:200px;top:700px;transform:rotate(-3deg)"><span class="ic appicon"></span><div><b>Refund request sent</b><span>${C.plan} · not installed</span></div></div>`,
+      <div class="toast" style="left:200px;top:700px;transform:rotate(-3deg)"><span class="ic appicon"></span><div><b>100% refund on its way</b><span>${C.plan} · unused</span></div></div>`,
   },
   still: {
     tag: "Before you fly",
     h: `Still flying to<br><span class="hl">${C.short}?</span>`,
-    sub: `Sort your data tonight. One price, set up in minutes, refund if not installed.`,
-    small: REFUND + " " + BASE,
+    sub: `Sort your data tonight. One price, set up in minutes, 100% refund if unused.`,
+    small: REFUND_ALL,
     bg: `<div class="bg terminal"></div>`,
     subj: `
       <div style="position:absolute;left:0;top:30px;transform:scale(.88);transform-origin:0 0">${K.board(C)}</div>
@@ -150,17 +172,21 @@ const ad = document.getElementById("ad");
 ad.className = `s-${size}`;
 ad.innerHTML = `
   <div class="top">${K.logo()}${size !== "1x1" ? `<span class="url">calafly.net</span>` : ""}</div>
-  <div class="txt"><span class="tag">${S.tag}</span><h1>${S.h}</h1><p class="sub">${S.sub}</p><p class="small small9">${S.small}</p></div>
+  <div class="txt"><span class="tag">${S.tag}</span><h1>${S.h}</h1>${S.hero ? S.hero : OF ? pline() : `<p class="sub">${S.sub}</p>`}<p class="small small9">${S.small}</p></div>
   <div class="card">${S.bg}</div>
   <div class="subjwrap"><div class="subj">${S.subj}</div></div>
   <div class="foot">${size === "191x1"
     ? `<span class="cta">Get Calafly</span><p class="small">${S.small}</p>`
-    : `<div style="display:flex;flex-direction:column;gap:8px">${size === "1x1" ? `<span class="url">calafly.net</span>` : ""}<p class="small">${S.small}</p></div><span class="cta">Get Calafly</span>`}</div>`;
+    : `<div style="display:flex;flex-direction:column;gap:8px">${size === "1x1" && !OF ? `<span class="url">calafly.net</span>` : ""}<p class="small">${S.small}</p></div><span class="cta">Get Calafly</span>`}</div>`;
 
 // place the 1000×1000 subject box over the card: contain-fit, anchored by size
 function place() {
   const card = ad.querySelector(".card"), wrap = ad.querySelector(".subjwrap"), subj = ad.querySelector(".subj");
   const z = size === "191x1" ? 1 : 1;
+  // stacked layouts: the scene card starts below whatever the copy needs (price lines vary by concept)
+  const txt = ad.querySelector(".txt"), tb = txt.offsetTop + txt.offsetHeight;
+  if (size === "9x16") { const t = Math.max(840, tb + 40); card.style.top = t + "px"; card.style.height = (1920 - t) + "px"; }
+  if (size === "4x5") { const foot = ad.querySelector(".foot"), t = Math.max(520, tb + 34), b = foot.offsetTop - 26; card.style.top = t + "px"; card.style.height = (b - t) + "px"; }
   const L = card.offsetLeft, T = card.offsetTop, W = card.offsetWidth, H = card.offsetHeight;
   Object.assign(wrap.style, { left: L + "px", top: T + "px", width: W + "px", height: H + "px" });
   let s = Math.min(W / 1000, H / 1000) * (size === "4x5" ? 1.14 : size === "191x1" ? 1.0 : 1.0);
@@ -174,7 +200,7 @@ function place() {
 }
 place();
 K.paintAll(ad);
-document.fonts.ready.then(() => { document.body.dataset.ready = "1"; });
+document.fonts.ready.then(() => { place(); document.body.dataset.ready = "1"; });
 </script>
 </body>
 </html>

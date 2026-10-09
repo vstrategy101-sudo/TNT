@@ -47,12 +47,27 @@ body { background: var(--ink); overflow: hidden; }
 .endcard .ticks div { display: flex; align-items: center; gap: 16px; font: 700 34px "CFD"; letter-spacing: -0.02em; }
 .endcard .ticks .tick { width: 44px; height: 44px; }
 .endcard .ticks .tick svg { width: 24px; height: 24px; }
+/* price pieces */
+.vprice { display: flex; align-items: flex-end; gap: 22px; margin-top: 24px; }
+.vprice .amt { font: 800 210px/0.8 "CFD"; letter-spacing: -0.07em; }
+.vprice .amt sup { font-size: .42em; vertical-align: 1.05em; color: var(--teal); }
+.vprice .per { font: 800 40px/1.05 "CFD"; letter-spacing: -0.02em; padding-bottom: 10px; }
+.vprice .per small { display: block; font: 600 28px/1.2 "CFD"; color: var(--muted); margin-top: 6px; }
+.f-16x9 .vprice .amt { font-size: 190px; }
+.f-9x16 .vprice { margin-top: 16px; } .f-9x16 .vprice .amt { font-size: 138px; } .f-9x16 .vprice .per { font-size: 34px; padding-bottom: 4px; } .f-9x16 .vprice .per small { font-size: 25px; }
+.vcode { display: inline-flex; gap: 12px; align-items: center; margin-top: 22px; background: var(--yellow); color: var(--ink); border: 4px solid #fff; border-radius: 14px; padding: 10px 18px; font: 800 32px "CFD"; box-shadow: 6px 6px 0 var(--teal); }
+.vcode i { font: 700 30px "DejaVu Sans Mono", monospace; font-style: normal; background: #fff; border: 3px solid var(--ink); border-radius: 9px; padding: 2px 10px; }
+.endcard .eprice { display: flex; align-items: center; border: 5px solid #fff; border-radius: 20px; overflow: hidden; box-shadow: 8px 8px 0 var(--teal); background: #fff; color: var(--ink); }
+.endcard .eprice span { padding: 12px 22px; font: 700 34px "CFD"; }
+.endcard .eprice b { background: var(--ink); color: var(--teal); font: 800 66px "CFD"; letter-spacing: -0.04em; padding: 4px 24px; }
+.endcard .eprice em { font-style: normal; background: var(--yellow); font: 800 28px/1.05 "CFD"; padding: 12px 18px; border-left: 5px solid var(--ink); }
 .flash { position: absolute; inset: 0; background: #fff; opacity: 0; z-index: 9; pointer-events: none; }
 </style>
 </head>
 <body>
 <div id="v"></div>
 <script src="qr.js"></script>
+<script src="../../src/offers.js"></script>
 <script src="kit.js"></script>
 <script>
 const P = new URLSearchParams(location.search);
@@ -61,8 +76,11 @@ const fmt = P.get("f") || "9x16";
 const C = K.COUNTRIES[P.get("c") || "dubai"];
 const v = document.getElementById("v");
 v.className = `f-${fmt}`;
-const BASE = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
-const REFUND = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+K.showOffer = true;
+const O = OFFERS, OF = O.get(C.key), SOFA = O.sofa(C.key);
+const BASE = O.small(C.key), REFUND_ALL = O.small(C.key, { refund: true });
+const PRICE = OF ? `<div class="vprice"><div class="amt"><sup>£</sup>${OF.price}</div><div class="per">${OF.data} · ${OF.days} days<small>Paid once. Not per day.</small></div></div>` : "";
+const CODE = OF && OF.code ? `<div class="vcode">New here? 10% off <i>${OF.code}</i></div>` : "";
 
 const clamp = x => Math.max(0, Math.min(1, x));
 const ease = x => 1 - Math.pow(1 - clamp(x), 3);
@@ -87,11 +105,12 @@ const SC = {
     ${phone(K.screenOrder(C), "ph_order", "left:470px;top:60px", { flat: true })}`,
   refund: `<div class="layer studio"></div>
     ${phone(K.screenRefund(C), "ph_ref", "left:330px;top:70px")}
-    <div class="toast" id="toast" style="left:160px;top:780px;opacity:0"><span class="ic appicon"></span><div><b>Refund request sent</b><span>${C.plan} · not installed</span></div></div>`,
+    <div class="toast" id="toast" style="left:160px;top:780px;opacity:0"><span class="ic appicon"></span><div><b>100% refund on its way</b><span>${C.plan} · unused</span></div></div>`,
   board: `<div class="layer terminal"></div>
     <div id="boardwrap" style="position:absolute;left:30px;top:250px;transform:scale(.97);transform-origin:0 0">${K.board(C)}</div>`,
   end: `<div class="layer endcard">${K.logo()}
-    <div class="ticks">${["Set up in minutes", "Pay once, not per day", "Refund if not installed"].map(t => `<div><span class="tick">${K.tickSvg()}</span>${t}</div>`).join("")}</div>
+    ${OF ? `<div class="eprice"><span>${C.short} · ${OF.data} · ${OF.days} days</span><b>${O.price(C.key)}</b>${OF.code ? `<em>10% off<br>code ${OF.code}</em>` : ""}</div>` : ""}
+    <div class="ticks">${["Set up in minutes", "Pay once, not per day", "100% refund if unused"].map(t => `<div><span class="tick">${K.tickSvg()}</span>${t}</div>`).join("")}</div>
     <span class="cta">Get Calafly</span><span class="url" style="font-size:38px">calafly.net</span></div>`,
 };
 
@@ -103,10 +122,10 @@ const V = {
     lines: [
       [0.2, 3.0, `<h1>Wheels<br>down.</h1>`],
       [3.0, 6.1, `<h1>Wheels down.<br><span class="hl">Data on.</span></h1><p class="sub">Your ${C.short} eSIM, set up before you flew.</p>`],
-      [6.1, 8.7, `<h1>Set up in minutes.<br><span class="hl">From the sofa.</span></h1>`],
-      [8.7, 10.9, `<h1>Pay once.<br><span class="hl">Not per day.</span></h1><p class="sub">One price for your whole trip.</p>`],
-      [10.9, 13.1, `<h1>Plans changed?<br><span class="hl">Get a refund.</span></h1><p class="sub">If you never install it.</p>`],
-      [13.1, 15.01, `<h1>${C.short} data,<br><span class="hl">sorted.</span></h1>`],
+      [6.1, 8.7, `<h1>Set up in minutes.<br><span class="hl">From the ${SOFA}.</span></h1>`],
+      [8.7, 10.9, `<h1>Pay once.<br><span class="hl">Not per day.</span></h1>${OF ? PRICE : `<p class="sub">One price for your whole trip.</p>`}`],
+      [10.9, 13.1, `<h1>Plans changed?<br><span class="hl">100% refund.</span></h1><p class="sub">Guaranteed, if your eSIM is unused.</p>`],
+      [13.1, 15.01, `<h1>${C.short} data,<br><span class="hl">sorted.</span></h1>${CODE}`],
     ],
     cues: [[0, "ambience", 6.4], [0, "music", 15], [0.35, "chime_seatbelt"], [1.55, "landing"], [3.0, "whoosh_up"], [3.9, "notif"], [4.7, "notif_soft"],
       [6.0, "whoosh"], [6.7, "focus_beep"], [7.0, "progress", 1.4], [8.35, "success"], [8.6, "whoosh"], [9.4, "pop"], [9.75, "pop"],
@@ -116,10 +135,10 @@ const V = {
     scenes: [["sofa", 0, 6.4], ["board", 6.2, 9.2], ["window", 9.0, 12.6], ["end", 12.4, 15.01]],
     lines: [
       [0.2, 2.6, `<h1>Flying to<br><span class="hl">${C.short}?</span></h1>`],
-      [2.6, 6.3, `<h1>Sort your data<br><span class="hl">from the sofa.</span></h1><p class="sub">Scan the QR code. Done in minutes.</p>`],
-      [6.3, 9.1, `<h1>Ready before<br><span class="hl">you board.</span></h1><p class="sub">One price for the trip. Not per day.</p>`],
-      [9.1, 12.5, `<h1>Switch it on<br><span class="hl">when you land.</span></h1><p class="sub">Refund if you never install it.</p>`],
-      [12.5, 15.01, `<h1>${C.short} data,<br><span class="hl">sorted.</span></h1>`],
+      [2.6, 6.3, `<h1>Sort your data<br><span class="hl">from the ${SOFA}.</span></h1><p class="sub">Scan the QR code. Done in minutes.</p>`],
+      [6.3, 9.1, `<h1>Ready before<br><span class="hl">you board.</span></h1>${OF ? PRICE : `<p class="sub">One price for the trip. Not per day.</p>`}`],
+      [9.1, 12.5, `<h1>Switch it on<br><span class="hl">when you land.</span></h1><p class="sub">Plans changed? 100% refund if unused.</p>`],
+      [12.5, 15.01, `<h1>${C.short} data,<br><span class="hl">sorted.</span></h1>${CODE}`],
     ],
     cues: [[0, "room", 6.5], [0, "music", 15], [0.25, "whoosh_up"], [2.4, "whoosh"], [3.4, "focus_beep"], [3.7, "progress", 1.6], [5.4, "success"],
       [6.2, "whoosh"], [6.5, "flaps", 1.7], [8.25, "pop"], [9.0, "whoosh"], [9.2, "ambience", 3.4], [9.6, "chime_seatbelt"], [10.6, "notif"], [11.4, "notif_soft"],
@@ -183,7 +202,7 @@ const ANIM = {
     el.querySelector("#boardwrap").style.transform = `scale(${0.97 + p * 0.01})`;
   },
   end(el, p) {
-    const kids = el.querySelectorAll(".logo, .ticks > div, .cta, .url");
+    const kids = el.querySelectorAll(".logo, .eprice, .ticks > div, .cta, .url");
     kids.forEach((k, i) => { const e = back((p - 0.1 - i * 0.12) / 0.45); k.style.opacity = clamp((p - 0.1 - i * 0.12) / 0.2); k.style.transform = `translateY(${(1 - e) * 40}px)`; });
   },
 };
@@ -205,7 +224,7 @@ window.renderFrame = (t) => {
     el.style.transform = `${base}translateY(${(1 - fin) * 30}px)`;
   });
   const refundShown = which === "wheels" ? t >= 10.9 : t >= 9.1;
-  $("#small").textContent = refundShown ? `${REFUND} ${BASE}` : BASE;
+  $("#small").innerHTML = refundShown ? REFUND_ALL : BASE;
   // landing flash
   $("#flash").style.opacity = which === "wheels" ? Math.max(0, 0.25 - Math.abs(t - 1.6) * 0.8) : 0;
 };

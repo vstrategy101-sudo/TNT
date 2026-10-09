@@ -181,6 +181,6 @@ if __name__ == "__main__":
         loudnorm(build(CUES[v]), base + "_MINIMAL.wav")
         print("mixed", os.path.basename(base) + "_MINIMAL.wav")
         if "--dry" in sys.argv: continue
-        for f in sorted(glob.glob(os.path.join(ROOT, "videos", f"CALAFLY_*_{code}_*.mp4"))):
+        for f in sorted(glob.glob(os.path.join(ROOT, "videos", f"CALAFLY_*_{code}_*.mp4")) + glob.glob(os.path.join(ROOT, "videos", f"CALAFLY_*_{code.replace('SOFA', 'COUCH')}_*.mp4"))):
             tmp = f + ".tmp.mp4"; remux(f, base + "_MINIMAL.wav", tmp); os.replace(tmp, f)
             print("  remuxed", os.path.basename(f))

@@ -31,7 +31,7 @@ for (const [v, label] of VIDEOS) {
       const page = await browser.newPage({ viewport: { width: w, height: h } });
       await page.goto(`file://${here}/video.html?v=${v}&c=${c}&f=${f}`);
       await page.waitForSelector("body[data-ready='1']");
-      const name = `CALAFLY_${c.toUpperCase()}_${label}_${f}`;
+      const name = `CALAFLY_${c.toUpperCase()}_${c === "usa" ? label.replace("SOFA", "COUCH") : label}_${f}`;
       if (stills) {
         for (const t of [1, 3.5, 5, 7.5, 9.8, 12, 14.5]) {
           await page.evaluate(t => window.renderFrame(t), t);
@@ -44,7 +44,9 @@ for (const [v, label] of VIDEOS) {
       const cueFile = path.join(tmp, `${v}.cues.json`);
       fs.writeFileSync(cueFile, JSON.stringify(cues));
       const mixBase = path.join(audioDir, `CALAFLY_${label}`);
-      if (!fs.existsSync(`${mixBase}_MIX.wav`)) execFileSync("python3", [path.join(here, "sound.py"), cueFile, mixBase, String(DURATION)], { stdio: "inherit" });
+      // the approved minimal sound mix is reused when present; the timeline is unchanged
+      const mixFile = fs.existsSync(`${mixBase}_MINIMAL.wav`) ? `${mixBase}_MINIMAL.wav` : `${mixBase}_MIX.wav`;
+      if (!fs.existsSync(mixFile)) execFileSync("python3", [path.join(here, "sound.py"), cueFile, mixBase, String(DURATION)], { stdio: "inherit" });
 
       const silent = path.join(tmp, `${name}.mp4`);
       const ff = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "png", "-i", "-",
@@ -55,7 +57,7 @@ for (const [v, label] of VIDEOS) {
         if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once("drain", r));
       }
       ff.stdin.end(); await new Promise(r => ff.on("close", r));
-      execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-i", silent, "-i", `${mixBase}_MIX.wav`, "-c:v", "copy", "-c:a", "aac", "-b:a", "256k", "-ar", "48000",
+      execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-i", silent, "-i", mixFile, "-c:v", "copy", "-c:a", "aac", "-b:a", "256k", "-ar", "48000",
         "-shortest", "-movflags", "+faststart", path.join(out, `${name}.mp4`)]);
       fs.unlinkSync(silent);
       await page.close();

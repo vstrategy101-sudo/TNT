@@ -306,7 +306,7 @@ function partC(k) {
       ${copyBlock("Sitelinks", sl)}
       <p class="warn"><b>Check each URL opens on calafly.net first.</b> Send TNT any that differ; a broken link disapproves the sitelink.</p>`),
     step(`C2-${k}`, "Callouts and structured snippet", `${path(`${c.camp} › Assets › + › Callout / Structured snippet`)}
-      ${copyBlock("Callouts (8)", S.callouts.join("\n"))}
+      ${copyBlock(`Callouts (${c.callouts.length})`, c.callouts.join("\n"))}
       ${kv([["Snippet header", S.snippet[0]], ["Values", S.snippet[1].join(", ")]])}`),
     step(`C3-${k}`, "Images", `${path(`${c.camp} › Assets › + › Image`)}
       <p>Upload the four ${n} files from <code>google-search/images/</code>: ${c.imgs.map(i => `<code>${i}</code>`).join(", ")}. Google will ask to crop; keep 1:1 and 1.91:1.</p>`),

@@ -71,7 +71,11 @@ NEG_SHARED = [
     "holafly", "airalo", "nomad esim", "ubigi", "saily", "esim4travel", "gigsky", "maya mobile", "simoptions", "drimsim",
 ]
 
-COMMON_H = ["Set Up in Minutes", "Pay Once, Not Per Day", "One Price for Your Trip", "Refund if Not Installed",
+# Confirmed prices and promo codes (match src/offers.js). Turkey and Dubai are added once their prices are confirmed.
+OFFERS = {"USA": {"h_price": "USA 3GB for £7, 30 Days", "h_code": "10% Off With Code USA10",
+                  "d_price": "3GB for 30 days: £7, paid once. New here? 10% off with code USA10. T&Cs apply.",
+                  "callouts": ["3GB for £7, 30 Days", "10% Off: Code USA10"]}}
+COMMON_H = ["Set Up in Minutes", "Pay Once, Not Per Day", "One Price for Your Trip", "100% Refund if Unused",
             "Scan a QR Code at Home", "QR Code Sent by Email", "Land Connected", "Sorted Before You Fly",
             "Data-Only Travel eSIM", "Keep Your WhatsApp Number", "No Daily Charges From Us"]
 
@@ -83,7 +87,11 @@ def headlines(theme, c):
         "Roaming":  [f"Using Your Phone in {S}?", f"Holiday Data for {S}", f"Travel Data for {S}", f"{S} eSIM by CalaFly"],
         "Cities":   [f"eSIM for {x.replace('the ', '')}" for x in cities] + [f"{S} eSIM by CalaFly"],
     }[theme]
-    h = first + [x for x in COMMON_H if x not in first]
+    common = COMMON_H
+    if c["S"] in OFFERS:   # confirmed price + promo replace the two softest lines
+        o = OFFERS[c["S"]]
+        common = [o["h_price"], o["h_code"]] + [x for x in COMMON_H if x not in ("Land Connected", "Sorted Before You Fly")]
+    h = first + [x for x in common if x not in first]
     return h[:15]
 
 def descriptions(theme, c):
@@ -94,23 +102,23 @@ def descriptions(theme, c):
     }.get(theme, f"Mobile data for {n}, sorted before you leave the UK. Scan a QR code, land connected.")
     # (text, pin). The two refund lines are both pinned to description 2, so a T&Cs line is in every ad shown.
     return [(d1, ""),
-            ("Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.", "2"),
-            ("Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.", "2"),
-            ("Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.", "")]
+            ("Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.", "2"),
+            ("Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.", "2"),
+            (OFFERS[c["S"]]["d_price"] if c["S"] in OFFERS else "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.", "")]
 
 PATH2 = {"eSIM": "esim", "Data SIM": "data", "Roaming": "roaming", "Cities": "cities"}
 BRAND_H = ["CalaFly Official Site", "CalaFly Travel eSIM", "USA, Turkey and Dubai", "Set Up in Minutes",
-           "Pay Once, Not Per Day", "Refund if Not Installed", "Scan a QR Code at Home", "Land Connected",
+           "Pay Once, Not Per Day", "100% Refund if Unused", "Scan a QR Code at Home", "Land Connected",
            "Data-Only Travel eSIM", "Keep Your WhatsApp Number", "QR Code Sent by Email", "Sorted Before You Fly"]
 BRAND_D = [("Travel eSIM data for the USA, Turkey and Dubai, sorted before you leave the UK.", ""),
-           ("Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.", "2"),
-           ("Pay once, not per day. Refund if your eSIM is never installed. T&Cs apply.", "2"),
+           ("Plans changed? 100% refund, guaranteed, if your eSIM is unused. T&Cs apply.", "2"),
+           ("Pay once, not per day. 100% refund if your eSIM is unused. T&Cs apply.", "2"),
            ("Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.", "")]
 
 # Sitelinks: URLs marked VERIFY must be checked on calafly.net before upload
 SITELINKS = [
     ("", "", "How It Works", "Pick a plan and scan a QR code", "Install at home before you fly", f"{SITE}/how-it-works"),
-    ("", "", "Refund Policy", "Refund if never installed", "See the full terms", f"{SITE}/refund-policy"),
+    ("", "", "Refund Policy", "100% refund if unused", "See the full terms", f"{SITE}/legal/terms"),
     ("", "", "Compatible Phones", "Check your phone supports eSIM", "Unlocked phones only", f"{SITE}/compatible-devices"),
     ("", "", "Help and FAQs", "Install, data and refunds", "Answers before you buy", f"{SITE}/faq"),
     ("", "", "USA eSIM", "Mobile data for the USA", "Set up in minutes", f"{SITE}/usa"),
@@ -118,7 +126,7 @@ SITELINKS = [
     ("", "", "Dubai eSIM", "Mobile data for Dubai and UAE", "Set up in minutes", f"{SITE}/dubai"),
     ("", "", "Global eSIM", "One eSIM for 200+ countries", "Pay once for the plan", f"{SITE}/global"),
 ]
-CALLOUTS = ["Set Up in Minutes", "Pay Once, Not Per Day", "Refund if Not Installed", "QR Code by Email",
+CALLOUTS = ["Set Up in Minutes", "Pay Once, Not Per Day", "100% Refund if Unused", "QR Code by Email",
             "Data-Only eSIM", "Keep Your WhatsApp Number", "Install Before You Fly", "No Daily Charges From Us"]
 SNIPPET = ("Destinations", ["USA", "Turkey", "Dubai", "Spain", "France", "Italy", "Japan", "Thailand"])
 
@@ -167,12 +175,13 @@ for key, c in COUNTRIES.items():
     for _, _, t, d1, d2, u in links:
         chk("sitelink text", t, 25, t); chk("sitelink desc", d1, 35, t); chk("sitelink desc", d2, 35, t)
         sl.append([camp, t, d1, d2, u])
-    co += [[camp, x] for x in CALLOUTS]
+    co += [[camp, x] for x in CALLOUTS + OFFERS.get(c["S"], {}).get("callouts", [])]
     sn.append([camp, SNIPPET[0], ";".join(SNIPPET[1])])
     files = [f"calafly-{key}-{kind}-{r}.jpg" for kind in ("arrive", "home") for r in ("1x1", "191x1")]
     imgs += [[camp, f] for f in files]
     guide[key] = {"camp": camp, "url": url, "budget": BUDGET[key], "suffix": suffix, "groups": g_out,
-                  "neg": OTHER[key] + NEG_CAMPAIGN, "sl": [s[2:] for s in links], "imgs": files}
+                  "neg": OTHER[key] + NEG_CAMPAIGN, "sl": [s[2:] for s in links], "imgs": files,
+                  "callouts": CALLOUTS + OFFERS.get(c["S"], {}).get("callouts", [])}
 
 for x in CALLOUTS: chk("callout", x, 25, x)
 for v in SNIPPET[1]: chk("snippet", v, 25, v)

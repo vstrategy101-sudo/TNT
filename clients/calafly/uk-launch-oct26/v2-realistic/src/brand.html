@@ -52,12 +52,24 @@ body { background: var(--ink); overflow: hidden; }
 .endcard .ticks div { display: flex; align-items: center; gap: 12px; font: 700 28px "CFD"; letter-spacing: -0.02em; }
 .endcard .ticks .tick { width: 38px; height: 38px; }
 .endcard .ticks .tick svg { width: 20px; height: 20px; }
+.vprice { display: flex; align-items: flex-end; gap: 20px; margin-top: 20px; }
+.vprice .amt { font: 800 190px/0.8 "CFD"; letter-spacing: -0.07em; }
+.vprice .amt sup { font-size: .42em; vertical-align: 1.05em; color: var(--teal); }
+.vprice .per { font: 800 38px/1.05 "CFD"; letter-spacing: -0.02em; padding-bottom: 8px; }
+.vprice .per small { display: block; font: 600 26px/1.2 "CFD"; color: var(--muted); margin-top: 6px; }
+.f-9x16 .vprice { margin-top: 6px; } .f-9x16 .vprice .amt { font-size: 98px; } .f-9x16 .vprice .per { font-size: 32px; padding-bottom: 2px; } .f-9x16 .vprice .per small { font-size: 23px; }
+.sub b { color: var(--teal); font-weight: 800; font-size: 1.5em; letter-spacing: -0.03em; }
+.endcard .eprice { display: flex; align-items: center; border: 5px solid #fff; border-radius: 20px; overflow: hidden; box-shadow: 8px 8px 0 var(--teal); background: #fff; color: var(--ink); }
+.endcard .eprice span { padding: 12px 22px; font: 700 32px "CFD"; }
+.endcard .eprice b { background: var(--ink); color: var(--teal); font: 800 62px "CFD"; letter-spacing: -0.04em; padding: 4px 22px; }
+.endcard .eprice em { font-style: normal; background: var(--yellow); font: 800 26px/1.05 "CFD"; padding: 12px 18px; border-left: 5px solid var(--ink); }
 .touch { position: absolute; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; background: rgba(255,255,255,.55); box-shadow: 0 0 0 3px rgba(11,13,16,.25); opacity: 0; z-index: 50; pointer-events: none; }
 </style>
 </head>
 <body>
 <div id="v"></div>
 <script src="qr.js"></script>
+<script src="../../src/offers.js"></script>
 <script src="kit.js"></script>
 <script>
 const P = new URLSearchParams(location.search);
@@ -66,8 +78,10 @@ const fmt = P.get("f") || "9x16";
 const C = K.COUNTRIES[P.get("c") || "dubai"];
 const v = document.getElementById("v");
 v.className = `f-${fmt}`;
-const BASE = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
-const REFUND = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+K.showOffer = true;
+const O = OFFERS, OF = O.get(C.key);
+const BASE = O.small(C.key), REFUND_ALL = O.small(C.key, { refund: true });
+const PRICE = OF ? `<div class="vprice"><div class="amt"><sup>£</sup>${OF.price}</div><div class="per">${OF.data} · ${OF.days} days<small>Paid once. No daily charges.</small></div></div>` : "";
 const clamp = x => Math.max(0, Math.min(1, x));
 const ease = x => 1 - Math.pow(1 - clamp(x), 3);
 const back = x => { x = clamp(x); const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
@@ -91,10 +105,11 @@ const SC = {
     ${phone(K.lockScreen(C, `<div id="n1" style="opacity:0">${K.notif({ title: "Mum", body: "Landed safe? Send a pic when you can x" })}</div><div id="n2" style="opacity:0;margin-top:10px">${K.notif({ title: "Holiday group", body: "Taxi rank is just outside arrivals" })}</div>`), "ph_lock", "left:320px;top:1200px")}`,
   refund: `<div class="layer studio"></div>
     ${phone(K.screenRefund(C), "ph_ref", "left:330px;top:70px")}<div class="touch" id="touch2"></div>
-    <div class="toast" id="toast" style="left:160px;top:780px;opacity:0"><span class="ic appicon"></span><div><b>Refund request sent</b><span>${C.plan} · not installed</span></div></div>`,
+    <div class="toast" id="toast" style="left:160px;top:780px;opacity:0"><span class="ic appicon"></span><div><b>100% refund on its way</b><span>${C.plan} · unused</span></div></div>`,
   end: `<div class="layer endcard">${K.logo()}
     <div class="line2">Sorted<br><span class="hl">before you fly.</span></div>
-    <div class="ticks">${["Set up in minutes", "Pay once, not per day", "Refund if not installed"].map(t => `<div><span class="tick">${K.tickSvg()}</span>${t}</div>`).join("")}</div>
+    ${OF ? `<div class="eprice"><span>${C.short} · ${OF.data} · ${OF.days} days</span><b>${O.price(C.key)}</b>${OF.code ? `<em>10% off<br>code ${OF.code}</em>` : ""}</div>` : ""}
+    <div class="ticks">${["Set up in minutes", "Pay once, not per day", "100% refund if unused"].map(t => `<div><span class="tick">${K.tickSvg()}</span>${t}</div>`).join("")}</div>
     <span class="cta">Get Calafly</span></div>`,
 };
 
@@ -107,10 +122,10 @@ const V = {
     lines: [
       [0.2, 3.6, `<h1>Mobile data abroad?<br><span class="hl">Sort it before you fly.</span></h1>`],
       [3.7, 8.0, `<span class="step"><span class="n">1</span>Pick</span><h1>Pick your<br><span class="hl">destination.</span></h1><p class="sub">The USA, Turkey or Dubai. One plan for the whole trip.</p>`],
-      [8.1, 12.2, `<span class="step"><span class="n">2</span>Pay</span><h1>Pay once.<br><span class="hl">Not per day.</span></h1><p class="sub">No daily charges from us.</p>`],
+      [8.1, 12.2, `<span class="step"><span class="n">2</span>Pay</span><h1>Pay once.<br><span class="hl">Not per day.</span></h1>${OF ? PRICE : `<p class="sub">No daily charges from us.</p>`}`],
       [12.3, 17.0, `<span class="step"><span class="n">3</span>Scan</span><h1>Scan the<br><span class="hl">QR code.</span></h1><p class="sub">At home, in minutes. Your number stays the same.</p>`],
       [17.1, 22.4, `<span class="step"><span class="n">4</span>Land</span><h1>Wheels down.<br><span class="hl">Data on.</span></h1><p class="sub">Switch it on when you land.</p>`],
-      [22.5, 26.0, `<span class="step">And if plans change</span><h1>Never installed?<br><span class="hl">Get a refund.</span></h1>`],
+      [22.5, 26.0, `<span class="step">And if plans change</span><h1>Plans changed?<br><span class="hl">100% refund.</span></h1><p class="sub">Guaranteed, if your eSIM is unused.</p>`],
     ],
     steps: [[3.6, 8.1], [8.0, 12.3], [12.2, 17.1], [17.0, 22.5]],
     refundFrom: 22.4,
@@ -121,7 +136,7 @@ const V = {
   bumper: {
     dur: 6,
     scenes: [["window", 0, 3.9, { enter: 0.0, n1: 1.2, shake: [0.2, 0.9] }], ["end", 3.8, 6.01]],
-    lines: [[0.15, 3.8, `<h1>Wheels down.<br><span class="hl">Data on.</span></h1><p class="sub">${C.short} data, sorted before you fly.</p>`]],
+    lines: [[0.15, 3.8, `<h1>Wheels down.<br><span class="hl">Data on.</span></h1><p class="sub">${OF ? `${C.short} · ${OF.data} · ${OF.days} days for <b>${O.price(C.key)}</b>. Sorted before you fly.` : `${C.short} data, sorted before you fly.`}</p>`]],
     steps: [],
     refundFrom: 99,
     cues: [[0.0, "air", 3.9], [0.25, "touchdown"], [1.2, "notif"], [1.95, "notif_soft"], [3.7, "swish"], [3.8, "logo"]],
@@ -202,7 +217,7 @@ const ANIM = {
     ts.style.opacity = clamp((p - o.tap - 0.3) / 0.2); ts.style.transform = `translateX(${(1 - k) * -160}px) rotate(-3deg)`;
   },
   end(el, p) {
-    el.querySelectorAll(".logo, .line2, .ticks, .cta").forEach((k, i) => { const e = back((p - 0.1 - i * 0.14) / 0.45); k.style.opacity = clamp((p - 0.1 - i * 0.14) / 0.2); k.style.transform = `translateY(${(1 - e) * 40}px)`; });
+    el.querySelectorAll(".logo, .line2, .eprice, .ticks, .cta").forEach((k, i) => { const e = back((p - 0.1 - i * 0.14) / 0.45); k.style.opacity = clamp((p - 0.1 - i * 0.14) / 0.2); k.style.transform = `translateY(${(1 - e) * 40}px)`; });
   },
 };
 
@@ -222,7 +237,7 @@ window.renderFrame = (t) => {
   });
   v.querySelectorAll(".progress i b").forEach((b, i) => { const [a, z] = T.steps[i]; b.style.transform = `scaleX(${clamp((t - a) / (z - a))})`; });
   const pr = $(".progress"); if (pr) pr.style.opacity = t > 3.4 && t < 26 ? 1 : 0;
-  $("#small").textContent = t >= T.refundFrom ? `${REFUND} ${BASE}` : BASE;
+  $("#small").innerHTML = t >= T.refundFrom ? REFUND_ALL : BASE;
 };
 document.fonts.ready.then(() => { window.renderFrame(0); document.body.dataset.ready = "1"; });
 </script>
