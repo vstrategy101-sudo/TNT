@@ -4,8 +4,9 @@ window.OFFERS = (() => {
   const TERMS = "calafly.net/legal/terms";
   const O = {
     usa: { data: "3GB", price: 7, days: 30, code: "USA10", pct: 10, couch: true },
-    turkey: null,   // price to come from calafly.net
-    dubai: null,    // price to come from calafly.net
+    // Hero plans from the Turkey and Dubai landing pages (Cala-landing-pages-tnt, 9 Oct 2026)
+    turkey: { data: "10GB", price: 11, days: 7, code: "TURKEY10", pct: 10 },
+    dubai: { data: "10GB", price: 18, days: 7, code: "DUBAI10", pct: 10 },
   };
   const gbp = n => "£" + (Number.isInteger(n) ? n : n.toFixed(2));
   const api = {
