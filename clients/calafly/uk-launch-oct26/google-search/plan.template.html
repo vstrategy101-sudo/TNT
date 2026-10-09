@@ -2,413 +2,363 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one reading column (max 1080px) of numbered build sections; the ad-group explorer is the single
-   brand-styled object (ink border + teal offset shadow, as on calafly.net); everything else stays quiet. */
+/* Layout: a working checklist in one column (max 960px). Parts A–E run in the order the build happens in Google Ads.
+   Part B/C switch by country tab and fill every value for that campaign. Brand cue: ink outline + teal offset
+   shadow, used only on the country switcher and the step being worked on. */
 :root {
   --bg: #f5f8f9; --surface: #ffffff; --fg: #0b0d10; --muted: #56606b; --line: #dbe2e7;
-  --teal: #0f9c83; --teal-soft: #dff5f0; --accent-ink: #0b0d10; --shadow: #18c8a8;
-  --warn: #9a5b00; --warn-soft: #fff3dc; --serp-link: #1a0dab; --serp-url: #202124;
+  --teal: #0f9c83; --teal-soft: #dff5f0; --ink: #0b0d10; --shadow: #18c8a8; --warn: #9a5b00; --warn-soft: #fff3dc;
   --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
   --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #0b0d10; --surface: #14181d; --fg: #eef2f4; --muted: #9aa5af; --line: #262c33;
-  --teal: #2fdcbc; --teal-soft: #10302a; --accent-ink: #eef2f4; --shadow: #18c8a8;
-  --warn: #ffc566; --warn-soft: #33270f; --serp-link: #8ab4f8; --serp-url: #dadce0; color-scheme: dark } }
+  --bg: #0b0d10; --surface: #14181d; --fg: #eef2f4; --muted: #9aa5af; --line: #2a3138;
+  --teal: #2fdcbc; --teal-soft: #10302a; --ink: #eef2f4; --shadow: #18c8a8; --warn: #ffc566; --warn-soft: #33270f; color-scheme: dark } }
 :root[data-theme="dark"] {
-  --bg: #0b0d10; --surface: #14181d; --fg: #eef2f4; --muted: #9aa5af; --line: #262c33;
-  --teal: #2fdcbc; --teal-soft: #10302a; --accent-ink: #eef2f4; --shadow: #18c8a8;
-  --warn: #ffc566; --warn-soft: #33270f; --serp-link: #8ab4f8; --serp-url: #dadce0; color-scheme: dark }
+  --bg: #0b0d10; --surface: #14181d; --fg: #eef2f4; --muted: #9aa5af; --line: #2a3138;
+  --teal: #2fdcbc; --teal-soft: #10302a; --ink: #eef2f4; --shadow: #18c8a8; --warn: #ffc566; --warn-soft: #33270f; color-scheme: dark }
 
 * { box-sizing: border-box }
-body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--body); }
-.wrap { grid-template-columns: minmax(0, 1fr); max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; display: grid; gap: 64px }
+body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--body) }
+.wrap { max-width: 960px; margin: 0 auto; padding-inline: 18px; padding-block: 36px 80px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px }
 h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.02em }
-h1 { font-size: clamp(36px, 6vw, 60px); font-weight: 800; line-height: 1 }
+h1 { font-size: clamp(34px, 6vw, 54px); font-weight: 800; line-height: 1.02 }
 h2 { font-size: clamp(24px, 3.4vw, 32px); font-weight: 800; line-height: 1.1 }
-h3 { font-size: 18px; font-weight: 600 }
-p { margin: 0; max-width: 68ch }
-.eyebrow { font: 600 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--teal) }
-.muted { color: var(--muted) }
+h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em }
+p { margin: 0; max-width: 70ch }
 code, .mono { font-family: var(--mono); font-size: .88em }
-section, .explorer, .side, .side > div { grid-template-columns: minmax(0, 1fr) }
-section { display: grid; gap: 20px; min-width: 0 }
-.sec-head { display: grid; gap: 8px }
-.sec-head .n { font: 500 13px var(--mono); color: var(--muted) }
+.muted { color: var(--muted) }
+.eyebrow { font: 600 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--teal) }
+section { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0 }
+.part { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap }
+.part .tag { font: 800 15px var(--display); color: var(--bg); background: var(--ink); border-radius: 6px; padding: 2px 9px }
 
-/* header */
-header { display: grid; gap: 18px }
-header .lede { font-size: 19px; color: var(--muted); max-width: 60ch }
-.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 6px; border-top: 1px solid var(--line) }
-.facts div { display: grid; gap: 2px; padding-top: 12px }
-.facts b { font: 800 26px/1 var(--display); font-variant-numeric: tabular-nums }
+header { display: grid; gap: 16px }
+header .lede { font-size: 18px; color: var(--muted) }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; border-top: 1px solid var(--line); padding-top: 14px }
+.facts div { display: grid; gap: 2px }
+.facts b { font: 800 24px/1 var(--display); font-variant-numeric: tabular-nums }
 .facts span { font-size: 13px; color: var(--muted) }
+.progress { display: grid; gap: 6px }
+.progress .track { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden }
+.progress .fill { height: 100%; background: var(--teal); width: 0; transition: width .2s }
+.progress span { font-size: 13px; color: var(--muted) }
 
-/* structure tree */
-.tree { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px }
-.tree .camp { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px }
-.country { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 10px; align-content: start }
-.country h3 { display: flex; justify-content: space-between; align-items: baseline }
-.country h3 small { font: 500 13px var(--mono); color: var(--muted) }
-.country ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px }
-.country li { font: 500 14px var(--mono); display: flex; justify-content: space-between; gap: 8px }
-.country li span { color: var(--muted) }
-.brandnote { grid-column: 1 / -1; font-size: 14px; color: var(--muted) }
+/* steps */
+.steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid;
+  grid-template-columns: 28px minmax(0, 1fr); gap: 4px 14px }
+.step.done { opacity: .62 }
+.step input[type=checkbox] { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--teal); cursor: pointer }
+.step .body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0 }
+.step .id { font: 500 12.5px var(--mono); color: var(--muted); margin-right: 6px }
+.path { font: 500 13.5px var(--mono); color: var(--teal); background: var(--teal-soft); border-radius: 6px; padding: 3px 8px; justify-self: start; max-width: 100% }
+.step ul, .step ol { margin: 0; padding-left: 20px; display: grid; gap: 4px }
+.step li { max-width: 72ch }
+.kv { display: grid; grid-template-columns: minmax(120px, max-content) minmax(0, 1fr); gap: 6px 16px; font-size: 15px }
+.kv dt { color: var(--muted) }
+.kv dd { margin: 0; font-weight: 600; min-width: 0; overflow-wrap: anywhere }
+.note { font-size: 14px; color: var(--muted) }
+.warn { background: var(--warn-soft); border: 1px solid var(--warn); color: var(--fg); border-radius: 8px; padding: 8px 12px; font-size: 14px }
+.warn b { color: var(--warn) }
 
-/* explorer */
-.explorer { background: var(--surface); border: 2.5px solid var(--accent-ink); border-radius: 18px; box-shadow: 6px 6px 0 var(--shadow);
-  padding: 20px; display: grid; gap: 18px; min-width: 0 }
-.tabs { display: flex; flex-wrap: wrap; gap: 8px }
-.tabs button { font: 600 14px var(--body); border: 2px solid var(--accent-ink); background: transparent; color: var(--fg);
-  border-radius: 999px; padding: 6px 14px; cursor: pointer }
-.tabs button[aria-pressed="true"] { background: var(--accent-ink); color: var(--bg) }
-.tabs.sub button { border-width: 1.5px; font-weight: 500 }
-.tabs button:focus-visible, .btn:focus-visible, input:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px }
-.ex-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px }
-.serp { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 4px; background: var(--bg) }
-.serp .spons { font: 700 13px var(--body) }
-.serp .site { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--serp-url) }
-.serp .fav { width: 26px; height: 26px; border-radius: 50%; background: var(--fg); display: grid; place-items: center; flex: 0 0 auto }
-.serp .fav i { width: 9px; height: 9px; border-radius: 50%; background: var(--shadow) }
-.serp .hl { font: 400 20px/1.3 Arial, sans-serif; color: var(--serp-link); margin-top: 4px }
-.serp .ds { font: 400 14px/1.5 Arial, sans-serif; color: var(--muted) }
-.serp .ds mark { background: var(--teal-soft); color: inherit; border-radius: 3px; padding: 0 2px }
-.serp .links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; font: 14px Arial, sans-serif; color: var(--serp-link) }
-.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between }
-.btn { font: 600 14px var(--body); border: 2px solid var(--accent-ink); background: var(--surface); color: var(--fg); border-radius: 10px; padding: 7px 14px; cursor: pointer }
-.legend { font-size: 13px; color: var(--muted) }
-.legend mark { background: var(--teal-soft); color: inherit; padding: 0 3px; border-radius: 3px }
-.list { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none }
-.list li { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding: 4px 0; border-bottom: 1px solid var(--line) }
-.list li .c { font: 500 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; flex: 0 0 auto }
-.list li .pin { font: 600 11px var(--body); text-transform: uppercase; letter-spacing: .08em; color: var(--teal) }
-.chips { display: flex; flex-wrap: wrap; gap: 6px }
-.chip { font: 400 13px var(--mono); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; background: var(--bg) }
-.side { display: grid; gap: 16px; align-content: start; min-width: 0 }
-.side h3 { font-size: 15px }
+/* copy blocks */
+.copy { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px }
+.copy .bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap }
+.copy .bar span { font: 600 12px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.copy pre { margin: 0; font: 400 13px/1.55 var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+  padding: 10px 12px; max-height: 220px; overflow: auto; white-space: pre-wrap; word-break: break-word }
+button { font: 600 13px var(--body); color: var(--fg); background: var(--surface); border: 1.5px solid var(--ink); border-radius: 8px; padding: 4px 11px; cursor: pointer }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px }
+button.ok { background: var(--teal); border-color: var(--teal); color: #0b0d10 }
+.lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden }
+.lines li { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 6px 10px; border-bottom: 1px solid var(--line); font-size: 14.5px; max-width: none }
+.lines li:last-child { border-bottom: 0 }
+.lines .n { font: 500 12px var(--mono); color: var(--muted) }
+.lines .c { font: 500 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums }
+.lines .pin { font: 700 11px var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--teal); margin-left: 6px }
+.lines button { padding: 2px 9px; font-size: 12px }
 
-/* tables */
-.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface) }
+/* country switch */
+.switch { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center }
+.switch button { font: 700 15px var(--body); border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 16px; background: var(--surface) }
+.switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); box-shadow: 4px 4px 0 var(--shadow) }
+.switch .meta { font: 500 13px var(--mono); color: var(--muted); margin-left: auto }
+.adgroup { border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; background: var(--bg) }
+.adgroup h4 { margin: 0; font: 800 17px var(--display) }
+
+/* optimisation */
+.rhythm { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden }
+.rhythm > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line) }
+.rhythm > div:last-child { border-bottom: 0 }
+.rhythm .when { font: 700 14px var(--body) }
+.rhythm .when small { display: block; font: 500 12px var(--mono); color: var(--muted) }
+.rhythm ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15px }
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface) }
 table { border-collapse: collapse; width: 100%; font-size: 14.5px }
 th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line) }
 tr:last-child td { border-bottom: 0 }
 th { font: 600 12px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
-td:first-child { font-weight: 600; white-space: nowrap }
-.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px }
 
-/* bidding stages */
-.stages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface) }
-.stage { padding: 18px; display: grid; gap: 6px; align-content: start; border-right: 1px solid var(--line) }
-.stage:last-child { border-right: 0 }
-.stage .k { font: 500 13px var(--mono); color: var(--teal) }
-.stage b { font: 800 19px/1.2 var(--display) }
-.stage p { font-size: 14px; color: var(--muted) }
-
-/* budget */
-.budget { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px; align-items: start }
-.budget label { display: grid; gap: 8px; font-weight: 600 }
-.budget .money { display: flex; align-items: center; border: 2px solid var(--accent-ink); border-radius: 10px; background: var(--surface); padding: 0 12px }
-.budget .money span { font: 800 22px var(--display) }
-.budget input { width: 100%; border: 0; background: transparent; color: var(--fg); font: 800 26px var(--display); padding: 10px 8px; font-variant-numeric: tabular-nums }
-.budget input:focus-visible { outline: none }
-.budget .money:focus-within { box-shadow: 0 0 0 3px var(--teal) }
-.out { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px }
-.out div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px }
-.out b { font: 800 28px/1.1 var(--display); font-variant-numeric: tabular-nums }
-.out span { font-size: 13px; color: var(--muted) }
-.bar { grid-column: 1 / -1; display: grid; gap: 8px }
-.bar .track { display: flex; height: 30px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line) }
-.bar .track div { display: grid; place-items: center; font: 600 12.5px var(--body); color: #0b0d10; white-space: nowrap; overflow: hidden }
-
-/* assets */
-.imgs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
-.imgs figure { margin: 0; display: grid; gap: 6px }
-.imgs .pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.91fr); gap: 6px; align-items: end }
-#adimg img, .imgs img { width: 100%; border-radius: 6px; border: 1px solid var(--line); display: block }
-.imgs figcaption { font-size: 13px; color: var(--muted) }
-
-/* timeline + checklist */
-.weeks { display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px }
-.week { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 14px; padding: 0 0 18px 18px; position: relative }
-.week::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--teal) }
-.week .w { font: 500 13px var(--mono); color: var(--muted); padding-top: 2px }
-.week p { font-size: 15px }
-.gate { border: 1px solid var(--warn); background: var(--warn-soft); border-radius: 10px; padding: 16px 18px; display: grid; gap: 10px }
-.gate h3 { color: var(--warn) }
-.gate ol { margin: 0; padding-left: 20px; display: grid; gap: 6px }
-ol.steps { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 72ch }
-footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px }
-
-@media (max-width: 820px) {
-  .ex-grid, .budget, .two { grid-template-columns: minmax(0, 1fr) }
-  .tree, .imgs { grid-template-columns: minmax(0, 1fr) }
-  .stages { grid-template-columns: minmax(0, 1fr) }
-  .stage { border-right: 0; border-bottom: 1px solid var(--line) }
-  .stage:last-child { border-bottom: 0 }
+@media (max-width: 640px) {
+  .rhythm > div { grid-template-columns: minmax(0, 1fr); gap: 6px }
+  .kv { grid-template-columns: minmax(0, 1fr); gap: 0 }
+  .kv dd { margin-bottom: 8px }
+  .switch .meta { margin-left: 0; width: 100% }
+  .step { padding: 14px; gap: 4px 10px }
 }
-@media (max-width: 480px) { .out { grid-template-columns: minmax(0, 1fr) } td:first-child { white-space: normal } }
-@media (prefers-reduced-motion: no-preference) { .serp { transition: opacity .15s } }
+@media (prefers-reduced-motion: reduce) { .progress .fill { transition: none } }
 </style>
 
 <div class="wrap">
   <header>
-    <span class="eyebrow">CalaFly · Google Ads · UK launch, October 2026</span>
-    <h1>One Search campaign for the USA, Turkey and Dubai</h1>
-    <p class="lede">The complete build: account setup, conversion tracking, campaign settings, 12 ad groups with keywords and ads, assets, budget, bidding and the first eight weeks. All of it is ready to import with Google Ads Editor.</p>
+    <span class="eyebrow">CalaFly · Google Ads · UK launch</span>
+    <h1>Build the three Search campaigns, step by step</h1>
+    <p class="lede">USA, Turkey and Dubai, one campaign each, on a starting budget of £1,000 for the month. Work through parts A to E in order. Every value you need to type is on this page with a copy button. Tick each step as you finish it; ticks are saved in this browser only.</p>
     <div class="facts">
-      <div><b>1 + 1</b><span>destinations campaign + brand</span></div>
-      <div><b>12</b><span>ad groups (3 countries × 4 intents)</span></div>
-      <div><b>200</b><span>keywords, phrase + exact</span></div>
-      <div><b>60</b><span>shared negatives</span></div>
-      <div><b>Paused</b><span>until conversion QA passes</span></div>
+      <div><b>3</b><span>campaigns</span></div>
+      <div><b>12</b><span>ad groups (4 per country)</span></div>
+      <div><b>£33/day</b><span>£1,000 a month in total</span></div>
+      <div><b>£0.60</b><span>max click cost to start</span></div>
     </div>
+    <div class="progress"><div class="track"><div class="fill" id="fill"></div></div><span id="ptext">0 steps done</span></div>
   </header>
 
+  <!-- PART A -->
   <section>
-    <div class="sec-head"><span class="n">01</span><h2>Structure</h2>
-      <p class="muted">Every country page gets its own four ad groups, split by what people type. The campaign shares one budget, and spend is steered between countries ad group by ad group (see Budget).</p></div>
-    <div class="tree" id="tree"></div>
+    <div class="part"><span class="tag">A</span><h2>Account setup (once)</h2></div>
+    <p class="muted">About 45 minutes. Steps A1–A3 can't be undone, so check them twice.</p>
+    <div class="steps" id="partA"></div>
+  </section>
+
+  <!-- PART B + C -->
+  <section>
+    <div class="part"><span class="tag">B</span><h2>Create each campaign</h2></div>
+    <p class="muted">Do this three times, once per country. Pick the country here and every value below changes to match it. Start with Dubai, which has the biggest budget.</p>
+    <div class="switch" id="switch" role="group" aria-label="Country"></div>
+    <div class="steps" id="partB"></div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="n">02</span><h2>Ad groups, keywords and ads</h2>
-      <p class="muted">Pick a country and an intent to see the ad as it could appear on Google, plus the full headline set and keywords. Press "Another combination" to see how Google mixes the assets.</p></div>
-    <div class="explorer">
-      <div class="tabs" id="ctabs" role="group" aria-label="Country"></div>
-      <div class="tabs sub" id="itabs" role="group" aria-label="Intent"></div>
-      <div class="ex-grid">
-        <div style="display:grid;gap:12px;align-content:start;min-width:0">
-          <div class="serp" id="serp" aria-live="polite"></div>
-          <div class="row"><button class="btn" id="shuffle" type="button">Another combination</button>
-            <span class="legend"><mark>Highlighted</mark> = refund line pinned to description 2, so T&amp;Cs always show</span></div>
-          <h3 style="font-size:15px">Headlines <span class="muted" style="font-weight:400">(limit 30 characters)</span></h3>
-          <ul class="list" id="hlist"></ul>
-          <h3 style="font-size:15px">Descriptions <span class="muted" style="font-weight:400">(limit 90)</span></h3>
-          <ul class="list" id="dlist"></ul>
-        </div>
-        <div class="side">
-          <div style="display:grid;gap:8px"><h3>Keywords <span class="muted" style="font-weight:400" id="kwn"></span></h3>
-            <p class="muted" style="font-size:13px">Each one runs as both [exact] and "phrase".</p>
-            <div class="chips" id="kw"></div></div>
-          <div style="display:grid;gap:6px"><h3>Final URL</h3><code id="url"></code></div>
-          <div style="display:grid;gap:6px"><h3>Image assets</h3><div class="pair" id="adimg" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.91fr);gap:6px;align-items:end"></div></div>
-        </div>
-      </div>
-    </div>
-    <p class="muted" style="font-size:14px">The Roaming groups bid on searches such as "ee roaming dubai". Turkey, the USA and the UAE are all outside UK networks' Europe roaming zones. The ads never name a network or compare prices; every claim is about CalaFly only (CAP Code 3.33–3.44). No dynamic keyword insertion is used, so words like "best" from a search never appear in an ad.</p>
+    <div class="part"><span class="tag">C</span><h2>After publishing each campaign</h2></div>
+    <p class="muted">These are added on the campaign page once it exists. Still for the country picked above.</p>
+    <div class="steps" id="partC"></div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="n">03</span><h2>Account setup</h2><p class="muted">Done once, before any campaign. Currency and time zone can never be changed later.</p></div>
-    <div class="tw"><table>
-      <thead><tr><th>Setting</th><th>Value</th><th>Why</th></tr></thead>
-      <tbody>
-        <tr><td>Account creation</td><td>Expert mode → "Create an account without a campaign"</td><td>Stops Google creating a Smart or PMax campaign</td></tr>
-        <tr><td>Currency</td><td><b>GBP</b></td><td>Permanent. Must match Merchant Center.</td></tr>
-        <tr><td>Time zone</td><td><b>(GMT+00:00) London</b></td><td>Permanent</td></tr>
-        <tr><td>Advertiser verification</td><td>Complete as soon as Google asks, with company documents</td><td>Ads stop if it isn't done in time</td></tr>
-        <tr><td>Auto-tagging</td><td>On</td><td>GA4 and conversion matching</td></tr>
-        <tr><td>Auto-apply recommendations</td><td>All off</td><td>Google would otherwise add broad match and rewrite approved ad copy</td></tr>
-        <tr><td>Linked accounts</td><td>GA4 · Merchant Center 5858054381 · Tag Manager</td><td>Conversions, audiences, and Shopping later</td></tr>
-        <tr><td>Customer data terms</td><td>Accept</td><td>Required for Enhanced Conversions</td></tr>
-        <tr><td>Shared negatives</td><td><code>CF_UK_NEGATIVES</code> on both campaigns</td><td>See section 08</td></tr>
-      </tbody></table></div>
-
-    <h3 style="margin-top:12px">Conversion tracking (blocks launch)</h3>
-    <p class="muted">Set up with Google Tag Manager on the custom events calafly.net already fires. Only Purchase drives bidding.</p>
-    <div class="tw"><table>
-      <thead><tr><th>Conversion action</th><th>Fires on</th><th>Goal</th><th>Value</th></tr></thead>
-      <tbody>
-        <tr><td>CF Purchase</td><td><code>CHECKOUT_SUCCESS</code></td><td><b>Primary</b></td><td>Order value in GBP + transaction ID, counted once</td></tr>
-        <tr><td>CF Begin checkout</td><td><code>CHECKOUT</code></td><td>Secondary</td><td>none</td></tr>
-        <tr><td>CF Start journey</td><td><code>INITIATE_JOURNEY</code></td><td>Secondary</td><td>none</td></tr>
-        <tr><td>CF Account created</td><td><code>ACCOUNT_CREATED</code></td><td>Secondary</td><td>none</td></tr>
-      </tbody></table></div>
-    <p class="muted" style="font-size:14px">Also: Enhanced Conversions (hashed checkout email), Consent Mode v2 in Advanced mode with a UK-compliant cookie banner (UK GDPR / PECR), data-driven attribution with a 30-day click window, and one real test purchase checked in Tag Assistant before launch.</p>
+    <div class="part"><span class="tag">D</span><h2>Go live</h2></div>
+    <div class="steps" id="partD"></div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="n">04</span><h2>Campaign settings</h2></div>
-    <div class="tw"><table>
-      <thead><tr><th>Setting</th><th><code>CF_UK_SEARCH_DESTINATIONS</code></th></tr></thead>
-      <tbody>
-        <tr><td>Goal</td><td>Sales. Campaign-specific goal: CF Purchase only.</td></tr>
-        <tr><td>Networks</td><td>Google Search only. Search Partners off, Display Network off.</td></tr>
-        <tr><td>Locations</td><td>United Kingdom, <b>Presence</b>: people in or regularly in the UK. Not "interest", which would include people abroad.</td></tr>
-        <tr><td>Language</td><td>English</td></tr>
-        <tr><td>Audiences</td><td>Observation only: in-market Air Travel, Trips to North America / Middle East / Europe; Travel Buffs; site visitors 30d; purchasers 180d</td></tr>
-        <tr><td>AI Max for Search</td><td>Off at launch. Test in month 2.</td></tr>
-        <tr><td>Auto-created assets</td><td>Off (text and final URL expansion), so every claim stays in the approved wording</td></tr>
-        <tr><td>Match types</td><td>Phrase + exact. No broad match.</td></tr>
-        <tr><td>Ad schedule · devices</td><td>All hours, all devices, no bid adjustments</td></tr>
-        <tr><td>Ad rotation</td><td>Optimise</td></tr>
-        <tr><td>Final URL suffix</td><td><code style="word-break:break-all">utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=cf_uk_search_destinations&amp;utm_content={adgroupid}&amp;utm_term={keyword}</code></td></tr>
-        <tr><td>Status on import</td><td>Paused</td></tr>
-      </tbody></table></div>
-    <p class="muted" style="font-size:14px"><b>Brand campaign</b> (<code>CF_UK_SEARCH_BRAND</code>) uses the same settings with a £0.30 click cap. It stays separate because Google reads "calafly" as a misspelling of a larger competitor. Brand terms are added as negatives in the destinations campaign so the two campaigns don't bid against each other.</p>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="n">05</span><h2>Bidding, in three stages</h2>
-      <p class="muted">Plans sell for roughly £3–£18, so a 70p click can wipe out a sale. Each stage starts only when the data supports it.</p></div>
-    <div class="stages">
-      <div class="stage"><span class="k">Days 1–14</span><b>Maximise clicks, £0.60 cap</b><p>Buys clean data at a controlled price. Purchases are still tracked from day one.</p></div>
-      <div class="stage"><span class="k">After ~15 purchases</span><b>Maximise conversions</b><p>No target yet. Google learns which searches buy.</p></div>
-      <div class="stage"><span class="k">After 30 in 30 days</span><b>Target CPA, then target ROAS</b><p>Set target CPA at the actual 14-day CPA, then lower it 10% every two weeks. Switch to target ROAS once order values track reliably.</p></div>
-    </div>
-    <p class="muted" style="font-size:14px">Never change budget or bids by more than 20% at a time, or more often than every 3–4 days.</p>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="n">06</span><h2>Budget</h2>
-      <p class="muted">We start small: £1,000 for the month on Google Search, split about 91% destinations and 9% brand. Change the figure to see the daily budgets for a different month.</p></div>
-    <div class="budget">
-      <label for="total">Monthly Google Search budget
-        <span class="money"><span>£</span><input id="total" type="number" inputmode="numeric" min="0" step="100" value="1000"></span>
-        <span class="muted" style="font-weight:400;font-size:13px">Agreed starting budget. At the £0.60 click cap that buys about 1,500 clicks.</span>
-      </label>
-      <div class="out">
-        <div><b id="dDest">£30</b><span>per day · destinations campaign</span></div>
-        <div><b id="dBrand">£3</b><span>per day · brand campaign</span></div>
-        <div class="bar"><span style="font-weight:600;font-size:14px">Target share of destinations spend (Oct–Mar)</span>
-          <div class="track" id="track"></div>
-          <span class="muted" style="font-size:13px">Check spend by ad-group prefix every Thursday. If a country runs more than 15 points over its share without the purchases to justify it, pause its weakest ad group. If that happens two weeks running, move the country into its own campaign.</span></div>
-      </div>
+    <div class="part"><span class="tag">E</span><h2>Optimisation routine</h2></div>
+    <p class="muted">Sized for £1,000 a month. Small budgets need patience: decisions are made on spend thresholds, not on a day or two of data.</p>
+    <div class="rhythm">
+      <div><span class="when">Launch day<small>+2 hours</small></span><ul>
+        <li>Campaigns → Ads: every ad shows <b>Eligible</b> or <b>Approved</b>. Fix anything "Disapproved" (usually a landing page or a sitelink URL).</li>
+        <li>Keywords: none show "Low search volume" across a whole ad group. If one does, that's fine as long as others in the group serve.</li></ul></div>
+      <div><span class="when">Days 1–7<small>5 min a day</small></span><ul>
+        <li>Spend pacing: each campaign near its daily budget. Under 50% spent means the £0.60 cap is too low; raise that campaign's cap to £0.70.</li>
+        <li>Don't change anything else for the first 72 hours.</li></ul></div>
+      <div><span class="when">Monday + Thursday<small>weeks 1–4, 15 min</small></span><ul>
+        <li><b>Insights and reports → Search terms</b> for each campaign. Tick irrelevant terms → <b>Add as negative keyword</b> → to list <code>CF_UK_NEGATIVES</code>.</li>
+        <li>Terms that got a purchase and aren't keywords yet: add them as [exact] to the matching ad group.</li>
+        <li>Any term mentioning another destination: add it as a negative to this campaign only.</li></ul></div>
+      <div><span class="when">Every Thursday<small>30 min</small></span><ul>
+        <li><b>Cost per purchase by campaign.</b> If one country's cost per purchase is under half another's for two weeks, move £2/day from the expensive one to the cheap one. Keep the total at £33/day.</li>
+        <li><b>Ad groups:</b> pause an ad group that has spent £40 with no purchase while others in the same campaign are converting. Cities is the likeliest.</li>
+        <li><b>Keywords:</b> pause a keyword that has spent £15 with no purchase and a CTR under 3%.</li>
+        <li><b>Ads → Assets:</b> after 2,000 impressions, replace headlines rated "Low" with a new line built from the best performer.</li>
+        <li><b>Impression share:</b> if "lost IS (budget)" is high and cost per purchase is good, that campaign is the one to give more money.</li></ul></div>
+      <div><span class="when">Milestones</span><ul>
+        <li><b>15 purchases in 30 days in a campaign:</b> switch its bidding to Maximise conversions (Settings → Bidding → Change bid strategy).</li>
+        <li><b>30 purchases in 30 days:</b> add a target cost per purchase equal to its actual 14-day figure.</li>
+        <li><b>Brand searches appear</b> (search terms containing "calafly" or "cala"): add a small brand campaign at £3/day.</li>
+        <li><b>Scaling:</b> only when cost per purchase is below the average order value. Then +20% every 3–4 days.</li></ul></div>
+      <div><span class="when">End of month 1</span><ul>
+        <li>Review with CalaFly: purchases, cost per purchase, install rate and refund rate by country. Decide month 2 budget.</li>
+        <li>Month 2 tests: AI Max on the best campaign, Shopping from Merchant Center, a second ad per ad group.</li></ul></div>
     </div>
   </section>
 
-  <section>
-    <div class="sec-head"><span class="n">07</span><h2>Assets</h2></div>
-    <div class="two">
-      <div style="display:grid;gap:10px;align-content:start;min-width:0"><h3>Sitelinks</h3><ul class="list" id="sl"></ul></div>
-      <div style="display:grid;gap:16px;align-content:start;min-width:0">
-        <div style="display:grid;gap:10px"><h3>Callouts</h3><div class="chips" id="co"></div></div>
-        <div style="display:grid;gap:10px"><h3>Structured snippet</h3><p style="font-size:14px"><b>Destinations:</b> USA, Turkey, Dubai, Spain, France, Italy, Japan, Thailand</p></div>
-        <div style="display:grid;gap:10px"><h3>Still to add</h3><p style="font-size:14px" class="muted">Business name "CalaFly" and the square logo; price assets ("From £X") once GBP prices match the site; a promotion only if a real code works at checkout.</p></div>
-      </div>
-    </div>
-    <h3>Image assets</h3>
-    <p class="muted" style="font-size:14px">Google rejects Search images with text laid over them, so these come from the text-free Merchant Center scenes: 1:1 and 1.91:1, assigned to each country's ad groups.</p>
-    <div class="imgs" id="imgs"></div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="n">08</span><h2>Negatives</h2>
-      <p class="muted">Shared list <code>CF_UK_NEGATIVES</code>, phrase match, on both campaigns. It covers jobs, logins and support searches; contracts and broadband; pocket wifi; people visiting the UK; other destinations; flights, hotels and visas; and competitor names at launch. Search terms are reviewed Monday and Thursday for the first four weeks.</p></div>
-    <div class="chips" id="neg"></div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="n">09</span><h2>Import with Google Ads Editor</h2><p class="muted">About 15 minutes. The files are in <code>google-search/editor/</code> on the TNT branch.</p></div>
-    <ol class="steps">
-      <li>Open Google Ads Editor, sign in, and download the CalaFly account.</li>
-      <li>Shared library → Negative keyword lists: create <code>CF_UK_NEGATIVES</code> and paste file <code>06</code>.</li>
-      <li>Account → Import → From file, in this order: <code>01 → 02 → 03 → 04 → 05 → 07 → 08 → 09</code>. Review and accept each one.</li>
-      <li>Add the images from <code>images/</code> to each ad group (file <code>10</code> lists which go where).</li>
-      <li>Set the campaign goal (CF Purchase only) and observation audiences, and turn AI Max and auto-created assets off.</li>
-      <li>Enter the daily budgets, then Post. Both campaigns arrive Paused.</li>
-    </ol>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="n">10</span><h2>First eight weeks</h2></div>
-    <div class="weeks">
-      <div class="week"><span class="w">Week 0</span><p>Account settings, conversion and Consent Mode QA, sitelink URL check, import, then enable.</p></div>
-      <div class="week"><span class="w">Wk 1–2</span><p>Leave bids alone. Review search terms twice a week. Track impression share on "turkey esim", "dubai esim" and "usa esim" exact.</p></div>
-      <div class="week"><span class="w">Wk 2</span><p>Move to Maximise conversions at about 15 purchases. Shift weight between countries if CPA differs by more than 30%.</p></div>
-      <div class="week"><span class="w">Wk 3–4</span><p>Add a second RSA per ad group from the best headlines in the asset report. Pause keywords that spent twice the target CPA with no purchase. Add price assets.</p></div>
-      <div class="week"><span class="w">Wk 5–8</span><p>Target CPA. Raise budget 20% every 3–4 days while under target. Test AI Max in one country. Launch Standard Shopping from the Merchant Center feed.</p></div>
-    </div>
-    <p class="muted" style="font-size:14px"><b>KPIs:</b> cost per purchase (primary), ROAS, conversion rate by ad group, impression share on core exact terms (above 60%), CTR (above 8% non-brand, above 25% brand), and install and refund rates from CalaFly.</p>
-  </section>
-
-  <section>
-    <div class="gate">
-      <h3>Before it goes live</h3>
-      <ol>
-        <li><b>Check the page addresses.</b> Sitelinks assume /how-it-works, /refund-policy, /compatible-devices, /faq and /global, and ads assume /usa, /turkey and /dubai. Ads pointing to a missing page get rejected.</li>
-        <li><b>Budget is set:</b> £30/day destinations and £3/day brand (£1,000 for the month), already in the import files.</li>
-        <li><b>Run one real test purchase</b> and confirm CF Purchase records it before enabling.</li>
-      </ol>
-    </div>
-  </section>
-
-  <footer>Prepared by TNT for CalaFly. Ad claims follow the UK launch sign-off: no competitor names or comparisons, and refund wording always carries "T&amp;Cs apply".</footer>
+  <footer>Prepared by TNT for CalaFly. All ad wording follows the UK launch sign-off: no competitor names or comparisons; refund wording always carries "T&amp;Cs apply". Google moves its menus from time to time; if a label differs, search the setting name with the search bar at the top of Google Ads.</footer>
 </div>
 
 <script>
-const D = /*DATA*/null;
-const C = [["usa", "USA"], ["turkey", "Turkey"], ["dubai", "Dubai"]];
-const I = ["eSIM", "Data SIM", "Roaming", "Cities"];
-const SHARE = { dubai: .40, usa: .35, turkey: .25 };
-const COL = { dubai: "#18c8a8", usa: "#7fb0ff", turkey: "#ffd36e" };
+const G = /*DATA*/null;
+const C = [["dubai", "Dubai"], ["usa", "USA"], ["turkey", "Turkey"]];
+let country = "dubai";
+try { country = localStorage.getItem("cf-country") || "dubai"; } catch (e) {}
+if (!G[country]) country = "dubai";
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const key = (c, i) => `${c.toUpperCase()} | ${i}`;
-let cur = { c: "dubai", i: "eSIM" };
+const done = (() => { try { return JSON.parse(localStorage.getItem("cf-done") || "{}"); } catch (e) { return {}; } })();
+const save = () => { try { localStorage.setItem("cf-done", JSON.stringify(done)); } catch (e) {} };
+const COPY = [];
+const copyBlock = (label, text) => { COPY.push(text); return `<div class="copy"><div class="bar"><span>${esc(label)}</span><button type="button" data-copy="${COPY.length - 1}">Copy</button></div><pre>${esc(text)}</pre></div>`; };
+const copyBtn = text => { COPY.push(text); return `<button type="button" data-copy="${COPY.length - 1}">Copy</button>`; };
+const kv = rows => `<dl class="kv">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>`;
+const path = p => `<span class="path">${p}</span>`;
 
-// structure tree
-document.getElementById("tree").innerHTML =
-  `<div class="camp"><b class="mono">CF_UK_SEARCH_DESTINATIONS</b><span class="muted">one budget · UK presence · Search only</span></div>` +
-  C.map(([k, n]) => `<div class="country"><h3>${n} <small>calafly.net/${k}</small></h3><ul>` +
-    I.map(i => `<li>${esc(i)} <span>${D.groups[key(k, i)].kw.length * 2} kw</span></li>`).join("") + `</ul></div>`).join("") +
-  `<p class="brandnote">Plus <b class="mono">CF_UK_SEARCH_BRAND</b>: one ad group, ${D.groups["Brand"].kw.length * 2} brand keywords, its own small budget.</p>`;
-
-function tabs(el, items, val, on) {
-  el.innerHTML = items.map(([v, l]) => `<button type="button" data-v="${esc(v)}" aria-pressed="${v === val}">${esc(l)}</button>`).join("");
-  el.onclick = e => { const b = e.target.closest("button"); if (b) on(b.dataset.v); };
-}
-function pick(arr, n) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a.slice(0, n); }
-
-function serp(g, fixed) {
-  const h = fixed ? g.h.slice(0, 3) : pick(g.h, 3);
-  const free = g.d.filter(d => !d[1]), pinned = g.d.filter(d => d[1] === "2");
-  const d1 = fixed ? free[0] : pick(free, 1)[0], d2 = fixed ? pinned[0] : pick(pinned, 1)[0];
-  const host = g.url.replace("https://", "").replace(/\/.*/, "");
-  document.getElementById("serp").innerHTML =
-    `<span class="spons">Sponsored</span>
-     <div class="site"><span class="fav"><i></i></span><span><b>CalaFly</b><br>${esc(host)} › ${esc(g.p1)} › ${esc(g.p2)}</span></div>
-     <div class="hl">${h.map(esc).join(" | ")}</div>
-     <div class="ds">${esc(d1[0])} <mark>${esc(d2[0])}</mark></div>
-     <div class="links">${D.sl.slice(0, 4).map(s => esc(s["Link text"])).join("<span class=muted>·</span>")}</div>`;
+function step(id, title, html) {
+  const on = !!done[id];
+  return `<div class="step${on ? " done" : ""}" data-id="${id}"><input type="checkbox" id="cb-${id}" aria-label="Done: ${esc(title)}"${on ? " checked" : ""}>
+    <div class="body"><h3><label for="cb-${id}"><span class="id">${id.split("-")[0]}</span>${title}</label></h3>${html}</div></div>`;
 }
 
-function render(fixed = true) {
-  const g = D.groups[key(cur.c, cur.i)];
-  tabs(document.getElementById("ctabs"), C, cur.c, v => { cur.c = v; render(); });
-  tabs(document.getElementById("itabs"), I.map(i => [i, i]), cur.i, v => { cur.i = v; render(); });
-  serp(g, fixed);
-  document.getElementById("hlist").innerHTML = g.h.map(x => `<li><span>${esc(x)}</span><span class="c">${x.length}/30</span></li>`).join("");
-  document.getElementById("dlist").innerHTML = g.d.map(([x, p]) =>
-    `<li><span>${esc(x)}${p ? ` <span class="pin">pinned D${p}</span>` : ""}</span><span class="c">${x.length}/90</span></li>`).join("");
-  document.getElementById("kw").innerHTML = g.kw.map(k => `<span class="chip">${esc(k)}</span>`).join("");
-  document.getElementById("kwn").textContent = `(${g.kw.length} × 2 match types)`;
-  document.getElementById("url").textContent = g.url;
-  const im = D.imgs[cur.c];
-  document.getElementById("adimg").innerHTML = `<img src="${im.sq}" alt="1:1 image asset for ${cur.c}"><img src="${im.wide}" alt="1.91:1 image asset for ${cur.c}">`;
+const S = G.shared;
+function partA() {
+  return [
+    step("A1", "Create the Google Ads account without a campaign", `${path("ads.google.com › New Google Ads account")}
+      <ol><li>Sign in with the account that will own CalaFly's ads (the client's main Google account).</li>
+      <li>On the first screen choose <b>Switch to Expert Mode</b>, then at the bottom <b>Create an account without a campaign</b>.</li>
+      <li>Enter the business details below, then <b>Submit</b>.</li></ol>
+      ${kv([["Billing country", "United Kingdom"], ["Time zone", "(GMT+00:00) United Kingdom Time"], ["Currency", "British Pound (GBP £)"]])}
+      <p class="warn"><b>Can't be changed later.</b> Wrong time zone or currency means starting a new account.</p>`),
+    step("A2", "Billing", `${path("Admin › Billing › Settings")}
+      <ul><li>Payments profile: Cala Travel (the client's business), type <b>Business</b>.</li>
+      <li>Payment method: the client's card. Choose <b>Automatic payments</b>.</li>
+      <li>Add your TNT email as a billing contact so invoices reach you.</li></ul>`),
+    step("A3", "Advertiser verification", `${path("Admin › Advertiser verification")}
+      <ul><li>Start it as soon as it appears. Answer: you are an <b>agency</b> advertising for CalaFly; the payer is CalaFly.</li>
+      <li>CalaFly's company registration details are needed. Google gives 30 days; ads pause after that.</li></ul>`),
+    step("A4", "Account settings", `${path("Admin › Account settings")}
+      ${kv([["Auto-tagging", "On (tag the URL that people click through from my ad)"], ["Tracking template", "Leave empty"], ["EU political ads", "No"]])}`),
+    step("A5", "Turn off auto-applied recommendations", `${path("Recommendations › Auto-apply (top right)")}
+      <ul><li>Open each tab (Keywords & targeting, Bidding & budgets, Ads & assets, Repairs) and untick <b>everything</b>. Save.</li>
+      <li>Otherwise Google adds broad match keywords and rewrites the approved ad text.</li></ul>`),
+    step("A6", "Link Google Analytics and Merchant Center", `${path("Admin › Linked accounts")}
+      <ul><li><b>Google Analytics (GA4)</b> → Details → Link the calafly.net property. Turn on "Import app and web metrics".</li>
+      <li><b>Google Merchant Center</b> → Details → Link account <code>5858054381</code>. Then approve the request in Merchant Center (Settings → Linked services).</li></ul>`),
+    step("A7", "Purchase conversion", `${path("Goals › Conversions › Summary › + Create conversion action › Website")}
+      <ol><li>Enter <code>calafly.net</code> → Scan → <b>Add a conversion action manually</b>.</li>
+      <li>Fill in as below → Done → Save and continue → choose <b>Use Google Tag Manager</b> and note the <b>Conversion ID</b> and <b>Conversion label</b>.</li></ol>
+      ${kv([["Goal and action", "Purchase"], ["Conversion name", "CF Purchase"], ["Value", "Use different values for each conversion, default £5"], ["Count", "One"], ["Click-through window", "30 days"], ["Attribution", "Data-driven"], ["Enhanced conversions", "On, via Google Tag Manager"]])}
+      <p class="note">Repeat for <b>CF Begin checkout</b> (goal: Begin checkout, value: don't use) and <b>CF Start journey</b> (goal: Page view). After saving, open each of these two and set it as a <b>Secondary action</b>, so bidding only uses CF Purchase.</p>`),
+    step("A8", "Tags in Google Tag Manager (calafly.net container)", `${path("tagmanager.google.com › CalaFly container › Tags › New")}
+      <ul><li><b>Conversion Linker</b> tag → trigger All Pages.</li>
+      <li><b>Google Ads Conversion Tracking</b> → paste the ID and label from A7 → Conversion value: the order value variable → Transaction ID: the order ID variable → Currency code <code>GBP</code> → tick "Include user-provided data" (email from checkout) → trigger: Custom Event <code>CHECKOUT_SUCCESS</code>.</li>
+      <li>Same tag type for Begin checkout (trigger <code>CHECKOUT</code>) and Start journey (trigger <code>INITIATE_JOURNEY</code>).</li>
+      <li><b>Consent:</b> the cookie banner must send Google Consent Mode v2 signals (ad_storage, ad_user_data, ad_personalization, analytics_storage). Most banner tools (CookieYes, Cookiebot) have a GTM template that does this.</li>
+      <li>Preview with Tag Assistant, run one real test purchase, check the tag fires once with the right value → <b>Submit</b> the container. Refund the test order.</li></ul>
+      <p class="note">If the order value and ID aren't in the data layer yet, ask CalaFly's developer (Lovable site) to push them with the CHECKOUT_SUCCESS event.</p>`),
+    step("A9", "Shared negative keyword list", `${path("Tools › Shared library › Exclusion lists › Negative keyword lists › +")}
+      <ul><li>Name: <code>CF_UK_NEGATIVES</code>. Paste the list below (one per line, phrase match). Save. You'll attach it to each campaign in step C4.</li></ul>
+      ${copyBlock(`${S.neg.length} negative keywords (phrase match)`, S.neg.map(n => `"${n}"`).join("\n"))}`),
+    step("A10", "Audience segments from your site data", `${path("Tools › Shared library › Audience manager › Your data segments › + › Website visitors")}
+      <ul><li><b>CF – All visitors 30d</b>: visitors of a page, URL contains <code>calafly.net</code>, membership 30 days.</li>
+      <li><b>CF – Dubai page 30d</b>, <b>CF – USA page 30d</b>, <b>CF – Turkey page 30d</b>: URL contains <code>/dubai</code>, <code>/usa</code>, <code>/turkey</code>.</li>
+      <li><b>CF – Purchasers 180d</b>: visitors who triggered CF Purchase, 180 days.</li></ul>
+      <p class="note">They start filling once the Google tag is live, and need about 1,000 people before Search can use them. They're added as "observation" in each campaign, so they never restrict reach.</p>`),
+    step("A11", "Business name and logo", `${path("Campaigns › Assets › + › Business name / Logo (account level)")}
+      ${kv([["Business name", "CalaFly"], ["Logo", "merchant-center/logos/calafly-logo-square-1200-white.png"]])}`),
+  ].join("");
 }
-document.getElementById("shuffle").onclick = () => serp(D.groups[key(cur.c, cur.i)], false);
+
+const flag = { dubai: "Dubai", usa: "USA", turkey: "Turkey" };
+function partB(k) {
+  const c = G[k], n = flag[k];
+  const groups = c.groups.map((g, gi) => {
+    const kws = g.kw.flatMap(w => [`[${w}]`, `"${w}"`]).join("\n");
+    const hl = g.h.map((h, i) => `<li><span class="n">${i + 1}</span><span>${esc(h)}</span><span class="c">${h.length}/30</span>${copyBtn(h)}</li>`).join("");
+    const ds = g.d.map(([d, p], i) => `<li><span class="n">${i + 1}</span><span>${esc(d)}${p ? `<span class="pin">pin position ${p}</span>` : ""}</span><span class="c">${d.length}/90</span>${copyBtn(d)}</li>`).join("");
+    return `<div class="adgroup"><h4>Ad group ${gi + 1}: ${esc(g.name)}</h4>
+      ${kv([["Ad group name", `<code>${esc(g.name)}</code> ${copyBtn(g.name)}`], ["Final URL", `<code>${c.url}</code>`], ["Display path", `<code>${g.p1}</code> / <code>${g.p2}</code>`]])}
+      ${copyBlock(`Keywords: ${g.kw.length} × [exact] and "phrase"`, kws)}
+      <div class="copy"><div class="bar"><span>Headlines (15)</span></div><ul class="lines">${hl}</ul></div>
+      <div class="copy"><div class="bar"><span>Descriptions (4)</span></div><ul class="lines">${ds}</ul></div>
+    </div>`;
+  }).join("");
+  return [
+    step(`B1-${k}`, "Start a new campaign", `${path("Campaigns › + New campaign")}
+      ${kv([["Objective", "Sales"], ["Conversion goals", "Keep <b>Purchases</b> only. Remove every other goal shown (click the ⋮ → Remove goal)."], ["Campaign type", "Search"], ["Ways to reach your goal", `Website visits: <code>${c.url}</code>`], ["Campaign name", `<code>${c.camp}</code> ${copyBtn(c.camp)}`]])}
+      <p class="note">Click <b>Continue</b>.</p>`),
+    step(`B2-${k}`, "Bidding", `${kv([["What do you want to focus on?", "Clicks"], ["Maximum cost per click bid limit", "Tick it, enter <b>£0.60</b>"]])}
+      <p class="note">This is Maximise clicks with a cap. It switches to Maximise conversions after 15 purchases (part E). Click <b>Next</b>.</p>`),
+    step(`B3-${k}`, "Networks, locations, language", `${kv([["Networks", "<b>Untick</b> Google Search Partners. <b>Untick</b> Google Display Network."], ["Locations", "Enter another location → <code>United Kingdom</code> → Target"], ["Location options", "Click to expand → Target: <b>Presence: people in or regularly in your targeted locations</b>"], ["Languages", "English"]])}
+      <p class="warn"><b>Check the location option.</b> The default "Presence or interest" also shows ads to people outside the UK.</p>`),
+    step(`B4-${k}`, "Audience segments (observation)", `${path("Audience segments › Edit › Browse")}
+      <ul><li>Targeting setting: <b>Observation (recommended)</b>. Never "Targeting".</li>
+      <li>Add: <b>What their active interests and habits are → In-market → Travel → Air Travel</b> and <b>Trips by destination</b> → ${k === "usa" ? "Trips to North America / Trips to the United States" : k === "dubai" ? "Trips to the Middle East / Trips to the United Arab Emirates" : "Trips to Europe / Trips to Turkey (search 'Turkey')"}.</li>
+      <li><b>Affinity → Travel → Travel Buffs</b>.</li>
+      <li><b>How they have interacted with your business</b> → CF – All visitors 30d, CF – ${n} page 30d, CF – Purchasers 180d.</li></ul>`),
+    step(`B5-${k}`, "Broad match, AI Max and more settings", `${kv([["Broad match keywords", "Off"], ["AI Max for Search", "Off (if shown)"], ["Start date (More settings)", "Your go-live date, after the test purchase in A8"], ["End date", "None"], ["Ad schedule", "All day"], ["Ad rotation", "Optimise"], ["Campaign URL options → Final URL suffix", `<code style="word-break:break-all">${esc(c.suffix)}</code> ${copyBtn(c.suffix)}`]])}
+      <p class="note">If asked about EU political ads, answer <b>No</b>. Click <b>Next</b>.</p>`),
+    step(`B6-${k}`, "Keywords and ads: the 4 ad groups", `<p>Google opens one ad group to start. Fill it in, then use <b>+ New ad group</b> for the next one. For every ad:</p>
+      <ul><li>Paste the keyword block as is: the brackets and quotes set the match type.</li>
+      <li>Add all 15 headlines and 4 descriptions.</li>
+      <li><b>Pin:</b> on descriptions 2 and 3 click the pin icon → <b>Show only in position 2</b>. This keeps "T&Cs apply" on every ad that can show the refund line.</li>
+      <li>Under the ad, open <b>Ad URL options</b> and leave it empty (the campaign suffix covers tracking).</li>
+      <li>If you see <b>Automatically created assets</b> or text customisation / final URL expansion, turn them <b>off</b>.</li></ul>
+      ${groups}`),
+    step(`B7-${k}`, "Budget, review, publish", `${kv([["Budget", `Set custom budget: <b>£${c.budget}</b> per day`], ["Review", "Fix anything in red, ignore optimisation score suggestions"]])}
+      <p class="note">Click <b>Publish campaign</b>. If tracking from A8 isn't tested yet, go straight to the campaign list and set it to <b>Paused</b>.</p>`),
+  ].join("");
+}
+
+function partC(k) {
+  const c = G[k], n = flag[k];
+  const sl = c.sl.map(([t, d1, d2, u]) => `${t}\n  ${d1}\n  ${d2}\n  ${u}`).join("\n\n");
+  return [
+    step(`C1-${k}`, "Sitelinks", `${path(`${c.camp} › Assets › + › Sitelink › Add to: Campaign`)}
+      <p>Add these ${c.sl.length}: text, description line 1, line 2, final URL.</p>
+      ${copyBlock("Sitelinks", sl)}
+      <p class="warn"><b>Check each URL opens on calafly.net first.</b> Send TNT any that differ; a broken link disapproves the sitelink.</p>`),
+    step(`C2-${k}`, "Callouts and structured snippet", `${path(`${c.camp} › Assets › + › Callout / Structured snippet`)}
+      ${copyBlock("Callouts (8)", S.callouts.join("\n"))}
+      ${kv([["Snippet header", S.snippet[0]], ["Values", S.snippet[1].join(", ")]])}`),
+    step(`C3-${k}`, "Images", `${path(`${c.camp} › Assets › + › Image`)}
+      <p>Upload the four ${n} files from <code>google-search/images/</code>: ${c.imgs.map(i => `<code>${i}</code>`).join(", ")}. Google will ask to crop; keep 1:1 and 1.91:1.</p>`),
+    step(`C4-${k}`, "Negative keywords", `${path(`${c.camp} › Keywords › Negative keywords › + › Use negative keyword list`)}
+      <ul><li>Tick <code>CF_UK_NEGATIVES</code> → Save.</li>
+      <li>Then <b>+ › Add negative keywords › Campaign</b>, paste the block below. It stops ${n} ads showing for the other two destinations and for brand searches.</li></ul>
+      ${copyBlock(`${c.neg.length} campaign negatives`, c.neg.map(x => `"${x}"`).join("\n"))}`),
+    step(`C5-${k}`, "Final check", `<ul><li>Campaign status column shows <b>Eligible</b> (or Paused if waiting on tracking).</li>
+      <li>Settings → Goals shows <b>Purchases</b> only.</li><li>Settings → Networks shows Google Search only.</li>
+      <li>Now switch the country at the top of part B and repeat for the next one.</li></ul>`),
+  ].join("");
+}
+
+function partD() {
+  return [
+    step("D1", "Test purchase recorded", `<p>Goals → Conversions shows CF Purchase as <b>Recording conversions</b> (or "No recent conversions" with the test purchase visible after 3–6 hours).</p>`),
+    step("D2", "Budgets add up to £33/day", `${kv([["CF_UK_SEARCH_DUBAI", "£13.00"], ["CF_UK_SEARCH_USA", "£11.50"], ["CF_UK_SEARCH_TURKEY", "£8.50"]])}<p class="note">Google may spend up to twice a daily budget on a busy day, but never more than 30.4× it in a month, so the month stays at £1,000.</p>`),
+    step("D3", "Enable all three campaigns", `<p>Campaigns → select all three → Edit → <b>Enable</b>. Note the date and time; no changes for 72 hours.</p>`),
+  ].join("");
+}
+
+function render() {
+  COPY.length = 0;
+  document.getElementById("partA").innerHTML = partA();
+  document.getElementById("switch").innerHTML = C.map(([k, n]) =>
+    `<button type="button" data-c="${k}" aria-pressed="${k === country}">${n}</button>`).join("") +
+    `<span class="meta">${G[country].camp} · £${G[country].budget}/day</span>`;
+  document.getElementById("partB").innerHTML = partB(country);
+  document.getElementById("partC").innerHTML = partC(country);
+  document.getElementById("partD").innerHTML = partD();
+  progress();
+}
+function progress() {
+  const all = document.querySelectorAll(".step").length - document.querySelectorAll("#partB .step, #partC .step").length
+    + C.length * (document.querySelectorAll("#partB .step, #partC .step").length);
+  const n = Object.values(done).filter(Boolean).length;
+  document.getElementById("fill").style.width = Math.min(100, n / all * 100) + "%";
+  document.getElementById("ptext").textContent = `${n} of ${all} steps done (all three countries)`;
+}
+document.addEventListener("change", e => {
+  if (e.target.type !== "checkbox") return;
+  const s = e.target.closest(".step"); done[s.dataset.id] = e.target.checked; s.classList.toggle("done", e.target.checked); save(); progress();
+});
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-c]");
+  if (c) { country = c.dataset.c; try { localStorage.setItem("cf-country", country); } catch (x) {} render(); return; }
+  const b = e.target.closest("[data-copy]");
+  if (!b) return;
+  const text = COPY[+b.dataset.copy];
+  const ok = () => { b.textContent = "Copied"; b.classList.add("ok"); setTimeout(() => { b.textContent = "Copy"; b.classList.remove("ok"); }, 1400); };
+  const fallback = () => { const pre = b.closest(".copy")?.querySelector("pre"); if (pre) { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected: press Ctrl/Cmd+C"; } };
+  try { navigator.clipboard.writeText(text).then(ok, fallback); } catch (x) { fallback(); }
+});
 render();
-
-// budget
-const gbp = n => "£" + (n >= 100 ? Math.round(n) : n.toFixed(n < 10 ? 2 : 0)).toLocaleString("en-GB");
-function budget() {
-  const t = Math.max(0, +document.getElementById("total").value || 0);
-  const dest = t * .91 / 30.4, brand = t * .09 / 30.4;
-  document.getElementById("dDest").textContent = gbp(dest);
-  document.getElementById("dBrand").textContent = gbp(brand);
-  document.getElementById("track").innerHTML = C.map(([k, n]) => [k, n]).sort((a, b) => SHARE[b[0]] - SHARE[a[0]])
-    .map(([k, n]) => `<div style="flex:${SHARE[k]};background:${COL[k]}">${n} ${SHARE[k] * 100}% · ${gbp(dest * SHARE[k])}/day</div>`).join("");
-}
-document.getElementById("total").addEventListener("input", budget);
-budget();
-
-// assets
-document.getElementById("sl").innerHTML = D.sl.map(s =>
-  `<li><span><b>${esc(s["Link text"])}</b><br><span class="muted" style="font-size:13px">${esc(s["Description line 1"])} · ${esc(s["Description line 2"])}</span></span><span class="c">${esc(s["Final URL"].replace("https://calafly.net", ""))}</span></li>`).join("");
-document.getElementById("co").innerHTML = D.co.map(c => `<span class="chip">${esc(c)}</span>`).join("");
-document.getElementById("imgs").innerHTML = C.map(([k, n]) =>
-  `<figure><div class="pair"><img src="${D.imgs[k].sq}" alt="${n} 1:1 image asset"><img src="${D.imgs[k].wide}" alt="${n} 1.91:1 image asset"></div><figcaption>${n} · 1:1 and 1.91:1</figcaption></figure>`).join("");
-document.getElementById("neg").innerHTML = D.neg.map(n => `<span class="chip">${esc(n)}</span>`).join("");
 </script>

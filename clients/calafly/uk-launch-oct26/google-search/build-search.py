@@ -1,19 +1,17 @@
 """Builds the CalaFly UK Google Search account as Google Ads Editor import files.
 
-One destination campaign (USA, Turkey, Dubai) plus a small brand campaign.
+One campaign per destination (USA, Turkey, Dubai). Brand campaign added later, once brand searches show up.
 Outputs editor/*.csv and images/*.jpg. Every line is checked against Google's limits:
 headline 30, description 90, path 15, sitelink 25/35, callout 25, snippet value 25.
 Run: python3 build-search.py
 """
-import csv, os, sys
+import csv, json, os, sys
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ED = os.path.join(HERE, "editor")
 MC_IMG = os.path.join(HERE, "..", "..", "merchant-center", "images")
 
-CAMP = "CF_UK_SEARCH_DESTINATIONS"
-BRAND_CAMP = "CF_UK_SEARCH_BRAND"
 SITE = "https://calafly.net"
 
 COUNTRIES = {
@@ -111,111 +109,105 @@ BRAND_D = [("Travel eSIM data for the USA, Turkey and Dubai, sorted before you l
 
 # Sitelinks: URLs marked VERIFY must be checked on calafly.net before upload
 SITELINKS = [
-    (CAMP, "", "How It Works", "Pick a plan and scan a QR code", "Install at home before you fly", f"{SITE}/how-it-works"),
-    (CAMP, "", "Refund Policy", "Refund if never installed", "See the full terms", f"{SITE}/refund-policy"),
-    (CAMP, "", "Compatible Phones", "Check your phone supports eSIM", "Unlocked phones only", f"{SITE}/compatible-devices"),
-    (CAMP, "", "Help and FAQs", "Install, data and refunds", "Answers before you buy", f"{SITE}/faq"),
-    (CAMP, "", "USA eSIM", "Mobile data for the USA", "Set up in minutes", f"{SITE}/usa"),
-    (CAMP, "", "Turkey eSIM", "Mobile data for Turkey", "Set up in minutes", f"{SITE}/turkey"),
-    (CAMP, "", "Dubai eSIM", "Mobile data for Dubai and UAE", "Set up in minutes", f"{SITE}/dubai"),
-    (CAMP, "", "Global eSIM", "One eSIM for 200+ countries", "Pay once for the plan", f"{SITE}/global"),
+    ("", "", "How It Works", "Pick a plan and scan a QR code", "Install at home before you fly", f"{SITE}/how-it-works"),
+    ("", "", "Refund Policy", "Refund if never installed", "See the full terms", f"{SITE}/refund-policy"),
+    ("", "", "Compatible Phones", "Check your phone supports eSIM", "Unlocked phones only", f"{SITE}/compatible-devices"),
+    ("", "", "Help and FAQs", "Install, data and refunds", "Answers before you buy", f"{SITE}/faq"),
+    ("", "", "USA eSIM", "Mobile data for the USA", "Set up in minutes", f"{SITE}/usa"),
+    ("", "", "Turkey eSIM", "Mobile data for Turkey", "Set up in minutes", f"{SITE}/turkey"),
+    ("", "", "Dubai eSIM", "Mobile data for Dubai and UAE", "Set up in minutes", f"{SITE}/dubai"),
+    ("", "", "Global eSIM", "One eSIM for 200+ countries", "Pay once for the plan", f"{SITE}/global"),
 ]
 CALLOUTS = ["Set Up in Minutes", "Pay Once, Not Per Day", "Refund if Not Installed", "QR Code by Email",
             "Data-Only eSIM", "Keep Your WhatsApp Number", "Install Before You Fly", "No Daily Charges From Us"]
 SNIPPET = ("Destinations", ["USA", "Turkey", "Dubai", "Spain", "France", "Italy", "Japan", "Thailand"])
 
+# One campaign per country. £1,000/month to start, split Dubai 40 / USA 35 / Turkey 25 (about £33/day in total).
+BUDGET = {"dubai": "13.00", "usa": "11.50", "turkey": "8.50"}
+CAMPS = {k: f"CF_UK_SEARCH_{k.upper()}" for k in COUNTRIES}
+# Each campaign blocks the other two destinations so a search only ever enters the right country's campaign.
+OTHER = {"usa": ["turkey", "turkiye", "istanbul", "antalya", "dubai", "uae", "abu dhabi"],
+         "turkey": ["usa", "america", "united states", "new york", "orlando", "florida", "dubai", "uae", "abu dhabi"],
+         "dubai": ["usa", "america", "united states", "new york", "orlando", "florida", "turkey", "turkiye", "istanbul", "antalya"]}
+SUFFIX = "utm_source=google&utm_medium=cpc&utm_campaign={c}&utm_content={{adgroupid}}&utm_term={{keyword}}"
+
 problems = []
 def chk(kind, s, lim, where):
     if len(s) > lim: problems.append(f"{where}: {kind} {len(s)}>{lim}: {s!r}")
-
-def ag(key, theme): return f"{COUNTRIES[key]['S'].upper()} | {theme}"
 
 def w(name, header, rows):
     with open(os.path.join(ED, name), "w", newline="") as f:
         x = csv.writer(f); x.writerow(header); x.writerows(rows)
 
-# 1. Campaigns
-w("01_campaigns.csv",
-  ["Campaign", "Campaign Type", "Campaign Status", "Networks", "Budget", "Budget type", "Bid Strategy Type",
-   "Max CPC Bid Limit", "Languages", "Location", "Targeting method", "Exclusion method", "Ad rotation",
-   "Final URL suffix", "Start Date"],
-  [[CAMP, "Search", "Paused", "Google search", "30.00", "Daily", "Maximize clicks", "0.60", "en",
-    "United Kingdom", "Location of presence", "Location of presence", "Optimize",
-    "utm_source=google&utm_medium=cpc&utm_campaign=cf_uk_search_destinations&utm_content={adgroupid}&utm_term={keyword}", ""],
-   [BRAND_CAMP, "Search", "Paused", "Google search", "3.00", "Daily", "Maximize clicks", "0.30", "en",
-    "United Kingdom", "Location of presence", "Location of presence", "Optimize",
-    "utm_source=google&utm_medium=cpc&utm_campaign=cf_uk_search_brand&utm_content={adgroupid}&utm_term={keyword}", ""]])
-
-# 2. Ad groups + 3. Keywords + 4. RSAs
-groups, kws, ads = [], [], []
-for key, themes in KEYWORDS.items():
-    c = COUNTRIES[key]
-    for theme, words in themes.items():
-        g = ag(key, theme)
-        url = f"{SITE}/{c['path']}"
-        groups.append([CAMP, g, "Enabled", "Standard", url])
+for f in os.listdir(ED): os.remove(os.path.join(ED, f))
+guide = {}
+camps, groups, kws, ads, negs, sl, co, sn, imgs = [], [], [], [], [], [], [], [], []
+for key, c in COUNTRIES.items():
+    camp, url = CAMPS[key], f"{SITE}/{c['path']}"
+    suffix = SUFFIX.format(c=camp.lower())
+    camps.append([camp, "Search", "Paused", "Google search", BUDGET[key], "Daily", "Maximize clicks", "0.60", "en",
+                  "United Kingdom", "Location of presence", "Location of presence", "Optimize", suffix])
+    g_out = []
+    for theme, words in KEYWORDS[key].items():
+        g = theme
+        groups.append([camp, g, "Enabled", "Standard", url])
         for k in words:
-            kws += [[CAMP, g, k, "Phrase", "Enabled"], [CAMP, g, k, "Exact", "Enabled"]]
+            kws += [[camp, g, k, "Phrase", "Enabled"], [camp, g, k, "Exact", "Enabled"]]
         h, d = headlines(theme, c), descriptions(theme, c)
-        for i, x in enumerate(h): chk("headline", x, 30, f"{g} H{i+1}")
-        for i, (x, _) in enumerate(d): chk("description", x, 90, f"{g} D{i+1}")
-        chk("path", c["path"], 15, g); chk("path", PATH2[theme], 15, g)
-        ads.append([CAMP, g, "Responsive search ad", "Enabled", url, c["path"], PATH2[theme]]
+        for i, x in enumerate(h): chk("headline", x, 30, f"{camp} {g} H{i+1}")
+        for i, (x, _) in enumerate(d): chk("description", x, 90, f"{camp} {g} D{i+1}")
+        chk("path", PATH2[theme], 15, g)
+        ads.append([camp, g, "Responsive search ad", "Enabled", url, c["path"], PATH2[theme]]
                    + h + [""] * (15 - len(h)) + [x for x, _ in d] + [p for _, p in d])
-groups.append([BRAND_CAMP, "Brand", "Enabled", "Standard", SITE])
-for k in BRAND_KW:
-    kws += [[BRAND_CAMP, "Brand", k.lower(), "Exact", "Enabled"], [BRAND_CAMP, "Brand", k.lower(), "Phrase", "Enabled"]]
-for i, x in enumerate(BRAND_H): chk("headline", x, 30, f"brand H{i+1}")
-for i, (x, _) in enumerate(BRAND_D): chk("description", x, 90, f"brand D{i+1}")
-ads.append([BRAND_CAMP, "Brand", "Responsive search ad", "Enabled", SITE, "esim", "official"]
-           + BRAND_H + [""] * (15 - len(BRAND_H)) + [x for x, _ in BRAND_D] + [p for _, p in BRAND_D])
+        g_out.append({"name": g, "kw": words, "h": h, "d": d, "p1": c["path"], "p2": PATH2[theme]})
+    for k in OTHER[key] + NEG_CAMPAIGN:
+        negs.append([camp, k, "Campaign Negative Phrase"])
+    links = [s for s in SITELINKS if not (s[2].endswith("eSIM") and s[2] != f"{c['S']} eSIM" and s[2] != "Global eSIM")]
+    links = [s for s in links if s[2] != f"{c['S']} eSIM"]   # the ad already lands on this country's page
+    for _, _, t, d1, d2, u in links:
+        chk("sitelink text", t, 25, t); chk("sitelink desc", d1, 35, t); chk("sitelink desc", d2, 35, t)
+        sl.append([camp, t, d1, d2, u])
+    co += [[camp, x] for x in CALLOUTS]
+    sn.append([camp, SNIPPET[0], ";".join(SNIPPET[1])])
+    files = [f"calafly-{key}-{kind}-{r}.jpg" for kind in ("arrive", "home") for r in ("1x1", "191x1")]
+    imgs += [[camp, f] for f in files]
+    guide[key] = {"camp": camp, "url": url, "budget": BUDGET[key], "suffix": suffix, "groups": g_out,
+                  "neg": OTHER[key] + NEG_CAMPAIGN, "sl": [s[2:] for s in links], "imgs": files}
 
+for x in CALLOUTS: chk("callout", x, 25, x)
+for v in SNIPPET[1]: chk("snippet", v, 25, v)
+
+w("01_campaigns.csv", ["Campaign", "Campaign Type", "Campaign Status", "Networks", "Budget", "Budget type",
+   "Bid Strategy Type", "Max CPC Bid Limit", "Languages", "Location", "Targeting method", "Exclusion method",
+   "Ad rotation", "Final URL suffix"], camps)
 w("02_ad_groups.csv", ["Campaign", "Ad group", "Ad group status", "Ad group type", "Final URL"], groups)
 w("03_keywords.csv", ["Campaign", "Ad group", "Keyword", "Criterion Type", "Status"], kws)
 w("04_responsive_search_ads.csv",
   ["Campaign", "Ad group", "Ad type", "Status", "Final URL", "Path 1", "Path 2"]
   + [f"Headline {i}" for i in range(1, 16)] + [f"Description {i}" for i in range(1, 5)]
   + [f"Description {i} position" for i in range(1, 5)], ads)
-
-# 5. Negatives
-neg = [[CAMP, "", k, "Campaign Negative Phrase"] for k in NEG_CAMPAIGN]
-w("05_negatives_campaign.csv", ["Campaign", "Ad group", "Keyword", "Criterion Type"], neg)
+w("05_negatives_campaign.csv", ["Campaign", "Keyword", "Criterion Type"], negs)
 w("06_negatives_shared_list.csv", ["Shared set name", "Keyword", "Criterion Type"],
   [["CF_UK_NEGATIVES", k, "Negative Phrase"] for k in NEG_SHARED])
+w("07_sitelinks.csv", ["Campaign", "Link text", "Description line 1", "Description line 2", "Final URL"], sl)
+w("08_callouts.csv", ["Campaign", "Callout text"], co)
+w("09_structured_snippets.csv", ["Campaign", "Header", "Values"], sn)
 
-# 6. Assets
-sl = []
-for camp, g, t, d1, d2, url in SITELINKS:
-    chk("sitelink text", t, 25, t); chk("sitelink desc", d1, 35, t); chk("sitelink desc", d2, 35, t)
-    sl.append([camp, g, t, d1, d2, url])
-for t, d1, d2, url in [("Turkey eSIM", "Mobile data for Turkey", "Set up in minutes", f"{SITE}/turkey"),
-                       ("How It Works", "Pick a plan and scan a QR code", "Install at home before you fly", f"{SITE}/how-it-works"),
-                       ("Refund Policy", "Refund if never installed", "See the full terms", f"{SITE}/refund-policy"),
-                       ("Compatible Phones", "Check your phone supports eSIM", "Unlocked phones only", f"{SITE}/compatible-devices")]:
-    sl.append([BRAND_CAMP, "", t, d1, d2, url])
-w("07_sitelinks.csv", ["Campaign", "Ad group", "Link text", "Description line 1", "Description line 2", "Final URL"], sl)
-for x in CALLOUTS: chk("callout", x, 25, x)
-w("08_callouts.csv", ["Campaign", "Callout text"], [[cmp, x] for cmp in (CAMP, BRAND_CAMP) for x in CALLOUTS])
-for v in SNIPPET[1]: chk("snippet", v, 25, v)
-w("09_structured_snippets.csv", ["Campaign", "Header", "Values"],
-  [[cmp, SNIPPET[0], ";".join(SNIPPET[1])] for cmp in (CAMP, BRAND_CAMP)])
-
-# 7. Image assets: Google Search images can't carry overlaid text or logos, so these are crops of the
-# text-free Merchant Center lifestyle shots (1:1 1200x1200 and 1.91:1 1200x628), assigned per ad group country.
-imgs = []
+# Image assets: Google Search images can't carry overlaid text, so these are crops of the text-free
+# Merchant Center lifestyle shots (1:1 1200x1200 and 1.91:1 1200x628), added at campaign level.
 for key in COUNTRIES:
     for kind in ("arrive", "home"):
         src = Image.open(os.path.join(MC_IMG, f"calafly-{key}-esim-{kind}.jpg")).convert("RGB")
-        sq = src.resize((1200, 1200), Image.LANCZOS)
-        a = f"calafly-{key}-{kind}-1x1.jpg"; sq.save(os.path.join(HERE, "images", a), quality=90)
+        src.resize((1200, 1200), Image.LANCZOS).save(os.path.join(HERE, "images", f"calafly-{key}-{kind}-1x1.jpg"), quality=90)
         top = int(1500 * (0.18 if kind == "arrive" else 0.08))
-        wide = src.crop((0, top, 1500, top + 785)).resize((1200, 628), Image.LANCZOS)
-        b = f"calafly-{key}-{kind}-191x1.jpg"; wide.save(os.path.join(HERE, "images", b), quality=90)
-        for t in KEYWORDS[key]:
-            imgs += [[CAMP, ag(key, t), a], [CAMP, ag(key, t), b]]
-w("10_image_assets.csv", ["Campaign", "Ad group", "Image file (in images/)"], imgs)
+        src.crop((0, top, 1500, top + 785)).resize((1200, 628), Image.LANCZOS).save(
+            os.path.join(HERE, "images", f"calafly-{key}-{kind}-191x1.jpg"), quality=90)
+w("10_image_assets.csv", ["Campaign", "Image file (in images/)"], imgs)
+
+guide["shared"] = {"neg": NEG_SHARED, "callouts": CALLOUTS, "snippet": SNIPPET}
+json.dump(guide, open(os.path.join(HERE, "guide.json"), "w"), indent=1, ensure_ascii=False)
 
 if problems:
     print("\n".join(problems)); sys.exit(1)
-print(f"ok: {len(groups)} ad groups, {len(kws)} keywords, {len(ads)} RSAs, {len(NEG_SHARED)} shared negatives, "
-      f"{len(sl)} sitelinks, {len(imgs)} image links")
+print(f"ok: {len(camps)} campaigns, {len(groups)} ad groups, {len(kws)} keywords, {len(ads)} RSAs, "
+      f"{len(negs)} campaign negatives, {len(NEG_SHARED)} shared negatives, {len(sl)} sitelinks")

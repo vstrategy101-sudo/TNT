@@ -1,8 +1,10 @@
 # CalaFly · Google Search build (UK → USA, Turkey, Dubai)
 
-One Search campaign covers all three destinations. A small brand campaign sits beside it. The whole build is in `editor/` as Google Ads Editor import files: 13 ad groups, 200 keywords, 13 RSAs, negatives, sitelinks, callouts, snippets and image assets. Every line has been checked against Google's character limits.
+**Structure: three campaigns, one per country.** `CF_UK_SEARCH_DUBAI` (£13/day), `CF_UK_SEARCH_USA` (£11.50/day) and `CF_UK_SEARCH_TURKEY` (£8.50/day), £1,000 a month in total. Each has 4 ad groups (eSIM, Data SIM, Roaming, Cities) and blocks the other two destinations with campaign negatives. A brand campaign is added later, once brand searches show up.
 
-Rebuild after any copy change: `python3 build-search.py`
+**Step-by-step build guide (click by click, with copy buttons):** `plan.html`, published at https://claude.ai/artifact/T94svaXL5m3xYe5CyfVDeR. The `editor/` files hold the same build for Google Ads Editor.
+
+Rebuild after any copy change: `python3 build-search.py && python3 build-page.py`
 
 ---
 
@@ -40,7 +42,7 @@ Set these up with GTM. The site already has a container, and calafly.net fires t
 
 ---
 
-## 2. Campaign settings: `CF_UK_SEARCH_DESTINATIONS`
+## 2. Campaign settings (same for all three campaigns)
 
 | Setting | Value |
 |---|---|
@@ -71,26 +73,13 @@ Plans sell for about £3–£18, so a 70p click can wipe out a sale. Bidding goe
 Never change budget or bidding by more than 20% at once, or more than once every 3–4 days.
 
 ### Budget: £1,000 a month to start
-The Google Search budget is **£1,000 for the month**, about £33 a day. Google can spend up to 2× the daily budget on a single day but never more than 30.4× it in a month.
-
-| Campaign | Daily budget | Month |
+| Campaign | Daily | Month |
 |---|---|---|
-| CF_UK_SEARCH_DESTINATIONS | **£30.00** | ~£912 |
-| CF_UK_SEARCH_BRAND | **£3.00** | ~£91 (usually underspends) |
+| CF_UK_SEARCH_DUBAI | £13.00 | ~£395 |
+| CF_UK_SEARCH_USA | £11.50 | ~£350 |
+| CF_UK_SEARCH_TURKEY | £8.50 | ~£260 |
 
-Target country split of the £30: Dubai about £12, USA about £10.50, Turkey about £7.50 a day.
-
-**What £1,000 buys.** At the £0.60 cap, that's roughly 1,500+ clicks a month, or about 50 a day across three countries. That's enough to learn which country and intent converts, but not enough to cover every search. Expect "Limited by budget" on the campaign; that's fine at this stage.
-
-**Rules for a small budget:**
-- Keep the £0.60 cap for the first 2 weeks. Don't remove it just because impression share is low.
-- If an ad group reaches about £40 spent with no purchase while others are converting, pause it. Cities is the likeliest one.
-- Scale only once cost per purchase is known. Then add +20% every 3–4 days (for example £30 → £36 → £43) to campaigns under target.
-
-**Country weighting in one campaign.** A single campaign budget can't be split by country, so the 40/35/25 plan (Dubai/USA/Turkey) is steered through ad groups:
-- Check spend by country every Thursday. Segment by ad group and filter by the "DUBAI |", "USA |" or "TURKEY |" prefix.
-- If one country takes more than 15 points over its share without the purchases to justify it, pause its weakest ad group, which is usually Roaming.
-- If that happens two weeks in a row, move that country into its own campaign. It's a 10-minute copy-and-paste in Editor.
+At the £0.60 cap that's about 1,600 clicks a month. Move £2/day between campaigns when one country's cost per purchase is under half another's for two weeks, keeping the total at £33/day. Scale only once cost per purchase is below the average order value, then +20% every 3–4 days.
 
 ---
 
@@ -104,7 +93,7 @@ Each country has four ad groups by search intent, all sending traffic to that co
 | `{COUNTRY} \| Data SIM` | dubai tourist sim, sim card for usa from uk | /dubai/data | Mobile Data for {Country} · No SIM Card to Collect |
 | `{COUNTRY} \| Roaming` | roaming in turkey, ee roaming dubai, vodafone roaming usa | /usa/roaming | Using Your Phone in {Country}? · Holiday Data for {Country} |
 | `{COUNTRY} \| Cities` | antalya esim, new york esim, abu dhabi esim | /turkey/cities | eSIM for Antalya · eSIM for Istanbul |
-| `Brand` (own campaign) | calafly, cala fly, calafly esim | /esim/official | CalaFly Official Site |
+| Brand (later, own campaign) | calafly, cala fly, calafly esim | | Added once brand searches appear |
 
 - **Roaming** is the highest-value group. Turkey, the USA and the UAE are all outside UK networks' Europe roaming zones, so these searchers face a daily charge. The ad copy never names a network or makes a comparison: "No daily charges from us" and "Pay once, not per day" are claims about CalaFly only.
 - **Brand** has its own campaign because Google reads "calafly" as a misspelling of a bigger competitor. Brand terms are added as negatives in the destinations campaign so the two campaigns don't compete with each other.

@@ -1,13 +1,16 @@
-Campaign,Ad group,Link text,Description line 1,Description line 2,Final URL
-CF_UK_SEARCH_DESTINATIONS,,How It Works,Pick a plan and scan a QR code,Install at home before you fly,https://calafly.net/how-it-works
-CF_UK_SEARCH_DESTINATIONS,,Refund Policy,Refund if never installed,See the full terms,https://calafly.net/refund-policy
-CF_UK_SEARCH_DESTINATIONS,,Compatible Phones,Check your phone supports eSIM,Unlocked phones only,https://calafly.net/compatible-devices
-CF_UK_SEARCH_DESTINATIONS,,Help and FAQs,"Install, data and refunds",Answers before you buy,https://calafly.net/faq
-CF_UK_SEARCH_DESTINATIONS,,USA eSIM,Mobile data for the USA,Set up in minutes,https://calafly.net/usa
-CF_UK_SEARCH_DESTINATIONS,,Turkey eSIM,Mobile data for Turkey,Set up in minutes,https://calafly.net/turkey
-CF_UK_SEARCH_DESTINATIONS,,Dubai eSIM,Mobile data for Dubai and UAE,Set up in minutes,https://calafly.net/dubai
-CF_UK_SEARCH_DESTINATIONS,,Global eSIM,One eSIM for 200+ countries,Pay once for the plan,https://calafly.net/global
-CF_UK_SEARCH_BRAND,,Turkey eSIM,Mobile data for Turkey,Set up in minutes,https://calafly.net/turkey
-CF_UK_SEARCH_BRAND,,How It Works,Pick a plan and scan a QR code,Install at home before you fly,https://calafly.net/how-it-works
-CF_UK_SEARCH_BRAND,,Refund Policy,Refund if never installed,See the full terms,https://calafly.net/refund-policy
-CF_UK_SEARCH_BRAND,,Compatible Phones,Check your phone supports eSIM,Unlocked phones only,https://calafly.net/compatible-devices
+Campaign,Link text,Description line 1,Description line 2,Final URL
+CF_UK_SEARCH_USA,How It Works,Pick a plan and scan a QR code,Install at home before you fly,https://calafly.net/how-it-works
+CF_UK_SEARCH_USA,Refund Policy,Refund if never installed,See the full terms,https://calafly.net/refund-policy
+CF_UK_SEARCH_USA,Compatible Phones,Check your phone supports eSIM,Unlocked phones only,https://calafly.net/compatible-devices
+CF_UK_SEARCH_USA,Help and FAQs,"Install, data and refunds",Answers before you buy,https://calafly.net/faq
+CF_UK_SEARCH_USA,Global eSIM,One eSIM for 200+ countries,Pay once for the plan,https://calafly.net/global
+CF_UK_SEARCH_TURKEY,How It Works,Pick a plan and scan a QR code,Install at home before you fly,https://calafly.net/how-it-works
+CF_UK_SEARCH_TURKEY,Refund Policy,Refund if never installed,See the full terms,https://calafly.net/refund-policy
+CF_UK_SEARCH_TURKEY,Compatible Phones,Check your phone supports eSIM,Unlocked phones only,https://calafly.net/compatible-devices
+CF_UK_SEARCH_TURKEY,Help and FAQs,"Install, data and refunds",Answers before you buy,https://calafly.net/faq
+CF_UK_SEARCH_TURKEY,Global eSIM,One eSIM for 200+ countries,Pay once for the plan,https://calafly.net/global
+CF_UK_SEARCH_DUBAI,How It Works,Pick a plan and scan a QR code,Install at home before you fly,https://calafly.net/how-it-works
+CF_UK_SEARCH_DUBAI,Refund Policy,Refund if never installed,See the full terms,https://calafly.net/refund-policy
+CF_UK_SEARCH_DUBAI,Compatible Phones,Check your phone supports eSIM,Unlocked phones only,https://calafly.net/compatible-devices
+CF_UK_SEARCH_DUBAI,Help and FAQs,"Install, data and refunds",Answers before you buy,https://calafly.net/faq
+CF_UK_SEARCH_DUBAI,Global eSIM,One eSIM for 200+ countries,Pay once for the plan,https://calafly.net/global

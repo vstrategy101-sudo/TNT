@@ -15,7 +15,7 @@ Re-render: `cd src && node render-creatives.mjs && node render-videos.mjs && pyt
 
 ## Google Search build
 
-See `google-search/README.md`. Search now runs as **one campaign for all three destinations** (`CF_UK_SEARCH_DESTINATIONS`, 12 ad groups by country × intent) plus the brand campaign. This replaces the three per-country campaigns below. It includes account setup, conversion tracking, bidding stages, and Google Ads Editor import files.
+See `google-search/README.md` and the step-by-step guide `google-search/plan.html`. Search runs as **three campaigns, one per country** (`CF_UK_SEARCH_DUBAI`, `_USA`, `_TURKEY`), 4 ad groups each, £1,000 a month to start. It covers account setup, conversion tracking, settings, audiences, optimisation and Google Ads Editor import files.
 
 ## Brand campaign
 

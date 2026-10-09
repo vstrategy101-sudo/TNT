@@ -1,3 +1,4 @@
 Campaign,Header,Values
-CF_UK_SEARCH_DESTINATIONS,Destinations,USA;Turkey;Dubai;Spain;France;Italy;Japan;Thailand
-CF_UK_SEARCH_BRAND,Destinations,USA;Turkey;Dubai;Spain;France;Italy;Japan;Thailand
+CF_UK_SEARCH_USA,Destinations,USA;Turkey;Dubai;Spain;France;Italy;Japan;Thailand
+CF_UK_SEARCH_TURKEY,Destinations,USA;Turkey;Dubai;Spain;France;Italy;Japan;Thailand
+CF_UK_SEARCH_DUBAI,Destinations,USA;Turkey;Dubai;Spain;France;Italy;Japan;Thailand

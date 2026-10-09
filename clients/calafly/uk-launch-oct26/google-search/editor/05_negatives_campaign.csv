@@ -1,4 +1,36 @@
-Campaign,Ad group,Keyword,Criterion Type
-CF_UK_SEARCH_DESTINATIONS,,calafly,Campaign Negative Phrase
-CF_UK_SEARCH_DESTINATIONS,,cala fly,Campaign Negative Phrase
-CF_UK_SEARCH_DESTINATIONS,,cala esim,Campaign Negative Phrase
+Campaign,Keyword,Criterion Type
+CF_UK_SEARCH_USA,turkey,Campaign Negative Phrase
+CF_UK_SEARCH_USA,turkiye,Campaign Negative Phrase
+CF_UK_SEARCH_USA,istanbul,Campaign Negative Phrase
+CF_UK_SEARCH_USA,antalya,Campaign Negative Phrase
+CF_UK_SEARCH_USA,dubai,Campaign Negative Phrase
+CF_UK_SEARCH_USA,uae,Campaign Negative Phrase
+CF_UK_SEARCH_USA,abu dhabi,Campaign Negative Phrase
+CF_UK_SEARCH_USA,calafly,Campaign Negative Phrase
+CF_UK_SEARCH_USA,cala fly,Campaign Negative Phrase
+CF_UK_SEARCH_USA,cala esim,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,usa,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,america,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,united states,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,new york,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,orlando,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,florida,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,dubai,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,uae,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,abu dhabi,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,calafly,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,cala fly,Campaign Negative Phrase
+CF_UK_SEARCH_TURKEY,cala esim,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,usa,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,america,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,united states,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,new york,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,orlando,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,florida,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,turkey,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,turkiye,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,istanbul,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,antalya,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,calafly,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,cala fly,Campaign Negative Phrase
+CF_UK_SEARCH_DUBAI,cala esim,Campaign Negative Phrase

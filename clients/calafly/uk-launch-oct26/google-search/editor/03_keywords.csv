@@ -1,201 +1,189 @@
 Campaign,Ad group,Keyword,Criterion Type,Status
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,usa esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,usa esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim for usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim for usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,us esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,us esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim for america,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim for america,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,best esim for usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,best esim for usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,usa esim uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,usa esim uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim for usa trip,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim for usa trip,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim usa holiday,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | eSIM,esim usa holiday,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa data sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa data sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,us sim card for travel,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,us sim card for travel,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa travel sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa travel sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,sim card for usa from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,sim card for usa from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,mobile data usa holiday,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,mobile data usa holiday,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa sim card for tourists,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,usa sim card for tourists,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,internet in usa for tourists,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,internet in usa for tourists,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,roaming in usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,roaming in usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,using phone in usa from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,using phone in usa from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,mobile data in america from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,mobile data in america from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,usa roaming charges,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,usa roaming charges,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,phone data in usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,phone data in usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,ee roaming usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,ee roaming usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,vodafone roaming usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,vodafone roaming usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,o2 roaming usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,o2 roaming usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,three roaming usa,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Roaming,three roaming usa,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,new york esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,new york esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,nyc esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,nyc esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,orlando esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,orlando esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,florida esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,florida esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,las vegas esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,las vegas esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,new york sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,new york sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,orlando sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,orlando sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,florida sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,USA | Cities,florida sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,turkey esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,turkey esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,esim turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,esim turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,esim for turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,esim for turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,best esim for turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,best esim for turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,turkiye esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,turkiye esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,turkey esim uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,turkey esim uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,esim turkey holiday,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,esim turkey holiday,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey data sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey data sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey travel sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey travel sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,sim card for turkey from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,sim card for turkey from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,mobile data turkey holiday,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,mobile data turkey holiday,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey sim card for tourists,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,turkey sim card for tourists,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,internet in turkey for tourists,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,internet in turkey for tourists,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,roaming in turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,roaming in turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,using phone in turkey from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,using phone in turkey from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,mobile data in turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,mobile data in turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,turkey roaming charges,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,turkey roaming charges,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,phone data in turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,phone data in turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,ee roaming turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,ee roaming turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,vodafone roaming turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,vodafone roaming turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,o2 roaming turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,o2 roaming turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,three roaming turkey,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,three roaming turkey,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,istanbul esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,istanbul esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,antalya esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,antalya esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,dalaman esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,dalaman esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,bodrum esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,bodrum esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,antalya sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,antalya sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,dalaman sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,dalaman sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,istanbul sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,istanbul sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,bodrum sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,bodrum sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,dubai esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,dubai esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,uae esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,uae esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim for dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim for dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim uae,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim uae,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,best esim for dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,best esim for dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,dubai esim uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,dubai esim uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim dubai holiday,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,esim dubai holiday,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,dubai data sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,dubai data sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,dubai sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,dubai sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,dubai tourist sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,dubai tourist sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,uae tourist sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,uae tourist sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,sim card for dubai from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,sim card for dubai from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,mobile data dubai holiday,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,mobile data dubai holiday,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,internet in dubai for tourists,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,internet in dubai for tourists,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,uae sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,uae sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,roaming in dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,roaming in dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,using phone in dubai from uk,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,using phone in dubai from uk,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,mobile data in uae,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,mobile data in uae,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,dubai roaming charges,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,dubai roaming charges,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,phone data in dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,phone data in dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,ee roaming dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,ee roaming dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,vodafone roaming dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,vodafone roaming dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,o2 roaming dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,o2 roaming dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,three roaming dubai,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,three roaming dubai,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,abu dhabi esim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,abu dhabi esim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,abu dhabi sim card,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,abu dhabi sim card,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,uae travel sim,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,uae travel sim,Exact,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,esim for abu dhabi,Phrase,Enabled
-CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,esim for abu dhabi,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,calafly,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,calafly,Phrase,Enabled
-CF_UK_SEARCH_BRAND,Brand,cala fly,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,cala fly,Phrase,Enabled
-CF_UK_SEARCH_BRAND,Brand,calafly esim,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,calafly esim,Phrase,Enabled
-CF_UK_SEARCH_BRAND,Brand,cala esim,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,cala esim,Phrase,Enabled
-CF_UK_SEARCH_BRAND,Brand,calafly.net,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,calafly.net,Phrase,Enabled
-CF_UK_SEARCH_BRAND,Brand,cala esim uk,Exact,Enabled
-CF_UK_SEARCH_BRAND,Brand,cala esim uk,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,usa esim,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,usa esim,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,esim usa,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,esim usa,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,esim for usa,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,esim for usa,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,us esim,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,us esim,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,esim for america,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,esim for america,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,best esim for usa,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,best esim for usa,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,usa esim uk,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,usa esim uk,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,esim for usa trip,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,esim for usa trip,Exact,Enabled
+CF_UK_SEARCH_USA,eSIM,esim usa holiday,Phrase,Enabled
+CF_UK_SEARCH_USA,eSIM,esim usa holiday,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa data sim,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa data sim,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa sim card,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa sim card,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,us sim card for travel,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,us sim card for travel,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa travel sim,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa travel sim,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,sim card for usa from uk,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,sim card for usa from uk,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,mobile data usa holiday,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,mobile data usa holiday,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa sim card for tourists,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,usa sim card for tourists,Exact,Enabled
+CF_UK_SEARCH_USA,Data SIM,internet in usa for tourists,Phrase,Enabled
+CF_UK_SEARCH_USA,Data SIM,internet in usa for tourists,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,roaming in usa,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,roaming in usa,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,using phone in usa from uk,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,using phone in usa from uk,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,mobile data in america from uk,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,mobile data in america from uk,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,usa roaming charges,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,usa roaming charges,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,phone data in usa,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,phone data in usa,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,ee roaming usa,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,ee roaming usa,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,vodafone roaming usa,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,vodafone roaming usa,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,o2 roaming usa,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,o2 roaming usa,Exact,Enabled
+CF_UK_SEARCH_USA,Roaming,three roaming usa,Phrase,Enabled
+CF_UK_SEARCH_USA,Roaming,three roaming usa,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,new york esim,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,new york esim,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,nyc esim,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,nyc esim,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,orlando esim,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,orlando esim,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,florida esim,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,florida esim,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,las vegas esim,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,las vegas esim,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,new york sim card,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,new york sim card,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,orlando sim card,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,orlando sim card,Exact,Enabled
+CF_UK_SEARCH_USA,Cities,florida sim card,Phrase,Enabled
+CF_UK_SEARCH_USA,Cities,florida sim card,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,turkey esim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,turkey esim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,esim turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,esim turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,esim for turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,esim for turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,best esim for turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,best esim for turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,turkiye esim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,turkiye esim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,turkey esim uk,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,turkey esim uk,Exact,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,esim turkey holiday,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,eSIM,esim turkey holiday,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey data sim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey data sim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey sim card,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey sim card,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey travel sim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey travel sim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,sim card for turkey from uk,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,sim card for turkey from uk,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,mobile data turkey holiday,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,mobile data turkey holiday,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey sim card for tourists,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,turkey sim card for tourists,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,internet in turkey for tourists,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Data SIM,internet in turkey for tourists,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,roaming in turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,roaming in turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,using phone in turkey from uk,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,using phone in turkey from uk,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,mobile data in turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,mobile data in turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,turkey roaming charges,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,turkey roaming charges,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,phone data in turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,phone data in turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,ee roaming turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,ee roaming turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,vodafone roaming turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,vodafone roaming turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,o2 roaming turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,o2 roaming turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,three roaming turkey,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Roaming,three roaming turkey,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,istanbul esim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,istanbul esim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,antalya esim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,antalya esim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,dalaman esim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,dalaman esim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,bodrum esim,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,bodrum esim,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,antalya sim card,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,antalya sim card,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,dalaman sim card,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,dalaman sim card,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,istanbul sim card,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,istanbul sim card,Exact,Enabled
+CF_UK_SEARCH_TURKEY,Cities,bodrum sim card,Phrase,Enabled
+CF_UK_SEARCH_TURKEY,Cities,bodrum sim card,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,dubai esim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,dubai esim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,uae esim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,uae esim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim for dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim for dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim uae,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim uae,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,best esim for dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,best esim for dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,dubai esim uk,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,dubai esim uk,Exact,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim dubai holiday,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,eSIM,esim dubai holiday,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,dubai data sim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,dubai data sim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,dubai sim card,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,dubai sim card,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,dubai tourist sim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,dubai tourist sim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,uae tourist sim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,uae tourist sim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,sim card for dubai from uk,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,sim card for dubai from uk,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,mobile data dubai holiday,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,mobile data dubai holiday,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,internet in dubai for tourists,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,internet in dubai for tourists,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,uae sim card,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Data SIM,uae sim card,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,roaming in dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,roaming in dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,using phone in dubai from uk,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,using phone in dubai from uk,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,mobile data in uae,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,mobile data in uae,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,dubai roaming charges,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,dubai roaming charges,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,phone data in dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,phone data in dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,ee roaming dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,ee roaming dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,vodafone roaming dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,vodafone roaming dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,o2 roaming dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,o2 roaming dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,three roaming dubai,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Roaming,three roaming dubai,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Cities,abu dhabi esim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Cities,abu dhabi esim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Cities,abu dhabi sim card,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Cities,abu dhabi sim card,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Cities,uae travel sim,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Cities,uae travel sim,Exact,Enabled
+CF_UK_SEARCH_DUBAI,Cities,esim for abu dhabi,Phrase,Enabled
+CF_UK_SEARCH_DUBAI,Cities,esim for abu dhabi,Exact,Enabled
