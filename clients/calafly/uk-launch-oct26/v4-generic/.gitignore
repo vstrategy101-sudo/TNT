@@ -1,0 +1,4 @@
+# Stock photos and their cutouts stay local: the photo licences don't allow redistributing the originals in a public repo.
+people/*.png
+people/raw/*
+!people/raw/.gitkeep
