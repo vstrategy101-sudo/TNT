@@ -153,7 +153,10 @@
   // ---------- HTML builders ----------
   const tickSvg = (c = "#0b0d10") => `<svg viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>`;
   K.tickSvg = tickSvg;
-  K.logo = (cls = "") => `<div class="logo ${cls}"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>`;
+  K.logo = (cls = "", { desc = true } = {}) => {
+    const mark = `<div class="logo ${cls}"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>`;
+    return desc ? `<div class="lockup">${mark}<span class="desc">Travel eSIM</span></div>` : mark;
+  };
   K.minilogo = `<span class="minilogo"><span class="dot"></span><span>CA<span class="la">LA</span></span></span>`;
 
   K.sbar = ({ light = false, time = "9:41", carrier = "", weak = false } = {}) => `

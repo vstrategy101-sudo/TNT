@@ -45,6 +45,9 @@ body { font-family: "CF", "Inter", sans-serif; -webkit-font-smoothing: antialias
 .logo .dot { width: 46px; height: 46px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
 .logo .dot::after { content: ""; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); }
 .logo .la { color: var(--teal); }
+.lockup { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.lockup .desc { font-weight: 800; font-size: 22px; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); padding-left: 4px; }
+.theme-teal .lockup .desc, .theme-light .lockup .desc { color: var(--ink); }
 .theme-teal .logo .dot { background: var(--ink); }
 .theme-teal .logo .dot::after { background: var(--teal); }
 .theme-teal .logo .la { color: var(--white); }
@@ -100,7 +103,7 @@ h1 .hl { color: var(--pink); }
 .s-1x1 .ticket .per { font-size: 38px; padding-bottom: 10px; } .s-1x1 .ticket .per small { font-size: 24px; }
 .s-1x1 .ticket .code { margin: 20px -32px 0; padding: 16px 32px; } .s-1x1 .ticket .code b { font-size: 32px; } .s-1x1 .ticket .code .k { font-size: 28px; }
 .s-1x1 .visual { padding-top: 24px; }
-.pass .row b.big { font-size: 54px; color: var(--teal); -webkit-text-stroke: 1.5px var(--ink); line-height: .9; }
+.pass .row b.big { font-size: 96px; color: var(--teal); -webkit-text-stroke: 1.5px var(--ink); line-height: .9; }
 
 /* ---------- shared visual pieces ---------- */
 .card { background: var(--white); color: var(--ink); border: 5px solid var(--ink); border-radius: 30px; box-shadow: 14px 14px 0 var(--teal); }
@@ -219,7 +222,7 @@ const REFUND_SMALL_ALL = O.small(country, { refund: true });
 const pline = () => OF ? `<div class="pline"><span class="w">${C.short} · ${O.plan(country)}</span><span class="p">${O.price(country)}</span>${OF.code ? `<span class="c">10% off<br>code ${OF.code}</span>` : ""}</div>` : "";
 const subOr = text => OF ? pline() : `<p class="sub">${text}</p>`;
 
-const logo = `<div class="logo"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>`;
+const logo = `<div class="lockup"><div class="logo"><span class="dot"></span><span>CA<span class="la">LA</span></span></div><span class="desc">Travel eSIM</span></div>`;
 const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="#0b0d10" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>`;
 
 function qr() {
@@ -274,7 +277,7 @@ const CONCEPTS = {
     copy: `<span class="tag">${C.tag}</span>
       <h1>Meet<br><span class="hl">CalaFly.</span></h1>
       ${subOr(`Mobile data for ${C.name}, sorted before you leave the UK.`)}`,
-    visual: `<div style="display:flex;align-items:center;gap:40px">${bagtag(-7)}${size === "1x1" ? "" : phoneConnected}</div>`,
+    visual: `<div style="display:flex;align-items:center;gap:40px">${bagtag(-7)}${size === "1x1" || (size === "9x16" && OF) ? "" : phoneConnected}</div>`,
     visualAlt: size === "1x1" ? null : null,
     small: BASE_SMALL,
   }),
@@ -339,14 +342,14 @@ const CONCEPTS = {
     copy: `<span class="tag">Before you fly</span>
       <h1>Still planning<br><span class="hl">${C.short}?</span></h1>
       ${OF ? "" : `<p class="sub">Your data can be sorted tonight. One price, and a 100% refund if unused.</p>`}`,
-    visual: `<div style="position:relative;width:100%;max-width:900px;padding:0 0 30px"><div class="card pass">
+    visual: `<div style="position:relative;width:100%;max-width:900px;padding:0 0 ${OF && size !== "1x1" && size !== "9x16" ? 120 : 30}px"><div class="card pass">
         <div class="hd"><span class="label">Boarding pass</span><span class="label">CalaFly</span></div>
         <div class="route"><div><small>FROM</small><b>UK</b></div><div class="arrow">→</div><div style="text-align:right"><small>TO</small><b>${C.code}</b></div></div>
         <div class="row"><div><small>DATA</small><b>Ready</b></div><div><small>${OF ? `${OF.data} · ${OF.days} DAYS` : "PRICE"}</small>${OF ? `<b class="big">${O.price(country)}</b>` : "<b>Paid once</b>"}</div>${OF && OF.code ? `<div><small>NEW? ${OF.pct}% OFF</small><b>${OF.code}</b></div>` : `<div><small>SETUP</small><b>Minutes</b></div>`}</div>
         <div class="perf"></div>
         ${barcode()}
       </div>
-      ${OF ? `<div class="sticker" style="right:-40px;bottom:-110px;width:250px;height:250px;font-size:92px;transform:rotate(10deg)">${O.price(country)}<span style="font-size:26px;letter-spacing:-.01em;margin-top:-30px">${OF.data} · ${OF.days} days</span></div>` : `<div class="sticker" style="right:-20px;bottom:-50px">Still<br>sorted</div>`}</div>`,
+      ${OF && size !== "1x1" && size !== "9x16" ? `<div class="sticker" style="right:-40px;bottom:-110px;width:250px;height:250px;font-size:92px;transform:rotate(10deg)">${O.price(country)}<span style="font-size:26px;letter-spacing:-.01em;margin-top:-30px">${OF.data} · ${OF.days} days</span></div>` : OF ? "" : `<div class="sticker" style="right:-20px;bottom:-50px">Still<br>sorted</div>`}</div>`,
     small: REFUND_SMALL_ALL,
   }),
 };
@@ -376,9 +379,14 @@ function fit() {
   const box = ad.querySelector(".visual");
   // the visual must fit inside its own box (rotation/shadows allowed a little bleed)
   const over = () => {
-    const v = vis.getBoundingClientRect(), b = box.getBoundingClientRect();
+    // union of everything drawn in the visual (rotated cards and stickers poke out of their wrapper)
+    const rs = [vis, ...vis.querySelectorAll(".card, .sticker, .phone")].map(e => e.getBoundingClientRect());
+    const v = { top: Math.min(...rs.map(r => r.top)), height: Math.max(...rs.map(r => r.bottom)) - Math.min(...rs.map(r => r.top)), width: vis.getBoundingClientRect().width };
+    const b = box.getBoundingClientRect();
     const z = size === "191x1" ? 0.625 : 1;
-    return main.scrollHeight > main.clientHeight + 1 || v.height > b.height + 40 * z || v.width > b.width + 60 * z;
+    const cp = ad.querySelector(".copy").getBoundingClientRect();
+    const intoCopy = size !== "191x1" && v.top < cp.bottom + 28 * z;
+    return main.scrollHeight > main.clientHeight + 1 || v.height > b.height + 40 * z || v.width > b.width + 60 * z || intoCopy;
   };
   const base = vis ? (vis.style.transform || "") : "";
   while (vis && over() && scale > 0.62 && guard++ < 40) {
