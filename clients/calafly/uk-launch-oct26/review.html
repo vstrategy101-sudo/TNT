@@ -1,0 +1,427 @@
+<title>CalaFly UK Launch Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one long briefing column in CalaFly's own visual world (ink ground, teal/pink accents, hard offset shadows). Single dark theme by choice. */
+:root {
+  --ink: #0b0d10; --panel: #16191e; --line: #2a3038; --fg: #f2f5f7; --muted: #9aa5b0;
+  --teal: #18c8a8; --pink: #ff4d6a; --blue: #2f6bff; --yellow: #ffe14a;
+  --display: "Inter Tight", "Inter Display", "Helvetica Neue", Arial, sans-serif;
+  --body: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--ink); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55; margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 24px; padding-block: 40px 96px; }
+@media (max-width: 520px) { .wrap { padding-inline: 16px; } }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 800; letter-spacing: -0.035em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(44px, 8vw, 96px); line-height: .95; }
+h1 .hl, h2 .hl { color: var(--pink); }
+h2 { font-size: clamp(30px, 4.4vw, 48px); line-height: 1; }
+h3 { font-size: 24px; letter-spacing: -0.02em; }
+h4 { font-size: 18px; letter-spacing: -0.01em; margin-bottom: 12px; }
+h5 { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin: 14px 0 4px; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--muted); }
+code, .mono { font-family: var(--mono); font-size: 13px; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.logo { display: inline-flex; align-items: center; gap: 10px; border: 3px solid var(--fg); border-radius: 14px; padding: 7px 14px 7px 9px; font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+.logo .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
+.logo .dot::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--ink); }
+.logo .la { color: var(--teal); }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.tag { display: inline-block; background: var(--fg); color: var(--ink); border-radius: 999px; padding: 5px 12px; font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--teal); }
+
+header.hero { display: grid; gap: 22px; padding-block: 56px 40px; }
+.hero .lede { font-size: 20px; color: #dbe2e7; max-width: 60ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; }
+.facts span { border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; font-family: var(--mono); font-size: 13px; }
+.facts b { color: var(--teal); }
+
+section { padding-block: 56px; border-top: 2px solid var(--line); display: grid; gap: 22px; }
+section > header { display: grid; gap: 10px; }
+section > *, .two > *, .copyset { min-width: 0; }
+
+/* split bar */
+.split { display: flex; height: 64px; border: 3px solid var(--fg); border-radius: 18px; overflow: hidden; box-shadow: 8px 8px 0 var(--teal); }
+.split div { display: flex; align-items: center; padding: 0 14px; font-family: var(--display); font-weight: 800; font-size: 18px; color: var(--ink); white-space: nowrap; overflow: hidden; min-width: 0; }
+.split .g { background: var(--fg); flex: 70; }
+.split .m { background: var(--teal); flex: 30; }
+.tablewrap { overflow-x: auto; border: 2px solid var(--line); border-radius: 16px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.ch { display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 2px 8px; border-radius: 6px; }
+.ch.g { background: var(--fg); color: var(--ink); }
+.ch.m { background: var(--teal); color: var(--ink); }
+.country-split { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.country-split div { border: 2px solid var(--line); border-radius: 16px; padding: 16px; }
+.country-split b { display: block; font-family: var(--display); font-size: 40px; letter-spacing: -0.04em; line-height: 1; }
+.country-split div:first-child b { color: var(--pink); }
+
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 820px) { .cols, .two { grid-template-columns: 1fr !important; } .country-split { grid-template-columns: 1fr; } }
+.box { border: 2px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.box ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; }
+.box li code { color: var(--teal); }
+
+/* controls */
+.controls { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--ink); padding-block: 12px; z-index: 5; }
+.seg { display: inline-flex; border: 2px solid var(--fg); border-radius: 999px; overflow: hidden; }
+.seg button { background: transparent; color: var(--fg); border: 0; font: 700 14px var(--display); padding: 8px 16px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--teal); color: var(--ink); }
+.seg button:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
+.ad { margin: 0; display: grid; gap: 10px; min-width: 0; }
+.frame { background: var(--panel); border-radius: 14px; display: grid; place-items: center; padding: 10px; }
+.frame img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.grid.tall .frame img { max-height: 620px; width: auto; }
+figcaption { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; font-size: 15px; }
+figcaption .num { font-family: var(--mono); color: var(--teal); font-size: 13px; }
+figcaption .role { color: var(--muted); font-size: 13px; }
+
+.videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 820px) { .videos { grid-template-columns: 1fr; } }
+.video { border: 2px solid var(--line); border-radius: 18px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.video .players { display: grid; grid-template-columns: 0.42fr 1fr; gap: 12px; align-items: center; }
+.video video { width: 100%; height: auto; border-radius: 10px; background: #000; display: block; }
+.video ol { margin: 0; padding-left: 20px; color: #dbe2e7; font-size: 14px; display: grid; gap: 4px; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+ol.lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: l; }
+ol.lines li { display: flex; justify-content: space-between; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; counter-increment: l; }
+ol.lines li::before { content: counter(l); font-family: var(--mono); font-size: 12px; color: var(--muted); min-width: 18px; }
+ol.lines li span { flex: 1; min-width: 0; }
+ol.lines li i { font-style: normal; font-family: var(--mono); font-size: 12px; color: var(--teal); white-space: nowrap; }
+.kwg p { font-size: 14px; color: #dbe2e7; }
+table.meta td.pt { font-size: 14px; color: #dbe2e7; min-width: 280px; }
+.pill { display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; margin-bottom: 4px; }
+.pill.prospecting { background: var(--teal); color: var(--ink); }
+.pill.retargeting { background: var(--yellow); color: var(--ink); }
+
+.check li::marker { content: "✓  "; color: var(--teal); }
+.block li::marker { color: var(--pink); font-weight: 800; }
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 820px) { .phases { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .phases { grid-template-columns: 1fr; } }
+.phase { border: 2px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 8px; align-content: start; }
+.phase .wk { font-family: var(--mono); font-size: 12px; color: var(--teal); letter-spacing: .08em; }
+.phase p { font-size: 14px; color: #dbe2e7; }
+.recs { counter-reset: r; display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.recs li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; }
+.recs li::before { counter-increment: r; content: counter(r); width: 36px; height: 36px; border-radius: 10px; background: var(--teal); color: var(--ink); display: grid; place-items: center; font-family: var(--display); font-weight: 800; }
+.recs li b { display: block; }
+footer { padding-top: 40px; color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="logo"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>
+    <span class="eyebrow">tnt. × CalaFly · UK launch · October 2026</span>
+  </div>
+
+  <header class="hero">
+    <span class="tag">UK → USA · Turkey · Dubai</span>
+    <h1>CalaFly UK launch.<br><span class="hl">Data, sorted.</span></h1>
+    <p class="lede">Prospecting and retargeting on Google and Meta for people flying from the UK to the USA, Turkey and Dubai. Every ad introduces CalaFly, then sells three things: set up in minutes, pay once (not per day), and a refund if the eSIM is never installed.</p>
+    <div class="facts">
+      <span><b>70 / 30</b> Google / Meta</span>
+      <span><b>18</b> concepts (6 per country)</span>
+      <span><b>72</b> static files in 4 sizes</span>
+      <span><b>2</b> videos × 2 formats</span>
+      <span><b>0</b> competitor names or comparisons</span>
+    </div>
+  </header>
+
+  <section id="budget">
+    <header><span class="eyebrow">Budget</span><h2>Where the money goes</h2>
+      <p class="muted">Shares of total spend, so the plan holds at any budget. Retargeting gets 15%; early on, retargeting audiences are small and will cap spend on their own.</p></header>
+    <div class="split" role="img" aria-label="Google 70 percent, Meta 30 percent"><div class="g">Google 70%</div><div class="m">Meta 30%</div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Channel</th><th>Campaign</th><th>Job</th><th style="text-align:right">Share</th><th style="text-align:right">Per £1,000</th></tr></thead>
+      <tbody>
+        <tr><td><span class="ch g">GOOGLE</span></td><td>Search, non-brand ×3 (one per country)</td><td>Catch "esim dubai", "usa esim", "turkey esim" searches</td><td class="num">49%</td><td class="num">£490</td></tr>
+        <tr><td><span class="ch g">GOOGLE</span></td><td>Search, brand + misspellings</td><td>Own "calafly" before Holafly does</td><td class="num">4%</td><td class="num">£40</td></tr>
+        <tr><td><span class="ch g">GOOGLE</span></td><td>Demand Gen prospecting</td><td>YouTube, Discover, Gmail with video + statics</td><td class="num">10%</td><td class="num">£100</td></tr>
+        <tr><td><span class="ch g">GOOGLE</span></td><td>Demand Gen remarketing</td><td>Bring back country-page visitors</td><td class="num">7%</td><td class="num">£70</td></tr>
+        <tr><td><span class="ch m">META</span></td><td>Prospecting, Sales objective</td><td>Find travellers before they search</td><td class="num">22%</td><td class="num">£220</td></tr>
+        <tr><td><span class="ch m">META</span></td><td>Retargeting</td><td>Visitors, video viewers, engagers</td><td class="num">8%</td><td class="num">£80</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Country split to start (October to March)</h3>
+    <div class="country-split">
+      <div><b>40%</b>Dubai<p class="muted">Winter is peak season for UK trips to Dubai.</p></div>
+      <div><b>35%</b>USA<p class="muted">Steady all year: New York at Christmas, Florida over half-term.</p></div>
+      <div><b>25%</b>Turkey<p class="muted">Mostly a summer trip for UK travellers. Raise it from April.</p></div>
+    </div>
+    <p class="muted">After two weeks, move budget toward whichever country has the lowest cost per purchase.</p>
+  </section>
+
+  <section id="structure">
+    <header><span class="eyebrow">Structure</span><h2>Campaigns</h2></header>
+    <div class="cols">
+      <div class="box"><h3>Google · 70%</h3><ul>
+        <li><code>CF_UK_SEARCH_USA / _TURKEY / _DUBAI</code>: ad groups for eSIM, Data/SIM, Roaming intent and Cities. Phrase + exact match, UK presence targeting. Maximise conversions, then target CPA at about 30 purchases a month.</li>
+        <li>Assets: 15-headline RSA, sitelinks (How it works, Refund policy, Compatible phones, one per country), callouts (the three USPs, Data-only eSIM, Keep your WhatsApp number), 1:1 + 1.91:1 image assets.</li>
+        <li><code>CF_UK_SEARCH_BRAND</code>: calafly, cala fly, calafly esim, cala esim, calafly.net.</li>
+        <li><code>CF_UK_DEMANDGEN_PROSPECTING</code>: custom segments from searches like "flights to dubai" and "esim turkey", plus in-market travel audiences. Statics 01–05 + both videos.</li>
+        <li><code>CF_UK_DEMANDGEN_REMARKETING</code>: site visitors in the last 30 days, split by country page. Statics 06 + 04 + video 02.</li>
+        <li>No Performance Max at launch: it would take spend from searches the Search campaigns already cover. Revisit in month 2 with brand exclusions.</li>
+      </ul></div>
+      <div class="box"><h3>Meta · 30%</h3><ul>
+        <li><code>CF_UK_META_PROSPECTING</code>: Sales objective, Purchase event, campaign budget. Ad sets USA / TURKEY / DUBAI, people living in the UK, 18+, Advantage+ audience with destination and airline interests as suggestions. Exclude purchasers from the last 180 days.</li>
+        <li>Ads: statics 01–05 with 1:1, 4:5 and 9:16 per placement, plus both videos.</li>
+        <li><code>CF_UK_META_RETARGETING</code>: ad set per country. Visitors to /usa, /turkey or /dubai in the last 30 days, plus 50% video viewers and engagers. Exclude purchasers. Keep frequency under 3 a week.</li>
+        <li>Ads: 06 Still planning, 04 Refund, video 02.</li>
+      </ul></div>
+    </div>
+    <div class="box"><h3>Tracking (week 0, before any spend)</h3><ul>
+      <li>Meta Pixel + Conversions API with deduplication. Google Ads purchase conversion with Enhanced Conversions, plus GA4.</li>
+      <li>Consent Mode v2 and a compliant cookie banner. Under UK GDPR and PECR, retargeting relies on consent.</li>
+      <li>Send purchase value and country with every purchase. Add an install event if CalaFly can send one: install rate and refund rate are the quality checks on this account.</li>
+    </ul></div>
+  </section>
+
+  <section id="creative">
+    <header><span class="eyebrow">Creative</span><h2>Six concepts per country</h2>
+      <p class="muted">The look is taken from the CalaFly brand: ink, teal and pink, heavy type, hard offset shadows. Each concept comes in four sizes. The 9:16 versions keep copy clear of the Reels and Stories controls and leave the CTA to Meta's own button.</p></header>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Country">
+        <button type="button" data-c="usa" aria-pressed="true">USA</button>
+        <button type="button" data-c="turkey" aria-pressed="false">Turkey</button>
+        <button type="button" data-c="dubai" aria-pressed="false">Dubai</button>
+      </div>
+      <div class="seg" role="group" aria-label="Size">
+        <button type="button" data-s="1x1" aria-pressed="true">1:1</button>
+        <button type="button" data-s="4x5" aria-pressed="false">4:5</button>
+        <button type="button" data-s="9x16" aria-pressed="false">9:16</button>
+        <button type="button" data-s="191x1" aria-pressed="false">1.91:1</button>
+      </div>
+    </div>
+    <div class="grid" data-country="usa"><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/usa/CALAFLY_USA_01_INTRO_MEET-CALAFLY_1x1.png" alt="Intro creative for USA, 1:1" loading="lazy"><img data-size="4x5" src="creatives/usa/CALAFLY_USA_01_INTRO_MEET-CALAFLY_4x5.png" alt="Intro creative for USA, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/usa/CALAFLY_USA_01_INTRO_MEET-CALAFLY_9x16.png" alt="Intro creative for USA, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/usa/CALAFLY_USA_01_INTRO_MEET-CALAFLY_191x1.png" alt="Intro creative for USA, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">01</span><b>Intro</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/usa/CALAFLY_USA_02_EASE_SET-UP-IN-MINUTES_1x1.png" alt="Easy setup creative for USA, 1:1" loading="lazy"><img data-size="4x5" src="creatives/usa/CALAFLY_USA_02_EASE_SET-UP-IN-MINUTES_4x5.png" alt="Easy setup creative for USA, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/usa/CALAFLY_USA_02_EASE_SET-UP-IN-MINUTES_9x16.png" alt="Easy setup creative for USA, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/usa/CALAFLY_USA_02_EASE_SET-UP-IN-MINUTES_191x1.png" alt="Easy setup creative for USA, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">02</span><b>Easy setup</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/usa/CALAFLY_USA_03_PRICE_PAY-ONCE_1x1.png" alt="Pay once creative for USA, 1:1" loading="lazy"><img data-size="4x5" src="creatives/usa/CALAFLY_USA_03_PRICE_PAY-ONCE_4x5.png" alt="Pay once creative for USA, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/usa/CALAFLY_USA_03_PRICE_PAY-ONCE_9x16.png" alt="Pay once creative for USA, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/usa/CALAFLY_USA_03_PRICE_PAY-ONCE_191x1.png" alt="Pay once creative for USA, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">03</span><b>Pay once</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/usa/CALAFLY_USA_04_REFUND_IF-NOT-INSTALLED_1x1.png" alt="Refund creative for USA, 1:1" loading="lazy"><img data-size="4x5" src="creatives/usa/CALAFLY_USA_04_REFUND_IF-NOT-INSTALLED_4x5.png" alt="Refund creative for USA, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/usa/CALAFLY_USA_04_REFUND_IF-NOT-INSTALLED_9x16.png" alt="Refund creative for USA, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/usa/CALAFLY_USA_04_REFUND_IF-NOT-INSTALLED_191x1.png" alt="Refund creative for USA, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">04</span><b>Refund</b><span class="role">Prospecting + retargeting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/usa/CALAFLY_USA_05_ALL-USP_DATA-SORTED_1x1.png" alt="All USPs creative for USA, 1:1" loading="lazy"><img data-size="4x5" src="creatives/usa/CALAFLY_USA_05_ALL-USP_DATA-SORTED_4x5.png" alt="All USPs creative for USA, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/usa/CALAFLY_USA_05_ALL-USP_DATA-SORTED_9x16.png" alt="All USPs creative for USA, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/usa/CALAFLY_USA_05_ALL-USP_DATA-SORTED_191x1.png" alt="All USPs creative for USA, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">05</span><b>All USPs</b><span class="role">Prospecting, Google image assets</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/usa/CALAFLY_USA_06_RETARGET_STILL-PLANNING_1x1.png" alt="Retarget creative for USA, 1:1" loading="lazy"><img data-size="4x5" src="creatives/usa/CALAFLY_USA_06_RETARGET_STILL-PLANNING_4x5.png" alt="Retarget creative for USA, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/usa/CALAFLY_USA_06_RETARGET_STILL-PLANNING_9x16.png" alt="Retarget creative for USA, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/usa/CALAFLY_USA_06_RETARGET_STILL-PLANNING_191x1.png" alt="Retarget creative for USA, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">06</span><b>Retarget</b><span class="role">Retargeting</span></figcaption>
+</figure></div>
+<div class="grid" data-country="turkey" hidden><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/turkey/CALAFLY_TURKEY_01_INTRO_MEET-CALAFLY_1x1.png" alt="Intro creative for Turkey, 1:1" loading="lazy"><img data-size="4x5" src="creatives/turkey/CALAFLY_TURKEY_01_INTRO_MEET-CALAFLY_4x5.png" alt="Intro creative for Turkey, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/turkey/CALAFLY_TURKEY_01_INTRO_MEET-CALAFLY_9x16.png" alt="Intro creative for Turkey, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/turkey/CALAFLY_TURKEY_01_INTRO_MEET-CALAFLY_191x1.png" alt="Intro creative for Turkey, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">01</span><b>Intro</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/turkey/CALAFLY_TURKEY_02_EASE_SET-UP-IN-MINUTES_1x1.png" alt="Easy setup creative for Turkey, 1:1" loading="lazy"><img data-size="4x5" src="creatives/turkey/CALAFLY_TURKEY_02_EASE_SET-UP-IN-MINUTES_4x5.png" alt="Easy setup creative for Turkey, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/turkey/CALAFLY_TURKEY_02_EASE_SET-UP-IN-MINUTES_9x16.png" alt="Easy setup creative for Turkey, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/turkey/CALAFLY_TURKEY_02_EASE_SET-UP-IN-MINUTES_191x1.png" alt="Easy setup creative for Turkey, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">02</span><b>Easy setup</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/turkey/CALAFLY_TURKEY_03_PRICE_PAY-ONCE_1x1.png" alt="Pay once creative for Turkey, 1:1" loading="lazy"><img data-size="4x5" src="creatives/turkey/CALAFLY_TURKEY_03_PRICE_PAY-ONCE_4x5.png" alt="Pay once creative for Turkey, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/turkey/CALAFLY_TURKEY_03_PRICE_PAY-ONCE_9x16.png" alt="Pay once creative for Turkey, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/turkey/CALAFLY_TURKEY_03_PRICE_PAY-ONCE_191x1.png" alt="Pay once creative for Turkey, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">03</span><b>Pay once</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/turkey/CALAFLY_TURKEY_04_REFUND_IF-NOT-INSTALLED_1x1.png" alt="Refund creative for Turkey, 1:1" loading="lazy"><img data-size="4x5" src="creatives/turkey/CALAFLY_TURKEY_04_REFUND_IF-NOT-INSTALLED_4x5.png" alt="Refund creative for Turkey, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/turkey/CALAFLY_TURKEY_04_REFUND_IF-NOT-INSTALLED_9x16.png" alt="Refund creative for Turkey, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/turkey/CALAFLY_TURKEY_04_REFUND_IF-NOT-INSTALLED_191x1.png" alt="Refund creative for Turkey, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">04</span><b>Refund</b><span class="role">Prospecting + retargeting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/turkey/CALAFLY_TURKEY_05_ALL-USP_DATA-SORTED_1x1.png" alt="All USPs creative for Turkey, 1:1" loading="lazy"><img data-size="4x5" src="creatives/turkey/CALAFLY_TURKEY_05_ALL-USP_DATA-SORTED_4x5.png" alt="All USPs creative for Turkey, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/turkey/CALAFLY_TURKEY_05_ALL-USP_DATA-SORTED_9x16.png" alt="All USPs creative for Turkey, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/turkey/CALAFLY_TURKEY_05_ALL-USP_DATA-SORTED_191x1.png" alt="All USPs creative for Turkey, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">05</span><b>All USPs</b><span class="role">Prospecting, Google image assets</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/turkey/CALAFLY_TURKEY_06_RETARGET_STILL-PLANNING_1x1.png" alt="Retarget creative for Turkey, 1:1" loading="lazy"><img data-size="4x5" src="creatives/turkey/CALAFLY_TURKEY_06_RETARGET_STILL-PLANNING_4x5.png" alt="Retarget creative for Turkey, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/turkey/CALAFLY_TURKEY_06_RETARGET_STILL-PLANNING_9x16.png" alt="Retarget creative for Turkey, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/turkey/CALAFLY_TURKEY_06_RETARGET_STILL-PLANNING_191x1.png" alt="Retarget creative for Turkey, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">06</span><b>Retarget</b><span class="role">Retargeting</span></figcaption>
+</figure></div>
+<div class="grid" data-country="dubai" hidden><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/dubai/CALAFLY_DUBAI_01_INTRO_MEET-CALAFLY_1x1.png" alt="Intro creative for Dubai, 1:1" loading="lazy"><img data-size="4x5" src="creatives/dubai/CALAFLY_DUBAI_01_INTRO_MEET-CALAFLY_4x5.png" alt="Intro creative for Dubai, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/dubai/CALAFLY_DUBAI_01_INTRO_MEET-CALAFLY_9x16.png" alt="Intro creative for Dubai, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/dubai/CALAFLY_DUBAI_01_INTRO_MEET-CALAFLY_191x1.png" alt="Intro creative for Dubai, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">01</span><b>Intro</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/dubai/CALAFLY_DUBAI_02_EASE_SET-UP-IN-MINUTES_1x1.png" alt="Easy setup creative for Dubai, 1:1" loading="lazy"><img data-size="4x5" src="creatives/dubai/CALAFLY_DUBAI_02_EASE_SET-UP-IN-MINUTES_4x5.png" alt="Easy setup creative for Dubai, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/dubai/CALAFLY_DUBAI_02_EASE_SET-UP-IN-MINUTES_9x16.png" alt="Easy setup creative for Dubai, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/dubai/CALAFLY_DUBAI_02_EASE_SET-UP-IN-MINUTES_191x1.png" alt="Easy setup creative for Dubai, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">02</span><b>Easy setup</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/dubai/CALAFLY_DUBAI_03_PRICE_PAY-ONCE_1x1.png" alt="Pay once creative for Dubai, 1:1" loading="lazy"><img data-size="4x5" src="creatives/dubai/CALAFLY_DUBAI_03_PRICE_PAY-ONCE_4x5.png" alt="Pay once creative for Dubai, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/dubai/CALAFLY_DUBAI_03_PRICE_PAY-ONCE_9x16.png" alt="Pay once creative for Dubai, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/dubai/CALAFLY_DUBAI_03_PRICE_PAY-ONCE_191x1.png" alt="Pay once creative for Dubai, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">03</span><b>Pay once</b><span class="role">Prospecting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/dubai/CALAFLY_DUBAI_04_REFUND_IF-NOT-INSTALLED_1x1.png" alt="Refund creative for Dubai, 1:1" loading="lazy"><img data-size="4x5" src="creatives/dubai/CALAFLY_DUBAI_04_REFUND_IF-NOT-INSTALLED_4x5.png" alt="Refund creative for Dubai, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/dubai/CALAFLY_DUBAI_04_REFUND_IF-NOT-INSTALLED_9x16.png" alt="Refund creative for Dubai, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/dubai/CALAFLY_DUBAI_04_REFUND_IF-NOT-INSTALLED_191x1.png" alt="Refund creative for Dubai, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">04</span><b>Refund</b><span class="role">Prospecting + retargeting</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/dubai/CALAFLY_DUBAI_05_ALL-USP_DATA-SORTED_1x1.png" alt="All USPs creative for Dubai, 1:1" loading="lazy"><img data-size="4x5" src="creatives/dubai/CALAFLY_DUBAI_05_ALL-USP_DATA-SORTED_4x5.png" alt="All USPs creative for Dubai, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/dubai/CALAFLY_DUBAI_05_ALL-USP_DATA-SORTED_9x16.png" alt="All USPs creative for Dubai, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/dubai/CALAFLY_DUBAI_05_ALL-USP_DATA-SORTED_191x1.png" alt="All USPs creative for Dubai, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">05</span><b>All USPs</b><span class="role">Prospecting, Google image assets</span></figcaption>
+</figure><figure class="ad">
+  <div class="frame"><img data-size="1x1" src="creatives/dubai/CALAFLY_DUBAI_06_RETARGET_STILL-PLANNING_1x1.png" alt="Retarget creative for Dubai, 1:1" loading="lazy"><img data-size="4x5" src="creatives/dubai/CALAFLY_DUBAI_06_RETARGET_STILL-PLANNING_4x5.png" alt="Retarget creative for Dubai, 4:5" loading="lazy" hidden><img data-size="9x16" src="creatives/dubai/CALAFLY_DUBAI_06_RETARGET_STILL-PLANNING_9x16.png" alt="Retarget creative for Dubai, 9:16" loading="lazy" hidden><img data-size="191x1" src="creatives/dubai/CALAFLY_DUBAI_06_RETARGET_STILL-PLANNING_191x1.png" alt="Retarget creative for Dubai, 1.91:1" loading="lazy" hidden></div>
+  <figcaption><span class="num">06</span><b>Retarget</b><span class="role">Retargeting</span></figcaption>
+</figure></div>
+  </section>
+
+  <section id="videos">
+    <header><span class="eyebrow">Video</span><h2>Two 15-second videos</h2>
+      <p class="muted">Each comes in 9:16 (Reels, Stories, Shorts) and 16:9 (YouTube, Demand Gen). They work with the sound off and ship with a silent track; add licensed music when uploading.</p></header>
+    <div class="videos">
+      <div class="video"><h3>01 · Meet CalaFly</h3><p class="muted">Prospecting on Meta, YouTube and Demand Gen</p>
+        <div class="players">
+          <video src="videos/CALAFLY_VIDEO_01_MEET-CALAFLY_9x16.mp4" controls muted playsinline preload="metadata"></video>
+          <video src="videos/CALAFLY_VIDEO_01_MEET-CALAFLY_16x9.mp4" controls muted playsinline preload="metadata"></video>
+        </div>
+        <ol><li>0–3s: Heading to the USA / Turkey / Dubai?</li><li>3–5s: Meet CalaFly</li><li>5–8s: Set up in minutes (QR scan)</li><li>8–11s: Pay once. Not per day.</li><li>11–13s: Plans changed? Refund.</li><li>13–15s: Data, sorted. Get Calafly.</li></ol>
+      </div>
+      <div class="video"><h3>02 · How it works</h3><p class="muted">Retargeting and mid-funnel</p>
+        <div class="players">
+          <video src="videos/CALAFLY_VIDEO_02_HOW-IT-WORKS_9x16.mp4" controls muted playsinline preload="metadata"></video>
+          <video src="videos/CALAFLY_VIDEO_02_HOW-IT-WORKS_16x9.mp4" controls muted playsinline preload="metadata"></video>
+        </div>
+        <ol><li>0–3s: Land connected.</li><li>3–6s: 1 · Pick your plan (USA, IST, DXB)</li><li>6–9s: 2 · Scan the QR code at home</li><li>9–11s: 3 · Data on arrival</li><li>11–13s: One price. Not per day. Refund.</li><li>13–15s: Get set up tonight.</li></ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="copy">
+    <header><span class="eyebrow">Copy</span><h2>Ad copy, checked against character limits</h2>
+      <p class="muted">The same text is in the CSV files in the <code>copy/</code> folder, ready for Google Ads Editor and Meta bulk upload. Shared negative keywords: free, jobs, job, career, login, log in, my account, customer service, contact number, phone number, contract, sim only deal, pay monthly, broadband, wifi router, pocket wifi, apn settings, unlock, hack, reddit.</p></header>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Copy country">
+        <button type="button" data-cc="usa" aria-pressed="true">USA</button>
+        <button type="button" data-cc="turkey" aria-pressed="false">Turkey</button>
+        <button type="button" data-cc="dubai" aria-pressed="false">Dubai</button>
+      </div>
+    </div>
+    <div class="copyset" data-country="usa">
+  <div class="two">
+    <div><h4>Google RSA headlines</h4><ol class="lines"><li><span>USA eSIM by CalaFly</span><i>19/30</i></li><li><span>Mobile Data for USA</span><i>19/30</i></li><li><span>Get Your USA eSIM</span><i>17/30</i></li><li><span>Set Up in Minutes</span><i>17/30</i></li><li><span>Pay Once, Not Per Day</span><i>21/30</i></li><li><span>One Price for Your Trip</span><i>23/30</i></li><li><span>Refund if Not Installed</span><i>23/30</i></li><li><span>Scan a QR Code at Home</span><i>22/30</i></li><li><span>Land Connected</span><i>14/30</i></li><li><span>Sorted Before You Fly</span><i>21/30</i></li><li><span>Data-Only Travel eSIM</span><i>21/30</i></li><li><span>Keep Your WhatsApp Number</span><i>25/30</i></li><li><span>Travel Data for USA</span><i>19/30</i></li><li><span>No Daily Charges From Us</span><i>24/30</i></li><li><span>Official Site: CalaFly</span><i>22/30</i></li></ol></div>
+    <div><h4>Google RSA descriptions</h4><ol class="lines"><li><span>Mobile data for the USA, sorted before you leave the UK. Scan a QR code, land connected.</span><i>88/90</i></li><li><span>Pay once for your whole trip, not per day. Set up in minutes from the sofa.</span><i>75/90</i></li><li><span>Plans changed? Get a refund if your eSIM is never installed. T&amp;Cs apply.</span><i>72/90</i></li><li><span>Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.</span><i>80/90</i></li></ol>
+      <h4 style="margin-top:28px">Keywords (phrase + exact)</h4><div class="kwg"><h5>eSIM</h5><p>usa esim, esim usa, esim for usa, us esim, esim for america, best esim for usa</p></div><div class="kwg"><h5>Data / SIM</h5><p>usa data sim, us sim card for travel, usa travel sim, mobile data usa holiday, sim card for usa from uk</p></div><div class="kwg"><h5>Roaming intent</h5><p>roaming in usa, using phone in usa from uk, mobile data in america from uk</p></div><div class="kwg"><h5>Destinations</h5><p>new york esim, orlando esim, florida esim, las vegas esim</p></div></div>
+  </div>
+  <h4 style="margin-top:36px">Meta ads</h4>
+  <div class="tablewrap"><table class="meta"><thead><tr><th>Ad</th><th>Primary text</th><th>Headline / description</th></tr></thead><tbody><tr><td><span class="pill prospecting">prospecting</span><br><code>01_INTRO</code></td>
+<td class="pt">Meet CalaFly: mobile data for the USA, sorted before you leave the UK.<br><br>Pick your USA plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&amp;Cs apply).</td><td><b>Meet CalaFly</b><br><span class="muted">USA data, sorted before you fly</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>02_EASE</code></td>
+<td class="pt">Set up your USA data in minutes, from the sofa.<br><br>1. Pick your plan<br>2. Scan the QR code<br>3. Land connected<br><br>Data-only eSIM. Your WhatsApp number stays the same.</td><td><b>Set up in minutes</b><br><span class="muted">Scan a QR code at home</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>03_PRICE</code></td>
+<td class="pt">Pay once. Not per day.<br><br>CalaFly gives you one price for your whole trip to the USA. No daily charges from us, whether you stay for a long weekend or two weeks.</td><td><b>Pay once, not per day</b><br><span class="muted">One price for your whole trip</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>04_REFUND</code></td>
+<td class="pt">Plans changed? If you never install your USA eSIM, you can get your money back.<br><br>Refund if not installed. T&amp;Cs apply, see calafly.net.</td><td><b>Refund if not installed</b><br><span class="muted">Book your data with confidence</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>05_ALL-USP</code></td>
+<td class="pt">USA data, sorted.<br><br>✓ Set up in minutes<br>✓ Pay once, not per day<br>✓ Refund if not installed (T&amp;Cs apply)<br><br>Data-only eSIM for unlocked, eSIM-compatible phones.</td><td><b>USA data, sorted</b><br><span class="muted">Set up in minutes. Pay once.</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>VIDEO_01</code></td>
+<td class="pt">Flying from the UK to the USA? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&amp;Cs apply.</td><td><b>Meet CalaFly</b><br><span class="muted">Data for the USA, sorted</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>VIDEO_02</code></td>
+<td class="pt">How CalaFly works: pick your USA plan, scan the QR code at home, land connected. One price for the trip.</td><td><b>Land connected in USA</b><br><span class="muted">Three steps, done before you fly</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>06_RETARGET</code></td>
+<td class="pt">Still planning the USA? Your data can be sorted tonight.<br><br>One price for the trip, set up in minutes, and a refund if you never install it (T&amp;Cs apply).</td><td><b>Still planning USA?</b><br><span class="muted">Your data, sorted tonight</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>04_REFUND</code></td>
+<td class="pt">Not sure your plans are fixed? Book your USA eSIM now. If you never install it, you can get a refund. T&amp;Cs apply.</td><td><b>Refund if not installed</b><br><span class="muted">Book now, decide later</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>VIDEO_02</code></td>
+<td class="pt">Three steps and you&#x27;re connected in the USA. Pick, scan, land. Pay once, not per day.</td><td><b>Pick. Scan. Land connected.</b><br><span class="muted">Set up in minutes</span></td></tr></tbody></table></div>
+</div>
+<div class="copyset" data-country="turkey" hidden>
+  <div class="two">
+    <div><h4>Google RSA headlines</h4><ol class="lines"><li><span>Turkey eSIM by CalaFly</span><i>22/30</i></li><li><span>Mobile Data for Turkey</span><i>22/30</i></li><li><span>Get Your Turkey eSIM</span><i>20/30</i></li><li><span>Set Up in Minutes</span><i>17/30</i></li><li><span>Pay Once, Not Per Day</span><i>21/30</i></li><li><span>One Price for Your Trip</span><i>23/30</i></li><li><span>Refund if Not Installed</span><i>23/30</i></li><li><span>Scan a QR Code at Home</span><i>22/30</i></li><li><span>Land Connected</span><i>14/30</i></li><li><span>Sorted Before You Fly</span><i>21/30</i></li><li><span>Data-Only Travel eSIM</span><i>21/30</i></li><li><span>Keep Your WhatsApp Number</span><i>25/30</i></li><li><span>Travel Data for Turkey</span><i>22/30</i></li><li><span>No Daily Charges From Us</span><i>24/30</i></li><li><span>Official Site: CalaFly</span><i>22/30</i></li></ol></div>
+    <div><h4>Google RSA descriptions</h4><ol class="lines"><li><span>Mobile data for Turkey, sorted before you leave the UK. Scan a QR code, land connected.</span><i>87/90</i></li><li><span>Pay once for your whole trip, not per day. Set up in minutes from the sofa.</span><i>75/90</i></li><li><span>Plans changed? Get a refund if your eSIM is never installed. T&amp;Cs apply.</span><i>72/90</i></li><li><span>Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.</span><i>80/90</i></li></ol>
+      <h4 style="margin-top:28px">Keywords (phrase + exact)</h4><div class="kwg"><h5>eSIM</h5><p>turkey esim, esim turkey, esim for turkey, best esim for turkey</p></div><div class="kwg"><h5>Data / SIM</h5><p>turkey data sim, turkey travel sim, sim card for turkey from uk, mobile data turkey holiday</p></div><div class="kwg"><h5>Roaming intent</h5><p>roaming in turkey, using phone in turkey from uk, mobile data in turkey</p></div><div class="kwg"><h5>Destinations</h5><p>istanbul esim, antalya esim, antalya sim card, dalaman sim card</p></div></div>
+  </div>
+  <h4 style="margin-top:36px">Meta ads</h4>
+  <div class="tablewrap"><table class="meta"><thead><tr><th>Ad</th><th>Primary text</th><th>Headline / description</th></tr></thead><tbody><tr><td><span class="pill prospecting">prospecting</span><br><code>01_INTRO</code></td>
+<td class="pt">Meet CalaFly: mobile data for Turkey, sorted before you leave the UK.<br><br>Pick your Turkey plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&amp;Cs apply).</td><td><b>Meet CalaFly</b><br><span class="muted">Turkey data, sorted before you fly</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>02_EASE</code></td>
+<td class="pt">Set up your Turkey data in minutes, from the sofa.<br><br>1. Pick your plan<br>2. Scan the QR code<br>3. Land connected<br><br>Data-only eSIM. Your WhatsApp number stays the same.</td><td><b>Set up in minutes</b><br><span class="muted">Scan a QR code at home</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>03_PRICE</code></td>
+<td class="pt">Pay once. Not per day.<br><br>CalaFly gives you one price for your whole trip to Turkey. No daily charges from us, whether you stay for a long weekend or two weeks.</td><td><b>Pay once, not per day</b><br><span class="muted">One price for your whole trip</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>04_REFUND</code></td>
+<td class="pt">Plans changed? If you never install your Turkey eSIM, you can get your money back.<br><br>Refund if not installed. T&amp;Cs apply, see calafly.net.</td><td><b>Refund if not installed</b><br><span class="muted">Book your data with confidence</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>05_ALL-USP</code></td>
+<td class="pt">Turkey data, sorted.<br><br>✓ Set up in minutes<br>✓ Pay once, not per day<br>✓ Refund if not installed (T&amp;Cs apply)<br><br>Data-only eSIM for unlocked, eSIM-compatible phones.</td><td><b>Turkey data, sorted</b><br><span class="muted">Set up in minutes. Pay once.</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>VIDEO_01</code></td>
+<td class="pt">Flying from the UK to Turkey? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&amp;Cs apply.</td><td><b>Meet CalaFly</b><br><span class="muted">Data for Turkey, sorted</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>VIDEO_02</code></td>
+<td class="pt">How CalaFly works: pick your Turkey plan, scan the QR code at home, land connected. One price for the trip.</td><td><b>Land connected in Turkey</b><br><span class="muted">Three steps, done before you fly</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>06_RETARGET</code></td>
+<td class="pt">Still planning Turkey? Your data can be sorted tonight.<br><br>One price for the trip, set up in minutes, and a refund if you never install it (T&amp;Cs apply).</td><td><b>Still planning Turkey?</b><br><span class="muted">Your data, sorted tonight</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>04_REFUND</code></td>
+<td class="pt">Not sure your plans are fixed? Book your Turkey eSIM now. If you never install it, you can get a refund. T&amp;Cs apply.</td><td><b>Refund if not installed</b><br><span class="muted">Book now, decide later</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>VIDEO_02</code></td>
+<td class="pt">Three steps and you&#x27;re connected in Turkey. Pick, scan, land. Pay once, not per day.</td><td><b>Pick. Scan. Land connected.</b><br><span class="muted">Set up in minutes</span></td></tr></tbody></table></div>
+</div>
+<div class="copyset" data-country="dubai" hidden>
+  <div class="two">
+    <div><h4>Google RSA headlines</h4><ol class="lines"><li><span>Dubai eSIM by CalaFly</span><i>21/30</i></li><li><span>Mobile Data for Dubai</span><i>21/30</i></li><li><span>Get Your Dubai eSIM</span><i>19/30</i></li><li><span>Set Up in Minutes</span><i>17/30</i></li><li><span>Pay Once, Not Per Day</span><i>21/30</i></li><li><span>One Price for Your Trip</span><i>23/30</i></li><li><span>Refund if Not Installed</span><i>23/30</i></li><li><span>Scan a QR Code at Home</span><i>22/30</i></li><li><span>Land Connected</span><i>14/30</i></li><li><span>Sorted Before You Fly</span><i>21/30</i></li><li><span>Data-Only Travel eSIM</span><i>21/30</i></li><li><span>Keep Your WhatsApp Number</span><i>25/30</i></li><li><span>Travel Data for Dubai</span><i>21/30</i></li><li><span>No Daily Charges From Us</span><i>24/30</i></li><li><span>Official Site: CalaFly</span><i>22/30</i></li></ol></div>
+    <div><h4>Google RSA descriptions</h4><ol class="lines"><li><span>Mobile data for Dubai, sorted before you leave the UK. Scan a QR code, land connected.</span><i>86/90</i></li><li><span>Pay once for your whole trip, not per day. Set up in minutes from the sofa.</span><i>75/90</i></li><li><span>Plans changed? Get a refund if your eSIM is never installed. T&amp;Cs apply.</span><i>72/90</i></li><li><span>Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays.</span><i>80/90</i></li></ol>
+      <h4 style="margin-top:28px">Keywords (phrase + exact)</h4><div class="kwg"><h5>eSIM</h5><p>dubai esim, esim dubai, uae esim, esim for dubai, best esim for dubai</p></div><div class="kwg"><h5>Data / SIM</h5><p>dubai data sim, dubai tourist sim, sim card for dubai from uk, mobile data dubai holiday</p></div><div class="kwg"><h5>Roaming intent</h5><p>roaming in dubai, using phone in dubai from uk, mobile data in uae</p></div><div class="kwg"><h5>Destinations</h5><p>abu dhabi esim, uae travel sim</p></div></div>
+  </div>
+  <h4 style="margin-top:36px">Meta ads</h4>
+  <div class="tablewrap"><table class="meta"><thead><tr><th>Ad</th><th>Primary text</th><th>Headline / description</th></tr></thead><tbody><tr><td><span class="pill prospecting">prospecting</span><br><code>01_INTRO</code></td>
+<td class="pt">Meet CalaFly: mobile data for Dubai, sorted before you leave the UK.<br><br>Pick your Dubai plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&amp;Cs apply).</td><td><b>Meet CalaFly</b><br><span class="muted">Dubai data, sorted before you fly</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>02_EASE</code></td>
+<td class="pt">Set up your Dubai data in minutes, from the sofa.<br><br>1. Pick your plan<br>2. Scan the QR code<br>3. Land connected<br><br>Data-only eSIM. Your WhatsApp number stays the same.</td><td><b>Set up in minutes</b><br><span class="muted">Scan a QR code at home</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>03_PRICE</code></td>
+<td class="pt">Pay once. Not per day.<br><br>CalaFly gives you one price for your whole trip to Dubai. No daily charges from us, whether you stay for a long weekend or two weeks.</td><td><b>Pay once, not per day</b><br><span class="muted">One price for your whole trip</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>04_REFUND</code></td>
+<td class="pt">Plans changed? If you never install your Dubai eSIM, you can get your money back.<br><br>Refund if not installed. T&amp;Cs apply, see calafly.net.</td><td><b>Refund if not installed</b><br><span class="muted">Book your data with confidence</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>05_ALL-USP</code></td>
+<td class="pt">Dubai data, sorted.<br><br>✓ Set up in minutes<br>✓ Pay once, not per day<br>✓ Refund if not installed (T&amp;Cs apply)<br><br>Data-only eSIM for unlocked, eSIM-compatible phones.</td><td><b>Dubai data, sorted</b><br><span class="muted">Set up in minutes. Pay once.</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>VIDEO_01</code></td>
+<td class="pt">Flying from the UK to Dubai? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&amp;Cs apply.</td><td><b>Meet CalaFly</b><br><span class="muted">Data for Dubai, sorted</span></td></tr><tr><td><span class="pill prospecting">prospecting</span><br><code>VIDEO_02</code></td>
+<td class="pt">How CalaFly works: pick your Dubai plan, scan the QR code at home, land connected. One price for the trip.</td><td><b>Land connected in Dubai</b><br><span class="muted">Three steps, done before you fly</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>06_RETARGET</code></td>
+<td class="pt">Still planning Dubai? Your data can be sorted tonight.<br><br>One price for the trip, set up in minutes, and a refund if you never install it (T&amp;Cs apply).</td><td><b>Still planning Dubai?</b><br><span class="muted">Your data, sorted tonight</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>04_REFUND</code></td>
+<td class="pt">Not sure your plans are fixed? Book your Dubai eSIM now. If you never install it, you can get a refund. T&amp;Cs apply.</td><td><b>Refund if not installed</b><br><span class="muted">Book now, decide later</span></td></tr><tr><td><span class="pill retargeting">retargeting</span><br><code>VIDEO_02</code></td>
+<td class="pt">Three steps and you&#x27;re connected in Dubai. Pick, scan, land. Pay once, not per day.</td><td><b>Pick. Scan. Land connected.</b><br><span class="muted">Set up in minutes</span></td></tr></tbody></table></div>
+</div>
+  </section>
+
+  <section id="compliance">
+    <header><span class="eyebrow">UK ad rules</span><h2>Compliance: <span class="hl">built in, plus six sign-offs</span></h2></header>
+    <div class="cols">
+      <div class="box"><h3>Already in every ad</h3><ul class="check">
+        <li>No competitors named and no comparisons. No "cheapest", "best", "unlimited", "5G" or "free". Every claim is about CalaFly only (CAP Code 3.33–3.44).</li>
+        <li>Material information on every ad: data-only eSIM, needs an unlocked eSIM-compatible phone (CAP 3.3).</li>
+        <li>The refund claim always carries "Refund if your eSIM is not installed. T&amp;Cs apply, see calafly.net." (CAP 3.9–3.10)</li>
+        <li>"Set up in minutes", not a specific minute count that would need proof.</li>
+        <li>No flags, maps, landmarks, or religious or national symbols. Destinations appear only as airport codes. Nothing political.</li>
+        <li>No countdowns or false urgency. Retargeting never says "we saw you".</li>
+        <li>Small print at least 24px on a 1080px canvas, in high contrast.</li>
+      </ul></div>
+      <div class="box"><h3>CalaFly must confirm before launch</h3><ol class="block">
+        <li><b>Pay once:</b> no plan for these destinations has a daily charge, auto-renewal or automatic top-up.</li>
+        <li><b>Refund terms:</b> what "not installed" means, the time window and how to claim, shown on the landing page and at checkout. A short deadline goes into the ad small print.</li>
+        <li><b>Setup time:</b> a typical install time that backs up "minutes".</li>
+        <li><b>WhatsApp line:</b> true because the eSIM is data-only and the main SIM stays. The landing page should explain it.</li>
+        <li><b>Brand name:</b> the logo reads CALA, the CTA says Calafly. Pick one.</li>
+        <li><b>Price:</b> add "from £X" only when it matches the landing page exactly.</li>
+      </ol></div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <header><span class="eyebrow">Plan</span><h2>First eight weeks</h2></header>
+    <div class="phases">
+      <div class="phase"><span class="wk">WEEK 0 · SET UP</span><h3>Set up</h3><p>Tracking QA, claim sign-off, landing-page message match per country, refund T&amp;Cs page live.</p></div>
+      <div class="phase"><span class="wk">WEEKS 1–2 · LEARN</span><h3>Learn</h3><p>Everything live. No edits for the first 72 hours. The Thursday competitive review starts.</p></div>
+      <div class="phase"><span class="wk">WEEKS 3–4 · CUT</span><h3>Cut</h3><p>Pause any ad that has spent twice the target cost per purchase with no purchases. Move Search to target CPA. Rebalance countries.</p></div>
+      <div class="phase"><span class="wk">WEEKS 5–8 · SCALE</span><h3>Scale</h3><p>Raise budget 20% every 3–4 days on campaigns under target. Round 2 creative built from what won.</p></div>
+    </div>
+    <p class="muted">KPIs: cost per purchase (primary), ROAS, landing-page conversion rate, CTR and CPC, 3-second video view rate, install rate, refund rate.</p>
+  </section>
+
+  <section id="suggestions">
+    <header><span class="eyebrow">Suggestions</span><h2>What would lift results most</h2></header>
+    <ol class="recs">
+      <li><div><b>Show the price once it's confirmed.</b><span class="muted">"Pay once" lands much harder with a number next to it. The templates take a price line in minutes.</span></div></li>
+      <li><div><b>Match each landing page to its ads.</b><span class="muted">Use the same headline per country, with refund terms and a phone-compatibility checker above the fold, plus Apple Pay and Google Pay.</span></div></li>
+      <li><div><b>Send an install reminder about 48 hours before the flight.</b><span class="muted">More installs, fewer refunds, fewer support tickets.</span></div></li>
+      <li><div><b>Round 2: creator-style arrival videos.</b><span class="muted">The phone connects as the plane lands, with the winning USP as the hook.</span></div></li>
+      <li><div><b>Add reviews as soon as there are any.</b><span class="muted">A new brand asking for card details needs social proof. A rating line slots into the refund and all-USP concepts.</span></div></li>
+    </ol>
+  </section>
+
+  <footer>tnt. × CalaFly. The files, copy CSVs and render scripts live in <code>clients/calafly/uk-launch-oct26/</code> in the TNT repo.</footer>
+</div>
+
+<script>
+(function () {
+  let country = "usa", size = "1x1";
+  const grids = document.querySelectorAll(".grid[data-country]");
+  function apply() {
+    grids.forEach(g => {
+      g.hidden = g.dataset.country !== country;
+      g.classList.toggle("tall", size === "9x16");
+      g.querySelectorAll("img").forEach(i => { i.hidden = i.dataset.size !== size; });
+    });
+  }
+  function press(group, btn) { group.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === btn))); }
+  document.querySelectorAll("[data-c]").forEach(b => b.addEventListener("click", () => { country = b.dataset.c; press(b.parentElement, b); apply(); }));
+  document.querySelectorAll("[data-s]").forEach(b => b.addEventListener("click", () => { size = b.dataset.s; press(b.parentElement, b); apply(); }));
+  document.querySelectorAll("[data-cc]").forEach(b => b.addEventListener("click", () => {
+    press(b.parentElement, b);
+    document.querySelectorAll(".copyset").forEach(s => { s.hidden = s.dataset.country !== b.dataset.cc; });
+  }));
+})();
+</script>

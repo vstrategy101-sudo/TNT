@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "CF"; src: local("Inter Display Bold"), local("InterDisplay-Bold"); font-weight: 700; }
+@font-face { font-family: "CF"; src: local("Inter Display ExtraBold"), local("InterDisplay-ExtraBold"); font-weight: 800; }
+@font-face { font-family: "CF"; src: local("Inter Display SemiBold"), local("InterDisplay-SemiBold"); font-weight: 600; }
+@font-face { font-family: "CF"; src: local("Inter Display Medium"), local("InterDisplay-Medium"); font-weight: 500; }
+
+:root {
+  --ink: #0b0d10; --panel: #16191e; --teal: #18c8a8; --pink: #ff4d6a;
+  --blue: #2f6bff; --yellow: #ffe14a; --white: #ffffff; --muted: #b7c0c8; --mist: #f4f7fb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: "CF", "Inter", sans-serif; -webkit-font-smoothing: antialiased; }
+
+/* ---------- canvas ---------- */
+#ad { position: relative; overflow: hidden; display: flex; flex-direction: column; color: var(--white); background: var(--ink); }
+.s-1x1  { width: 1080px; height: 1080px; padding: 56px 60px 48px; }
+.s-4x5  { width: 1080px; height: 1350px; padding: 64px 60px 56px; }
+/* 9:16 keeps logo, copy and CTA inside the Reels/Stories safe zone (≈250px top, ≈560px bottom) */
+.s-9x16 { width: 1080px; height: 1920px; padding: 250px 64px 0; }
+.s-191x1 { width: 1920px; height: 1005px; padding: 64px 80px 56px; zoom: 0.625; }
+
+#ad.theme-light { background: var(--white); color: var(--ink); }
+#ad.theme-teal  { background: var(--teal);  color: var(--ink); }
+
+.top { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 3; }
+.main { flex: 1; display: flex; flex-direction: column; position: relative; z-index: 2; min-height: 0; }
+.s-191x1 .main { flex-direction: row; align-items: center; gap: 64px; }
+.copy { position: relative; z-index: 2; margin-top: 40px; }
+.s-191x1 .copy { flex: 1.05; margin-top: 0; }
+.visual { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; min-height: 0; }
+.s-191x1 .visual { flex: 1; height: 100%; }
+
+.foot { position: relative; z-index: 3; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+.s-9x16 .foot { flex: 0 0 auto; padding-top: 28px; }
+.below { display: none; }
+.s-9x16 .below { display: block; flex: 0 0 600px; position: relative; margin: 0 -64px; }
+
+/* ---------- logo ---------- */
+.logo { display: inline-flex; align-items: center; gap: 14px; border: 4px solid currentColor; border-radius: 22px; padding: 14px 22px 14px 16px; font-weight: 800; font-size: 40px; letter-spacing: -0.02em; line-height: 1; }
+.logo .dot { width: 46px; height: 46px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
+.logo .dot::after { content: ""; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); }
+.logo .la { color: var(--teal); }
+.theme-teal .logo .dot { background: var(--ink); }
+.theme-teal .logo .dot::after { background: var(--teal); }
+.theme-teal .logo .la { color: var(--white); }
+
+/* ---------- type ---------- */
+.tag { display: inline-block; background: var(--white); color: var(--ink); border: 4px solid var(--ink); border-radius: 999px; padding: 10px 22px 9px; font-weight: 800; font-size: 26px; letter-spacing: 0.12em; text-transform: uppercase; box-shadow: 6px 6px 0 var(--teal); }
+.theme-teal .tag { box-shadow: 6px 6px 0 var(--ink); }
+h1 { font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; font-size: 112px; margin-top: 26px; }
+.s-9x16 h1 { font-size: 124px; }
+.s-191x1 h1 { font-size: 118px; }
+h1 .hl { color: var(--pink); }
+.theme-teal h1 .hl { color: var(--white); }
+.sub { font-weight: 600; font-size: 40px; line-height: 1.18; letter-spacing: -0.015em; margin-top: 22px; max-width: 900px; }
+.theme-dark .sub { color: #e9eef2; }
+.s-191x1 .sub { font-size: 42px; }
+
+/* ---------- CTA + small print ---------- */
+.cta { display: inline-flex; align-items: center; background: var(--blue); color: var(--white); font-weight: 800; font-size: 36px; letter-spacing: -0.02em; padding: 22px 36px; border-radius: 999px; border: 4px solid var(--ink); box-shadow: 7px 7px 0 var(--ink); white-space: nowrap; }
+.theme-dark .cta { border-color: var(--white); box-shadow: 7px 7px 0 var(--teal); }
+.small { font-weight: 500; font-size: 24px; line-height: 1.35; color: var(--muted); max-width: 640px; }
+.theme-light .small { color: #59616b; }
+.theme-teal .small { color: #0b3b33; }
+.url { font-weight: 800; font-size: 30px; color: var(--teal); letter-spacing: -0.01em; }
+.theme-light .url { color: var(--ink); }
+.theme-teal .url { color: var(--ink); }
+.footcol { display: flex; flex-direction: column; gap: 10px; }
+.s-9x16 .foot { flex-direction: column; align-items: flex-start; gap: 22px; }
+
+/* ---------- shared visual pieces ---------- */
+.card { background: var(--white); color: var(--ink); border: 5px solid var(--ink); border-radius: 30px; box-shadow: 14px 14px 0 var(--teal); }
+.theme-light .card, .theme-teal .card { box-shadow: 14px 14px 0 var(--ink); }
+.mono { font-family: "DejaVu Sans Mono", monospace; font-weight: 700; letter-spacing: 0.04em; }
+.label { font-weight: 800; font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; }
+
+/* bag tag */
+.bagtag { position: relative; width: 430px; padding: 70px 40px 40px; transform: rotate(-6deg); text-align: center; }
+.bagtag::before { content: ""; position: absolute; top: 24px; left: 50%; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; border: 5px solid var(--ink); background: var(--teal); }
+.bagtag .code { font-weight: 800; font-size: 150px; letter-spacing: -0.05em; line-height: 0.9; }
+.bagtag .codes { font-size: 34px; margin-top: 14px; }
+.bagtag .city { font-size: 24px; margin-top: 10px; }
+.string { position: absolute; top: -140px; left: 50%; width: 5px; height: 170px; background: currentColor; transform-origin: bottom; }
+
+/* phone */
+.phone { position: relative; width: 330px; height: 620px; border: 6px solid var(--ink); border-radius: 56px; background: var(--white); box-shadow: 14px 14px 0 var(--teal); padding: 26px 20px; display: flex; flex-direction: column; color: var(--ink); }
+.theme-light .phone, .theme-teal .phone { box-shadow: 14px 14px 0 var(--ink); }
+.phone .notch { width: 110px; height: 24px; border-radius: 99px; background: var(--ink); margin: 0 auto 28px; }
+.phone .bars { display: flex; gap: 8px; align-items: flex-end; justify-content: center; height: 90px; margin-top: 30px; }
+.phone .bars i { display: block; width: 26px; background: var(--teal); border: 4px solid var(--ink); border-radius: 6px; }
+.phone .status { text-align: center; font-weight: 800; font-size: 46px; letter-spacing: -0.03em; line-height: 1; margin-top: 34px; }
+.phone .where { text-align: center; font-size: 24px; margin-top: 14px; }
+.phone .chip { margin: auto auto 10px; background: var(--ink); color: var(--teal); border-radius: 99px; padding: 12px 22px; font-size: 22px; }
+
+/* QR */
+.qr { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; width: 230px; height: 230px; margin: 10px auto 0; }
+.qr i { background: var(--ink); border-radius: 3px; }
+.qr i.o { background: transparent; }
+
+/* stamp */
+.stamp { position: relative; width: 470px; height: 470px; border-radius: 50%; background: var(--pink); border: 6px solid var(--ink); box-shadow: 16px 16px 0 var(--ink); display: grid; place-items: center; transform: rotate(-9deg); color: var(--ink); }
+.theme-dark .stamp { box-shadow: 16px 16px 0 var(--teal); }
+.stamp::before { content: ""; position: absolute; inset: 30px; border-radius: 50%; border: 5px dashed var(--ink); }
+.stamp .big { font-weight: 800; font-size: 104px; letter-spacing: -0.05em; line-height: 0.9; text-align: center; }
+.stamp .lil { display: block; font-size: 38px; letter-spacing: -0.02em; margin-top: 10px; }
+
+/* sticker */
+.sticker { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: var(--yellow); color: var(--ink); border: 5px solid var(--ink); display: grid; place-items: center; text-align: center; font-weight: 800; font-size: 36px; line-height: 0.95; letter-spacing: -0.03em; transform: rotate(12deg); z-index: 4; }
+
+/* steps */
+.steps { display: flex; flex-direction: column; gap: 26px; width: 100%; }
+.step { display: flex; align-items: center; gap: 28px; padding: 24px 30px; }
+.step .n { flex: 0 0 auto; width: 82px; height: 82px; border-radius: 20px; border: 5px solid var(--ink); display: grid; place-items: center; font-weight: 800; font-size: 46px; background: var(--teal); }
+.step:nth-child(3) .n { background: var(--pink); }
+.step .t { font-weight: 800; font-size: 44px; letter-spacing: -0.03em; line-height: 1; }
+.step .d { font-weight: 600; font-size: 26px; margin-top: 8px; color: #3a414a; }
+
+/* week strip */
+.week { width: 100%; padding: 34px 34px 38px; }
+.week .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 18px; }
+.week .day { border: 4px solid var(--ink); border-radius: 16px; padding: 16px 6px; text-align: center; background: var(--mist); }
+.week .day b { display: block; font-weight: 800; font-size: 22px; letter-spacing: 0.06em; }
+.week .day span { display: block; font-size: 34px; margin-top: 8px; color: var(--teal); }
+.week .bar { margin-top: 22px; background: var(--teal); border: 4px solid var(--ink); border-radius: 18px; padding: 20px 26px; display: flex; justify-content: space-between; align-items: center; }
+.week .bar .k { font-weight: 800; font-size: 40px; letter-spacing: -0.03em; }
+.week .bar .v { font-weight: 800; font-size: 26px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* checklist */
+.checks { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.check { display: flex; align-items: center; gap: 24px; padding: 22px 28px; }
+.check .tick { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 50%; border: 5px solid var(--ink); background: var(--teal); display: grid; place-items: center; }
+.check .tick svg { width: 34px; height: 34px; }
+.check:nth-child(2) .tick { background: var(--yellow); }
+.check:nth-child(3) .tick { background: var(--pink); }
+.check .t { font-weight: 800; font-size: 42px; letter-spacing: -0.03em; line-height: 1.02; }
+.check .d { font-weight: 600; font-size: 24px; color: #3a414a; margin-top: 6px; }
+
+/* boarding pass */
+.pass { width: 100%; max-width: 900px; padding: 0 0 30px; overflow: hidden; transform: rotate(-3deg); }
+.pass .hd { background: var(--ink); color: var(--white); display: flex; justify-content: space-between; padding: 20px 30px; }
+.pass .hd .label:last-child { color: var(--teal); }
+.pass .route { display: flex; justify-content: space-between; align-items: flex-end; padding: 26px 34px 0; }
+.pass .route small { display: block; font-weight: 800; font-size: 18px; letter-spacing: 0.16em; color: #59616b; }
+.pass .route b { display: block; font-weight: 800; font-size: 74px; letter-spacing: -0.04em; line-height: 1; margin-top: 6px; }
+.pass .arrow { font-size: 60px; padding-bottom: 6px; }
+.pass .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 24px 34px 0; }
+.pass .row small { display: block; font-weight: 800; font-size: 17px; letter-spacing: 0.16em; color: #59616b; }
+.pass .row b { display: block; font-weight: 800; font-size: 30px; letter-spacing: -0.01em; margin-top: 6px; }
+.pass .perf { border-top: 5px dotted var(--ink); margin: 26px 34px 0; }
+.pass .barcode { display: flex; gap: 6px; height: 64px; margin: 22px 34px 0; }
+.pass .barcode i { flex: 1; background: var(--ink); }
+.pass .barcode i.t { background: var(--teal); }
+.pass .barcode i.g { background: transparent; }
+
+/* decorative ground for 9:16 lower band */
+.ticker { position: absolute; left: 0; right: 0; top: 70px; background: var(--teal); color: var(--ink); border-top: 5px solid var(--ink); border-bottom: 5px solid var(--ink); padding: 22px 0; white-space: nowrap; overflow: hidden; font-size: 40px; transform: rotate(-4deg); }
+.theme-teal .ticker { background: var(--ink); color: var(--teal); }
+.ticker span { padding: 0 26px; }
+.giant { position: absolute; left: 40px; right: 0; top: 190px; font-weight: 800; font-size: 330px; letter-spacing: -0.06em; line-height: 1; color: transparent; -webkit-text-stroke: 5px var(--teal); white-space: nowrap; opacity: .55; }
+.theme-teal .giant { -webkit-text-stroke-color: var(--ink); opacity: .35; }
+.theme-light .giant { -webkit-text-stroke-color: var(--ink); opacity: .14; }
+</style>
+</head>
+<body>
+<div id="ad"></div>
+<script>
+const P = new URLSearchParams(location.search);
+const country = P.get("c") || "dubai";
+const concept = P.get("k") || "intro";
+const size = P.get("s") || "1x1";
+
+const COUNTRIES = {
+  usa:    { name: "the USA", short: "USA", tag: "USA", codes: ["JFK", "LAX", "MCO"], code: "USA", city: "New York · LA · Orlando", in: "in the USA" },
+  turkey: { name: "Turkey",  short: "Turkey", tag: "Turkey", codes: ["IST", "AYT", "DLM"], code: "IST", city: "Istanbul · Antalya · Dalaman", in: "in Turkey" },
+  dubai:  { name: "Dubai",   short: "Dubai", tag: "Dubai", codes: ["DXB"], code: "DXB", city: "Dubai International", in: "in Dubai" },
+};
+const C = COUNTRIES[country];
+
+// Standard qualifications (CAP Code 3.9/3.10): shown on every ad, plus refund terms where refund is claimed.
+const BASE_SMALL = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
+const REFUND_SMALL = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+
+const logo = `<div class="logo"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>`;
+const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="#0b0d10" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>`;
+
+function qr() {
+  // deterministic pseudo-QR pattern with three finder squares
+  const on = (r, c) => {
+    const f = (r0, c0) => r >= r0 && r < r0 + 3 && c >= c0 && c < c0 + 3;
+    if (f(0,0) || f(0,6) || f(6,0)) return !(r % 3 === 1 && c % 3 === 1 && false);
+    return ((r * 7 + c * 13 + r * c) % 5) < 2;
+  };
+  let s = "";
+  for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) s += `<i class="${on(r,c) ? "" : "o"}"></i>`;
+  return `<div class="qr">${s}</div>`;
+}
+
+function barcode() {
+  let s = "";
+  for (let i = 0; i < 46; i++) s += `<i class="${i % 7 === 3 ? "t" : (i * 11) % 5 === 0 ? "g" : ""}"></i>`;
+  return `<div class="barcode">${s}</div>`;
+}
+
+const bagtag = (rot = -6) => `
+  <div class="card bagtag" style="transform:rotate(${rot}deg)">
+    <div class="label">Bag tag</div>
+    <div class="code">${C.code}</div>
+    <div class="mono codes">${C.codes.join(" · ")}</div>
+    <div class="city label" style="letter-spacing:.08em">${C.city}</div>
+  </div>`;
+
+const phoneConnected = `
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="label" style="text-align:center">CalaFly eSIM</div>
+    <div class="bars"><i style="height:30%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:100%"></i></div>
+    <div class="status">Connected</div>
+    <div class="where">Landed ${C.in}</div>
+    <div class="chip mono">DATA ON</div>
+  </div>`;
+
+const phoneQR = `
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="label" style="text-align:center">Scan to install</div>
+    ${qr()}
+    <div class="status" style="font-size:38px;margin-top:30px">${C.short} plan</div>
+    <div class="chip mono">READY</div>
+  </div>`;
+
+const CONCEPTS = {
+  // 1. Brand intro
+  intro: () => ({
+    theme: "dark",
+    copy: `<span class="tag">${C.tag}</span>
+      <h1>Meet<br><span class="hl">CalaFly.</span></h1>
+      <p class="sub">Mobile data for ${C.name}, sorted before you leave the UK.</p>`,
+    visual: `<div style="display:flex;align-items:center;gap:40px">${bagtag(-7)}${size === "1x1" ? "" : phoneConnected}</div>`,
+    visualAlt: size === "1x1" ? null : null,
+    small: BASE_SMALL,
+  }),
+
+  // 2. Easy to set up
+  ease: () => ({
+    theme: "teal",
+    copy: `<span class="tag">Easy setup</span>
+      <h1>Set up in minutes.<br><span class="hl">From the sofa.</span></h1>`,
+    visual: `<div class="steps">
+        <div class="card step"><div class="n">1</div><div><div class="t">Pick</div><div class="d">Choose your ${C.short} plan.</div></div></div>
+        <div class="card step"><div class="n">2</div><div><div class="t">Scan</div><div class="d">Scan the QR code at home.</div></div></div>
+        <div class="card step"><div class="n">3</div><div><div class="t">Land connected</div><div class="d">Your data is ready ${C.in}.</div></div></div>
+      </div>`,
+    small: BASE_SMALL,
+  }),
+
+  // 3. Pay once, not per day
+  price: () => ({
+    theme: "light",
+    copy: `<span class="tag">${C.tag}</span>
+      <h1>Pay once.<br><span class="hl">Not per day.</span></h1>
+      <p class="sub">One price for your whole trip. No daily charges from us.</p>`,
+    visual: `<div class="card week">
+        <div class="label">Your week ${C.in}</div>
+        <div class="days">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(d => `<div class="day"><b>${d}</b><span>${tick.replace('stroke="#0b0d10"','stroke="#18c8a8"').replace("<svg", '<svg style="width:36px;height:36px"')}</span></div>`).join("")}</div>
+        <div class="bar"><span class="k">One CalaFly price</span><span class="v">Paid once</span></div>
+      </div>`,
+    small: BASE_SMALL + " Price varies by plan.",
+  }),
+
+  // 4. Refund if unused
+  refund: () => ({
+    theme: "dark",
+    copy: `<span class="tag">Peace of mind</span>
+      <h1>Plans changed?<br><span class="hl">Get a refund.</span></h1>
+      <p class="sub">If you never install your ${C.short} eSIM, you can get your money back.</p>`,
+    visual: `<div class="stamp"><div class="big">REFUND<span class="lil">if not installed</span></div></div>`,
+    small: REFUND_SMALL + " " + BASE_SMALL,
+  }),
+
+  // 5. All three USPs
+  stack: () => ({
+    theme: "light",
+    copy: `<span class="tag">${C.tag}</span>
+      <h1>${C.short} data,<br><span class="hl">sorted.</span></h1>`,
+    visual: `<div class="checks">
+        <div class="card check"><div class="tick">${tick}</div><div><div class="t">Set up in minutes</div><div class="d">Scan a QR code before you fly.</div></div></div>
+        <div class="card check"><div class="tick">${tick}</div><div><div class="t">Pay once, not per day</div><div class="d">One price for the whole trip.</div></div></div>
+        <div class="card check"><div class="tick">${tick}</div><div><div class="t">Refund if not installed</div><div class="d">T&amp;Cs apply.</div></div></div>
+      </div>`,
+    small: REFUND_SMALL + " " + BASE_SMALL,
+  }),
+
+  // 6. Retargeting
+  retarget: () => ({
+    theme: "dark",
+    copy: `<span class="tag">Before you fly</span>
+      <h1>Still planning<br><span class="hl">${C.short}?</span></h1>
+      <p class="sub">Your data can be sorted tonight. One price, and a refund if you never install it.</p>`,
+    visual: `<div style="position:relative;width:100%;max-width:900px;padding:0 0 30px"><div class="card pass">
+        <div class="hd"><span class="label">Boarding pass</span><span class="label">CalaFly</span></div>
+        <div class="route"><div><small>FROM</small><b>UK</b></div><div class="arrow">→</div><div style="text-align:right"><small>TO</small><b>${C.code}</b></div></div>
+        <div class="row"><div><small>DATA</small><b>Ready</b></div><div><small>PRICE</small><b>Paid once</b></div><div><small>SETUP</small><b>Minutes</b></div></div>
+        <div class="perf"></div>
+        ${barcode()}
+      </div>
+      <div class="sticker" style="right:-20px;bottom:-50px">Still<br>sorted</div></div>`,
+    small: REFUND_SMALL + " " + BASE_SMALL,
+  }),
+};
+
+const spec = CONCEPTS[concept]();
+const ad = document.getElementById("ad");
+ad.className = `s-${size} theme-${spec.theme}`;
+const tickerText = C.codes.concat(["DATA READY", "PAY ONCE", "LAND CONNECTED"]);
+ad.innerHTML = `
+  <div class="top">${logo}${size === "9x16" || size === "191x1" ? `<span class="url">calafly.net</span>` : ""}</div>
+  <div class="main">
+    <div class="copy">${spec.copy}</div>
+    <div class="visual">${spec.visual}</div>
+  </div>
+  <div class="foot">
+    ${size === "9x16"
+      ? `<p class="small" style="max-width:900px">${spec.small}</p>`
+      : `<div class="footcol">${size === "191x1" ? "" : `<span class="url">calafly.net</span>`}<p class="small">${spec.small}</p></div><span class="cta">Get Calafly</span>`}
+  </div>
+  <div class="below"><div class="giant">${C.code === "USA" ? "USA" : C.code}</div><div class="ticker mono">${Array(6).fill(tickerText.map(t => `<span>${t}</span>`).join("✦")).join("✦")}</div></div>`;
+
+// shrink headline / visual if they overflow the canvas
+function fit() {
+  const main = ad.querySelector(".main");
+  const vis = ad.querySelector(".visual > *");
+  let scale = 1, guard = 0;
+  const box = ad.querySelector(".visual");
+  // the visual must fit inside its own box (rotation/shadows allowed a little bleed)
+  const over = () => {
+    const v = vis.getBoundingClientRect(), b = box.getBoundingClientRect();
+    const z = size === "191x1" ? 0.625 : 1;
+    return main.scrollHeight > main.clientHeight + 1 || v.height > b.height + 40 * z || v.width > b.width + 60 * z;
+  };
+  const base = vis ? (vis.style.transform || "") : "";
+  while (vis && over() && scale > 0.62 && guard++ < 40) {
+    scale -= 0.03;
+    vis.style.transform = `${base} scale(${scale})`;
+  }
+  document.body.dataset.fit = scale.toFixed(2);
+}
+document.fonts.ready.then(() => { fit(); document.body.dataset.ready = "1"; });
+</script>
+</body>
+</html>

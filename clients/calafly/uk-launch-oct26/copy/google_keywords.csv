@@ -1,0 +1,125 @@
+Campaign,Ad group,Keyword,Match type
+CF_UK_SEARCH_USA,eSIM,usa esim,Phrase
+CF_UK_SEARCH_USA,eSIM,usa esim,Exact
+CF_UK_SEARCH_USA,eSIM,esim usa,Phrase
+CF_UK_SEARCH_USA,eSIM,esim usa,Exact
+CF_UK_SEARCH_USA,eSIM,esim for usa,Phrase
+CF_UK_SEARCH_USA,eSIM,esim for usa,Exact
+CF_UK_SEARCH_USA,eSIM,us esim,Phrase
+CF_UK_SEARCH_USA,eSIM,us esim,Exact
+CF_UK_SEARCH_USA,eSIM,esim for america,Phrase
+CF_UK_SEARCH_USA,eSIM,esim for america,Exact
+CF_UK_SEARCH_USA,eSIM,best esim for usa,Phrase
+CF_UK_SEARCH_USA,eSIM,best esim for usa,Exact
+CF_UK_SEARCH_USA,Data / SIM,usa data sim,Phrase
+CF_UK_SEARCH_USA,Data / SIM,usa data sim,Exact
+CF_UK_SEARCH_USA,Data / SIM,us sim card for travel,Phrase
+CF_UK_SEARCH_USA,Data / SIM,us sim card for travel,Exact
+CF_UK_SEARCH_USA,Data / SIM,usa travel sim,Phrase
+CF_UK_SEARCH_USA,Data / SIM,usa travel sim,Exact
+CF_UK_SEARCH_USA,Data / SIM,mobile data usa holiday,Phrase
+CF_UK_SEARCH_USA,Data / SIM,mobile data usa holiday,Exact
+CF_UK_SEARCH_USA,Data / SIM,sim card for usa from uk,Phrase
+CF_UK_SEARCH_USA,Data / SIM,sim card for usa from uk,Exact
+CF_UK_SEARCH_USA,Roaming intent,roaming in usa,Phrase
+CF_UK_SEARCH_USA,Roaming intent,roaming in usa,Exact
+CF_UK_SEARCH_USA,Roaming intent,using phone in usa from uk,Phrase
+CF_UK_SEARCH_USA,Roaming intent,using phone in usa from uk,Exact
+CF_UK_SEARCH_USA,Roaming intent,mobile data in america from uk,Phrase
+CF_UK_SEARCH_USA,Roaming intent,mobile data in america from uk,Exact
+CF_UK_SEARCH_USA,Destinations,new york esim,Phrase
+CF_UK_SEARCH_USA,Destinations,new york esim,Exact
+CF_UK_SEARCH_USA,Destinations,orlando esim,Phrase
+CF_UK_SEARCH_USA,Destinations,orlando esim,Exact
+CF_UK_SEARCH_USA,Destinations,florida esim,Phrase
+CF_UK_SEARCH_USA,Destinations,florida esim,Exact
+CF_UK_SEARCH_USA,Destinations,las vegas esim,Phrase
+CF_UK_SEARCH_USA,Destinations,las vegas esim,Exact
+CF_UK_SEARCH_TURKEY,eSIM,turkey esim,Phrase
+CF_UK_SEARCH_TURKEY,eSIM,turkey esim,Exact
+CF_UK_SEARCH_TURKEY,eSIM,esim turkey,Phrase
+CF_UK_SEARCH_TURKEY,eSIM,esim turkey,Exact
+CF_UK_SEARCH_TURKEY,eSIM,esim for turkey,Phrase
+CF_UK_SEARCH_TURKEY,eSIM,esim for turkey,Exact
+CF_UK_SEARCH_TURKEY,eSIM,best esim for turkey,Phrase
+CF_UK_SEARCH_TURKEY,eSIM,best esim for turkey,Exact
+CF_UK_SEARCH_TURKEY,Data / SIM,turkey data sim,Phrase
+CF_UK_SEARCH_TURKEY,Data / SIM,turkey data sim,Exact
+CF_UK_SEARCH_TURKEY,Data / SIM,turkey travel sim,Phrase
+CF_UK_SEARCH_TURKEY,Data / SIM,turkey travel sim,Exact
+CF_UK_SEARCH_TURKEY,Data / SIM,sim card for turkey from uk,Phrase
+CF_UK_SEARCH_TURKEY,Data / SIM,sim card for turkey from uk,Exact
+CF_UK_SEARCH_TURKEY,Data / SIM,mobile data turkey holiday,Phrase
+CF_UK_SEARCH_TURKEY,Data / SIM,mobile data turkey holiday,Exact
+CF_UK_SEARCH_TURKEY,Roaming intent,roaming in turkey,Phrase
+CF_UK_SEARCH_TURKEY,Roaming intent,roaming in turkey,Exact
+CF_UK_SEARCH_TURKEY,Roaming intent,using phone in turkey from uk,Phrase
+CF_UK_SEARCH_TURKEY,Roaming intent,using phone in turkey from uk,Exact
+CF_UK_SEARCH_TURKEY,Roaming intent,mobile data in turkey,Phrase
+CF_UK_SEARCH_TURKEY,Roaming intent,mobile data in turkey,Exact
+CF_UK_SEARCH_TURKEY,Destinations,istanbul esim,Phrase
+CF_UK_SEARCH_TURKEY,Destinations,istanbul esim,Exact
+CF_UK_SEARCH_TURKEY,Destinations,antalya esim,Phrase
+CF_UK_SEARCH_TURKEY,Destinations,antalya esim,Exact
+CF_UK_SEARCH_TURKEY,Destinations,antalya sim card,Phrase
+CF_UK_SEARCH_TURKEY,Destinations,antalya sim card,Exact
+CF_UK_SEARCH_TURKEY,Destinations,dalaman sim card,Phrase
+CF_UK_SEARCH_TURKEY,Destinations,dalaman sim card,Exact
+CF_UK_SEARCH_DUBAI,eSIM,dubai esim,Phrase
+CF_UK_SEARCH_DUBAI,eSIM,dubai esim,Exact
+CF_UK_SEARCH_DUBAI,eSIM,esim dubai,Phrase
+CF_UK_SEARCH_DUBAI,eSIM,esim dubai,Exact
+CF_UK_SEARCH_DUBAI,eSIM,uae esim,Phrase
+CF_UK_SEARCH_DUBAI,eSIM,uae esim,Exact
+CF_UK_SEARCH_DUBAI,eSIM,esim for dubai,Phrase
+CF_UK_SEARCH_DUBAI,eSIM,esim for dubai,Exact
+CF_UK_SEARCH_DUBAI,eSIM,best esim for dubai,Phrase
+CF_UK_SEARCH_DUBAI,eSIM,best esim for dubai,Exact
+CF_UK_SEARCH_DUBAI,Data / SIM,dubai data sim,Phrase
+CF_UK_SEARCH_DUBAI,Data / SIM,dubai data sim,Exact
+CF_UK_SEARCH_DUBAI,Data / SIM,dubai tourist sim,Phrase
+CF_UK_SEARCH_DUBAI,Data / SIM,dubai tourist sim,Exact
+CF_UK_SEARCH_DUBAI,Data / SIM,sim card for dubai from uk,Phrase
+CF_UK_SEARCH_DUBAI,Data / SIM,sim card for dubai from uk,Exact
+CF_UK_SEARCH_DUBAI,Data / SIM,mobile data dubai holiday,Phrase
+CF_UK_SEARCH_DUBAI,Data / SIM,mobile data dubai holiday,Exact
+CF_UK_SEARCH_DUBAI,Roaming intent,roaming in dubai,Phrase
+CF_UK_SEARCH_DUBAI,Roaming intent,roaming in dubai,Exact
+CF_UK_SEARCH_DUBAI,Roaming intent,using phone in dubai from uk,Phrase
+CF_UK_SEARCH_DUBAI,Roaming intent,using phone in dubai from uk,Exact
+CF_UK_SEARCH_DUBAI,Roaming intent,mobile data in uae,Phrase
+CF_UK_SEARCH_DUBAI,Roaming intent,mobile data in uae,Exact
+CF_UK_SEARCH_DUBAI,Destinations,abu dhabi esim,Phrase
+CF_UK_SEARCH_DUBAI,Destinations,abu dhabi esim,Exact
+CF_UK_SEARCH_DUBAI,Destinations,uae travel sim,Phrase
+CF_UK_SEARCH_DUBAI,Destinations,uae travel sim,Exact
+CF_UK_SEARCH_BRAND,Brand,calafly,Exact
+CF_UK_SEARCH_BRAND,Brand,calafly,Phrase
+CF_UK_SEARCH_BRAND,Brand,cala fly,Exact
+CF_UK_SEARCH_BRAND,Brand,cala fly,Phrase
+CF_UK_SEARCH_BRAND,Brand,calafly esim,Exact
+CF_UK_SEARCH_BRAND,Brand,calafly esim,Phrase
+CF_UK_SEARCH_BRAND,Brand,cala esim,Exact
+CF_UK_SEARCH_BRAND,Brand,cala esim,Phrase
+CF_UK_SEARCH_BRAND,Brand,calafly.net,Exact
+CF_UK_SEARCH_BRAND,Brand,calafly.net,Phrase
+ALL NON-BRAND (shared list),Negative,free,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,jobs,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,job,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,career,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,login,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,log in,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,my account,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,customer service,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,contact number,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,phone number,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,contract,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,sim only deal,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,pay monthly,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,broadband,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,wifi router,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,pocket wifi,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,apn settings,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,unlock,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,hack,Phrase (negative)
+ALL NON-BRAND (shared list),Negative,reddit,Phrase (negative)

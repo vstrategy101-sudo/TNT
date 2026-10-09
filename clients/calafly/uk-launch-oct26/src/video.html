@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "CF"; src: local("Inter Display ExtraBold"), local("InterDisplay-ExtraBold"); font-weight: 800; }
+@font-face { font-family: "CF"; src: local("Inter Display SemiBold"), local("InterDisplay-SemiBold"); font-weight: 600; }
+@font-face { font-family: "CF"; src: local("Inter Display Medium"), local("InterDisplay-Medium"); font-weight: 500; }
+:root { --ink:#0b0d10; --panel:#16191e; --teal:#18c8a8; --pink:#ff4d6a; --blue:#2f6bff; --yellow:#ffe14a; --white:#fff; --muted:#b7c0c8; --mist:#f4f7fb; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "CF", sans-serif; -webkit-font-smoothing: antialiased; background: var(--ink); overflow: hidden; }
+#v { position: relative; overflow: hidden; background: var(--ink); color: var(--white); }
+.f-9x16 { width: 1080px; height: 1920px; }
+.f-16x9 { width: 1920px; height: 1080px; }
+
+/* the 1080×1080 stage holds every scene; it sits inside the Reels safe zone on 9:16 */
+#stage { position: absolute; width: 1080px; height: 1080px; }
+.f-9x16 #stage { left: 0; top: 240px; transform: scale(.94); transform-origin: top center; }
+.f-16x9 #stage { left: 160px; top: 0; width: 1600px; }
+.f-16x9 .scene { padding: 90px 80px; }
+.f-9x16 .scene h1 { font-size: 140px; }
+
+.chrome-top { position: absolute; display: flex; align-items: center; justify-content: space-between; z-index: 10; }
+.f-9x16 .chrome-top { left: 64px; right: 64px; top: 130px; }
+.f-16x9 .chrome-top { left: 64px; right: 64px; top: 56px; }
+.logo { display: inline-flex; align-items: center; gap: 14px; border: 4px solid currentColor; border-radius: 22px; padding: 12px 20px 12px 14px; font-weight: 800; font-size: 36px; letter-spacing: -0.02em; line-height: 1; background: var(--ink); }
+.logo .dot { width: 42px; height: 42px; border-radius: 50%; background: var(--teal); display: grid; place-items: center; }
+.logo .dot::after { content: ""; width: 15px; height: 15px; border-radius: 50%; background: var(--ink); }
+.logo .la { color: var(--teal); }
+.url { font-weight: 800; font-size: 30px; color: var(--teal); }
+
+.small { position: absolute; z-index: 10; font-weight: 500; font-size: 24px; line-height: 1.35; color: var(--muted); }
+.f-9x16 .small { left: 64px; right: 64px; top: 1290px; }
+.f-16x9 .small { left: 64px; right: 64px; bottom: 40px; text-align: center; }
+
+.ticker { position: absolute; z-index: 1; background: var(--teal); color: var(--ink); border-top: 5px solid var(--ink); border-bottom: 5px solid var(--ink); padding: 20px 0; white-space: nowrap; font-family: "DejaVu Sans Mono", monospace; font-weight: 700; font-size: 38px; letter-spacing: .04em; }
+.f-9x16 .ticker { left: -100px; right: -100px; top: 1480px; transform: rotate(-4deg); }
+.f-16x9 .ticker { display: none; }
+
+.scene { position: absolute; inset: 0; padding: 70px 64px; display: flex; flex-direction: column; justify-content: center; opacity: 0; }
+.tag { display: inline-block; align-self: flex-start; background: var(--white); color: var(--ink); border: 4px solid var(--ink); border-radius: 999px; padding: 10px 22px 9px; font-weight: 800; font-size: 26px; letter-spacing: 0.12em; text-transform: uppercase; box-shadow: 6px 6px 0 var(--teal); }
+h1 { font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; font-size: 128px; margin-top: 24px; }
+h1 .hl { color: var(--pink); }
+.sub { font-weight: 600; font-size: 42px; line-height: 1.18; margin-top: 22px; color: #e9eef2; letter-spacing: -0.015em; }
+.card { background: var(--white); color: var(--ink); border: 5px solid var(--ink); border-radius: 30px; box-shadow: 14px 14px 0 var(--teal); }
+.label { font-weight: 800; font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase; }
+.cta { display: inline-flex; align-self: flex-start; background: var(--blue); color: var(--white); font-weight: 800; font-size: 44px; letter-spacing: -0.02em; padding: 24px 42px; border-radius: 999px; border: 4px solid var(--white); box-shadow: 8px 8px 0 var(--teal); }
+
+.phone { flex-shrink: 0; position: relative; width: 330px; height: 600px; border: 6px solid var(--ink); border-radius: 56px; background: var(--white); box-shadow: 14px 14px 0 var(--teal); padding: 26px 22px; color: var(--ink); display: flex; flex-direction: column; overflow: hidden; }
+.phone .notch { width: 110px; height: 24px; border-radius: 99px; background: var(--ink); margin: 0 auto 24px; }
+.qr { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; width: 240px; height: 240px; margin: 14px auto 0; position: relative; }
+.qr i { background: var(--ink); border-radius: 3px; }
+.qr i.o { background: transparent; }
+.scanline { position: absolute; left: -10px; right: -10px; height: 8px; background: var(--pink); border-radius: 4px; box-shadow: 0 0 0 3px var(--ink); }
+.bars { display: flex; gap: 8px; align-items: flex-end; justify-content: center; height: 100px; margin-top: 40px; }
+.bars i { display: block; width: 28px; background: var(--teal); border: 4px solid var(--ink); border-radius: 6px; }
+.status { text-align: center; font-weight: 800; font-size: 46px; letter-spacing: -0.03em; margin-top: 30px; }
+.chip { margin: auto auto 6px; background: var(--ink); color: var(--teal); border-radius: 99px; padding: 12px 24px; font-family: "DejaVu Sans Mono", monospace; font-weight: 700; font-size: 22px; }
+
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 18px; }
+.day { border: 4px solid var(--ink); border-radius: 16px; padding: 16px 4px; text-align: center; background: var(--mist); }
+.day b { display: block; font-weight: 800; font-size: 22px; letter-spacing: .06em; }
+.day svg { width: 38px; height: 38px; margin-top: 8px; }
+.bar { margin-top: 22px; background: var(--teal); border: 4px solid var(--ink); border-radius: 18px; padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; }
+.bar .k { font-weight: 800; font-size: 42px; letter-spacing: -0.03em; }
+.bar .v { font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; }
+
+.stamp { flex-shrink: 0; width: 460px; height: 460px; border-radius: 50%; background: var(--pink); border: 6px solid var(--ink); box-shadow: 16px 16px 0 var(--teal); display: grid; place-items: center; color: var(--ink); position: relative; }
+.stamp::before { content: ""; position: absolute; inset: 30px; border-radius: 50%; border: 5px dashed var(--ink); }
+.stamp .big { font-weight: 800; font-size: 90px; letter-spacing: -0.05em; line-height: .9; text-align: center; }
+.stamp .lil { display: block; font-size: 36px; font-weight: 600; letter-spacing: 0; margin-top: 12px; }
+
+.dest { display: flex; gap: 22px; margin-top: 40px; }
+.dest .card { flex: 1; padding: 26px 22px; text-align: center; }
+.dest .code { font-weight: 800; font-size: 76px; letter-spacing: -0.05em; line-height: 1; }
+.dest .nm { font-weight: 600; font-size: 26px; margin-top: 8px; }
+.dest .card.sel { background: var(--teal); }
+
+.step { display: inline-flex; align-items: center; gap: 18px; font-weight: 800; font-size: 34px; letter-spacing: -0.02em; color: var(--teal); }
+.step .n { width: 64px; height: 64px; border-radius: 16px; border: 4px solid var(--white); background: var(--teal); color: var(--ink); display: grid; place-items: center; font-size: 38px; }
+</style>
+</head>
+<body>
+<div id="v"></div>
+<script>
+const P = new URLSearchParams(location.search);
+const which = P.get("v") || "intro";
+const fmt = P.get("f") || "9x16";
+const v = document.getElementById("v");
+v.className = `f-${fmt}`;
+
+const tick = (c = "#18c8a8") => `<svg viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg>`;
+const logo = `<div class="logo"><span class="dot"></span><span>CA<span class="la">LA</span></span></div>`;
+function qr() {
+  let s = "";
+  for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) {
+    const f = (r0, c0) => r >= r0 && r < r0 + 3 && c >= c0 && c < c0 + 3;
+    const on = f(0,0) || f(0,6) || f(6,0) || ((r * 7 + c * 13 + r * c) % 5) < 2;
+    s += `<i class="${on ? "" : "o"}"></i>`;
+  }
+  return s;
+}
+
+const BASE_SMALL = "Data-only eSIM. Requires an unlocked, eSIM-compatible phone.";
+const REFUND_SMALL = "Refund if your eSIM is not installed. T&Cs apply, see calafly.net.";
+
+// ---------- scene markup ----------
+const SCENES = {
+  intro: [
+    { id: "hook", t0: 0, t1: 2.9, html: `
+      <span class="tag">Flying from the UK?</span>
+      <h1>Heading to<br><span class="hl" id="cyc">the USA.</span></h1>
+      <p class="sub">Sort your mobile data before you go.</p>` },
+    { id: "meet", t0: 2.9, t1: 5.0, html: `
+      <span class="tag">Meet</span>
+      <h1 style="font-size:180px">Cala<span class="hl">Fly.</span></h1>
+      <p class="sub">eSIM data for the USA, Turkey and Dubai.</p>` },
+    { id: "ease", t0: 5.0, t1: 7.8, html: `
+      <div style="display:flex;align-items:center;gap:56px">
+        <div style="flex:1"><span class="tag">01 · Easy setup</span><h1 style="font-size:104px">Set up in<br><span class="hl">minutes.</span></h1><p class="sub">Scan a QR code from the sofa.</p></div>
+        <div class="phone" id="ph1"><div class="notch"></div><div class="label" style="text-align:center">Scan to install</div><div class="qr">${qr()}<div class="scanline" id="scan"></div></div><div class="chip" id="chip1">SCANNING…</div></div>
+      </div>` },
+    { id: "price", t0: 7.8, t1: 10.6, html: `
+      <span class="tag">02 · Pay once</span>
+      <h1 style="font-size:116px">Pay once.<br><span class="hl">Not per day.</span></h1>
+      <div class="card" style="padding:30px 30px 34px;margin-top:40px">
+        <div class="label">Your trip</div>
+        <div class="days">${["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((d,i) => `<div class="day"><b>${d}</b><div class="tk" data-i="${i}">${tick()}</div></div>`).join("")}</div>
+        <div class="bar" id="pbar"><span class="k">One CalaFly price</span><span class="v">Paid once</span></div>
+      </div>` },
+    { id: "refund", t0: 10.6, t1: 13.0, html: `
+      <div style="display:flex;align-items:center;gap:40px">
+        <div style="flex:1"><span class="tag">03 · Peace of mind</span><h1 style="font-size:104px">Plans<br>changed?<br><span class="hl">Refund.</span></h1><p class="sub">If you never install it.</p></div>
+        <div class="stamp" id="stamp"><div class="big">REFUND<span class="lil">if not installed</span></div></div>
+      </div>` },
+    { id: "end", t0: 13.0, t1: 15.01, html: `
+      <h1 style="font-size:120px">Data,<br><span class="hl">sorted.</span></h1>
+      <p class="sub">Set up in minutes · Pay once, not per day · Refund if not installed</p>
+      <div style="margin-top:46px;display:flex;gap:30px;align-items:center"><span class="cta">Get Calafly</span><span class="url" style="font-size:40px">calafly.net</span></div>` },
+  ],
+  howto: [
+    { id: "hook", t0: 0, t1: 2.6, html: `
+      <span class="tag">How CalaFly works</span>
+      <h1>Land<br><span class="hl">connected.</span></h1>
+      <p class="sub">Three steps. All done before you fly.</p>` },
+    { id: "pick", t0: 2.6, t1: 5.6, html: `
+      <span class="step"><span class="n">1</span>Pick your plan</span>
+      <h1 style="font-size:110px">Where are<br>you <span class="hl">flying?</span></h1>
+      <div class="dest">
+        <div class="card" data-k="0"><div class="code">USA</div><div class="nm">The USA</div></div>
+        <div class="card" data-k="1"><div class="code">IST</div><div class="nm">Turkey</div></div>
+        <div class="card" data-k="2"><div class="code">DXB</div><div class="nm">Dubai</div></div>
+      </div>` },
+    { id: "scan", t0: 5.6, t1: 8.6, html: `
+      <div style="display:flex;align-items:center;gap:56px">
+        <div style="flex:1"><span class="step"><span class="n">2</span>Scan at home</span><h1 style="font-size:104px">Scan the<br><span class="hl">QR code.</span></h1><p class="sub">On the sofa, not in the airport queue.</p></div>
+        <div class="phone"><div class="notch"></div><div class="label" style="text-align:center">Scan to install</div><div class="qr">${qr()}<div class="scanline" id="scan2"></div></div><div class="chip" id="chip2">SCANNING…</div></div>
+      </div>` },
+    { id: "land", t0: 8.6, t1: 11.4, html: `
+      <div style="display:flex;align-items:center;gap:56px">
+        <div style="flex:1"><span class="step"><span class="n">3</span>Land connected</span><h1 style="font-size:104px">Data on<br><span class="hl">arrival.</span></h1><p class="sub">Your WhatsApp number stays the same.</p></div>
+        <div class="phone"><div class="notch"></div><div class="label" style="text-align:center">CalaFly eSIM</div><div class="bars">${[30,55,78,100].map((h,i) => `<i data-b="${i}" style="height:${h}%"></i>`).join("")}</div><div class="status" id="st">Connecting</div><div class="chip">DATA ON</div></div>
+      </div>` },
+    { id: "usp", t0: 11.4, t1: 13.2, html: `
+      <h1 style="font-size:112px">One price.<br><span class="hl">Not per day.</span></h1>
+      <p class="sub" style="margin-top:34px">And a refund if you never install it.</p>` },
+    { id: "end", t0: 13.2, t1: 15.01, html: `
+      <span class="tag">USA · Turkey · Dubai</span>
+      <h1 style="font-size:120px">Get set up<br><span class="hl">tonight.</span></h1>
+      <div style="margin-top:46px;display:flex;gap:30px;align-items:center"><span class="cta">Get Calafly</span><span class="url" style="font-size:40px">calafly.net</span></div>` },
+  ],
+};
+
+const scenes = SCENES[which];
+v.innerHTML = `
+  <div class="chrome-top">${logo}<span class="url">calafly.net</span></div>
+  <div class="ticker">${Array(8).fill("USA ✦ IST ✦ DXB ✦ DATA READY ✦ PAY ONCE ✦ LAND CONNECTED ✦ ").join("")}</div>
+  <div id="stage">${scenes.map(s => `<div class="scene" id="s-${s.id}">${s.html}</div>`).join("")}</div>
+  <p class="small" id="small"></p>`;
+
+// ---------- animation ----------
+const clamp = (x) => Math.max(0, Math.min(1, x));
+const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const back = (x) => { x = clamp(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const $ = (q) => document.querySelector(q);
+const $$ = (q) => [...document.querySelectorAll(q)];
+
+window.renderFrame = (t) => {
+  for (const s of scenes) {
+    const el = document.getElementById(`s-${s.id}`);
+    const last = s === scenes[scenes.length - 1];
+    const inP = ease((t - s.t0) / 0.35);
+    const outP = last ? 0 : ease((t - (s.t1 - 0.25)) / 0.25);
+    const vis = t >= s.t0 && t < s.t1;
+    el.style.opacity = vis ? Math.min(inP, 1 - outP) : 0;
+    el.style.transform = `translateY(${(1 - inP) * 60 - outP * 60}px)`;
+    // stagger children in
+    [...el.querySelectorAll(".tag, .step, h1, .sub, .card, .phone, .stamp, .cta, .dest")].forEach((c, i) => {
+      const p = ease((t - s.t0 - 0.08 * i) / 0.4);
+      c.style.opacity = vis ? p : 0;
+      if (!c.classList.contains("stamp")) c.style.transform = `translateY(${(1 - p) * 40}px)`;
+    });
+  }
+  const small = $("#small");
+  if (which === "intro") {
+    // destination cycle in the hook
+    const cyc = $("#cyc");
+    if (cyc) cyc.textContent = t < 1.0 ? "the USA." : t < 1.9 ? "Turkey." : "Dubai.";
+    const scan = $("#scan");
+    if (scan) { const p = clamp((t - 5.4) / 1.4); scan.style.top = `${p * 230}px`; scan.style.opacity = p > 0 && p < 1 ? 1 : 0; $("#chip1").textContent = p >= 1 ? "INSTALLED ✓" : "SCANNING…"; }
+    $$(".tk").forEach(e => { const p = back((t - 8.4 - 0.12 * +e.dataset.i) / 0.3); e.style.transform = `scale(${p})`; e.style.opacity = clamp(p); });
+    const pbar = $("#pbar"); if (pbar) { const p = back((t - 9.4) / 0.4); pbar.style.transform = `scale(${0.6 + 0.4 * p})`; pbar.style.opacity = clamp(p * 2); }
+    const st = $("#stamp"); if (st) { const p = back((t - 11.1) / 0.35); st.style.transform = `rotate(${-9 - (1 - clamp(p)) * 30}deg) scale(${1.8 - 0.8 * p})`; st.style.opacity = clamp((t - 11.1) / 0.15); }
+    small.textContent = t >= 10.6 ? `${REFUND_SMALL} ${BASE_SMALL}` : BASE_SMALL;
+  } else {
+    $$(".dest .card").forEach(c => { const k = +c.dataset.k; const sel = Math.floor(clamp((t - 3.4) / 2.1) * 3 - 0.0001); c.classList.toggle("sel", k === sel); });
+    const scan = $("#scan2");
+    if (scan) { const p = clamp((t - 6.0) / 1.5); scan.style.top = `${p * 230}px`; scan.style.opacity = p > 0 && p < 1 ? 1 : 0; $("#chip2").textContent = p >= 1 ? "INSTALLED ✓" : "SCANNING…"; }
+    $$("[data-b]").forEach(b => { const on = t > 9.1 + 0.25 * +b.dataset.b; b.style.background = on ? "var(--teal)" : "var(--mist)"; });
+    const st = $("#st"); if (st) st.textContent = t > 10.1 ? "Connected" : "Connecting";
+    small.textContent = t >= 11.4 ? `${REFUND_SMALL} ${BASE_SMALL}` : BASE_SMALL;
+  }
+};
+document.fonts.ready.then(() => { window.renderFrame(0); document.body.dataset.ready = "1"; });
+</script>
+</body>
+</html>

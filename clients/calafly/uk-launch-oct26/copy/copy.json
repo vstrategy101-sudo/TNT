@@ -1,0 +1,407 @@
+{
+ "google": {
+  "usa": {
+   "headlines": [
+    "USA eSIM by CalaFly",
+    "Mobile Data for USA",
+    "Get Your USA eSIM",
+    "Set Up in Minutes",
+    "Pay Once, Not Per Day",
+    "One Price for Your Trip",
+    "Refund if Not Installed",
+    "Scan a QR Code at Home",
+    "Land Connected",
+    "Sorted Before You Fly",
+    "Data-Only Travel eSIM",
+    "Keep Your WhatsApp Number",
+    "Travel Data for USA",
+    "No Daily Charges From Us",
+    "Official Site: CalaFly"
+   ],
+   "descriptions": [
+    "Mobile data for the USA, sorted before you leave the UK. Scan a QR code, land connected.",
+    "Pay once for your whole trip, not per day. Set up in minutes from the sofa.",
+    "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+    "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays."
+   ]
+  },
+  "turkey": {
+   "headlines": [
+    "Turkey eSIM by CalaFly",
+    "Mobile Data for Turkey",
+    "Get Your Turkey eSIM",
+    "Set Up in Minutes",
+    "Pay Once, Not Per Day",
+    "One Price for Your Trip",
+    "Refund if Not Installed",
+    "Scan a QR Code at Home",
+    "Land Connected",
+    "Sorted Before You Fly",
+    "Data-Only Travel eSIM",
+    "Keep Your WhatsApp Number",
+    "Travel Data for Turkey",
+    "No Daily Charges From Us",
+    "Official Site: CalaFly"
+   ],
+   "descriptions": [
+    "Mobile data for Turkey, sorted before you leave the UK. Scan a QR code, land connected.",
+    "Pay once for your whole trip, not per day. Set up in minutes from the sofa.",
+    "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+    "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays."
+   ]
+  },
+  "dubai": {
+   "headlines": [
+    "Dubai eSIM by CalaFly",
+    "Mobile Data for Dubai",
+    "Get Your Dubai eSIM",
+    "Set Up in Minutes",
+    "Pay Once, Not Per Day",
+    "One Price for Your Trip",
+    "Refund if Not Installed",
+    "Scan a QR Code at Home",
+    "Land Connected",
+    "Sorted Before You Fly",
+    "Data-Only Travel eSIM",
+    "Keep Your WhatsApp Number",
+    "Travel Data for Dubai",
+    "No Daily Charges From Us",
+    "Official Site: CalaFly"
+   ],
+   "descriptions": [
+    "Mobile data for Dubai, sorted before you leave the UK. Scan a QR code, land connected.",
+    "Pay once for your whole trip, not per day. Set up in minutes from the sofa.",
+    "Plans changed? Get a refund if your eSIM is never installed. T&Cs apply.",
+    "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays."
+   ]
+  },
+  "brand": {
+   "headlines": [
+    "CalaFly Official Site",
+    "CalaFly Travel eSIM",
+    "USA, Turkey and Dubai",
+    "Set Up in Minutes",
+    "Pay Once, Not Per Day",
+    "Refund if Not Installed",
+    "Scan a QR Code at Home",
+    "Land Connected",
+    "Data-Only Travel eSIM",
+    "Keep Your WhatsApp Number"
+   ],
+   "descriptions": [
+    "Travel eSIM data for the USA, Turkey and Dubai, sorted before you leave the UK.",
+    "Pay once for your whole trip, not per day. Set up in minutes from the sofa.",
+    "Refund if your eSIM is never installed. T&Cs apply.",
+    "Data-only eSIM for unlocked, eSIM-compatible phones. Your WhatsApp number stays."
+   ]
+  }
+ },
+ "meta": {
+  "usa": {
+   "prospecting": [
+    {
+     "creative": "01_INTRO",
+     "primary": "Meet CalaFly: mobile data for the USA, sorted before you leave the UK.\n\nPick your USA plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&Cs apply).",
+     "headline": "Meet CalaFly",
+     "description": "USA data, sorted before you fly"
+    },
+    {
+     "creative": "02_EASE",
+     "primary": "Set up your USA data in minutes, from the sofa.\n\n1. Pick your plan\n2. Scan the QR code\n3. Land connected\n\nData-only eSIM. Your WhatsApp number stays the same.",
+     "headline": "Set up in minutes",
+     "description": "Scan a QR code at home"
+    },
+    {
+     "creative": "03_PRICE",
+     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to the USA. No daily charges from us, whether you stay for a long weekend or two weeks.",
+     "headline": "Pay once, not per day",
+     "description": "One price for your whole trip"
+    },
+    {
+     "creative": "04_REFUND",
+     "primary": "Plans changed? If you never install your USA eSIM, you can get your money back.\n\nRefund if not installed. T&Cs apply, see calafly.net.",
+     "headline": "Refund if not installed",
+     "description": "Book your data with confidence"
+    },
+    {
+     "creative": "05_ALL-USP",
+     "primary": "USA data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ Refund if not installed (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
+     "headline": "USA data, sorted",
+     "description": "Set up in minutes. Pay once."
+    },
+    {
+     "creative": "VIDEO_01",
+     "primary": "Flying from the UK to the USA? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&Cs apply.",
+     "headline": "Meet CalaFly",
+     "description": "Data for the USA, sorted"
+    },
+    {
+     "creative": "VIDEO_02",
+     "primary": "How CalaFly works: pick your USA plan, scan the QR code at home, land connected. One price for the trip.",
+     "headline": "Land connected in USA",
+     "description": "Three steps, done before you fly"
+    }
+   ],
+   "retargeting": [
+    {
+     "creative": "06_RETARGET",
+     "primary": "Still planning the USA? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a refund if you never install it (T&Cs apply).",
+     "headline": "Still planning USA?",
+     "description": "Your data, sorted tonight"
+    },
+    {
+     "creative": "04_REFUND",
+     "primary": "Not sure your plans are fixed? Book your USA eSIM now. If you never install it, you can get a refund. T&Cs apply.",
+     "headline": "Refund if not installed",
+     "description": "Book now, decide later"
+    },
+    {
+     "creative": "VIDEO_02",
+     "primary": "Three steps and you're connected in the USA. Pick, scan, land. Pay once, not per day.",
+     "headline": "Pick. Scan. Land connected.",
+     "description": "Set up in minutes"
+    }
+   ]
+  },
+  "turkey": {
+   "prospecting": [
+    {
+     "creative": "01_INTRO",
+     "primary": "Meet CalaFly: mobile data for Turkey, sorted before you leave the UK.\n\nPick your Turkey plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&Cs apply).",
+     "headline": "Meet CalaFly",
+     "description": "Turkey data, sorted before you fly"
+    },
+    {
+     "creative": "02_EASE",
+     "primary": "Set up your Turkey data in minutes, from the sofa.\n\n1. Pick your plan\n2. Scan the QR code\n3. Land connected\n\nData-only eSIM. Your WhatsApp number stays the same.",
+     "headline": "Set up in minutes",
+     "description": "Scan a QR code at home"
+    },
+    {
+     "creative": "03_PRICE",
+     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to Turkey. No daily charges from us, whether you stay for a long weekend or two weeks.",
+     "headline": "Pay once, not per day",
+     "description": "One price for your whole trip"
+    },
+    {
+     "creative": "04_REFUND",
+     "primary": "Plans changed? If you never install your Turkey eSIM, you can get your money back.\n\nRefund if not installed. T&Cs apply, see calafly.net.",
+     "headline": "Refund if not installed",
+     "description": "Book your data with confidence"
+    },
+    {
+     "creative": "05_ALL-USP",
+     "primary": "Turkey data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ Refund if not installed (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
+     "headline": "Turkey data, sorted",
+     "description": "Set up in minutes. Pay once."
+    },
+    {
+     "creative": "VIDEO_01",
+     "primary": "Flying from the UK to Turkey? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&Cs apply.",
+     "headline": "Meet CalaFly",
+     "description": "Data for Turkey, sorted"
+    },
+    {
+     "creative": "VIDEO_02",
+     "primary": "How CalaFly works: pick your Turkey plan, scan the QR code at home, land connected. One price for the trip.",
+     "headline": "Land connected in Turkey",
+     "description": "Three steps, done before you fly"
+    }
+   ],
+   "retargeting": [
+    {
+     "creative": "06_RETARGET",
+     "primary": "Still planning Turkey? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a refund if you never install it (T&Cs apply).",
+     "headline": "Still planning Turkey?",
+     "description": "Your data, sorted tonight"
+    },
+    {
+     "creative": "04_REFUND",
+     "primary": "Not sure your plans are fixed? Book your Turkey eSIM now. If you never install it, you can get a refund. T&Cs apply.",
+     "headline": "Refund if not installed",
+     "description": "Book now, decide later"
+    },
+    {
+     "creative": "VIDEO_02",
+     "primary": "Three steps and you're connected in Turkey. Pick, scan, land. Pay once, not per day.",
+     "headline": "Pick. Scan. Land connected.",
+     "description": "Set up in minutes"
+    }
+   ]
+  },
+  "dubai": {
+   "prospecting": [
+    {
+     "creative": "01_INTRO",
+     "primary": "Meet CalaFly: mobile data for Dubai, sorted before you leave the UK.\n\nPick your Dubai plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if you never install it, you can get a refund (T&Cs apply).",
+     "headline": "Meet CalaFly",
+     "description": "Dubai data, sorted before you fly"
+    },
+    {
+     "creative": "02_EASE",
+     "primary": "Set up your Dubai data in minutes, from the sofa.\n\n1. Pick your plan\n2. Scan the QR code\n3. Land connected\n\nData-only eSIM. Your WhatsApp number stays the same.",
+     "headline": "Set up in minutes",
+     "description": "Scan a QR code at home"
+    },
+    {
+     "creative": "03_PRICE",
+     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to Dubai. No daily charges from us, whether you stay for a long weekend or two weeks.",
+     "headline": "Pay once, not per day",
+     "description": "One price for your whole trip"
+    },
+    {
+     "creative": "04_REFUND",
+     "primary": "Plans changed? If you never install your Dubai eSIM, you can get your money back.\n\nRefund if not installed. T&Cs apply, see calafly.net.",
+     "headline": "Refund if not installed",
+     "description": "Book your data with confidence"
+    },
+    {
+     "creative": "05_ALL-USP",
+     "primary": "Dubai data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ Refund if not installed (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
+     "headline": "Dubai data, sorted",
+     "description": "Set up in minutes. Pay once."
+    },
+    {
+     "creative": "VIDEO_01",
+     "primary": "Flying from the UK to Dubai? Meet CalaFly. Set up in minutes, pay once (not per day), and get a refund if you never install it. T&Cs apply.",
+     "headline": "Meet CalaFly",
+     "description": "Data for Dubai, sorted"
+    },
+    {
+     "creative": "VIDEO_02",
+     "primary": "How CalaFly works: pick your Dubai plan, scan the QR code at home, land connected. One price for the trip.",
+     "headline": "Land connected in Dubai",
+     "description": "Three steps, done before you fly"
+    }
+   ],
+   "retargeting": [
+    {
+     "creative": "06_RETARGET",
+     "primary": "Still planning Dubai? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a refund if you never install it (T&Cs apply).",
+     "headline": "Still planning Dubai?",
+     "description": "Your data, sorted tonight"
+    },
+    {
+     "creative": "04_REFUND",
+     "primary": "Not sure your plans are fixed? Book your Dubai eSIM now. If you never install it, you can get a refund. T&Cs apply.",
+     "headline": "Refund if not installed",
+     "description": "Book now, decide later"
+    },
+    {
+     "creative": "VIDEO_02",
+     "primary": "Three steps and you're connected in Dubai. Pick, scan, land. Pay once, not per day.",
+     "headline": "Pick. Scan. Land connected.",
+     "description": "Set up in minutes"
+    }
+   ]
+  }
+ },
+ "keywords": {
+  "usa": {
+   "eSIM": [
+    "usa esim",
+    "esim usa",
+    "esim for usa",
+    "us esim",
+    "esim for america",
+    "best esim for usa"
+   ],
+   "Data / SIM": [
+    "usa data sim",
+    "us sim card for travel",
+    "usa travel sim",
+    "mobile data usa holiday",
+    "sim card for usa from uk"
+   ],
+   "Roaming intent": [
+    "roaming in usa",
+    "using phone in usa from uk",
+    "mobile data in america from uk"
+   ],
+   "Destinations": [
+    "new york esim",
+    "orlando esim",
+    "florida esim",
+    "las vegas esim"
+   ]
+  },
+  "turkey": {
+   "eSIM": [
+    "turkey esim",
+    "esim turkey",
+    "esim for turkey",
+    "best esim for turkey"
+   ],
+   "Data / SIM": [
+    "turkey data sim",
+    "turkey travel sim",
+    "sim card for turkey from uk",
+    "mobile data turkey holiday"
+   ],
+   "Roaming intent": [
+    "roaming in turkey",
+    "using phone in turkey from uk",
+    "mobile data in turkey"
+   ],
+   "Destinations": [
+    "istanbul esim",
+    "antalya esim",
+    "antalya sim card",
+    "dalaman sim card"
+   ]
+  },
+  "dubai": {
+   "eSIM": [
+    "dubai esim",
+    "esim dubai",
+    "uae esim",
+    "esim for dubai",
+    "best esim for dubai"
+   ],
+   "Data / SIM": [
+    "dubai data sim",
+    "dubai tourist sim",
+    "sim card for dubai from uk",
+    "mobile data dubai holiday"
+   ],
+   "Roaming intent": [
+    "roaming in dubai",
+    "using phone in dubai from uk",
+    "mobile data in uae"
+   ],
+   "Destinations": [
+    "abu dhabi esim",
+    "uae travel sim"
+   ]
+  }
+ },
+ "brand": [
+  "calafly",
+  "cala fly",
+  "calafly esim",
+  "cala esim",
+  "calafly.net"
+ ],
+ "negatives": [
+  "free",
+  "jobs",
+  "job",
+  "career",
+  "login",
+  "log in",
+  "my account",
+  "customer service",
+  "contact number",
+  "phone number",
+  "contract",
+  "sim only deal",
+  "pay monthly",
+  "broadband",
+  "wifi router",
+  "pocket wifi",
+  "apn settings",
+  "unlock",
+  "hack",
+  "reddit"
+ ]
+}
