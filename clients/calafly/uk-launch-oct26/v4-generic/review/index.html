@@ -1,0 +1,182 @@
+<title>CalaFly Brand Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one review column. Scan first, then each concept as creative + rationale + photo brief side by side.
+   CalaFly's own world: ink, teal, pink, yellow, hard offset shadows on the things that matter. */
+:root {
+  --bg: #f4f6f5; --surface: #ffffff; --fg: #0b0d10; --muted: #56606b; --line: #d9e0e3;
+  --teal: #0f9c83; --teal-soft: #dcf4ee; --pink: #e8355a; --yellow: #ffe14a; --shadow: #18c8a8;
+  --display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0d10; --surface: #15191d; --fg: #eef2f4; --muted: #9aa5af; --line: #2a3138;
+  --teal: #2fdcbc; --teal-soft: #10302a; --pink: #ff5f7c; --yellow: #ffe14a; --shadow: #18c8a8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b0d10; --surface: #15191d; --fg: #eef2f4; --muted: #9aa5af; --line: #2a3138;
+  --teal: #2fdcbc; --teal-soft: #10302a; --pink: #ff5f7c; --yellow: #ffe14a; --shadow: #18c8a8; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font: 500 16px/1.6 var(--display); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 90px; display: grid; gap: 64px; }
+h1, h2, h3 { margin: 0; letter-spacing: -0.035em; text-wrap: balance; font-weight: 800; }
+h1 { font-size: clamp(38px, 7vw, 68px); line-height: .98; }
+h1 span, h2 span { color: var(--pink); }
+h2 { font-size: clamp(26px, 4vw, 38px); line-height: 1.05; }
+h3 { font-size: 22px; letter-spacing: -0.02em; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--muted); }
+.eyebrow { font: 700 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--teal); }
+header { display: grid; gap: 16px; }
+.lede { font-size: 19px; color: var(--muted); }
+section { display: grid; gap: 20px; min-width: 0; }
+
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font: 700 11.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+td b { white-space: nowrap; }
+.pts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.pt { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.pt.gap { border: 2.5px solid var(--fg); box-shadow: 6px 6px 0 var(--shadow); }
+.pt b { font-size: 17px; letter-spacing: -0.01em; }
+.pt p { font-size: 15px; color: var(--muted); }
+
+.concept { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 32px; align-items: start; padding-top: 28px; border-top: 2px solid var(--line); }
+.concept figure { margin: 0; display: grid; gap: 8px; }
+.concept img { width: 100%; height: auto; display: block; border-radius: 10px; border: 2.5px solid var(--fg); box-shadow: 8px 8px 0 var(--shadow); }
+.concept figcaption { font: 500 12.5px var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.body { display: grid; gap: 16px; min-width: 0; }
+.id { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.code { font: 700 13px var(--mono); background: var(--fg); color: var(--bg); border-radius: 6px; padding: 2px 8px; }
+.pill { font: 700 11.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 3px 10px; background: var(--teal-soft); color: var(--teal); }
+dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 18px; margin: 0; font-size: 15.5px; }
+dt { font: 700 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+dd { margin: 0; }
+.brief { background: var(--surface); border: 2px dashed var(--muted); border-radius: 14px; padding: 14px 16px; display: grid; gap: 6px; }
+.brief .eyebrow { color: var(--pink); }
+.brief p { font-size: 15.5px; }
+.lines { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+
+.next { background: var(--surface); border: 2.5px solid var(--fg); border-radius: 18px; padding: 22px; box-shadow: 8px 8px 0 var(--shadow); display: grid; gap: 12px; }
+.next ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+footer { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 760px) { .concept { grid-template-columns: minmax(0, 1fr); } dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } dd { margin-bottom: 8px; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">tnt. × CalaFly · Brand ads · first look · 9 October</span>
+    <h1>Why CalaFly, <span>in five ads.</span></h1>
+    <p class="lede">Five concepts that sell CalaFly itself, with no country, plan or price on them, so they can run all year to every UK traveller. Each one is rendered as a 4:5 feed ad in a die-cut sticker style, ready for a photo of a real person to drop in.</p>
+  </header>
+
+  <section>
+    <span class="eyebrow">What other eSIM brands run in the UK</span>
+    <h2>Most of the category sells a discount.</h2>
+    <p class="muted">Live Meta ads seen in the UK on 9 October. The Ad Library tool returns headlines and volume, not the images, so this covers messages, not visual style.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Brand</th><th>Live ads</th><th>What they lead with</th></tr></thead>
+      <tbody>
+        <tr><td><b>Holafly</b></td><td>≈307</td><td>5% off codes, "goodbye to roaming", free destination guides as lead magnets</td></tr>
+        <tr><td><b>Saily</b></td><td>≈256</td><td>One promise in many variants: fast data from touchdown in 200+ destinations</td></tr>
+        <tr><td><b>Airalo</b></td><td>≈100</td><td>One brand line in about 30 variants: go further, stay connected</td></tr>
+        <tr><td><b>Jetpac, Vodafone Travel eSIM, ESIMWorld</b></td><td>many</td><td>Promo codes and first-order discounts (15% off, free credit)</td></tr>
+        <tr><td><b>Yesim, KlugeSim, Chillaxsim</b></td><td>many</td><td>"Get the app", data ready before you land, cheap per-country bundles</td></tr>
+      </tbody>
+    </table></div>
+    <div class="pts">
+      <div class="pt"><b>Crowded: discounts</b><p>Almost everyone runs a code. A discount does not tell a traveller why one eSIM beats another.</p></div>
+      <div class="pt"><b>Crowded: "land connected"</b><p>Arrival-moment lines are everywhere, so they read as category wallpaper.</p></div>
+      <div class="pt gap"><b>Open for CalaFly</b><p>Keep your number and WhatsApp, pay once instead of per day, 100% refund if unused. Few brands lead with any of these.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">The five concepts</span>
+    <h2>One reason to choose CalaFly <span>per ad.</span></h2>
+
+    <article class="concept">
+      <figure><img src="creatives/CALAFLY_GENERIC_G1_PASSPORT-CHARGER-DATA_4x5.png" alt="Passport, sunglasses, charger cable and a phone showing a before-you-fly checklist with Data ticked by CalaFly"><figcaption>CALAFLY_GENERIC_G1_PASSPORT-CHARGER-DATA_4x5.png</figcaption></figure>
+      <div class="body">
+        <div class="id"><span class="code">G1</span><h3>Passport. Charger. Data.</h3><span class="pill">Prospecting</span></div>
+        <dl>
+          <dt>Idea</dt><dd>Put data on the packing list next to the things nobody forgets. It makes an eSIM feel like a normal part of getting ready, not a tech purchase.</dd>
+          <dt>Why it works</dt><dd>Familiar, scroll-stopping flatlay; no jargon. Good cold opener for people who have never bought an eSIM.</dd>
+          <dt>Objects</dt><dd>Passport, sunglasses, charger cable, phone with a checklist.</dd>
+        </dl>
+        <div class="brief"><span class="eyebrow">Person cutout brief</span><p>Hands from above dropping the phone into an open suitcase, or a smiling traveller holding passport and phone up to camera. Cut out at the waist, entering from the right.</p></div>
+      </div>
+    </article>
+
+    <article class="concept">
+      <figure><img src="creatives/CALAFLY_GENERIC_G2_SAME-NUMBER_4x5.png" alt="A physical SIM labelled Your SIM next to a teal CalaFly eSIM card, and a phone showing a chat with Mum"><figcaption>CALAFLY_GENERIC_G2_SAME-NUMBER_4x5.png</figcaption></figure>
+      <div class="body">
+        <div class="id"><span class="code">G2</span><h3>Same number. Same WhatsApp. No roaming.</h3><span class="pill">Prospecting</span></div>
+        <dl>
+          <dt>Idea</dt><dd>Answer the biggest worry about eSIMs head on: you don't lose your number. Your own SIM keeps calls, texts and WhatsApp; CalaFly only adds data.</dd>
+          <dt>Why it works</dt><dd>Two SIM cards side by side explain "data-only eSIM" without the word. The chat with Mum makes it human.</dd>
+          <dt>Objects</dt><dd>Physical SIM, CalaFly eSIM card, phone with a family chat.</dd>
+        </dl>
+        <div class="brief"><span class="eyebrow">Person cutout brief</span><p>Woman on a sunny café terrace abroad, laughing at her phone mid-message. Cut out at the chest, phone in her right hand, entering from the left.</p></div>
+      </div>
+    </article>
+
+    <article class="concept">
+      <figure><img src="creatives/CALAFLY_GENERIC_G3_ROAMING-BILL_4x5.png" alt="A long roaming charges receipt totalling £70 stamped Not yours, paid once with Cala, beside an order-confirmed phone screen"><figcaption>CALAFLY_GENERIC_G3_ROAMING-BILL_4x5.png</figcaption></figure>
+      <div class="body">
+        <div class="id"><span class="code">G3</span><h3>The roaming bill you won't get.</h3><span class="pill">Prospecting</span></div>
+        <dl>
+          <dt>Idea</dt><dd>Make "pay once, not per day" physical: a receipt that keeps adding £5 a day, stamped out.</dd>
+          <dt>Why it works</dt><dd>A concrete total (£70 for two weeks) lands harder than a percentage off, and it names no other brand.</dd>
+          <dt>Objects</dt><dd>Till receipt, rubber stamp, phone with order confirmed.</dd>
+          <dt>Check</dt><dd>The £5 a day comes from your landing pages (a UK network's daily pass). Small print labels it as an example. Confirm the figure before launch.</dd>
+        </dl>
+        <div class="brief"><span class="eyebrow">Person cutout brief</span><p>Man holding up a long receipt with a mock-shocked face, other hand giving a thumbs up with his phone. Cut out at the waist, centre-left.</p></div>
+      </div>
+    </article>
+
+    <article class="concept">
+      <figure><img src="creatives/CALAFLY_GENERIC_G4_MONEY-BACK_4x5.png" alt="Teal suitcase with a kraft luggage tag reading 100% refund if unused, and a phone showing an unused eSIM with a request refund button"><figcaption>CALAFLY_GENERIC_G4_MONEY-BACK_4x5.png</figcaption></figure>
+      <div class="body">
+        <div class="id"><span class="code">G4</span><h3>Trip off? Money back.</h3><span class="pill">Prospecting + retargeting</span></div>
+        <dl>
+          <dt>Idea</dt><dd>Remove the risk of buying early. The refund promise lives on a luggage tag, where travellers already look for reassurance.</dd>
+          <dt>Why it works</dt><dd>Pushes people who are still planning to buy now instead of the night before. Strong for site visitors who left.</dd>
+          <dt>Objects</dt><dd>Suitcase, luggage tag on string, phone with refund screen.</dd>
+        </dl>
+        <div class="brief"><span class="eyebrow">Person cutout brief</span><p>Traveller sitting on an unopened suitcase at home, shrugging and smiling at the phone. Cut out full length, sitting on the suitcase's left edge.</p></div>
+      </div>
+    </article>
+
+    <article class="concept">
+      <figure><img src="creatives/CALAFLY_GENERIC_G5_200-COUNTRIES_4x5.png" alt="A pile of colourful luggage tags for JFK, IST, DXB, BCN, BKK and HND beside a phone showing pick your destination"><figcaption>CALAFLY_GENERIC_G5_200-COUNTRIES_4x5.png</figcaption></figure>
+      <div class="body">
+        <div class="id"><span class="code">G5</span><h3>One eSIM app. 200+ countries.</h3><span class="pill">Prospecting</span></div>
+        <dl>
+          <dt>Idea</dt><dd>Show range with a pile of airport tags in CalaFly colours, so any traveller spots their own trip.</dd>
+          <dt>Why it works</dt><dd>Gives one ad that fits every destination; pairs well with Advantage+ broad targeting.</dd>
+          <dt>Objects</dt><dd>Six luggage tags, phone with destination picker.</dd>
+          <dt>Check</dt><dd>calafly.net says 201+ countries; the ad rounds down to 200+.</dd>
+        </dl>
+        <div class="brief"><span class="eyebrow">Person cutout brief</span><p>Backpacker mid-stride pointing up at the headline, big grin. Cut out full length, standing in front of the tag pile.</p></div>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <div class="next">
+      <h2>Real people in the ads</h2>
+      <p>The objects are rendered here. Photos of real people need licensed images, which I can't source from this workspace. Two ways to add them:</p>
+      <ul>
+        <li><b>Stock:</b> pick one photo per brief from a licensed library and send them over. Each drops into its ad as a cutout with the same white outline and shadow.</li>
+        <li><b>Own shoot:</b> one afternoon with two or three people covers all five briefs, and gives Cala faces no competitor has.</li>
+      </ul>
+      <p class="muted">Once you pick the concepts, each gets the other three sizes (1:1, 9:16, 1.91:1) and copy for Meta and Google.</p>
+    </div>
+  </section>
+
+  <footer>tnt. for CalaFly. No competitor names appear in any ad. All five carry the standard small print: data-only eSIM, unlocked eSIM-compatible phone, T&amp;Cs at calafly.net/legal/terms.</footer>
+</div>
