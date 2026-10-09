@@ -1,0 +1,14 @@
+Campaign,Ad group,Ad group status,Ad group type,Final URL
+CF_UK_SEARCH_DESTINATIONS,USA | eSIM,Enabled,Standard,https://calafly.net/usa
+CF_UK_SEARCH_DESTINATIONS,USA | Data SIM,Enabled,Standard,https://calafly.net/usa
+CF_UK_SEARCH_DESTINATIONS,USA | Roaming,Enabled,Standard,https://calafly.net/usa
+CF_UK_SEARCH_DESTINATIONS,USA | Cities,Enabled,Standard,https://calafly.net/usa
+CF_UK_SEARCH_DESTINATIONS,TURKEY | eSIM,Enabled,Standard,https://calafly.net/turkey
+CF_UK_SEARCH_DESTINATIONS,TURKEY | Data SIM,Enabled,Standard,https://calafly.net/turkey
+CF_UK_SEARCH_DESTINATIONS,TURKEY | Roaming,Enabled,Standard,https://calafly.net/turkey
+CF_UK_SEARCH_DESTINATIONS,TURKEY | Cities,Enabled,Standard,https://calafly.net/turkey
+CF_UK_SEARCH_DESTINATIONS,DUBAI | eSIM,Enabled,Standard,https://calafly.net/dubai
+CF_UK_SEARCH_DESTINATIONS,DUBAI | Data SIM,Enabled,Standard,https://calafly.net/dubai
+CF_UK_SEARCH_DESTINATIONS,DUBAI | Roaming,Enabled,Standard,https://calafly.net/dubai
+CF_UK_SEARCH_DESTINATIONS,DUBAI | Cities,Enabled,Standard,https://calafly.net/dubai
+CF_UK_SEARCH_BRAND,Brand,Enabled,Standard,https://calafly.net

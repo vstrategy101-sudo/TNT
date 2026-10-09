@@ -13,6 +13,10 @@ Prospecting and retargeting on Google (70% of spend) and Meta (30%) for people t
 
 Re-render: `cd src && node render-creatives.mjs && node render-videos.mjs && python3 build-copy.py`
 
+## Google Search build
+
+See `google-search/README.md`. Search now runs as **one campaign for all three destinations** (`CF_UK_SEARCH_DESTINATIONS`, 12 ad groups by country × intent) plus the brand campaign. This replaces the three per-country campaigns below. It includes account setup, conversion tracking, bidding stages, and Google Ads Editor import files.
+
 ## Brand campaign
 
 See `v3-brand/README.md`: brand platform ("Sorted before you fly."), 30s walkthrough film and 6s bumpers per destination, sequencing, flighting and measurement.
