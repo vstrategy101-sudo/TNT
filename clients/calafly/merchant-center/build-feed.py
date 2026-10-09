@@ -33,7 +33,7 @@ def title(dest, data):
     return f"{dest} eSIM – Travel Mobile Data for {dest} | Install Before You Fly | CalaFly"
 
 def description(dest, data):
-    where = "in 200+ countries" if dest == "Global" else f"in {dest}"
+    where = "in 200+ countries" if dest == "Global" else f"in {'the USA' if dest == 'USA' else dest}"
     plan = f"{data} of data" if data else "mobile data"
     return (f"CalaFly {dest} eSIM gives you {plan} on your phone while you travel {where}. "
             "Buy online and your eSIM QR code arrives by email. Scan it at home, install it before you fly, "
@@ -42,7 +42,7 @@ def description(dest, data):
             "your eSIM you can get a refund (terms apply, see calafly.net). Requires an unlocked, eSIM-compatible phone.")
 
 def highlights(dest):
-    where = "200+ countries" if dest == "Global" else dest
+    where = "200+ countries" if dest == "Global" else ("the USA" if dest == "USA" else dest)
     return [f"Mobile data for {where} on your existing phone",
             "QR code delivered by email, install at home in minutes",
             "Data-only eSIM: your number and WhatsApp stay the same",
@@ -65,7 +65,7 @@ def row(pid, key, dest, region, prio, band, data):
     det = details(dest, data); det += [""] * (5 - len(det))
     return ([pid, title(dest, data), description(dest, data), f"{IMG}/calafly-{key}-esim-main.jpg",
              f"{IMG}/calafly-{key}-esim-arrive.jpg", f"{IMG}/calafly-{key}-esim-home.jpg", f"{IMG}/calafly-{key}-esim-arrive.jpg",
-             CATEGORY, f"eSIM > {region} > {dest}" + (f" > {data}" if data else ""), "CalaFly", "no", "new"]
+             CATEGORY, (f"eSIM > Global > {data}" if data else f"eSIM > {region} > {dest}"), "CalaFly", "no", "new"]
             + highlights(dest) + det + [prio, region.lower().replace(" ", "_"), band])
 
 problems = []
