@@ -51,7 +51,11 @@ Videos:
 - **V3 Wheels down:** landing, then the phone wakes, setup, pay once, refund, end card.
 - **V4 From the sofa:** QR install, departures board, landing, end card.
 
-## Sound design
+## Sound design (minimal, current)
+
+`sound_min.py` is the current mix: no music, sparse clean cues (cabin chime, touchdown, swishes, glass message pings, focus tick, three-note confirm, departures-board clicks, end-card swell), soft attacks, nothing harsh above ~5 kHz, −16 LUFS / −1 dBTP. Run `python3 src/sound_min.py` to rebuild and remux all 12 films.
+
+## Sound design (first pass, superseded)
 
 Everything is synthesised in `sound.py`: no samples and no licensed music.
 - **Mix target:** −14 LUFS integrated, −1 dBTP.
