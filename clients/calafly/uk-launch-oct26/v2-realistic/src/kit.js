@@ -210,6 +210,16 @@
     <div class="bigbtn" id="refundbtn" style="background:var(--pink);color:var(--ink)">Request refund</div>
     <div style="font:500 13px/1.35 UI;color:#59616b;text-align:center">Refund if your eSIM is not installed. T&amp;Cs apply.</div>`);
 
+  K.screenPick = (C) => K.web(`
+    <span class="chip">Where to?</span>
+    <h3>Pick your<br><span class="hl">destination.</span></h3>
+    ${[["usa", "USA", "JFK · MCO · LAX"], ["turkey", "Turkey", "IST · AYT · DLM"], ["dubai", "Dubai", "DXB"]].map(([k, n, codes]) => `
+      <div class="card2 pick" data-k="${k}" style="display:flex;align-items:center;gap:14px;padding:12px 14px;transition:none">
+        <span style="font:800 26px CFD;letter-spacing:-.03em;flex:1">${n}<span style="display:block;font:500 13px UI;color:#59616b;letter-spacing:0;margin-top:2px">${codes} · one price, whole trip</span></span>
+        <span class="tick pk" style="opacity:0">${tickSvg()}</span>
+      </div>`).join("")}
+    <div class="bigbtn" id="pickbtn">Continue</div>`);
+
   K.screenPlan = (C) => K.web(`
     <span class="chip">${C.tag}</span>
     <h3>${C.short} data,<br><span class="hl">sorted.</span></h3>

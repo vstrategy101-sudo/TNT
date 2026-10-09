@@ -76,6 +76,18 @@ def videos_v2():
         out.append(f'<div class="vset videos" data-country="{key}"{" hidden" if key != "usa" else ""}>{"".join(vids)}</div>')
     return "\n".join(out)
 
+def videos_brand():
+    out = []
+    for key, label in COUNTRIES:
+        vids = []
+        for code, name, note in [("B1_SORTED-BEFORE-YOU-FLY_30s", "B1 · Sorted before you fly (30s)", "Hero walkthrough: YouTube in-stream, Demand Gen, Reels"), ("B2_BUMPER_6s", "B2 · Bumper (6s)", "YouTube bumpers, Reels, Stories")]:
+            b = f"v3-brand/videos/CALAFLY_{key.upper()}_{code}"
+            vids.append(f'''<div class="video"><h3>{name}</h3><p class="muted">{note}</p>
+  <div class="players"><video src="{b}_9x16.mp4" controls playsinline preload="metadata"></video><video src="{b}_16x9.mp4" controls playsinline preload="metadata"></video></div></div>''')
+        out.append(f'<div class="vset videos" data-country="{key}"{" hidden" if key != "usa" else ""}>{"".join(vids)}</div>')
+    return "\n".join(out)
+
+page = page.replace("<!--BRAND_VIDEOS-->", videos_brand())
 page = page.replace("<!--GALLERY_V2-->", gallery(CONCEPTS_V2, "v2-realistic/creatives")).replace("<!--VIDEOS_V2-->", videos_v2())
 page = page.replace("<!--GALLERY-->", gallery()).replace("<!--COPY-->", copy_blocks())
 page = page.replace("<!--NEG-->", ", ".join(html.escape(n) for n in copy["negatives"]))

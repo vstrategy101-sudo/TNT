@@ -13,6 +13,10 @@ Prospecting and retargeting on Google (70% of spend) and Meta (30%) for people t
 
 Re-render: `cd src && node render-creatives.mjs && node render-videos.mjs && python3 build-copy.py`
 
+## Brand campaign
+
+See `v3-brand/README.md`: brand platform ("Sorted before you fly."), 30s walkthrough film and 6s bumpers per destination, sequencing, flighting and measurement.
+
 ## Round 2 (realistic set)
 
 See `v2-realistic/README.md`: competitor scan, 60 realistic statics (phone mock-ups, iOS-style screens, rendered scenes), 12 videos with synthesised sound design, and audio stems.

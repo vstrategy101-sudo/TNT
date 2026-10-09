@@ -136,12 +136,12 @@ MAKE = {"air": AIR_BED, "roomtone": ROOM_BED, "chime": lambda a: CHIME(), "touch
         "confirm_soft": lambda a: CONFIRM(-19), "tap": lambda a: TAP(), "flaps": lambda a: FLAPS(a or 1.6), "logo": lambda a: LOGO()}
 
 
-def build(cues):
-    n = int(DUR * SR) + 2 * SR; mix = np.zeros((n, 2))
+def build(cues, dur=DUR):
+    n = int(dur * SR) + 2 * SR; mix = np.zeros((n, 2))
     for c in cues:
         at, kind = c[0], c[1]; arg = c[2] if len(c) > 2 else None
         x = MAKE[kind](arg); s = int(at * SR); x = x[: n - s]; mix[s: s + len(x)] += x
-    mix = mix[: int(DUR * SR)]
+    mix = mix[: int(dur * SR)]
     mix = np.stack([hp(mix[:, 0], 35), hp(mix[:, 1], 35)], 1)
     f = int(0.3 * SR); mix[-f:] *= np.linspace(1, 0, f)[:, None] ** 2
     return mix
@@ -161,8 +161,20 @@ def loudnorm(x, out, target=-16):
 if __name__ == "__main__":
     sys.path.insert(0, HERE)
     from music import remux
-    codes = {"wheels": "V3_WHEELS-DOWN", "sofa": "V4_FROM-THE-SOFA"}
     import glob
+    if "--brand" in sys.argv:  # brand campaign films: cues come from brand.html via render-brand.mjs
+        broot = os.path.join(ROOT, "..", "v3-brand")
+        os.makedirs(os.path.join(broot, "audio"), exist_ok=True)
+        for v, code in {"brand": "B1_SORTED-BEFORE-YOU-FLY_30s", "bumper": "B2_BUMPER_6s"}.items():
+            spec = json.load(open(os.path.join(HERE, "cues", f"{v}.cues.json")))
+            base = os.path.join(broot, "audio", f"CALAFLY_{code}_MINIMAL.wav")
+            loudnorm(build(spec["cues"], spec["dur"]), base)
+            print("mixed", os.path.basename(base))
+            for f in sorted(glob.glob(os.path.join(broot, "videos", f"CALAFLY_*_{code}_*.mp4"))):
+                tmp = f + ".tmp.mp4"; remux(f, base, tmp); os.replace(tmp, f)
+                print("  remuxed", os.path.basename(f))
+        sys.exit(0)
+    codes = {"wheels": "V3_WHEELS-DOWN", "sofa": "V4_FROM-THE-SOFA"}
     for v, code in codes.items():
         base = os.path.join(ROOT, "audio", f"CALAFLY_{code}")
         for old in glob.glob(base + "_*.wav"): os.remove(old)
