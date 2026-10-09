@@ -59,6 +59,23 @@ Everything is synthesised in `sound.py`: no samples and no licensed music.
 - **Music bed:** 112 bpm, plucked arpeggio over a pad with a light kick. It is sidechain-ducked under each effect.
 - **Original sounds:** the chimes are written to be generic, not copies of Apple's or any airline's sounds.
 
+## Licensed music drop-in (replaces the synth music)
+
+The synthesised bed is a placeholder. For production, use a licensed track (Artlist, Epidemic Sound, Musicbed, etc.):
+
+```
+cd src
+python3 music.py --track wheels=/path/trackA.wav --track sofa=/path/trackB.wav \
+                 [--sfx-dir /path/licensed_sfx] [--start wheels=24.0] [--dry]
+```
+
+- **Cutting:** finds the tempo and beats, starts the body on a strong downbeat after any quiet intro, and keeps the track's real ending. It splices on a beat with an equal-power crossfade, so the final hit lands on the end card (13.0 s on V3, 12.4 s on V4).
+- **Effects:** a file in `--sfx-dir` named after a cue (`notif.wav`, `landing.wav`, `whoosh.wav`, `success.wav`, `flaps.wav`…) replaces that sound. Cues without a file stay silent unless `--synth-sfx` is given.
+- **Mixing:** music ducks 4 dB under each effect. Two-pass loudness normalisation to −14 LUFS / −1 dBTP, AAC 320k.
+- **Output:** all 12 films are remuxed in place with no picture re-render. `--dry` writes only the mixes, to `.tmp/`.
+
+Brief for picking tracks: modern electronic or indie-pop, 110–124 BPM, bright plucks or guitar, an optimistic travel feel, no vocals (the films carry on-screen copy), and a clean "button" ending rather than a fade.
+
 ## Sign-off before launch
 1. **Swap the mock screens for real CalaFly screenshots.** An ad can't show a product flow that differs from the real one (CAP 3.1). Each screen is one function in `kit.js`.
 2. **Confirm the network label** "CalaFly" on the lock screen matches what the eSIM shows on a phone.
