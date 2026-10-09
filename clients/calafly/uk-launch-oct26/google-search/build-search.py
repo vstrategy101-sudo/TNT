@@ -139,10 +139,10 @@ w("01_campaigns.csv",
   ["Campaign", "Campaign Type", "Campaign Status", "Networks", "Budget", "Budget type", "Bid Strategy Type",
    "Max CPC Bid Limit", "Languages", "Location", "Targeting method", "Exclusion method", "Ad rotation",
    "Final URL suffix", "Start Date"],
-  [[CAMP, "Search", "Paused", "Google search", "FILL daily", "Daily", "Maximize clicks", "0.60", "en",
+  [[CAMP, "Search", "Paused", "Google search", "30.00", "Daily", "Maximize clicks", "0.60", "en",
     "United Kingdom", "Location of presence", "Location of presence", "Optimize",
     "utm_source=google&utm_medium=cpc&utm_campaign=cf_uk_search_destinations&utm_content={adgroupid}&utm_term={keyword}", ""],
-   [BRAND_CAMP, "Search", "Paused", "Google search", "FILL daily", "Daily", "Maximize clicks", "0.30", "en",
+   [BRAND_CAMP, "Search", "Paused", "Google search", "3.00", "Daily", "Maximize clicks", "0.30", "en",
     "United Kingdom", "Location of presence", "Location of presence", "Optimize",
     "utm_source=google&utm_medium=cpc&utm_campaign=cf_uk_search_brand&utm_content={adgroupid}&utm_term={keyword}", ""]])
 

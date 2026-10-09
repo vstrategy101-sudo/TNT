@@ -263,15 +263,15 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line)
 
   <section>
     <div class="sec-head"><span class="n">06</span><h2>Budget</h2>
-      <p class="muted">Search is 53% of total media in the plan: 49% destinations and 4% brand. Enter the monthly total to get the daily budgets to type into Google Ads.</p></div>
+      <p class="muted">We start small: £1,000 for the month on Google Search, split about 91% destinations and 9% brand. Change the figure to see the daily budgets for a different month.</p></div>
     <div class="budget">
-      <label for="total">Total monthly media (Google + Meta)
-        <span class="money"><span>£</span><input id="total" type="number" inputmode="numeric" min="0" step="100" value="3000"></span>
-        <span class="muted" style="font-weight:400;font-size:13px">Example figure. Change it to the agreed budget.</span>
+      <label for="total">Monthly Google Search budget
+        <span class="money"><span>£</span><input id="total" type="number" inputmode="numeric" min="0" step="100" value="1000"></span>
+        <span class="muted" style="font-weight:400;font-size:13px">Agreed starting budget. At the £0.60 click cap that buys about 1,500 clicks.</span>
       </label>
       <div class="out">
-        <div><b id="dDest">£48</b><span>per day · destinations campaign</span></div>
-        <div><b id="dBrand">£4</b><span>per day · brand campaign</span></div>
+        <div><b id="dDest">£30</b><span>per day · destinations campaign</span></div>
+        <div><b id="dBrand">£3</b><span>per day · brand campaign</span></div>
         <div class="bar"><span style="font-weight:600;font-size:14px">Target share of destinations spend (Oct–Mar)</span>
           <div class="track" id="track"></div>
           <span class="muted" style="font-size:13px">Check spend by ad-group prefix every Thursday. If a country runs more than 15 points over its share without the purchases to justify it, pause its weakest ad group. If that happens two weeks running, move the country into its own campaign.</span></div>
@@ -329,7 +329,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line)
       <h3>Before it goes live</h3>
       <ol>
         <li><b>Check the page addresses.</b> Sitelinks assume /how-it-works, /refund-policy, /compatible-devices, /faq and /global, and ads assume /usa, /turkey and /dubai. Ads pointing to a missing page get rejected.</li>
-        <li><b>Agree the monthly budget</b> and enter the daily figures from section 06.</li>
+        <li><b>Budget is set:</b> £30/day destinations and £3/day brand (£1,000 for the month), already in the import files.</li>
         <li><b>Run one real test purchase</b> and confirm CF Purchase records it before enabling.</li>
       </ol>
     </div>
@@ -395,7 +395,7 @@ render();
 const gbp = n => "£" + (n >= 100 ? Math.round(n) : n.toFixed(n < 10 ? 2 : 0)).toLocaleString("en-GB");
 function budget() {
   const t = Math.max(0, +document.getElementById("total").value || 0);
-  const dest = t * .49 / 30.4, brand = t * .04 / 30.4;
+  const dest = t * .91 / 30.4, brand = t * .09 / 30.4;
   document.getElementById("dDest").textContent = gbp(dest);
   document.getElementById("dBrand").textContent = gbp(brand);
   document.getElementById("track").innerHTML = C.map(([k, n]) => [k, n]).sort((a, b) => SHARE[b[0]] - SHARE[a[0]])
