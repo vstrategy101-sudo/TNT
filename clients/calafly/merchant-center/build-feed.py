@@ -44,17 +44,17 @@ def description(dest, data):
 def highlights(dest):
     where = "200+ countries" if dest == "Global" else ("the USA" if dest == "USA" else dest)
     return [f"Mobile data for {where} on your existing phone",
-            "QR code delivered by email, install at home in minutes",
+            "QR code by email: install at home in minutes",
             "Data-only eSIM: your number and WhatsApp stay the same",
-            "Pay once for the plan, no daily roaming charges from us",
+            "Pay once for the plan with no daily roaming charges from us",
             "Refund if your eSIM is not installed (terms apply)",
-            "Works with unlocked, eSIM-compatible phones"]
+            "Works with unlocked eSIM-compatible phones"]
 
 def details(dest, data):
     d = [f"eSIM:Type:Data-only eSIM", "eSIM:Delivery:QR code by email",
          f"eSIM:Coverage:{'200+ countries' if dest == 'Global' else dest}",
-         "Compatibility:Phone:Unlocked, eSIM-compatible"]
-    if data: d.insert(1, f"eSIM:Data:{data}")
+         "Compatibility:Phone:Unlocked eSIM-compatible phone", "eSIM:Install:At home before you fly"]
+    if data: d[-1] = f"eSIM:Data:{data}"
     return d
 
 header = (["id", "title", "description", "image_link"] + ["additional_image_link"] * 2 + ["lifestyle_image_link",
