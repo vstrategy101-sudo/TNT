@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../v2-realistic/src/kit.css">
+<style>
+/* Generic CalaFly brand ads (not country-specific). Die-cut "sticker" look: every object gets a white outline
+   and a hard drop shadow, so photo cutouts of people (drop a transparent PNG into .person) sit in the same frame. */
+html, body { background: #777; margin: 0; }
+#ad { position: relative; overflow: hidden; width: 1080px; height: 1350px; color: var(--ink); background: #f3efe7; }
+#ad.dark { background: var(--ink); color: #fff; }
+.paper { position: absolute; inset: 0; }
+.paper canvas { width: 100%; height: 100%; display: block; }
+
+.top { position: absolute; left: 60px; right: 60px; top: 56px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 8; }
+.url { font: 800 30px "CFD"; color: var(--teal-d, #0f9c83); }
+.dark .url { color: var(--teal); }
+.txt { position: absolute; left: 60px; top: 200px; width: 960px; z-index: 8; }
+h1 { font-weight: 800; letter-spacing: -0.05em; line-height: 0.92; font-size: 104px; margin: 22px 0 0; }
+.sub { font: 600 33px/1.22 "CFD"; letter-spacing: -0.015em; margin-top: 20px; max-width: 900px; color: #3a434c; }
+.dark .sub { color: #dbe2e7; }
+.foot { position: absolute; left: 60px; right: 60px; bottom: 46px; display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; z-index: 8; }
+.small { font: 500 21px/1.35 "CFD"; color: #59616b; max-width: 660px; margin: 0; }
+.dark .small { color: var(--muted); }
+
+/* the stage behind the cutouts */
+.stage { position: absolute; left: 60px; right: 60px; border-radius: 40px; box-shadow: 16px 16px 0 var(--ink); border: 4px solid var(--ink); overflow: hidden; z-index: 1; }
+.dark .stage { box-shadow: 16px 16px 0 var(--teal); border-color: #fff; }
+.scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; z-index: 5; pointer-events: none; }
+.scene > * { position: absolute; }
+
+/* die-cut sticker treatment */
+.cut { filter: drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(14px 18px 0 rgba(11,13,16,.28)); }
+.dark .cut { filter: drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(14px 18px 0 rgba(24,200,168,.55)); }
+
+/* ---------- props ---------- */
+.passport { width: 300px; height: 420px; border-radius: 18px 26px 26px 18px; background: linear-gradient(135deg, #1b2a4a, #101a33 60%, #0c1428); box-shadow: inset 10px 0 0 rgba(0,0,0,.25), inset 0 0 40px rgba(0,0,0,.35); color: #d9b86a; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; overflow: hidden; }
+.passport canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .22; mix-blend-mode: overlay; }
+.passport b { font: 700 30px "CFD"; letter-spacing: .32em; padding-left: .32em; }
+.passport small { font: 600 17px "CFD"; letter-spacing: .3em; padding-left: .3em; opacity: .85; }
+.passport svg { width: 120px; height: 120px; }
+
+.receipt { width: 360px; background: #fffdf8; padding: 34px 30px 52px; font: 500 21px/1.55 "DejaVu Sans Mono", monospace; color: #2b2f33; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), 95% 100%, 90% calc(100% - 18px), 85% 100%, 80% calc(100% - 18px), 75% 100%, 70% calc(100% - 18px), 65% 100%, 60% calc(100% - 18px), 55% 100%, 50% calc(100% - 18px), 45% 100%, 40% calc(100% - 18px), 35% 100%, 30% calc(100% - 18px), 25% 100%, 20% calc(100% - 18px), 15% 100%, 10% calc(100% - 18px), 5% 100%, 0 calc(100% - 18px)); }
+.receipt .h { text-align: center; font-weight: 700; letter-spacing: .12em; border-bottom: 2px dashed #9aa3ab; padding-bottom: 12px; margin-bottom: 12px; }
+.receipt .l { display: flex; justify-content: space-between; }
+.receipt .t { border-top: 2px dashed #9aa3ab; margin-top: 12px; padding-top: 12px; font-weight: 700; font-size: 30px; display: flex; justify-content: space-between; }
+.stamp { border: 7px solid var(--pink); color: var(--pink); border-radius: 18px; padding: 10px 22px; font: 800 44px/1 "CFD"; letter-spacing: -0.02em; text-align: center; background: rgba(255,255,255,.55); mix-blend-mode: multiply; }
+.stamp small { display: block; font: 800 20px "CFD"; letter-spacing: .14em; margin-top: 6px; }
+
+.sim { width: 300px; height: 190px; border-radius: 16px 46px 16px 16px; background: linear-gradient(160deg, #ffffff, #e9edf0); box-shadow: inset 0 0 0 2px #cfd6dc; display: flex; align-items: center; gap: 22px; padding: 0 26px; }
+.sim .chip { width: 92px; height: 70px; border-radius: 12px; background: linear-gradient(135deg, #f3d98b, #c99a3a 55%, #f0d27c); box-shadow: inset 0 0 0 2px rgba(120,85,20,.45); position: relative; border: 0; padding: 0; align-self: auto; }
+.sim .chip::before { content: ""; position: absolute; inset: 14px 0; border-top: 2px solid rgba(120,85,20,.45); border-bottom: 2px solid rgba(120,85,20,.45); }
+.sim .chip::after { content: ""; position: absolute; inset: 0 30px; border-left: 2px solid rgba(120,85,20,.45); border-right: 2px solid rgba(120,85,20,.45); }
+.sim { color: var(--ink); }
+.sim b { font: 800 26px/1.05 "CFD"; letter-spacing: -0.02em; }
+.sim span { display: block; font: 600 18px "CFD"; color: #59616b; margin-top: 6px; letter-spacing: 0; }
+.sim.e { background: linear-gradient(160deg, #22d6b4, #10a98c); box-shadow: inset 0 0 0 2px rgba(0,0,0,.15); color: var(--ink); }
+.sim.e span { color: #0b3a32; }
+
+.tag2 { width: 300px; height: 470px; background: linear-gradient(170deg, #d9b98a, #c79f68); border-radius: 26px 26px 18px 18px; clip-path: polygon(22% 0, 78% 0, 100% 12%, 100% 100%, 0 100%, 0 12%); display: flex; flex-direction: column; align-items: center; padding: 96px 26px 26px; color: #3b2a14; text-align: center; }
+.tag2::before { content: ""; position: absolute; top: 34px; left: 50%; width: 40px; height: 40px; margin-left: -20px; border-radius: 50%; background: #f3efe7; box-shadow: inset 0 0 0 6px #a8834e; }
+.tag2 b { font: 800 78px/0.86 "CFD"; letter-spacing: -0.05em; color: var(--ink); }
+.tag2 i { font: 800 30px/1.05 "CFD"; font-style: normal; letter-spacing: -0.01em; margin-top: 12px; color: var(--ink); }
+.tag2 small { font: 600 18px/1.3 "CFD"; margin-top: auto; letter-spacing: .04em; }
+.string { width: 8px; height: 260px; background: repeating-linear-gradient(170deg, #f1e3c8 0 6px, #cdb58b 6px 10px); border-radius: 4px; }
+
+.case { width: 430px; height: 500px; border-radius: 52px; background: linear-gradient(90deg, #0f9c83, #18c8a8 18%, #12b495 22%, #18c8a8 40%, #12b495 44%, #18c8a8 62%, #12b495 66%, #18c8a8 84%, #0f9c83); box-shadow: inset 0 -20px 40px rgba(0,0,0,.18), inset 0 20px 30px rgba(255,255,255,.18); }
+.case::before { content: ""; position: absolute; top: -78px; left: 50%; width: 170px; height: 90px; margin-left: -85px; border: 16px solid #22282e; border-bottom: 0; border-radius: 36px 36px 0 0; }
+.case::after { content: ""; position: absolute; left: 0; right: 0; top: 280px; height: 14px; background: rgba(0,0,0,.18); }
+.wheel { width: 64px; height: 64px; border-radius: 50%; background: radial-gradient(circle, #555 0 22%, #1b1f23 24%); }
+
+.pass2 { width: 520px; height: 230px; background: #fff; border-radius: 20px; display: flex; overflow: hidden; color: var(--ink); }
+.pass2 .m { flex: 1; padding: 22px 26px; display: flex; flex-direction: column; justify-content: space-between; }
+.pass2 .hd { display: flex; justify-content: space-between; font: 700 15px "CFD"; letter-spacing: .14em; color: #59616b; }
+.pass2 .rt { display: flex; align-items: center; gap: 20px; font: 800 64px/1 "CFD"; letter-spacing: -0.04em; }
+.pass2 .rt i { font-style: normal; font-size: 36px; color: var(--teal-d, #0f9c83); }
+.pass2 .st { width: 120px; border-left: 3px dashed #c9d1d8; background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 6px, var(--ink) 6px 7px, transparent 7px 11px); background-size: 60% 70%; background-repeat: no-repeat; background-position: center; }
+
+.shades { width: 330px; height: 120px; }
+.cable { width: 260px; height: 260px; }
+
+.ltag { width: 210px; height: 120px; border-radius: 16px; background: #fff; display: flex; flex-direction: column; justify-content: center; padding: 0 22px; color: var(--ink); }
+.ltag b { font: 800 56px/1 "CFD"; letter-spacing: -0.04em; }
+.ltag span { font: 700 15px "CFD"; letter-spacing: .14em; color: #59616b; margin-top: 4px; }
+.ltag.y { background: var(--yellow); } .ltag.p { background: var(--pink); } .ltag.t { background: var(--teal); } .ltag.k { background: var(--ink); color: #fff; } .ltag.k span { color: var(--muted); }
+
+/* person cutout slot: drop a transparent PNG named after the concept into ../people/ and it replaces the slot */
+.person { z-index: 3; }
+.person img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
+
+/* chat screen for the "same number" concept (generic green chat, no third-party branding) */
+.chat { position: absolute; inset: 0; background: #efe7dd; font-family: "UI"; color: #111; }
+.chat .bar { position: absolute; top: 64px; left: 0; right: 0; height: 86px; background: #f7f7f7; display: flex; align-items: center; gap: 14px; padding: 0 20px; border-bottom: 1px solid #ddd; }
+.chat .av { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(160deg, #f8a170, #d76d77); }
+.chat .bar b { font: 600 20px "UI"; display: block; }
+.chat .bar span { font: 400 15px "UI"; color: #2fbf4a; }
+.chat .msgs { position: absolute; top: 170px; left: 0; right: 0; padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+.bub { max-width: 78%; padding: 12px 16px; border-radius: 20px; font: 400 19px/1.3 "UI"; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+.bub.in { background: #fff; align-self: flex-start; border-top-left-radius: 6px; }
+.bub.out { background: #d6f7c9; align-self: flex-end; border-top-right-radius: 6px; }
+.bub small { display: block; text-align: right; font-size: 13px; color: #7b8590; margin-top: 4px; }
+.bub .ph { width: 280px; height: 180px; border-radius: 12px; margin-bottom: 8px; background: linear-gradient(180deg, #4fa3ea, #a9dcff 55%, #e9d3a8 56%, #d6b680); }
+
+.checklist { position: absolute; inset: 0; background: #fff; font-family: "UI"; color: var(--ink); }
+.checklist .in { position: absolute; top: 150px; left: 26px; right: 26px; display: grid; gap: 14px; }
+.checklist h3 { font: 800 40px/0.98 "CFD"; letter-spacing: -0.04em; margin: 0 0 8px; }
+.checklist .it { display: flex; align-items: center; gap: 14px; border: 2.5px solid var(--ink); border-radius: 18px; padding: 14px 16px; font: 600 21px "UI"; box-shadow: 5px 5px 0 var(--teal); }
+.checklist .it.d { box-shadow: 5px 5px 0 var(--pink); }
+.checklist .it em { font-style: normal; margin-left: auto; font: 600 14px "UI"; color: #0f9c83; }
+</style>
+</head>
+<body>
+<div id="ad"></div>
+<script src="../../v2-realistic/src/qr.js"></script>
+<script src="../../src/offers.js"></script>
+<script src="../../v2-realistic/src/kit.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const k = P.get("k") || "pack";
+const GEN = { key: "global", name: "your trip", short: "Travel", tag: "Travel eSIM", code: "ANY", plan: "Travel eSIM", sky: "turkey", wall: ["#0b6e8a", "#5fd4c4", "#f6e7b0"] };
+const SMALL = "Data-only eSIM. Unlocked, eSIM-compatible phone needed. T&amp;Cs apply: calafly.net/legal/terms";
+const SMALL_REFUND = "100% refund if your eSIM is unused. Data-only eSIM. Unlocked, eSIM-compatible phone needed. T&amp;Cs apply: calafly.net/legal/terms";
+const tick = K.tickSvg ? K.tickSvg() : "✓";
+const globe = `<svg viewBox="0 0 100 100" fill="none" stroke="#d9b86a" stroke-width="3"><circle cx="50" cy="50" r="40"/><ellipse cx="50" cy="50" rx="17" ry="40"/><path d="M10 50h80M16 30h68M16 70h68"/></svg>`;
+const shades = `<svg class="shades" viewBox="0 0 330 120"><path d="M8 26 Q165 6 322 26" stroke="#111" stroke-width="10" fill="none"/><path d="M20 28 h120 q4 70 -58 74 q-58 2 -62 -74z" fill="#16323a"/><path d="M190 28 h120 q-4 70 -62 74 q-58 -4 -58 -74z" fill="#16323a"/><path d="M38 40 q30 -6 54 0" stroke="rgba(255,255,255,.35)" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M208 40 q30 -6 54 0" stroke="rgba(255,255,255,.35)" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M140 34 q25 -12 50 0" stroke="#111" stroke-width="10" fill="none"/></svg>`;
+const cable = `<svg class="cable" viewBox="0 0 260 260" fill="none"><path d="M40 220 C 10 140, 120 160, 110 100 S 30 40, 120 30 S 240 90, 200 160 S 120 230, 220 236" stroke="#f4f4f4" stroke-width="16" stroke-linecap="round"/><path d="M40 220 C 10 140, 120 160, 110 100 S 30 40, 120 30 S 240 90, 200 160 S 120 230, 220 236" stroke="rgba(0,0,0,.08)" stroke-width="16" stroke-linecap="round" stroke-dasharray="2 14"/><rect x="200" y="222" width="54" height="30" rx="8" fill="#e8e8e8" stroke="#cfcfcf" stroke-width="3"/><rect x="12" y="206" width="44" height="36" rx="9" fill="#e8e8e8" stroke="#cfcfcf" stroke-width="3" transform="rotate(-70 34 224)"/></svg>`;
+
+const ph = (screen, x, y, r = 6, sc = .6) => `<div class="phone3d" style="left:${x}px;top:${y}px;transform:rotate(${r}deg) scale(${sc});transform-origin:0 0;filter:drop-shadow(18px 22px 0 rgba(11,13,16,.28))">${K.iphone(screen, { flat: true })}</div>`;
+const C = {
+  pack: {
+    tag: "Packing list", dark: false,
+    h: `Passport. Charger.<br><span class="hl">Data.</span>`,
+    sub: "",
+    small: SMALL, stage: [560, 690], stageBg: "linear-gradient(160deg,#18c8a8,#12b495)",
+    scene: T => `
+      <div class="cut" style="left:96px;top:${T+80}px;transform:rotate(-9deg)"><div class="passport"><canvas data-fabric="#1b2a4a" width="200" height="280"></canvas>${globe}<b>PASSPORT</b><small>TRAVEL DOCUMENT</small></div></div>
+      <div class="cut" style="left:96px;top:${T+470}px;transform:rotate(4deg)">${shades}</div>
+      <div class="cut" style="left:380px;top:${T+330}px;transform:rotate(-6deg) scale(.9)">${cable}</div>
+      ${ph(`<div class="checklist">${K.sbar()}<div class="in"><h3>Before<br><span class="hl">you fly.</span></h3>
+        <div class="it"><span class="tick">${tick}</span>Passport</div>
+        <div class="it"><span class="tick">${tick}</span>Charger</div>
+        <div class="it"><span class="tick">${tick}</span>Sunglasses</div>
+        <div class="it d"><span class="tick">${tick}</span>Data<em>CalaFly · ready</em></div></div><div class="homebar"></div></div>`, 620, T+10, 7)}`,
+    person: "Hands from above dropping the phone into an open suitcase, or a smiling traveller holding a passport and phone up to camera. Cut out at the waist, entering from the right.",
+  },
+  number: {
+    tag: "Keep your number", dark: true,
+    h: `Same number.<br>Same WhatsApp.<br><span class="hl">No roaming.</span>`,
+    sub: "",
+    small: SMALL, stage: [610, 650], stageBg: "radial-gradient(90% 70% at 60% 35%, #2a3a3a 0%, #13181b 60%, #07090b 100%)",
+    scene: T => `
+      <div class="cut" style="left:96px;top:${T+130}px;transform:rotate(-8deg)"><div class="sim"><span class="chip"></span><div><b>Your SIM</b><span>Calls, texts,<br>WhatsApp number</span></div></div></div>
+      <div class="cut" style="left:150px;top:${T+370}px;transform:rotate(5deg)"><div class="sim e"><span class="chip"></span><div><b>CalaFly eSIM</b><span>Travel data,<br>paid once</span></div></div></div>
+      ${ph(`<div class="chat">${K.sbar({ carrier: "CalaFly" })}<div class="bar"><span class="av"></span><div><b>Mum</b><span>online</span></div></div>
+        <div class="msgs"><div class="bub in">Is this still your number? 😄<small>14:02</small></div>
+        <div class="bub out"><div class="ph"></div>Same number, just landed!<small>14:05 ✓✓</small></div>
+        <div class="bub in">Lovely. No silly roaming bill this time x<small>14:06</small></div></div><div class="homebar"></div></div>`, 625, T+30, 6)}`,
+    person: "Woman on a sunny café terrace abroad, laughing at her phone mid-message. Cut out at the chest, phone in her right hand, entering from the left.",
+  },
+  bill: {
+    tag: "Pay once", dark: false,
+    h: `The roaming bill<br><span class="hl">you won't get.</span>`,
+    sub: "",
+    small: "Example: a £5-a-day roaming pass for 14 days. Network prices vary. " + SMALL, stage: [560, 690], stageBg: "linear-gradient(160deg,#ffe14a,#ffd21f)",
+    scene: T => `
+      <div class="cut" style="left:110px;top:${T+0}px;transform:rotate(-6deg)"><div class="receipt"><div class="h">ROAMING CHARGES</div>
+        ${[["Day 1", "£5.00"], ["Day 2", "£5.00"], ["Day 3", "£5.00"], ["Day 4", "£5.00"], ["…", ""], ["Day 13", "£5.00"], ["Day 14", "£5.00"]].map(([a, b]) => `<div class="l"><span>${a}</span><span>${b}</span></div>`).join("")}
+        <div class="t"><span>TOTAL</span><span>£70.00</span></div></div></div>
+      <div class="cut" style="left:170px;top:${T+150}px;transform:rotate(-14deg)"><div class="stamp">NOT YOURS<small>PAID ONCE WITH CALA</small></div></div>
+      ${ph(K.screenOrder(GEN), 625, T+30, 6)}`,
+    person: "Man holding up a long roaming receipt with a mock-shocked face, other hand giving a thumbs up with his phone. Cut out at the waist, centre-left.",
+  },
+  refund: {
+    tag: "Guaranteed", dark: true,
+    h: `Trip off?<br><span class="hl">Money back.</span>`,
+    sub: "",
+    small: SMALL_REFUND, stage: [560, 690], stageBg: "radial-gradient(90% 70% at 40% 35%, #3a2230 0%, #18121a 60%, #07090b 100%)",
+    scene: T => `
+      <div class="cut" style="left:110px;top:${T+90}px;transform:rotate(-4deg)"><div class="case"></div><div class="wheel" style="position:absolute;left:60px;bottom:-40px"></div><div class="wheel" style="position:absolute;right:60px;bottom:-40px"></div></div>
+      <div style="left:430px;top:${T+0}px;transform:rotate(18deg);transform-origin:top" class="string"></div>
+      <div class="cut" style="left:380px;top:${T+80}px;transform:rotate(9deg)"><div class="tag2"><b>100%</b><i>refund if<br>unused</i><small>CALAFLY · GUARANTEED</small></div></div>
+      ${ph(K.screenRefund(GEN), 670, T+60, 7)}`,
+    person: "Traveller sitting on an unopened suitcase at home, shrugging and smiling at the phone. Cut out full length, sitting on the suitcase cutout's left edge.",
+  },
+  global: {
+    tag: "200+ countries", dark: false,
+    h: `One eSIM app.<br><span class="hl">200+ countries.</span>`,
+    sub: "",
+    small: SMALL, stage: [560, 690], stageBg: "linear-gradient(160deg,#ff4d6a,#ff6f86)",
+    scene: T => `
+      ${[["JFK", "NEW YORK", "", -12, 96, 600], ["IST", "ISTANBUL", "y", 8, 300, 640], ["DXB", "DUBAI", "k", -6, 120, 780], ["BCN", "BARCELONA", "t", 10, 330, 820], ["BKK", "BANGKOK", "", -9, 90, 950], ["HND", "TOKYO", "y", 6, 320, 990]]
+        .map(([c, n, cls, r, x, y]) => `<div class="cut" style="left:${x}px;top:${T + y - 560}px;transform:rotate(${r}deg)"><div class="ltag ${cls}"><b>${c}</b><span>${n}</span></div></div>`).join("")}
+      ${ph(K.screenPick(GEN), 640, T+30, 6)}`,
+    person: "Backpacker mid-stride pointing up at the headline, big grin. Cut out full length, standing in front of the tag pile.",
+  },
+};
+
+const S = C[k];
+const ad = document.getElementById("ad");
+ad.className = S.dark ? "dark" : "";
+
+const ppl = P.get("person") === "1";
+ad.innerHTML = `
+  ${S.dark ? "" : `<div class="paper"><canvas data-fabric="#efe9df" width="540" height="675"></canvas></div>`}
+  <div class="top">${K.logo()}<span class="url">calafly.net</span></div>
+  <div class="txt"><span class="tag">${S.tag}</span><h1>${S.h}</h1>${S.sub ? `<p class="sub">${S.sub}</p>` : ""}</div>
+  <div class="stage" style="background:${S.stageBg}"></div>
+  ${ppl ? `<div class="person" style="position:absolute;right:40px;bottom:0;width:560px;height:760px"><img src="../people/${k}.png" onerror="this.parentNode.remove()"></div>` : ""}
+  <div class="scene"></div>
+  <div class="foot"><p class="small">${S.small}</p><span class="cta">Get Calafly</span></div>`;
+window.PERSON_BRIEF = S.person;
+const txt = ad.querySelector(".txt"), T = Math.max(560, txt.offsetTop + txt.offsetHeight + 44), stage = ad.querySelector(".stage");
+stage.style.top = T + "px"; stage.style.height = (1196 - T) + "px";
+ad.querySelector(".scene").innerHTML = S.scene(T);
+K.paintAll(ad);
+document.fonts.ready.then(() => { document.body.dataset.ready = "1"; });
+</script>
+</body>
+</html>

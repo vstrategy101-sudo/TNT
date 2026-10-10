@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../v2-realistic/src/kit.css">
+<style>
+/* Generic CalaFly brand ads with real people (4:5). Read order, top to bottom on the left:
+   1 what it is (definition bar)  2 the hook (headline + the person's reaction)  3 why CalaFly (ticks) + CTA.
+   The person is a die-cut sticker on the right, bleeding off the bottom edge. */
+html, body { margin: 0; background: #777; }
+#ad { position: relative; overflow: hidden; width: 1080px; height: 1350px; color: var(--ink); }
+.bgfill { position: absolute; inset: 0; }
+.bgfill canvas { width: 100%; height: 100%; display: block; }
+.disc { position: absolute; border-radius: 50%; }
+
+.top { position: absolute; left: 56px; right: 56px; top: 50px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 9; }
+.url { font: 800 30px "CFD"; }
+
+.def { position: absolute; left: 56px; top: 196px; z-index: 9; display: flex; align-items: center; gap: 16px; background: #fff; border: 4px solid var(--ink); border-radius: 20px; padding: 14px 22px 14px 16px; box-shadow: 7px 7px 0 var(--ink); max-width: 968px; }
+.def .ic { flex: 0 0 auto; width: 58px; height: 58px; border-radius: 14px; background: var(--teal); display: grid; place-items: center; border: 3px solid var(--ink); }
+.def .ic svg { width: 34px; height: 34px; }
+.def p { color: var(--ink); margin: 0; font: 700 27px/1.2 "CFD"; letter-spacing: -0.015em; }
+.def p b { font-weight: 800; }
+
+.col { position: absolute; left: 56px; top: 330px; width: 520px; z-index: 9; display: flex; flex-direction: column; align-items: flex-start; }
+h1 { font-weight: 800; letter-spacing: -0.05em; line-height: 0.93; font-size: 86px; margin: 0; }
+h1 .hl { color: var(--pink); }
+.dark h1 .hl { color: var(--pink); }
+.ticks { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 12px; }
+.ticks li { display: flex; align-items: center; gap: 14px; font: 700 29px/1.15 "CFD"; letter-spacing: -0.015em; }
+.ticks .tick { width: 40px; height: 40px; flex: 0 0 auto; border: 3px solid var(--ink); }
+.ticks .tick svg { width: 20px; height: 20px; }
+.ctarow { margin-top: 34px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.cta { font-size: 38px; }
+.small { position: absolute; left: 56px; bottom: 40px; width: 380px; margin: 0; font: 500 17px/1.35 "CFD"; z-index: 9; }
+
+/* person sticker */
+.person { position: absolute; z-index: 5; }
+.person img { display: block; width: 100%; height: auto; }
+.sticker { filter: drop-shadow(6px 0 0 #fff) drop-shadow(-6px 0 0 #fff) drop-shadow(0 6px 0 #fff) drop-shadow(0 -6px 0 #fff) drop-shadow(16px 18px 0 rgba(11,13,16,.9)); }
+.prop { position: absolute; z-index: 7; }
+.propb { position: absolute; z-index: 3; }
+
+/* props */
+.bubble { background: #d6f7c9; border: 3px solid var(--ink); border-radius: 26px 26px 6px 26px; padding: 16px 20px; font: 600 26px/1.2 "UI", "CFD"; box-shadow: 7px 7px 0 var(--ink); width: 330px; }
+.bubble small { display: block; text-align: right; font: 500 17px "UI"; color: #5b6b5e; margin-top: 4px; }
+.bubble.in { background: #fff; border-radius: 26px 26px 26px 6px; }
+.receipt { width: 300px; background: #fffdf8; padding: 26px 24px 40px; font: 500 19px/1.5 "DejaVu Sans Mono", monospace; color: #2b2f33; border: 3px solid var(--ink); clip-path: polygon(0 0,100% 0,100% calc(100% - 14px),95% 100%,90% calc(100% - 14px),85% 100%,80% calc(100% - 14px),75% 100%,70% calc(100% - 14px),65% 100%,60% calc(100% - 14px),55% 100%,50% calc(100% - 14px),45% 100%,40% calc(100% - 14px),35% 100%,30% calc(100% - 14px),25% 100%,20% calc(100% - 14px),15% 100%,10% calc(100% - 14px),5% 100%,0 calc(100% - 14px)); }
+.receipt .h { text-align: center; font-weight: 700; letter-spacing: .1em; border-bottom: 2px dashed #9aa3ab; padding-bottom: 8px; margin-bottom: 8px; }
+.receipt .l { display: flex; justify-content: space-between; }
+.receipt .t { border-top: 2px dashed #9aa3ab; margin-top: 8px; padding-top: 8px; font-weight: 700; font-size: 28px; display: flex; justify-content: space-between; color: #c41d3b; }
+.tag2 { width: 230px; height: 330px; background: linear-gradient(170deg, #e2c393, #c79f68); clip-path: polygon(22% 0, 78% 0, 100% 12%, 100% 100%, 0 100%, 0 12%); display: flex; flex-direction: column; align-items: center; padding: 74px 18px 20px; text-align: center; color: var(--ink); }
+.tag2::before { content: ""; position: absolute; top: 26px; left: 50%; width: 32px; height: 32px; margin-left: -16px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 5px #a8834e; }
+.tag2 b { font: 800 74px/0.86 "CFD"; letter-spacing: -0.05em; }
+.tag2 i { font: 800 26px/1.05 "CFD"; font-style: normal; margin-top: 10px; }
+.tag2 small { font: 700 14px/1.3 "CFD"; margin-top: auto; letter-spacing: .08em; color: #3b2a14; }
+.ltag { width: 190px; height: 112px; border-radius: 16px; background: #fff; border: 3px solid var(--ink); display: flex; flex-direction: column; justify-content: center; padding: 0 20px; box-shadow: 6px 6px 0 var(--ink); }
+.ltag b { font: 800 54px/1 "CFD"; letter-spacing: -0.04em; }
+.ltag span { font: 700 14px "CFD"; letter-spacing: .14em; color: #59616b; margin-top: 3px; }
+.ltag.y { background: var(--yellow); } .ltag.p { background: var(--pink); } .ltag.t { background: var(--teal); }
+.ltag.p span, .ltag.t span, .ltag.y span { color: var(--ink); }
+.stamp { border: 6px solid var(--pink); color: var(--pink); border-radius: 14px; padding: 8px 16px; font: 800 36px/1 "CFD"; letter-spacing: -0.02em; text-align: center; background: rgba(255,255,255,.9); }
+.stamp small { display: block; font: 800 16px "CFD"; letter-spacing: .12em; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div id="ad"></div>
+<script src="../../v2-realistic/src/qr.js"></script>
+<script src="../../src/offers.js"></script>
+<script src="../../v2-realistic/src/kit.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const k = P.get("k") || "pack";
+const tick = K.tickSvg();
+const SMALL = "Data-only eSIM. Unlocked, eSIM-compatible phone needed. T&amp;Cs apply: calafly.net/legal/terms";
+const SIG = `<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="14" width="3.4" height="6" rx="1" fill="#0b0d10"/><rect x="8.3" y="10.5" width="3.4" height="9.5" rx="1" fill="#0b0d10"/><rect x="13.6" y="7" width="3.4" height="13" rx="1" fill="#0b0d10"/><rect x="18.9" y="3.5" width="3.4" height="16.5" rx="1" fill="#0b0d10"/></svg>`;
+const T = { pay: "Pay once, not per day", num: "Keep your number &amp; WhatsApp", ref: "100% refund if unused", set: "Set up at home in minutes", cty: "200+ countries" };
+
+// x/y/w place the person (px in the 1080×1350 ad); bottom-anchored people use bottom:-n.
+const C = {
+  pack: { bg: "#f3efe7", disc: ["#18c8a8", 520, 330, 720],
+    h: `Land abroad.<br><span class="hl">Data's already on.</span>`, ticks: [T.pay, T.num, T.ref],
+    person: { src: "pack", left: 450, bottom: -250, width: 660 }, props: "" },
+  number: { bg: "#ffe14a", disc: ["#fff6c4", 540, 360, 700],
+    h: `Same number.<br><span class="hl">No roaming bill.</span>`, ticks: [T.num, T.pay, T.ref],
+    person: { src: "number", left: 455, bottom: -40, width: 760 },
+    props: `<div class="prop" style="left:610px;top:430px;transform:rotate(3deg)"><div class="bubble">Still on your normal number? 😄<small>Mum · 14:02</small></div></div>` },
+  bill: { bg: "#f3efe7", disc: ["#ff4d6a", 560, 340, 680],
+    h: `£70 to use your phone abroad?<br><span class="hl">Not this trip.</span>`, ticks: [T.pay, T.num, T.ref],
+    small: "Example: a £5-a-day roaming pass for 14 days. Network prices vary. " + SMALL,
+    person: { src: "bill", left: 540, bottom: -150, width: 560 },
+    props: `<div class="prop" style="left:470px;top:925px;transform:rotate(-9deg)"><div class="receipt"><div class="h">ROAMING</div>
+      ${[["Day 1", "£5.00"], ["Day 2", "£5.00"], ["…", ""], ["Day 14", "£5.00"]].map(([a, b]) => `<div class="l"><span>${a}</span><span>${b}</span></div>`).join("")}
+      <div class="t"><span>TOTAL</span><span>£70.00</span></div></div></div>` },
+  refund: { bg: "#0b0d10", dark: true, disc: ["#18c8a8", 540, 330, 720],
+    h: `Trip cancelled?<br><span class="hl">100% refund.</span>`, ticks: [T.ref, T.pay, T.num],
+    small: "100% refund if your eSIM is unused. " + SMALL,
+    person: { src: "refund", left: 470, bottom: -240, width: 660 },
+    props: `<div class="prop" style="left:840px;top:370px;transform:rotate(12deg)"><div class="tag2"><b>100%</b><i>refund if<br>unused</i><small>CALAFLY</small></div></div>` },
+  global: { bg: "#f3efe7", disc: ["#2f6bff", 520, 330, 740],
+    h: `One eSIM.<br><span class="hl">200+ countries.</span>`, ticks: [T.pay, T.num, T.ref],
+    person: { src: "global", left: 440, bottom: -150, width: 700 },
+    props: [["IST", "ISTANBUL", "y", -10, 720, 390], ["DXB", "DUBAI", "", 8, 880, 500], ["JFK", "NEW YORK", "p", -6, 860, 700], ["BCN", "BARCELONA", "t", 9, 620, 600]]
+      .map(([c, n, cls, r, x, y]) => `<div class="propb" style="left:${x}px;top:${y}px;transform:rotate(${r}deg)"><div class="ltag ${cls}"><b>${c}</b><span>${n}</span></div></div>`).join("") },
+};
+
+const S = C[k], ad = document.getElementById("ad");
+const fg = S.dark ? "#fff" : "var(--ink)";
+const [dc, dx, dy, dr] = S.disc;
+ad.className = S.dark ? "dark" : "";
+ad.style.background = S.bg; ad.style.color = fg;
+ad.innerHTML = `
+  ${S.dark ? "" : `<div class="bgfill"><canvas data-fabric="${S.bg === "#ffe14a" ? "#ffe14a" : "#efe9df"}" width="540" height="675"></canvas></div>`}
+  <div class="disc" style="left:${dx}px;top:${dy}px;width:${dr}px;height:${dr}px;background:${dc}"></div>
+  <div class="top">${K.logo()}<span class="url" style="color:${S.dark ? "var(--teal)" : "#0f9c83"}">calafly.net</span></div>
+  <div class="def"><span class="ic">${SIG}</span><p><b>CalaFly is a travel eSIM.</b><br>Mobile data for your phone abroad, set up before you fly.</p></div>
+  <div class="col"><h1>${S.h}</h1>
+    <ul class="ticks">${S.ticks.map(t => `<li><span class="tick">${tick}</span>${t}</li>`).join("")}</ul>
+    <div class="ctarow"><span class="cta">Get your eSIM</span></div></div>
+  ${S.props}
+  <div class="person sticker" style="left:${S.person.left}px;bottom:${S.person.bottom}px;width:${S.person.width}px"><img src="../people/${S.person.src}.png"></div>
+  <p class="small" style="color:${S.dark ? "var(--muted)" : "#4e5761"}">${S.small || SMALL}</p>`;
+K.paintAll(ad);
+Promise.all([document.fonts.ready, ...[...ad.querySelectorAll("img")].map(i => i.decode().catch(() => {}))]).then(() => { document.body.dataset.ready = "1"; });
+</script>
+</body>
+</html>

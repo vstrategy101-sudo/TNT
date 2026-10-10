@@ -73,6 +73,7 @@ h1 { font-weight: 800; letter-spacing: -0.045em; line-height: 0.94; margin-top: 
 .pline > span { display: flex; align-items: center; padding: 10px 18px; }
 .pline .w { font: 700 26px "CFD"; letter-spacing: -0.01em; }
 .pline .p { background: var(--ink); color: var(--teal); font: 800 52px "CFD"; letter-spacing: -0.04em; padding: 4px 20px; }
+.pline .w.two { flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1.1; } .pline .w i { font-style: normal; white-space: nowrap; } .pline .c { white-space: nowrap; }
 .pline .c { background: var(--yellow); font: 800 22px/1.05 "CFD"; border-left: 4px solid var(--ink); }
 .s-1x1 .pline .w { font-size: 22px; } .s-1x1 .pline .p { font-size: 44px; padding: 4px 14px; } .s-1x1 .pline .c { font-size: 19px; padding: 8px 12px; } .s-1x1 .pline .w { padding: 8px 12px; }
 .bigprice { display: flex; align-items: flex-end; gap: 18px; margin-top: 22px; }
@@ -102,7 +103,7 @@ const size = P.get("s") || "1x1";
 K.showOffer = true;
 const O = OFFERS, OF = O.get(C.key);
 const BASE = O.small(C.key), REFUND_ALL = O.small(C.key, { refund: true });
-const pline = () => OF ? `<div class="pline"><span class="w">${C.short} · ${O.plan(C.key)}</span><span class="p">${O.price(C.key)}</span>${OF.code ? `<span class="c">10% off<br>code ${OF.code}</span>` : ""}</div>` : "";
+const pline = () => OF ? `<div class="pline"><span class="w${(C.short + O.plan(C.key)).length > 16 ? " two" : ""}">${(C.short + O.plan(C.key)).length > 16 ? `<i>${C.short}</i><i>${O.plan(C.key)}</i>` : `${C.short} · ${O.plan(C.key)}`}</span><span class="p">${O.price(C.key)}</span>${OF.code ? `<span class="c">10% off<br>code ${OF.code}</span>` : ""}</div>` : "";
 
 // Each concept: copy + a backdrop that fills the card + a subject composed in a 1000×1000 box.
 const CONCEPTS = {

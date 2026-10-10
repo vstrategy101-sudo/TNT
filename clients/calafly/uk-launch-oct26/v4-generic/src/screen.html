@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../v2-realistic/src/kit.css">
+<style>
+html, body { margin: 0; background: #000; }
+#s { position: relative; width: 390px; height: 860px; overflow: hidden; }
+.big { display: grid; place-items: center; width: 108px; height: 108px; border-radius: 50%; background: var(--teal); border: 4px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); margin: 8px 0 6px; }
+.big svg { width: 54px; height: 54px; }
+</style></head>
+<body><div id="s"></div>
+<script src="../../v2-realistic/src/qr.js"></script>
+<script src="../../src/offers.js"></script>
+<script src="../../v2-realistic/src/kit.js"></script>
+<script>
+const tick = K.tickSvg();
+document.getElementById("s").innerHTML = K.web(`
+  <span class="chip">Travel eSIM</span>
+  <span class="big">${tick.replace('<svg', '<svg style="width:54px;height:54px"')}</span>
+  <h3 style="font-size:46px">Data<br><span class="hl">ready.</span></h3>
+  <div class="card2" style="display:grid;gap:10px">
+    ${["Pay once, not per day", "Keep your number", "100% refund if unused"].map(t => `<div style="display:flex;gap:10px;align-items:center;font:600 17px UI"><span class="tick">${tick}</span>${t}</div>`).join("")}
+  </div>`);
+document.fonts.ready.then(() => { document.body.dataset.ready = "1"; });
+</script></body></html>
