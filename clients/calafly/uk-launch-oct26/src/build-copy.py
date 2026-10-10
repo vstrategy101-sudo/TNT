@@ -10,12 +10,20 @@ OUT = os.path.join(HERE, "..", "copy")
 os.makedirs(OUT, exist_ok=True)
 
 COUNTRIES = {
-    "usa":    {"name": "the USA", "short": "USA",    "path": "usa", "sofa": "couch",
-               "price": "\n\nUSA 3GB for 30 days: £7, paid once. New to CalaFly? Use code USA10 for 10% off your first order.",
-               "h_price": "USA 3GB for £7, 30 Days", "h_code": "10% Off With Code USA10",    "cities": ["New York", "Orlando", "Las Vegas"]},
+    "usa":    {"name": "the USA", "short": "USA",    "path": "usa", "sofa": "couch",    "cities": ["New York", "Orlando", "Las Vegas"]},
     "turkey": {"name": "Turkey",  "short": "Turkey", "path": "turkey", "cities": ["Istanbul", "Antalya", "Dalaman"]},
     "dubai":  {"name": "Dubai",   "short": "Dubai",  "path": "dubai",  "cities": ["Dubai"]},
 }
+# Hero plans from the landing pages (match src/offers.js): price lines for Meta, price headlines for Google
+PRICES = {"usa": ("3GB", 7, 30, "USA10"), "turkey": ("10GB", 11, 7, "TURKEY10"), "dubai": ("10GB", 18, 7, "DUBAI10")}
+for _k, (_d, _p, _days, _code) in PRICES.items():
+    _c = COUNTRIES[_k]
+    _c["price"] = (f"\n\n{_c['short']} {_d} for {_days} days: £{_p}, paid once. "
+                   f"New to CalaFly? Use code {_code} for 10% off your first order.")
+    _c["h_price"] = f"{_c['short']} {_d} for £{_p}, {_days} Days"
+    _c["h_code"] = f"10% Off With Code {_code}"
+    _c["m_price"] = (f"{_d} for £{_p} · {_days} days", f"New here? 10% off: {_code}")
+
 
 def rsa(c):
     s, n = c["short"], c["name"]
@@ -152,7 +160,7 @@ with open(os.path.join(OUT, "meta_ads.csv"), "w", newline="") as f:
                 pt, hl, ds = (x.format(n=c["name"], s=c["short"], sofa=c.get("sofa", "sofa")) for x in (pt, hl, ds))
                 if cre in ("01_INTRO", "03_PRICE", "05_ALL-USP", "06_RETARGET", "VIDEO_01"): pt += c.get("price", "")
                 if "h_price" in c and cre in ("03_PRICE", "05_ALL-USP"):   # price-led headline where a price is confirmed
-                    hl, ds = "3GB for £7 · 30 days", "New here? 10% off: USA10"
+                    hl, ds = c["m_price"]
                 check("meta headline", hl, 40, f"{key} {cre}")
                 check("meta description", ds, 40, f"{key} {cre}")
                 out.append({"creative": cre, "primary": pt, "headline": hl, "description": ds})

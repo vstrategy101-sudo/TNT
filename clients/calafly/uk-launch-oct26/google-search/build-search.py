@@ -72,10 +72,11 @@ NEG_SHARED = [
 ]
 
 # Confirmed prices and promo codes (match src/offers.js). Turkey and Dubai are added once their prices are confirmed.
-# Confirmed plan prices from each landing page (match src/offers.js). Add Turkey and Dubai here once confirmed,
-# e.g. "Turkey": {"data": "3GB", "price": 5, "days": 15, "code": None}, and every price line below is generated.
+# Confirmed hero plans from each landing page (match src/offers.js); every price line below is generated from these.
 PRICES = {
     "USA": {"data": "3GB", "price": 7, "days": 30, "code": "USA10", "pct": 10},
+    "Turkey": {"data": "10GB", "price": 11, "days": 7, "code": "TURKEY10", "pct": 10},
+    "Dubai": {"data": "10GB", "price": 18, "days": 7, "code": "DUBAI10", "pct": 10},
 }
 def gbp(n): return f"£{n:g}" if float(n).is_integer() else f"£{n:.2f}"
 def offer_lines(S, p):

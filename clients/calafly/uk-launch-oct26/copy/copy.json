@@ -30,13 +30,13 @@
     "Turkey eSIM by CalaFly",
     "Mobile Data for Turkey",
     "Get Your Turkey eSIM",
+    "Turkey 10GB for £11, 7 Days",
+    "10% Off With Code TURKEY10",
     "Set Up in Minutes",
     "Pay Once, Not Per Day",
     "One Price for Your Trip",
     "100% Refund if Unused",
     "Scan a QR Code at Home",
-    "Land Connected",
-    "Sorted Before You Fly",
     "Data-Only Travel eSIM",
     "Keep Your WhatsApp Number",
     "Travel Data for Turkey",
@@ -55,13 +55,13 @@
     "Dubai eSIM by CalaFly",
     "Mobile Data for Dubai",
     "Get Your Dubai eSIM",
+    "Dubai 10GB for £18, 7 Days",
+    "10% Off With Code DUBAI10",
     "Set Up in Minutes",
     "Pay Once, Not Per Day",
     "One Price for Your Trip",
     "100% Refund if Unused",
     "Scan a QR Code at Home",
-    "Land Connected",
-    "Sorted Before You Fly",
     "Data-Only Travel eSIM",
     "Keep Your WhatsApp Number",
     "Travel Data for Dubai",
@@ -167,7 +167,7 @@
    "prospecting": [
     {
      "creative": "01_INTRO",
-     "primary": "Meet CalaFly: mobile data for Turkey, sorted before you leave the UK.\n\nPick your Turkey plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if it's unused, you get a 100% refund. Guaranteed (T&Cs apply).",
+     "primary": "Meet CalaFly: mobile data for Turkey, sorted before you leave the UK.\n\nPick your Turkey plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if it's unused, you get a 100% refund. Guaranteed (T&Cs apply).\n\nTurkey 10GB for 7 days: £11, paid once. New to CalaFly? Use code TURKEY10 for 10% off your first order.",
      "headline": "Meet CalaFly",
      "description": "Turkey data, sorted before you fly"
     },
@@ -179,9 +179,9 @@
     },
     {
      "creative": "03_PRICE",
-     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to Turkey. No daily charges from us, whether you stay for a long weekend or two weeks.",
-     "headline": "Pay once, not per day",
-     "description": "One price for your whole trip"
+     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to Turkey. No daily charges from us, whether you stay for a long weekend or two weeks.\n\nTurkey 10GB for 7 days: £11, paid once. New to CalaFly? Use code TURKEY10 for 10% off your first order.",
+     "headline": "10GB for £11 · 7 days",
+     "description": "New here? 10% off: TURKEY10"
     },
     {
      "creative": "04_REFUND",
@@ -191,13 +191,13 @@
     },
     {
      "creative": "05_ALL-USP",
-     "primary": "Turkey data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ 100% refund if unused (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
-     "headline": "Turkey data, sorted",
-     "description": "Set up in minutes. Pay once."
+     "primary": "Turkey data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ 100% refund if unused (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.\n\nTurkey 10GB for 7 days: £11, paid once. New to CalaFly? Use code TURKEY10 for 10% off your first order.",
+     "headline": "10GB for £11 · 7 days",
+     "description": "New here? 10% off: TURKEY10"
     },
     {
      "creative": "VIDEO_01",
-     "primary": "Flying from the UK to Turkey? Meet CalaFly. Set up in minutes, pay once (not per day), and get a 100% refund if it's unused. T&Cs apply.",
+     "primary": "Flying from the UK to Turkey? Meet CalaFly. Set up in minutes, pay once (not per day), and get a 100% refund if it's unused. T&Cs apply.\n\nTurkey 10GB for 7 days: £11, paid once. New to CalaFly? Use code TURKEY10 for 10% off your first order.",
      "headline": "Meet CalaFly",
      "description": "Data for Turkey, sorted"
     },
@@ -211,7 +211,7 @@
    "retargeting": [
     {
      "creative": "06_RETARGET",
-     "primary": "Still planning Turkey? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a 100% refund if it's unused (T&Cs apply).",
+     "primary": "Still planning Turkey? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a 100% refund if it's unused (T&Cs apply).\n\nTurkey 10GB for 7 days: £11, paid once. New to CalaFly? Use code TURKEY10 for 10% off your first order.",
      "headline": "Still planning Turkey?",
      "description": "Your data, sorted tonight"
     },
@@ -233,7 +233,7 @@
    "prospecting": [
     {
      "creative": "01_INTRO",
-     "primary": "Meet CalaFly: mobile data for Dubai, sorted before you leave the UK.\n\nPick your Dubai plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if it's unused, you get a 100% refund. Guaranteed (T&Cs apply).",
+     "primary": "Meet CalaFly: mobile data for Dubai, sorted before you leave the UK.\n\nPick your Dubai plan, scan the QR code at home and land connected. One price for the whole trip, not per day. And if it's unused, you get a 100% refund. Guaranteed (T&Cs apply).\n\nDubai 10GB for 7 days: £18, paid once. New to CalaFly? Use code DUBAI10 for 10% off your first order.",
      "headline": "Meet CalaFly",
      "description": "Dubai data, sorted before you fly"
     },
@@ -245,9 +245,9 @@
     },
     {
      "creative": "03_PRICE",
-     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to Dubai. No daily charges from us, whether you stay for a long weekend or two weeks.",
-     "headline": "Pay once, not per day",
-     "description": "One price for your whole trip"
+     "primary": "Pay once. Not per day.\n\nCalaFly gives you one price for your whole trip to Dubai. No daily charges from us, whether you stay for a long weekend or two weeks.\n\nDubai 10GB for 7 days: £18, paid once. New to CalaFly? Use code DUBAI10 for 10% off your first order.",
+     "headline": "10GB for £18 · 7 days",
+     "description": "New here? 10% off: DUBAI10"
     },
     {
      "creative": "04_REFUND",
@@ -257,13 +257,13 @@
     },
     {
      "creative": "05_ALL-USP",
-     "primary": "Dubai data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ 100% refund if unused (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.",
-     "headline": "Dubai data, sorted",
-     "description": "Set up in minutes. Pay once."
+     "primary": "Dubai data, sorted.\n\n✓ Set up in minutes\n✓ Pay once, not per day\n✓ 100% refund if unused (T&Cs apply)\n\nData-only eSIM for unlocked, eSIM-compatible phones.\n\nDubai 10GB for 7 days: £18, paid once. New to CalaFly? Use code DUBAI10 for 10% off your first order.",
+     "headline": "10GB for £18 · 7 days",
+     "description": "New here? 10% off: DUBAI10"
     },
     {
      "creative": "VIDEO_01",
-     "primary": "Flying from the UK to Dubai? Meet CalaFly. Set up in minutes, pay once (not per day), and get a 100% refund if it's unused. T&Cs apply.",
+     "primary": "Flying from the UK to Dubai? Meet CalaFly. Set up in minutes, pay once (not per day), and get a 100% refund if it's unused. T&Cs apply.\n\nDubai 10GB for 7 days: £18, paid once. New to CalaFly? Use code DUBAI10 for 10% off your first order.",
      "headline": "Meet CalaFly",
      "description": "Data for Dubai, sorted"
     },
@@ -277,7 +277,7 @@
    "retargeting": [
     {
      "creative": "06_RETARGET",
-     "primary": "Still planning Dubai? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a 100% refund if it's unused (T&Cs apply).",
+     "primary": "Still planning Dubai? Your data can be sorted tonight.\n\nOne price for the trip, set up in minutes, and a 100% refund if it's unused (T&Cs apply).\n\nDubai 10GB for 7 days: £18, paid once. New to CalaFly? Use code DUBAI10 for 10% off your first order.",
      "headline": "Still planning Dubai?",
      "description": "Your data, sorted tonight"
     },
