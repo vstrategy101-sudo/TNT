@@ -72,9 +72,23 @@ NEG_SHARED = [
 ]
 
 # Confirmed prices and promo codes (match src/offers.js). Turkey and Dubai are added once their prices are confirmed.
-OFFERS = {"USA": {"h_price": "USA 3GB for £7, 30 Days", "h_code": "10% Off With Code USA10",
-                  "d_price": "3GB for 30 days: £7, paid once. New here? 10% off with code USA10. T&Cs apply.",
-                  "callouts": ["3GB for £7, 30 Days", "10% Off: Code USA10"]}}
+# Confirmed plan prices from each landing page (match src/offers.js). Add Turkey and Dubai here once confirmed,
+# e.g. "Turkey": {"data": "3GB", "price": 5, "days": 15, "code": None}, and every price line below is generated.
+PRICES = {
+    "USA": {"data": "3GB", "price": 7, "days": 30, "code": "USA10", "pct": 10},
+}
+def gbp(n): return f"£{n:g}" if float(n).is_integer() else f"£{n:.2f}"
+def offer_lines(S, p):
+    price, data, days = gbp(p["price"]), p["data"], p["days"]
+    code = p.get("code")
+    return {
+        "h_price": f"{S} {data} for {price}, {days} Days",
+        "h_code": f"{p['pct']}% Off With Code {code}" if code else f"From {price}, Paid Once",
+        "d_price": (f"{data} for {days} days: {price}, paid once. New here? {p['pct']}% off with code {code}. T&Cs apply."
+                    if code else f"{data} for {days} days: {price}, paid once. No daily charges from us. T&Cs apply."),
+        "callouts": [f"{data} for {price}, {days} Days"] + ([f"{p['pct']}% Off: Code {code}"] if code else []),
+    }
+OFFERS = {S: offer_lines(S, p) for S, p in PRICES.items()}
 COMMON_H = ["Set Up in Minutes", "Pay Once, Not Per Day", "One Price for Your Trip", "100% Refund if Unused",
             "Scan a QR Code at Home", "QR Code Sent by Email", "Land Connected", "Sorted Before You Fly",
             "Data-Only Travel eSIM", "Keep Your WhatsApp Number", "No Daily Charges From Us"]
