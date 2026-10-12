@@ -10,7 +10,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 IMG = "https://raw.githubusercontent.com/vstrategy101-sudo/TNT/refs/heads/claude/claude-cloud-status-glwjyq/clients/calafly/merchant-center/images"
 CAT = "Electronics > Communications > Telephony > Mobile Phone Accessories > Mobile Phone Pre-Paid Cards & SIM Cards"
 PLANS = [  # id, key, destination, data, days, price GBP, url
-    ("CF-GB-USA-3GB-30D",     "usa",    "USA",    "3GB",  15, 7.00,  "https://calafly.net/usa"),
+    ("CF-GB-USA-3GB-30D",     "usa",    "USA",    "3GB",  15, 7.00,  "https://calafly.net/destinations/esim-usa"),
     ("CF-GB-TURKEY-10GB-7D",  "turkey", "Turkey", "10GB", 7,  11.00, "https://calafly.net/turkey"),
     ("CF-GB-DUBAI-10GB-7D",   "dubai",  "Dubai",  "10GB", 7,  18.00, "https://calafly.net/dubai"),
 ]

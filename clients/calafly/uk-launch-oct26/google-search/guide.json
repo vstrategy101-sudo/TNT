@@ -1,7 +1,7 @@
 {
  "usa": {
   "camp": "CF_UK_SEARCH_USA",
-  "url": "https://calafly.net/usa",
+  "url": "https://calafly.net/destinations/esim-usa",
   "budget": "11.50",
   "suffix": "utm_source=google&utm_medium=cpc&utm_campaign=cf_uk_search_usa&utm_content={adgroupid}&utm_term={keyword}",
   "groups": [

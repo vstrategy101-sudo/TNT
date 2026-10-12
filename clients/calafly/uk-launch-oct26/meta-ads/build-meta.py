@@ -10,6 +10,8 @@ UTM = "utm_source=meta&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm
 # Destinations with a confirmed price go live first; the others join once their price lines are confirmed.
 COUNTRIES = [("usa", "USA", True), ("dubai", "Dubai", False), ("turkey", "Turkey", False)]
 
+LANDING = {"usa": "https://calafly.net/destinations/esim-usa"}   # confirmed landing pages; others default to calafly.net/<path>
+
 def meta(key, stage, cre):
     for a in copy["meta"][key][stage]:
         if a["creative"] == cre: return a
@@ -36,7 +38,7 @@ def ads(key, label):
         for name, files, cre in rows:
             m = meta(key, src if cre != "VIDEO_02" or stage == "retargeting" else "prospecting", cre)
             out[stage].append({"name": name, "files": files, "primary": m["primary"], "headline": m["headline"],
-                               "description": m["description"], "url": f"https://calafly.net/{key}"})
+                               "description": m["description"], "url": LANDING.get(key, f"https://calafly.net/{key}")})
     return out
 
 data = {"utm": UTM, "countries": [{"key": k, "label": l, "live": live, "ads": ads(k, l)} for k, l, live in COUNTRIES]}

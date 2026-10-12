@@ -136,7 +136,7 @@ SITELINKS = [
     ("", "", "Refund Policy", "100% refund if unused", "See the full terms", f"{SITE}/legal/terms"),
     ("", "", "Compatible Phones", "Check your phone supports eSIM", "Unlocked phones only", f"{SITE}/compatible-devices"),
     ("", "", "Help and FAQs", "Install, data and refunds", "Answers before you buy", f"{SITE}/faq"),
-    ("", "", "USA eSIM", "Mobile data for the USA", "Set up in minutes", f"{SITE}/usa"),
+    ("", "", "USA eSIM", "Mobile data for the USA", "Set up in minutes", "https://calafly.net/destinations/esim-usa"),
     ("", "", "Turkey eSIM", "Mobile data for Turkey", "Set up in minutes", f"{SITE}/turkey"),
     ("", "", "Dubai eSIM", "Mobile data for Dubai and UAE", "Set up in minutes", f"{SITE}/dubai"),
     ("", "", "Global eSIM", "One eSIM for 200+ countries", "Pay once for the plan", f"{SITE}/global"),
@@ -147,6 +147,7 @@ SNIPPET = ("Destinations", ["USA", "Turkey", "Dubai", "Spain", "France", "Italy"
 
 # One campaign per country. £1,000/month to start, split Dubai 40 / USA 35 / Turkey 25 (about £33/day in total).
 BUDGET = {"dubai": "13.00", "usa": "11.50", "turkey": "8.50"}
+LANDING = {"usa": "https://calafly.net/destinations/esim-usa"}   # confirmed landing pages; others default to calafly.net/<path>
 CAMPS = {k: f"CF_UK_SEARCH_{k.upper()}" for k in COUNTRIES}
 # Each campaign blocks the other two destinations so a search only ever enters the right country's campaign.
 OTHER = {"usa": ["turkey", "turkiye", "istanbul", "antalya", "dubai", "uae", "abu dhabi"],
@@ -166,7 +167,7 @@ for f in os.listdir(ED): os.remove(os.path.join(ED, f))
 guide = {}
 camps, groups, kws, ads, negs, sl, co, sn, imgs = [], [], [], [], [], [], [], [], []
 for key, c in COUNTRIES.items():
-    camp, url = CAMPS[key], f"{SITE}/{c['path']}"
+    camp, url = CAMPS[key], LANDING.get(key, f"{SITE}/{c['path']}")
     suffix = SUFFIX.format(c=camp.lower())
     camps.append([camp, "Search", "Paused", "Google search", BUDGET[key], "Daily", "Maximize clicks", "0.60", "en",
                   "United Kingdom", "Location of presence", "Location of presence", "Optimize", suffix])

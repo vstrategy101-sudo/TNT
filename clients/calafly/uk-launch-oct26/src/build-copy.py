@@ -15,6 +15,7 @@ COUNTRIES = {
     "dubai":  {"name": "Dubai",   "short": "Dubai",  "path": "dubai",  "cities": ["Dubai"]},
 }
 # Hero plans from the landing pages (match src/offers.js): price lines for Meta, price headlines for Google
+LANDING = {"usa": "https://calafly.net/destinations/esim-usa"}   # confirmed landing pages; others default to calafly.net/<path>
 PRICES = {"usa": ("3GB", 7, 15, "USA10"), "turkey": ("10GB", 11, 7, "TURKEY10"), "dubai": ("10GB", 18, 7, "DUBAI10")}
 for _k, (_d, _p, _days, _code) in PRICES.items():
     _c = COUNTRIES[_k]
@@ -123,7 +124,7 @@ with open(os.path.join(OUT, "google_rsa.csv"), "w", newline="") as f:
         p1, p2 = c["path"], "esim"
         check("path", p1, 15, key)
         copy["google"][key] = {"headlines": h, "descriptions": d}
-        w.writerow([f"CF_UK_SEARCH_{key.upper()}", "All ad groups", f"https://calafly.net/{c['path']}", p1, p2] + h + d)
+        w.writerow([f"CF_UK_SEARCH_{key.upper()}", "All ad groups", LANDING.get(key, f"https://calafly.net/{c['path']}"), p1, p2] + h + d)
     h = ["CalaFly Official Site", "CalaFly Travel eSIM", "USA, Turkey and Dubai", "Set Up in Minutes", "Pay Once, Not Per Day",
          "100% Refund if Unused", "Scan a QR Code at Home", "Land Connected", "Data-Only Travel eSIM", "Keep Your WhatsApp Number"]
     d = ["Travel eSIM data for the USA, Turkey and Dubai, sorted before you leave the UK.",
@@ -165,7 +166,7 @@ with open(os.path.join(OUT, "meta_ads.csv"), "w", newline="") as f:
                 check("meta description", ds, 40, f"{key} {cre}")
                 out.append({"creative": cre, "primary": pt, "headline": hl, "description": ds})
                 camp = "CF_UK_META_PROSPECTING" if stage == "prospecting" else "CF_UK_META_RETARGETING"
-                w.writerow([camp, f"{key.upper()}", cre, pt, hl, ds, "Shop now", f"https://calafly.net/{c['path']}"])
+                w.writerow([camp, f"{key.upper()}", cre, pt, hl, ds, "Shop now", LANDING.get(key, f"https://calafly.net/{c['path']}")])
             copy["meta"][key][stage] = out
 
 json.dump(copy, open(os.path.join(OUT, "copy.json"), "w"), indent=1, ensure_ascii=False)
