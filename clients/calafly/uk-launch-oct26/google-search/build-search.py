@@ -74,7 +74,7 @@ NEG_SHARED = [
 # Confirmed prices and promo codes (match src/offers.js). Turkey and Dubai are added once their prices are confirmed.
 # Confirmed hero plans from each landing page (match src/offers.js); every price line below is generated from these.
 PRICES = {
-    "USA": {"data": "3GB", "price": 7, "days": 30, "code": "USA10", "pct": 10},
+    "USA": {"data": "3GB", "price": 7, "days": 15, "code": "USA10", "pct": 10},
     "Turkey": {"data": "10GB", "price": 11, "days": 7, "code": "TURKEY10", "pct": 10},
     "Dubai": {"data": "10GB", "price": 18, "days": 7, "code": "DUBAI10", "pct": 10},
 }

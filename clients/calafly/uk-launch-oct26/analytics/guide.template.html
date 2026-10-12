@@ -112,10 +112,10 @@ dataLayer.push({
     currency: "GBP",
     value: 7.00,
     items: [{
-      item_id: "usa-3gb-30d",
-      item_name: "USA eSIM 3GB 30 days",
+      item_id: "usa-3gb-15d",
+      item_name: "USA eSIM 3GB 15 days",
       item_category: "USA",          // destination: USA, Turkey, Dubai
-      item_variant: "3GB 30 days",
+      item_variant: "3GB 15 days",
       price: 7.00,
       quantity: 1
     }]
@@ -129,8 +129,8 @@ dataLayer.push({
     currency: "GBP",
     value: 7.00,
     coupon: "USA10",                // if a code was entered, otherwise leave out
-    items: [{ item_id: "usa-3gb-30d", item_name: "USA eSIM 3GB 30 days",
-              item_category: "USA", item_variant: "3GB 30 days", price: 7.00, quantity: 1 }]
+    items: [{ item_id: "usa-3gb-15d", item_name: "USA eSIM 3GB 15 days",
+              item_category: "USA", item_variant: "3GB 15 days", price: 7.00, quantity: 1 }]
   }
 });`;
 const DL_PURCHASE = `// On the order confirmation (where CHECKOUT_SUCCESS fires today), once per order
@@ -143,8 +143,8 @@ dataLayer.push({
     currency: "GBP",
     value: 6.30,                        // what the customer paid, after any code
     coupon: "USA10",
-    items: [{ item_id: "usa-3gb-30d", item_name: "USA eSIM 3GB 30 days",
-              item_category: "USA", item_variant: "3GB 30 days",
+    items: [{ item_id: "usa-3gb-15d", item_name: "USA eSIM 3GB 15 days",
+              item_category: "USA", item_variant: "3GB 15 days",
               price: 6.30, discount: 0.70, quantity: 1, coupon: "USA10" }]
   }
 });`;
@@ -193,7 +193,7 @@ document.getElementById("partA").innerHTML = [
 document.getElementById("partB").innerHTML = [
   step("B1", "What to send, and when", `<p>Keep the existing events as they are. At the same three moments, also push these to the <code>dataLayer</code>, using the real plan, price and order:</p>
     ${kv([["Plan shown", "<code>view_item</code>"], ["Checkout started", "<code>begin_checkout</code>"], ["Order confirmed", "<code>purchase</code> (once per order)"]])}
-    <p class="note">Plan IDs to use: <code>usa-3gb-30d</code>, <code>turkey-10gb-7d</code>, <code>dubai-10gb-7d</code>, and the same pattern for other plans. <code>item_category</code> is always the destination, which is how sales are split by country in part F.</p>`),
+    <p class="note">Plan IDs to use: <code>usa-3gb-15d</code>, <code>turkey-10gb-7d</code>, <code>dubai-10gb-7d</code>, and the same pattern for other plans. <code>item_category</code> is always the destination, which is how sales are split by country in part F.</p>`),
   step("B2", "Plan shown", copyBlock("view_item", DL_VIEW)),
   step("B3", "Checkout started", copyBlock("begin_checkout", DL_CHECKOUT)),
   step("B4", "Order confirmed", `${copyBlock("purchase", DL_PURCHASE)}

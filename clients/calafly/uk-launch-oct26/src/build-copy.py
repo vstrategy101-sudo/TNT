@@ -15,7 +15,7 @@ COUNTRIES = {
     "dubai":  {"name": "Dubai",   "short": "Dubai",  "path": "dubai",  "cities": ["Dubai"]},
 }
 # Hero plans from the landing pages (match src/offers.js): price lines for Meta, price headlines for Google
-PRICES = {"usa": ("3GB", 7, 30, "USA10"), "turkey": ("10GB", 11, 7, "TURKEY10"), "dubai": ("10GB", 18, 7, "DUBAI10")}
+PRICES = {"usa": ("3GB", 7, 15, "USA10"), "turkey": ("10GB", 11, 7, "TURKEY10"), "dubai": ("10GB", 18, 7, "DUBAI10")}
 for _k, (_d, _p, _days, _code) in PRICES.items():
     _c = COUNTRIES[_k]
     _c["price"] = (f"\n\n{_c['short']} {_d} for {_days} days: £{_p}, paid once. "
