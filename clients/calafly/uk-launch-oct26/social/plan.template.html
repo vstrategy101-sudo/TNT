@@ -1,0 +1,327 @@
+<meta charset="utf-8">
+<title>CalaFly Social Launch Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one working column (max 1040px) read top to bottom in the order the team works:
+   rules → sign-off → profile → launch grid → calendar → each post (creative left, files + captions right).
+   CalaFly's own world, taken from its ads: ink, teal, pink, yellow, hard teal offset shadow on the one thing that matters per section. */
+:root {
+  --bg: #f4f6f5; --surface: #ffffff; --fg: #0b0d10; --muted: #56606b; --line: #d9e0e3;
+  --teal: #0c8a74; --teal-soft: #dcf4ee; --pink: #d42a4e; --pink-soft: #fde6eb; --yellow: #ffe14a; --yellow-soft: #fff6c7;
+  --blue: #2f5bea; --blue-soft: #e3e9ff; --shadow: #18c8a8;
+  --display: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0b0d10; --surface: #15191d; --fg: #eef2f4; --muted: #9aa5af; --line: #2a3138;
+  --teal: #2fdcbc; --teal-soft: #10302a; --pink: #ff6f8a; --pink-soft: #3a1620; --yellow: #ffe14a; --yellow-soft: #33300f;
+  --blue: #8ea6ff; --blue-soft: #1a2245; --shadow: #18c8a8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0b0d10; --surface: #15191d; --fg: #eef2f4; --muted: #9aa5af; --line: #2a3138;
+  --teal: #2fdcbc; --teal-soft: #10302a; --pink: #ff6f8a; --pink-soft: #3a1620; --yellow: #ffe14a; --yellow-soft: #33300f;
+  --blue: #8ea6ff; --blue-soft: #1a2245; --shadow: #18c8a8; color-scheme: dark }
+
+* { box-sizing: border-box }
+html { scroll-behavior: smooth }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } }
+body { background: var(--bg); color: var(--fg); font: 500 16px/1.6 var(--display); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 18px; padding-block: 40px 90px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 64px; }
+h1, h2, h3, h4 { margin: 0; letter-spacing: -0.035em; text-wrap: balance; font-weight: 800; }
+h1 { font-size: clamp(38px, 7vw, 66px); line-height: .98; }
+h1 span { color: var(--pink); }
+h2 { font-size: clamp(26px, 4vw, 36px); line-height: 1.05; }
+h3 { font-size: 24px; letter-spacing: -0.025em; }
+h4 { font-size: 19px; letter-spacing: -0.015em; line-height: 1.2; }
+p { margin: 0; max-width: 68ch; }
+a { color: var(--blue); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.muted { color: var(--muted); }
+.eyebrow { font: 700 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--teal); }
+section { display: grid; gap: 18px; min-width: 0; }
+.shead { display: grid; gap: 8px; }
+
+header { display: grid; gap: 18px; }
+.lede { font-size: 19px; color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 34px; border-top: 2px solid var(--fg); padding-top: 14px; }
+.facts div { display: grid; gap: 0; }
+.facts b { font-size: 34px; line-height: 1.1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.facts span { font: 500 12.5px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+.jump a { font: 700 12px var(--mono); text-decoration: none; color: var(--fg); border: 1.5px solid var(--line); border-radius: 99px; padding: 5px 12px; background: var(--surface); }
+.jump a:hover { border-color: var(--fg); }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 14px; }
+.rule { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; }
+.rule b { font-size: 16.5px; }
+.rule p { font-size: 15px; color: var(--muted); }
+.rule code { font: 600 13px var(--mono); color: var(--fg); }
+
+.signoff { background: var(--surface); border: 2.5px solid var(--fg); border-radius: 18px; padding: 20px 22px; box-shadow: 8px 8px 0 var(--shadow); display: grid; gap: 12px; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.checks li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; font-size: 15.5px; }
+.checks input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--teal); }
+.checks label b { font-weight: 800; }
+
+.profile { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 18px; }
+.pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.pcard h3 { font-size: 20px; }
+dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 9px 16px; margin: 0; font-size: 15px; }
+dt { font: 700 11.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.logo-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.logo-row img { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--line); }
+
+.gridwrap { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.phone { background: var(--surface); border: 2.5px solid var(--fg); border-radius: 26px; padding: 14px 10px 18px; box-shadow: 8px 8px 0 var(--shadow); display: grid; gap: 10px; }
+.phone .handle { font: 800 15px var(--display); padding-inline: 6px; display: flex; gap: 8px; align-items: center; }
+.phone .handle img { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); }
+.igrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.cell { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--line); }
+.cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cell i { position: absolute; top: 5px; right: 6px; font-style: normal; color: #fff; font-size: 14px; text-shadow: 0 1px 3px rgba(0,0,0,.7); }
+.order { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 15px; }
+
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font: 700 11.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+td.n { font-family: var(--mono); font-size: 13.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td { white-space: nowrap; }
+td:last-child { white-space: normal; min-width: 240px; }
+td a { color: var(--fg); text-decoration-color: var(--line); text-underline-offset: 3px; }
+
+.fmt { font: 700 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 3px 9px; white-space: nowrap; }
+.fmt.feed { background: var(--teal-soft); color: var(--teal); }
+.fmt.reel { background: var(--pink-soft); color: var(--pink); }
+.fmt.carousel { background: var(--blue-soft); color: var(--blue); }
+.fmt.story { background: var(--yellow-soft); color: var(--fg); }
+
+.week { display: grid; gap: 14px; padding-top: 26px; border-top: 2px solid var(--fg); }
+.whead { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; }
+.dates { font: 700 13px var(--mono); color: var(--muted); }
+.post { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 24px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; scroll-margin-top: 16px; }
+.post:target { border: 2.5px solid var(--fg); box-shadow: 8px 8px 0 var(--shadow); }
+.thumbs { display: grid; gap: 8px; }
+.thumbs.multi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.m { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); }
+video.m { aspect-ratio: 9 / 16; max-height: 520px; object-fit: contain; background: #0b0d10; }
+.pbody { display: grid; gap: 10px; min-width: 0; }
+.phead { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.num { font: 700 13px var(--mono); background: var(--fg); color: var(--bg); border-radius: 6px; padding: 2px 8px; font-variant-numeric: tabular-nums; }
+.when { font: 600 13px var(--mono); color: var(--muted); }
+.files, .kv { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: 14px; }
+.files > span, .kv > span { font: 700 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); min-width: 104px; }
+.kv em { font-style: normal; color: var(--muted); }
+a.file { font: 500 12.5px var(--mono); overflow-wrap: anywhere; }
+.caps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; margin-top: 4px; }
+.cap { border: 1px solid var(--line); border-radius: 10px; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.caphead { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px 6px 12px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.cap pre { margin: 0; padding: 10px 12px; font: 500 13.5px/1.5 var(--display); white-space: pre-wrap; overflow-wrap: anywhere; }
+button.copy { font: 700 11.5px var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--bg); background: var(--fg); border: 0; border-radius: 7px; padding: 5px 10px; cursor: pointer; }
+button.copy.ok { background: var(--teal); }
+
+.stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 16px; }
+.scard { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; align-items: start; }
+.scard > div { display: grid; gap: 6px; min-width: 0; font-size: 15px; }
+.m.tall { max-height: 214px; }
+.hls { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+.hl { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
+.hl ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.box ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 15px; min-width: 0; }
+.box li { min-width: 0; overflow-wrap: anywhere; }
+pre.tree { margin: 0; font: 500 13px/1.6 var(--mono); overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+footer { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+
+@media (max-width: 780px) {
+  .gridwrap, .post { grid-template-columns: minmax(0, 1fr); }
+  .post .thumbs:not(.multi) { max-width: 300px; }
+  dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } dd { margin-bottom: 8px; }
+  .scard { grid-template-columns: 96px minmax(0, 1fr); }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">tnt. × CalaFly · Organic social · Instagram + Facebook · 19 Oct – 5 Dec 2026</span>
+    <h1>Fill the CalaFly pages <span>with what we've already made.</span></h1>
+    <p class="lede">A seven-week posting plan that uses every CalaFly static and video: round 1, the realistic set, the brand films and the brand ads. Each post below has its files, its time and ready-to-paste captions for Instagram and Facebook.</p>
+    <div class="facts">
+      <div><b>{{TOTAL}}</b><span>posts</span></div>
+      <div><b>{{REEL}}</b><span>Reels</span></div>
+      <div><b>{{CAR}}</b><span>carousels</span></div>
+      <div><b>{{FEED}}</b><span>single images</span></div>
+      <div><b>{{NSTORY}}</b><span>story-only</span></div>
+      <div><b>{{NFILES}}</b><span>files used</span></div>
+    </div>
+    <nav class="jump" aria-label="Sections">
+      <a href="#rules">How to post</a><a href="#signoff">Before you post</a><a href="#profile">Profile setup</a><a href="#grid">Launch grid</a><a href="#calendar">Calendar</a><a href="#posts">All posts</a><a href="#stories">Stories</a><a href="#community">Replies + reporting</a><a href="#files">Files</a>
+    </nav>
+  </header>
+
+  <section id="rules">
+    <div class="shead"><span class="eyebrow">How to post</span><h2>Six rules for every post.</h2></div>
+    <div class="rules">
+      <div class="rule"><b>Post once, publish to both</b><p>Schedule in Meta Business Suite (Planner) with both the Instagram account and the Facebook Page ticked. Paste the Instagram caption in the Instagram field and the Facebook caption in the Facebook field.</p></div>
+      <div class="rule"><b>Use the file sizes listed</b><p>Feed and carousels use <code>_4x5.png</code> (1080×1350). Reels and Stories use <code>_9x16</code> (1080×1920). Don't let the app crop or zoom.</p></div>
+      <div class="rule"><b>Reels need a cover</b><p>Upload the matching end-card JPG from <code>social/covers/</code> as the cover. Check the grid preview: the profile grid shows the middle 3:4 of it.</p></div>
+      <div class="rule"><b>Links</b><p>Instagram captions say "Link in bio" because caption links don't click. Facebook captions carry the full URL. Stories get a link sticker.</p></div>
+      <div class="rule"><b>Times are UK time</b><p>Feed 12:30 on weekdays, 10:00 on Saturday. Reels 19:00. Story-only posts 18:00. Move a slot by an hour if needed, but keep the order.</p></div>
+      <div class="rule"><b>Share every post to Story</b><p>Same day, a few hours later. For statics use the <code>_9x16.png</code> listed on the post and add a link sticker. For Reels, share the Reel itself.</p></div>
+    </div>
+  </section>
+
+  <section id="signoff">
+    <div class="signoff">
+      <span class="eyebrow" style="color: var(--pink)">Before you post · needs CalaFly sign-off</span>
+      <h2>Organic posts follow the same ad rules as paid ones.</h2>
+      <p class="muted">These came up when the creatives were made and are still open. UK advertising rules (CAP Code) apply to a brand's own social posts too. Tick them off before the first post goes live.</p>
+      <ul class="checks">
+        <li><input type="checkbox" id="c1"><label for="c1"><b>Real app screens.</b> The phone screens in the realistic set and brand films are CalaFly-style mock-ups. Confirm they match the real product flow, or swap in real screenshots (CAP 3.1).</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2"><b>Prices and codes are live.</b> USA 3GB / 15 days £7 (USA10), Turkey 10GB / 7 days £11 (TURKEY10), Dubai 10GB / 7 days £18 (DUBAI10). If a price changes, the posts and captions for that country need updating.</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3"><b>Claims.</b> "Pay once, not per day", "100% refund if unused" and "keep your number and WhatsApp" are confirmed by CalaFly. Keep "T&amp;Cs apply" wherever the refund is mentioned.</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4"><b>Stock photo licences.</b> The people in P1–P5 are stock photos. Check each licence covers advertising and social use.</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5"><b>£5 a day.</b> G3 and P3 use £5 a day (£70 for two weeks) as an example UK roaming pass. Confirm it matches a current UK network price.</label></li>
+        <li><input type="checkbox" id="c6"><label for="c6"><b>200+ countries.</b> calafly.net says 201+. The posts round down to 200+, which is fine as long as the site stays above 200.</label></li>
+        <li><input type="checkbox" id="c7"><label for="c7"><b>Network label.</b> "CalaFly" on the lock screen in R1 and V3 matches what the eSIM shows on a real phone.</label></li>
+      </ul>
+      <p class="muted" style="font-size:13.5px">Ticks are only for your own screen; they aren't saved or shared.</p>
+    </div>
+  </section>
+
+  <section id="profile">
+    <div class="shead"><span class="eyebrow">Profile setup · do this first</span><h2>Make both profiles look finished before post one.</h2></div>
+    <div class="profile">
+      <div class="pcard">
+        <h3>Instagram</h3>
+        <div class="logo-row"><img src="social/profile/calafly-logo-square-1200-ink.png" alt="CalaFly logo, dark"><img src="social/profile/calafly-logo-square-1200-white.png" alt="CalaFly logo, light"><span class="muted" style="font-size:14px">Profile photo: use the ink version (check it reads inside the circle crop).</span></div>
+        <dl>
+          <dt>Account</dt><dd>Professional account, category <b>Travel Company</b>, linked to the Facebook Page in Accounts Centre</dd>
+          <dt>Name</dt><dd>CalaFly | Travel eSIM <span class="muted">(the name field is searchable, so keep "Travel eSIM" in it)</span></dd>
+          <dt>Bio</dt><dd><pre id="bio" style="margin:0;font:600 14.5px/1.5 var(--display);white-space:pre-wrap">Travel eSIM for UK travellers ✈️
+Mobile data sorted before you fly
+Pay once, not per day · 100% refund if unused
+USA · Turkey · Dubai · 200+ countries</pre><button type="button" class="copy" data-t="bio" style="margin-top:6px">Copy bio</button></dd>
+          <dt>Links (up to 5)</dt><dd>1. Get your eSIM → calafly.net<br>2. USA eSIM → calafly.net/destinations/esim-usa<br>3. Turkey eSIM → calafly.net/turkey<br>4. Dubai eSIM → calafly.net/dubai<br>5. How it works → calafly.net/how-it-works</dd>
+          <dt>Highlights</dt><dd>How it works · Prices · Refunds · USA · Turkey · Dubai. Files are listed under <a href="#stories">Stories</a>. Post them as stories on launch day, then save them to highlights.</dd>
+          <dt>Pinned</dt><dd>Pin #09 (Dubai film), #08 (P1) and #07 (prices carousel) once the launch grid is up.</dd>
+        </dl>
+      </div>
+      <div class="pcard">
+        <h3>Facebook Page</h3>
+        <dl>
+          <dt>Page name</dt><dd>CalaFly</dd>
+          <dt>Category</dt><dd>Travel Company, plus Telecommunication Company</dd>
+          <dt>Profile photo</dt><dd>Same ink logo as Instagram</dd>
+          <dt>Cover</dt><dd>Cover video: <a class="file" href="v3-brand/videos/CALAFLY_DUBAI_B1_SORTED-BEFORE-YOU-FLY_30s_16x9.mp4" target="_blank" rel="noopener">CALAFLY_DUBAI_B1_SORTED-BEFORE-YOU-FLY_30s_16x9.mp4</a> (30s, 16:9). Facebook crops the top and bottom, so preview it on desktop and mobile. If the text gets cut, use the end-card still <a class="file" href="social/covers/CALAFLY_DUBAI_B1_SORTED-BEFORE-YOU-FLY_30s_16x9.jpg" target="_blank" rel="noopener">…_16x9.jpg</a> instead.</dd>
+          <dt>Button</dt><dd><b>Shop now</b> → https://calafly.net</dd>
+          <dt>Intro</dt><dd><pre id="fbintro" style="margin:0;font:600 14.5px/1.5 var(--display);white-space:pre-wrap">Travel eSIM data for UK travellers. Set up at home before you fly, pay once for your whole trip, and get a 100% refund if your eSIM is unused (T&amp;Cs apply). USA, Turkey, Dubai and 200+ countries.</pre><button type="button" class="copy" data-t="fbintro" style="margin-top:6px">Copy intro</button></dd>
+          <dt>Website</dt><dd>https://calafly.net</dd>
+          <dt>Messaging</dt><dd>Turn on the instant reply and FAQs: "Will my phone work?" → calafly.net/compatible-devices · "How do I install it?" → calafly.net/how-it-works · "Can I get a refund?" → calafly.net/legal/terms</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="grid">
+    <div class="shead"><span class="eyebrow">Launch grid · Mon 19 – Wed 21 Oct</span><h2>Nine posts, so the profile never looks empty.</h2></div>
+    <div class="gridwrap">
+      <div class="phone" aria-label="Preview of the Instagram grid after the launch posts">
+        <div class="handle"><img src="social/profile/calafly-logo-square-1200-ink.png" alt="">calafly</div>
+        <div class="igrid">{{GRID}}</div>
+      </div>
+      <div style="display:grid;gap:12px;min-width:0">
+        <p>This is how the grid looks once all nine are up. Instagram shows the newest post top-left, so <b>post them in the order in the calendar</b>: #01 lands bottom-right and #09, the Dubai brand film, lands top-left.</p>
+        <ol class="order">
+          <li>Mon 19 Oct: #01 P5 · #02 G1 · #03 Meet CalaFly (USA)</li>
+          <li>Tue 20 Oct: #04 P4 · #05 Wheels down (Dubai) · #06 G2</li>
+          <li>Wed 21 Oct: #07 prices carousel · #08 P1 · #09 Dubai film (Reel)</li>
+        </ol>
+        <p class="muted">The rows alternate the people ads, the realistic scenes and the flat brand ads, so no two neighbouring posts look alike. Light and dark backgrounds are mixed on purpose.</p>
+        <p class="muted">After launch: three feed posts and two Reels a week. Each week has one theme, taken from the brand pillars (easy, fair, safe), and follows UK travel peaks: October half-term, New York at Christmas, Dubai winter sun.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="calendar">
+    <div class="shead"><span class="eyebrow">Calendar</span><h2>Everything in order.</h2><p class="muted">Select a row to jump to the post. The same schedule is in <a class="file" href="social/posting_schedule.csv" target="_blank" rel="noopener">social/posting_schedule.csv</a> for Sheets.</p></div>
+    <div class="tw"><table>
+      <thead><tr><th>#</th><th>Date</th><th>Time</th><th>Format</th><th>Post</th></tr></thead>
+      <tbody>{{CAL}}</tbody>
+    </table></div>
+  </section>
+
+  <section id="posts">
+    <div class="shead"><span class="eyebrow">All posts</span><h2>Files, captions, done.</h2><p class="muted">Each card lists the files in posting order (carousel slides left to right), the Reel cover, the 9:16 file for the Story reshare, and both captions. Videos play inline with the sound off.</p></div>
+    {{WEEKS}}
+  </section>
+
+  <section id="stories">
+    <div class="shead"><span class="eyebrow">Stories</span><h2>Story-only posts and highlights.</h2><p class="muted">On top of the daily reshares, these four go out as Stories only, with a link sticker.</p></div>
+    <div class="stories">{{STORIES}}</div>
+    <h3 style="margin-top:8px">Highlights</h3>
+    <p class="muted">Post these as Stories on launch day (Mon 19 Oct), then save each group to a highlight with this name.</p>
+    <div class="hls">{{HIGHLIGHTS}}</div>
+  </section>
+
+  <section id="community">
+    <div class="shead"><span class="eyebrow">Replies + reporting</span><h2>Answer people, and track what works.</h2></div>
+    <div class="two">
+      <div class="box"><b>Comments and DMs</b><ul>
+        <li>Reply within 4 hours on weekdays. First names and plain British English, no hype.</li>
+        <li>"Will it work on my phone?" → unlocked and eSIM-compatible, check calafly.net/compatible-devices.</li>
+        <li>"Do I lose my number?" → no, your own SIM keeps calls, texts and WhatsApp. CalaFly adds data only.</li>
+        <li>"Refund?" → 100% if the eSIM is unused, T&amp;Cs at calafly.net/legal/terms.</li>
+        <li>Never name or criticise another eSIM brand, even if a commenter does.</li>
+        <li>Send order problems to CalaFly support in DM. Don't ask for order details in public comments.</li>
+      </ul></div>
+      <div class="box"><b>Every Monday, report</b><ul>
+        <li>Followers gained on Instagram and Facebook</li>
+        <li>Per post: reach, saves, shares, link clicks (Stories), profile visits</li>
+        <li>Per Reel: plays, average watch time, % watched to the end</li>
+        <li>Clicks from the link in bio (add UTM tags: <code style="font-family:var(--mono);font-size:13px;overflow-wrap:anywhere">?utm_source=instagram&amp;utm_medium=social&amp;utm_campaign=organic_launch</code>)</li>
+        <li>The top three posts by saves and shares. Tell the paid team, so the best ones get budget in the Meta campaigns.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="files">
+    <div class="shead"><span class="eyebrow">Files</span><h2>Where everything is.</h2><p class="muted">All files are in the TNT repository under <code style="font-family:var(--mono);font-size:14px">clients/calafly/uk-launch-oct26/</code>. Download that folder and open <b>social-plan.html</b> from inside it, and every file link on this page opens the real file.</p></div>
+<pre class="tree">uk-launch-oct26/
+├── social-plan.html                 ← this page
+├── social/
+│   ├── posting_schedule.csv         same schedule + captions, for Sheets
+│   ├── covers/                      Reel covers (end-card stills, 9:16)
+│   ├── profile/                     logos for profile photos
+│   └── build.py                     rebuilds this page and the CSV from one list
+├── creatives/&lt;country&gt;/            round 1 statics (01–06 × 4 sizes)
+├── videos/                          round 1 films: V1 Meet CalaFly, V2 How it works
+├── v2-realistic/creatives/&lt;country&gt;/  realistic statics (R1–R5 × 4 sizes)
+├── v2-realistic/videos/             V3 Wheels down, V4 From the sofa (× 3 countries)
+├── v3-brand/videos/                 B1 30s film, B2 6s bumper (× 3 countries)
+└── v4-generic/creatives(-people)/   brand ads G1–G5 and people ads P1–P5 (4:5)</pre>
+  </section>
+
+  <footer>tnt. for CalaFly. Every creative is CalaFly's own product; no competitor is named anywhere. Change a caption or date in <code style="font-family:var(--mono)">social/build.py</code> and run <code style="font-family:var(--mono)">python3 social/build.py</code> to rebuild this page and the CSV.</footer>
+</div>
+
+<script>
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('button.copy');
+  if (!b) return;
+  var el = document.getElementById(b.dataset.t);
+  if (!el) return;
+  var text = el.innerText;
+  var done = function () { var t = b.textContent; b.textContent = 'Copied'; b.classList.add('ok'); setTimeout(function () { b.textContent = t; b.classList.remove('ok'); }, 1400); };
+  var fallback = function () { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected, press Ctrl/Cmd+C'; };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+    else fallback();
+  } catch (err) { fallback(); }
+});
+</script>
