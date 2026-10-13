@@ -461,12 +461,65 @@ New here? Code TURKEY10: {CODE_FINE.lower()} Link in bio.
 
 {tags('turkey')}""")
 
+post(LAUNCH, "19:00", "Reel", "B2 · Bumper (Dubai, 6s)", [vid("B2", "dubai") + "_9x16.mp4"], f"""
+Dubai data, sorted. Six seconds, that's the whole pitch. ☀️
+
+{offer('dubai')}
+
+Link in bio.
+
+{tags('dubai')}""")
+
+# ---------- the real schedule ----------
+# Phase 1 (populate): 18 posts over two days, before the ads go live, so anyone who taps through from an ad
+# lands on a full profile. Order = bottom-right of the grid first; the last post lands top-left.
+# Phase 2 (daily): one post a day from the day the ads start.
+POP1 = date(2026, 10, 14)
+POP2 = date(2026, 10, 15)
+DAILY = date(2026, 10, 16)
+POP_TIMES = ["09:00", "09:45", "10:30", "11:15", "12:00", "13:30", "14:15", "15:00", "16:00"]
+POPULATE = [
+    # Day 1: rows 6, 5 and 4 of the grid (right to left)
+    "P5 · One eSIM. 200+ countries.", "V2 · How it works (15s)", "01 · Meet CalaFly (USA)",
+    "P2 · Same number. No roaming bill.", "B1 · Sorted before you fly (Turkey, 30s)", "R4 · Plans changed? Get a refund. (USA, Turkey, Dubai)",
+    "V3 · Wheels down (Dubai, 15s)", "G1 · Passport. Charger. Data.", "P3 · £70 to use your phone abroad?",
+    # Day 2: rows 3, 2 and 1
+    "B1 · Sorted before you fly (USA, 30s)", "R3 · Pay once. Not per day. (USA, Turkey, Dubai)", "R1 · Wheels down. Data on. (Dubai)",
+    "P4 · Trip cancelled? 100% refund.", "V4 · From the couch (USA, 15s)", "G2 · Same number. Same WhatsApp.",
+    "05 · Data, sorted (USA, Turkey, Dubai)", "P1 · Land abroad. Data's already on.", "B1 · Sorted before you fly (Dubai, 30s)",
+]
+DAILY_ORDER = [
+    "G3 · The roaming bill you won't get", "V4 · From the sofa (Dubai, 15s)", "02 · Set up in minutes (USA, Turkey, Dubai)",
+    "B2 · Bumper (Turkey, 6s)", "R1 · Wheels down. Data on. (Turkey)", "V3 · Wheels down (Turkey, 15s)",
+    "R2 · Set up from the sofa (Turkey)", "03 · Pay once (USA, Turkey, Dubai)", "V3 · Wheels down (USA, 15s)",
+    "G4 · Trip off? Money back.", "B2 · Bumper (USA, 6s)", "R2 · Set up from the couch (USA)",
+    "R5 · Still flying to…? (USA, Turkey, Dubai)", "V1 · Meet CalaFly (15s)", "01 · Meet CalaFly (Dubai)",
+    "V4 · From the sofa (Turkey, 15s)", "G5 · One eSIM app. 200+ countries.", "B2 · Bumper (Dubai, 6s)",
+    "04 · Plans changed? 100% refund. (USA, Turkey, Dubai)", "R1 · Wheels down. Data on. (USA)", "R2 · Set up from the sofa (Dubai)",
+    "01 · Meet CalaFly (Turkey)",
+]
+_by = {x["title"]: x for x in P}
+assert len(_by) == len(P) == len(POPULATE) + len(DAILY_ORDER), (len(_by), len(P))
+assert set(POPULATE) | set(DAILY_ORDER) == set(_by)
+_new = []
+for i, t in enumerate(POPULATE):
+    x = _by[t]; x["when"] = POP1 if i < 9 else POP2; x["time"] = POP_TIMES[i % 9]; x["phase"] = "populate"; _new.append(x)
+for i, t in enumerate(DAILY_ORDER):
+    x = _by[t]; x["when"] = DAILY + timedelta(i)
+    weekend = x["when"].weekday() >= 5
+    x["time"] = "19:00" if x["fmt"] == "Reel" else ("10:00" if weekend else "12:30")
+    x["phase"] = "daily"; _new.append(x)
+P[:] = _new
+_by["B1 · Sorted before you fly (Dubai, 30s)"]["note"] = "Last populate post, so it sits top-left of the grid. Pin it."
+_by["05 · Data, sorted (USA, Turkey, Dubai)"]["note"] = "Slide order: Dubai, USA, Turkey (winter priority). Pin it."
+_by["P1 · Land abroad. Data's already on."]["note"] = "Pin it."
+_by["B2 · Bumper (Turkey, 6s)"]["note"] = "October half-term starts the following weekend."
+
 # ---------- story-only assets ----------
 STORIES = [
-    (wk(1, 4), "Story", "06 · Still planning Turkey?", [r1("turkey", 6) + "_9x16.png"], "turkey", "Link sticker → calafly.net/turkey. Half-term Friday."),
-    (wk(3, 4), "Story", "B2 · Bumper (Dubai, 6s)", [vid("B2", "dubai") + "_9x16.mp4"], "dubai", "Link sticker → calafly.net/dubai."),
-    (wk(5, 4), "Story", "06 · Still planning USA?", [r1("usa", 6) + "_9x16.png"], "usa", "Link sticker → calafly.net/destinations/esim-usa. Black Friday week: no discount claim beyond USA10."),
-    (wk(6, 4), "Story", "06 · Still planning Dubai?", [r1("dubai", 6) + "_9x16.png"], "dubai", "Link sticker → calafly.net/dubai."),
+    (DAILY + timedelta(3), "Story", "06 · Still planning Turkey?", [r1("turkey", 6) + "_9x16.png"], "turkey", "Link sticker → calafly.net/turkey. The week before half-term."),
+    (DAILY + timedelta(10), "Story", "06 · Still planning USA?", [r1("usa", 6) + "_9x16.png"], "usa", "Link sticker → calafly.net/destinations/esim-usa."),
+    (DAILY + timedelta(17), "Story", "06 · Still planning Dubai?", [r1("dubai", 6) + "_9x16.png"], "dubai", "Link sticker → calafly.net/dubai."),
 ]
 
 HIGHLIGHTS = [
@@ -574,8 +627,7 @@ def post_card(i, x):
 </article>'''
 
 def grid_preview():
-    launch = [x for x in P if x["when"] < W1]
-    newest_first = list(reversed(launch))
+    newest_first = list(reversed([x for x in P if x["phase"] == "populate"]))
     cells = []
     for x in newest_first:
         f = x["files"][0]
@@ -585,24 +637,30 @@ def grid_preview():
     return "".join(cells)
 
 def week_blocks():
-    weeks = [("Launch grid", "Mon 19 – Wed 21 Oct", "Nine posts over three days so the profile never looks empty. Post in the order listed: the first post ends up bottom-right of the grid, the last one (the Dubai film) top-left.", [x for x in P if x["when"] < W1])]
-    themes = {1: ("Easy: set up from the sofa", "October half-term. Lead with Turkey and the setup story."),
-              2: ("Fair: pay once, not per day", "The roaming-bill week. Start the New York Christmas push."),
-              3: ("Safe: refund if unused", "Take the risk out of buying early."),
-              4: ("Destinations", "One country per day; the carousel covers all three."),
-              5: ("Christmas trips", "New York and winter sun. Black Friday week: don't add any discount beyond the existing codes."),
-              6: ("Last call before Christmas", "Remind people flying in December, and nudge early bookers for 2027.")}
-    for n in range(1, 7):
-        start = wk(n, 0); end = wk(n, 5)
-        weeks.append((f"Week {n} · {themes[n][0]}", f"{start.strftime('%a %-d %b')} – {end.strftime('%a %-d %b')}", themes[n][1],
-                      [x for x in P if start <= x["when"] <= end]))
+    pop = [x for x in P if x["phase"] == "populate"]
+    blocks = [
+        ("Populate · Day 1", POP1.strftime("%a %-d %b"), "Nine posts, about 45 minutes apart. These become the bottom three rows of the grid. Post them in exactly this order.", pop[:9], "populate"),
+        ("Populate · Day 2", POP2.strftime("%a %-d %b"), "Nine more, same spacing. These become the top three rows. The last one (the Dubai film) ends up top-left. Pin it, P1 and the prices carousel. Switch the ads on once this day is done.", pop[9:], "populate"),
+    ]
+    daily = [x for x in P if x["phase"] == "daily"]
+    weeks = {}
+    for x in daily:
+        monday = x["when"] - timedelta(days=x["when"].weekday())
+        weeks.setdefault(monday, []).append(x)
+    notes = ["The ads go live. One post a day from here, alternating images and Reels.",
+             "October half-term week: lead with Turkey and the setup story.",
+             "Start the Christmas push: New York and Dubai winter sun.",
+             "Last week of the current set. Plan new content for after this (see the end of the calendar)."]
+    for n, (monday, xs) in enumerate(sorted(weeks.items())):
+        rng = f"{xs[0]['when'].strftime('%a %-d %b')} – {xs[-1]['when'].strftime('%a %-d %b')}"
+        blocks.append((f"Daily · week of {monday.strftime('%-d %b')}", rng, notes[min(n, len(notes) - 1)], xs, "daily"))
     out, i = [], 0
-    for title, dates, desc, posts in weeks:
+    for title, dates, desc, posts, phase in blocks:
         cards = []
         for x in posts:
             i += 1
             cards.append(post_card(i, x))
-        out.append(f'<section class="week"><div class="whead"><h3>{E(title)}</h3><span class="dates">{E(dates)}</span></div><p class="muted">{E(desc)}</p>{"".join(cards)}</section>')
+        out.append(f'<section class="week {phase}"><div class="whead"><h3>{E(title)}</h3><span class="dates">{E(dates)}</span></div><p class="muted">{E(desc)}</p>{"".join(cards)}</section>')
     return "".join(out)
 
 def calendar_table():
@@ -633,12 +691,15 @@ def counts():
 
 def write_html():
     total, feed, car, reel, nfiles = counts()
+    npop = sum(1 for x in P if x["phase"] == "populate"); nday = total - npop
+    last = P[-1]["when"].strftime("%a %-d %b")
     tpl = open(os.path.join(ROOT, "social", "plan.template.html")).read()
     out = (tpl.replace("{{GRID}}", grid_preview()).replace("{{WEEKS}}", week_blocks())
               .replace("{{CAL}}", calendar_table()).replace("{{STORIES}}", stories_block())
               .replace("{{HIGHLIGHTS}}", highlights_block())
               .replace("{{TOTAL}}", str(total)).replace("{{FEED}}", str(feed)).replace("{{CAR}}", str(car))
-              .replace("{{REEL}}", str(reel)).replace("{{NFILES}}", str(nfiles)).replace("{{NSTORY}}", str(len(STORIES))))
+              .replace("{{REEL}}", str(reel)).replace("{{NFILES}}", str(nfiles)).replace("{{NSTORY}}", str(len(STORIES)))
+              .replace("{{NPOP}}", str(npop)).replace("{{NDAY}}", str(nday)).replace("{{LAST}}", last))
     open(os.path.join(ROOT, "social-plan.html"), "w").write(out)
 
 def used_files():

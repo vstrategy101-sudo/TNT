@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;800&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 /* Layout: one working column (max 1040px) read top to bottom in the order the team works:
-   rules → sign-off → profile → launch grid → calendar → each post (creative left, files + captions right).
+   rules → sign-off → profile → populate grid → calendar → each post (creative left, files + captions right).
    CalaFly's own world, taken from its ads: ink, teal, pink, yellow, hard teal offset shadow on the one thing that matters per section. */
 :root {
   --bg: #f4f6f5; --surface: #ffffff; --fg: #0b0d10; --muted: #56606b; --line: #d9e0e3;
@@ -148,11 +148,12 @@ footer { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--lin
 
 <div class="wrap">
   <header>
-    <span class="eyebrow">tnt. × CalaFly · Organic social · Instagram + Facebook · 19 Oct – 5 Dec 2026</span>
-    <h1>Fill the CalaFly pages <span>with what we've already made.</span></h1>
-    <p class="lede">A seven-week posting plan that uses every CalaFly static and video: round 1, the realistic set, the brand films and the brand ads. Each post below has its files, its time and ready-to-paste captions for Instagram and Facebook.</p>
+    <span class="eyebrow">tnt. × CalaFly · Organic social · Instagram + Facebook · from 14 Oct 2026</span>
+    <h1>Fill the pages first. <span>Then post every day.</span></h1>
+    <p class="lede">People who see a CalaFly ad tap through to the page before they buy. So before the ads go live, we put {{NPOP}} posts up in two days, enough to fill the grid with Reels, carousels and images. Then we post once a day until {{LAST}}. The plan uses every CalaFly static and video we have made, and each post below has its files, time and ready-to-paste captions.</p>
     <div class="facts">
-      <div><b>{{TOTAL}}</b><span>posts</span></div>
+      <div><b>{{NPOP}}</b><span>to populate (2 days)</span></div>
+      <div><b>{{NDAY}}</b><span>daily posts after</span></div>
       <div><b>{{REEL}}</b><span>Reels</span></div>
       <div><b>{{CAR}}</b><span>carousels</span></div>
       <div><b>{{FEED}}</b><span>single images</span></div>
@@ -160,7 +161,7 @@ footer { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--lin
       <div><b>{{NFILES}}</b><span>files used</span></div>
     </div>
     <nav class="jump" aria-label="Sections">
-      <a href="#rules">How to post</a><a href="#signoff">Before you post</a><a href="#profile">Profile setup</a><a href="#grid">Launch grid</a><a href="#calendar">Calendar</a><a href="#posts">All posts</a><a href="#stories">Stories</a><a href="#community">Replies + reporting</a><a href="#files">Files</a>
+      <a href="#rules">How to post</a><a href="#signoff">Before you post</a><a href="#profile">Profile setup</a><a href="#grid">Populate</a><a href="#calendar">Calendar</a><a href="#posts">All posts</a><a href="#stories">Stories</a><a href="#community">Replies + reporting</a><a href="#files">Files</a>
     </nav>
   </header>
 
@@ -171,7 +172,7 @@ footer { font-size: 13.5px; color: var(--muted); border-top: 1px solid var(--lin
       <div class="rule"><b>Use the file sizes listed</b><p>Feed and carousels use <code>_4x5.png</code> (1080×1350). Reels and Stories use <code>_9x16</code> (1080×1920). Don't let the app crop or zoom.</p></div>
       <div class="rule"><b>Reels need a cover</b><p>Upload the matching end-card JPG from <code>social/covers/</code> as the cover. Check the grid preview: the profile grid shows the middle 3:4 of it.</p></div>
       <div class="rule"><b>Links</b><p>Instagram captions say "Link in bio" because caption links don't click. Facebook captions carry the full URL. Stories get a link sticker.</p></div>
-      <div class="rule"><b>Times are UK time</b><p>Feed 12:30 on weekdays, 10:00 on Saturday. Reels 19:00. Story-only posts 18:00. Move a slot by an hour if needed, but keep the order.</p></div>
+      <div class="rule"><b>Times are UK time</b><p>Populate days: posts about 45 minutes apart, 09:00 to 16:00. Daily posts: images 12:30 on weekdays and 10:00 at weekends, Reels 19:00, Story-only 18:00. Move a slot by an hour if needed, but keep the order.</p></div>
       <div class="rule"><b>Share every post to Story</b><p>Same day, a few hours later. For statics use the <code>_9x16.png</code> listed on the post and add a link sticker. For Reels, share the Reel itself.</p></div>
     </div>
   </section>
@@ -208,8 +209,8 @@ Mobile data sorted before you fly
 Pay once, not per day · 100% refund if unused
 USA · Turkey · Dubai · 200+ countries</pre><button type="button" class="copy" data-t="bio" style="margin-top:6px">Copy bio</button></dd>
           <dt>Links (up to 5)</dt><dd>1. Get your eSIM → calafly.net<br>2. USA eSIM → calafly.net/destinations/esim-usa<br>3. Turkey eSIM → calafly.net/turkey<br>4. Dubai eSIM → calafly.net/dubai<br>5. How it works → calafly.net/how-it-works</dd>
-          <dt>Highlights</dt><dd>How it works · Prices · Refunds · USA · Turkey · Dubai. Files are listed under <a href="#stories">Stories</a>. Post them as stories on launch day, then save them to highlights.</dd>
-          <dt>Pinned</dt><dd>Pin #09 (Dubai film), #08 (P1) and #07 (prices carousel) once the launch grid is up.</dd>
+          <dt>Highlights</dt><dd>How it works · Prices · Refunds · USA · Turkey · Dubai. Files are listed under <a href="#stories">Stories</a>. Post them as stories on populate day 1, then save them to highlights.</dd>
+          <dt>Pinned</dt><dd>Pin #18 (Dubai film), #17 (P1) and #16 (prices carousel) at the end of populate day 2.</dd>
         </dl>
       </div>
       <div class="pcard">
@@ -229,21 +230,21 @@ USA · Turkey · Dubai · 200+ countries</pre><button type="button" class="copy"
   </section>
 
   <section id="grid">
-    <div class="shead"><span class="eyebrow">Launch grid · Mon 19 – Wed 21 Oct</span><h2>Nine posts, so the profile never looks empty.</h2></div>
+    <div class="shead"><span class="eyebrow">Phase 1 · populate · Wed 14 – Thu 15 Oct</span><h2>{{NPOP}} posts before the first ad runs.</h2></div>
     <div class="gridwrap">
       <div class="phone" aria-label="Preview of the Instagram grid after the launch posts">
         <div class="handle"><img src="social/profile/calafly-logo-square-1200-ink.png" alt="">calafly</div>
         <div class="igrid">{{GRID}}</div>
       </div>
       <div style="display:grid;gap:12px;min-width:0">
-        <p>This is how the grid looks once all nine are up. Instagram shows the newest post top-left, so <b>post them in the order in the calendar</b>: #01 lands bottom-right and #09, the Dubai brand film, lands top-left.</p>
+        <p>This is the grid once all {{NPOP}} are up: six full rows, with 6 Reels, 3 carousels and 9 images. Instagram shows the newest post top-left, so <b>post them in the calendar order</b>: #01 lands bottom-right and #18, the Dubai brand film, lands top-left.</p>
         <ol class="order">
-          <li>Mon 19 Oct: #01 P5 · #02 G1 · #03 Meet CalaFly (USA)</li>
-          <li>Tue 20 Oct: #04 P4 · #05 Wheels down (Dubai) · #06 G2</li>
-          <li>Wed 21 Oct: #07 prices carousel · #08 P1 · #09 Dubai film (Reel)</li>
+          <li>Wed 14 Oct: #01–#09, the bottom three rows</li>
+          <li>Thu 15 Oct: #10–#18, the top three rows. Then pin #18, #17 and #16.</li>
+          <li>Fri 16 Oct: switch the ads on. Daily posting starts.</li>
         </ol>
-        <p class="muted">The rows alternate the people ads, the realistic scenes and the flat brand ads, so no two neighbouring posts look alike. Light and dark backgrounds are mixed on purpose.</p>
-        <p class="muted">After launch: three feed posts and two Reels a week. Each week has one theme, taken from the brand pillars (easy, fair, safe), and follows UK travel peaks: October half-term, New York at Christmas, Dubai winter sun.</p>
+        <p class="muted">The rows alternate the people ads, the realistic scenes and the flat brand ads, so no two neighbouring posts look alike. Every row mixes a Reel with images, and all three countries show up in the top rows.</p>
+        <p class="muted">Phase 2, from Fri 16 Oct: one post a day until {{LAST}}, Reels and images alternating. The order follows UK travel peaks: Turkey before October half-term, then New York at Christmas and Dubai winter sun.</p>
       </div>
     </div>
   </section>
@@ -262,10 +263,10 @@ USA · Turkey · Dubai · 200+ countries</pre><button type="button" class="copy"
   </section>
 
   <section id="stories">
-    <div class="shead"><span class="eyebrow">Stories</span><h2>Story-only posts and highlights.</h2><p class="muted">On top of the daily reshares, these four go out as Stories only, with a link sticker.</p></div>
+    <div class="shead"><span class="eyebrow">Stories</span><h2>Story-only posts and highlights.</h2><p class="muted">On top of the daily reshares, these go out as Stories only, with a link sticker.</p></div>
     <div class="stories">{{STORIES}}</div>
     <h3 style="margin-top:8px">Highlights</h3>
-    <p class="muted">Post these as Stories on launch day (Mon 19 Oct), then save each group to a highlight with this name.</p>
+    <p class="muted">Post these as Stories on populate day 1 (Wed 14 Oct), then save each group to a highlight with this name.</p>
     <div class="hls">{{HIGHLIGHTS}}</div>
   </section>
 
@@ -279,6 +280,11 @@ USA · Turkey · Dubai · 200+ countries</pre><button type="button" class="copy"
         <li>"Refund?" → 100% if the eSIM is unused, T&amp;Cs at calafly.net/legal/terms.</li>
         <li>Never name or criticise another eSIM brand, even if a commenter does.</li>
         <li>Send order problems to CalaFly support in DM. Don't ask for order details in public comments.</li>
+      </ul></div>
+      <div class="box"><b>After {{LAST}}</b><ul>
+        <li>The current set runs out. Keep posting daily by repeating the five posts with the most saves and shares, each with a new caption.</li>
+        <li>Mix in content that isn't an ad: a setup walkthrough filmed on a real phone, customer questions answered on camera, destination tips (Dubai metro, US data speeds, Turkish SIM rules).</li>
+        <li>Ask tnt. for the next creative batch two weeks before the set runs out.</li>
       </ul></div>
       <div class="box"><b>Every Monday, report</b><ul>
         <li>Followers gained on Instagram and Facebook</li>
