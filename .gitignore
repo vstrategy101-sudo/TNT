@@ -6,3 +6,5 @@ coverage/
 *.log
 .env*
 !.env.example
+# real person's face: keep out of the repo
+reena-devi/maaya-*.mp4

@@ -21,7 +21,7 @@ def font(size, bold=True):
 
 # ---------- 1. Voiceover + sound design ----------
 script = json.load(open(f"{HERE}/script_maaya.json"))
-OUT = f"{HERE}/maaya-piles-real.mp4"
+OUT = os.environ.get("OUT", f"{HERE}/maaya-piles-real.mp4")
 os.makedirs(f"{WORK}/vo_m", exist_ok=True)
 def read_wav(p):
     with wave.open(p) as w:
@@ -176,33 +176,33 @@ def draw_overlay(frame, ts):
         if v["type"] == "timer":
             sec = min(1, (ts - s["start"]) / (s["end"] - s["start"])) * 25 * 60
             ti = text_img(f"{int(sec // 60):02}:{int(sec % 60):02}", F_LATB(150), (255, 255, 255), 10, (200, 30, 35))
-            paste_scaled(ov, emoji("🚽", 210), 230, 300, sc, -8)
-            paste_scaled(ov, emoji("📱", 190), 850, 300, sc, 12)
-            paste_scaled(ov, ti, W / 2, 470, sc)
+            paste_scaled(ov, emoji("🚽", 210), 230, 1000, sc, -8)
+            paste_scaled(ov, emoji("📱", 190), 850, 1000, sc, 12)
+            paste_scaled(ov, ti, W / 2, 1180, sc)
         elif v["type"] == "sticker":
-            paste_scaled(ov, emoji(v["e"], 300), 820, 470, sc, 10 * math.sin(ts * 6))
+            paste_scaled(ov, emoji(v["e"], 300), 820, 1150, sc, 10 * math.sin(ts * 6))
         elif v["type"] == "slam":
             big = v["big"]
             f = F_LATB(330) if big.isascii() else font(118)
             bi = text_img(big, f, (255, 220, 60) if big.isascii() else (255, 255, 255), 14, (150, 15, 30))
             z = 1 + 1.2 * max(0, 1 - p)         # slam in from big
-            paste_scaled(ov, bi, W / 2, 470, min(z, 2.2) if p < 1 else 1 + 0.02 * math.sin(ts * 8))
+            paste_scaled(ov, bi, W / 2, 1150, min(z, 2.2) if p < 1 else 1 + 0.02 * math.sin(ts * 8))
             if v["small"]:
                 si = text_img(v["small"], F_LATB(34), (255, 255, 255), 0)
-                dd = ImageDraw.Draw(ov); dd.rounded_rectangle([W / 2 - si.width / 2, 650, W / 2 + si.width / 2, 650 + si.height], 16, fill=(0, 0, 0, 170))
-                ov.paste(si, (int(W / 2 - si.width / 2), 650), si)
+                dd = ImageDraw.Draw(ov); dd.rounded_rectangle([W / 2 - si.width / 2, 1330, W / 2 + si.width / 2, 1330 + si.height], 16, fill=(0, 0, 0, 170))
+                ov.paste(si, (int(W / 2 - si.width / 2), 1330), si)
         elif v["type"] == "meter":
             q = min(1, (ts - s["start"]) / (s["end"] - s["start"]))
             lab = text_img(v["label"], font(64), (90, 15, 30), pad=0)
-            ov.paste(lab, (100, 330), lab)
-            d.rounded_rectangle([100, 440, 980, 520], 40, fill=(255, 255, 255, 220), outline=(120, 20, 40), width=6)
+            ov.paste(lab, (100, 1030), lab)
+            d.rounded_rectangle([100, 1140, 980, 1220], 40, fill=(255, 255, 255, 220), outline=(120, 20, 40), width=6)
             col = (int(80 + 175 * q), int(180 - 150 * q), 50)
-            d.rounded_rectangle([110, 450, 110 + int(860 * q), 510], 30, fill=col)
-            paste_scaled(ov, emoji("⏰", 150), 900, 380, 1, 15 * math.sin(ts * 20) * q)
+            d.rounded_rectangle([110, 1150, 110 + int(860 * q), 1210], 30, fill=col)
+            paste_scaled(ov, emoji("⏰", 150), 900, 1080, 1, 15 * math.sin(ts * 20) * q)
         elif v["type"] == "card":
             c = CARDS[s["id"]]
             x = W / 2 + (1 - min(1, p)) * -900
-            paste_scaled(ov, c, x, 420, 1 if p >= 1 else 0.9 + 0.1 * p)
+            paste_scaled(ov, c, x, 1200, 1 if p >= 1 else 0.9 + 0.1 * p)
         # karaoke captions: 3 words, current word yellow & bigger
         page = next((pg for pg in s["pages"] if pg[0][0] <= ts < pg[-1][1] + 0.15), None)
         if page:
