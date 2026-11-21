@@ -1,0 +1,13 @@
+[
+ {"id":"v01","text":"टॉयलेट में मोबाइल चलाते हैं?","face":"stern","zoom":1.18,"fx":"tick","vis":{"type":"timer"},"gap":0.05},
+ {"id":"v02","text":"रुकिए!","face":"shock","zoom":1.32,"fx":"boom","flash":true,"vis":{"type":"sticker","e":"😱"},"gap":0.15},
+ {"id":"v03","text":"एक रिसर्च में, टॉयलेट में फ़ोन चलाने वालों में, बवासीर ज़्यादा मिली।","face":"worried","zoom":1.05,"fx":"whoosh","vis":{"type":"sticker","e":"📱"},"gap":0.05},
+ {"id":"v04","text":"पूरे छियालीस प्रतिशत ज़्यादा।","face":"shock","zoom":1.25,"fx":"boom","flash":true,"vis":{"type":"slam","big":"46%","small":"PLOS One, 2025 · 125 adults"},"gap":0.2},
+ {"id":"v05","text":"आप बैठे रहते हैं, बैठे रहते हैं, और नीचे की नसों पर दबाव बढ़ता जाता है।","face":"worried","zoom":1.0,"fx":"whoosh","vis":{"type":"meter","label":"नसों पर दबाव"},"gap":0.2},
+ {"id":"v06","text":"मैं रीना देवी। आज से तीन बातें बदलिए। तीसरी सबसे ज़रूरी है।","face":"smile","zoom":1.1,"fx":"ding","vis":{"type":"card","n":"3","t":"बातें, आज से"},"gap":0.2},
+ {"id":"v07","text":"एक। फ़ोन बाहर छोड़िए। काम नहीं हुआ, तो उठ जाइए।","face":"stern","zoom":1.0,"fx":"whoosh","vis":{"type":"card","n":"1","t":"फ़ोन बाहर","e":"📵"},"gap":0.15},
+ {"id":"v08","text":"दो। ईसबगोल और भरपूर पानी। मल नरम, तो ज़ोर लगाना बंद।","face":"smile","zoom":1.12,"fx":"whoosh","vis":{"type":"card","n":"2","t":"ईसबगोल + पानी","e":"💧"},"gap":0.15},
+ {"id":"v09","text":"तीन। खून बार-बार आए, या मल काला हो, तो शर्म छोड़िए। डॉक्टर के पास जाइए।","face":"stern","zoom":1.22,"fx":"boom","flash":true,"vis":{"type":"card","n":"3","t":"खून दिखे? डॉक्टर!","e":"🩺","red":true},"gap":0.1},
+ {"id":"v10","text":"हर खून बवासीर नहीं होता।","face":"worried","zoom":1.3,"fx":"whoosh","vis":{"type":"slam","big":"हर खून बवासीर नहीं","small":""},"gap":0.25},
+ {"id":"v11","text":"ये वीडियो उस भाई को भेजिए, जो टॉयलेट में आधा घंटा बिताता है।","face":"smile","zoom":1.08,"fx":"ding","vis":{"type":"sticker","e":"😂"},"gap":0.1}
+]
